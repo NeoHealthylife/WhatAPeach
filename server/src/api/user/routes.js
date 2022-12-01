@@ -4,15 +4,18 @@ const { isAdmin } = require('../../middlewares/admin.middlewares');
 const { isBasic } = require('../../middlewares/basic.middlewares');
 
 const passport = require('passport');
-require('./passportSetup');
 
 const {
   register,
   login,
   getUsers,
   deleteUser,
-  updateUser,
-} = require('./controller.user');
+  addFavRecipes,
+  addFavWorkout,
+  addTodoRecipe,
+  addTodoWorkout,
+  deleteFavRecipes,
+} = require('./controller');
 
 UserRoutes.get('/auth/facebook', passport.authenticate('facebook'));
 UserRoutes.get(
@@ -44,6 +47,17 @@ UserRoutes.post('/register', register);
 UserRoutes.post('/login', login);
 UserRoutes.get('/', getUsers);
 UserRoutes.delete('/:id', [isAdmin], deleteUser);
-UserRoutes.patch('/:id', [isAdmin], updateUser);
+UserRoutes.patch(
+  '/',
+  addFavRecipes,
+  addFavWorkout,
+  addTodoRecipe,
+  addTodoWorkout,
+  deleteFavRecipes
+);
+UserRoutes.patch('/addfavrecipes/:id', addFavRecipes);
+UserRoutes.patch('/addfavworkout/id', addFavRecipes);
+UserRoutes.patch('/deletefavrecipes/:id', addFavRecipes);
+UserRoutes.patch('/deletefavworkout', addFavRecipes);
 
 module.exports = UserRoutes;
