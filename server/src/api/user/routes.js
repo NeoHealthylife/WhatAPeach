@@ -10,11 +10,14 @@ const {
   login,
   getUsers,
   deleteUser,
-  addFavRecipes,
+  addFavRecipe,
   addFavWorkout,
+  deleteFavRecipe,
+  deleteFavWorkout,
   addTodoRecipe,
   addTodoWorkout,
-  deleteFavRecipes,
+  addCompletedRecipe,
+  addCompletedWorkout
 } = require('./controller');
 
 UserRoutes.get('/auth/facebook', passport.authenticate('facebook'));
@@ -46,18 +49,15 @@ UserRoutes.post('/register', register);
 
 UserRoutes.post('/login', login);
 UserRoutes.get('/', getUsers);
-UserRoutes.delete('/:id', [isAdmin], deleteUser);
-UserRoutes.patch(
-  '/',
-  addFavRecipes,
-  addFavWorkout,
-  addTodoRecipe,
-  addTodoWorkout,
-  deleteFavRecipes
-);
-UserRoutes.patch('/addfavrecipes/:id', addFavRecipes);
-UserRoutes.patch('/addfavworkout/id', addFavRecipes);
-UserRoutes.patch('/deletefavrecipes/:id', addFavRecipes);
-UserRoutes.patch('/deletefavworkout', addFavRecipes);
+UserRoutes.delete('/:id', deleteUser);
+
+UserRoutes.patch('/addfavrecipe', addFavRecipe);
+UserRoutes.patch('/addfavworkout', addFavWorkout);
+UserRoutes.patch('/deletefavrecipe', deleteFavRecipe);
+UserRoutes.patch('/deletefavworkout', deleteFavWorkout);
+UserRoutes.patch("/todorecipe", addTodoRecipe);
+UserRoutes.patch('/todoworkout', addTodoWorkout);
+UserRoutes.patch("/addcomplrecipe", addCompletedRecipe)
+UserRoutes.patch("/addcomplworkout", addCompletedWorkout)
 
 module.exports = UserRoutes;
