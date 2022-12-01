@@ -4,11 +4,12 @@ const cors = require('cors');
 
 const { connect } = require('./utils/database/connect');
 const { setUpCloudinary } = require('./utils/cloudinary/cloudinary');
-const UserRoutes = require('./api/user/user.routes');
 
 const { setError } = require('./utils/error/handle.error');
-const recipesRoutes = require('./api/recipes/recipes.routes');
-const workoutRoutes = require('./api/workout/workout.routes');
+const UserRoutes = require('./api/user/routes');
+
+const RecipeRoutes = require('./api/recipes/routes');
+const WorkoutRoutes = require('./api/workout/routes');
 
 connect();
 setUpCloudinary();
@@ -44,10 +45,9 @@ app.use(express.urlencoded({ limit: '1mb', extended: true }));
 
 app.set('secretKey', process.env.SECRET_KEY_JWT);
 
-//Modificar rutas
 app.use('/api/users', UserRoutes);
-app.use('/api/recipes', recipesRoutes);
-app.use('/api/workout', workoutRoutes);
+app.use('/api/recipes', RecipeRoutes);
+app.use('/api/workouts', WorkoutRoutes);
 
 app.use('*', (req, res, next) => next(setError(404, 'Route not found')));
 

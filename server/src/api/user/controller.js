@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const User = require('./model.user');
+const User = require('./model');
 const { setError } = require('../../utils/error/handle.error');
 
 const register = async (req, res, next) => {
@@ -11,7 +11,7 @@ const register = async (req, res, next) => {
 
     if (userDuplicate) return next('User alredy exists');
 
-    const newUserDb = newUser.save();
+    newUser.save();
     return res.json({
       status: 201,
       message: 'user registered',
@@ -73,16 +73,99 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-const updateUser = async (req, res, next) => {
+const addFavRecipes = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const user = new User(req.body);
-    user._id = id;
-    const editUser = await User.findByIdAndUpdate(id, user);
-    return res.status(200).json(editUser);
+    const { userId } = req.body;
+    const { recipeId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $push: { favRecipes: recipeId },
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
   } catch (err) {
     return next(err);
   }
 };
 
-module.exports = { register, login, getUsers, deleteUser, updateUser };
+const deleteFavRecipes = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const { recipeId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { favRecipes: recipeId },
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const addFavWorkout = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const { workoutId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $push: { favWorkouts: workoutId },
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const addTodoRecipe = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const { recipeId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $push: { toDoRecipes: recipeId },
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const addTodoWorkout = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const { workoutId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $push: { toDoWorkouts: workoutId },
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+module.exports = {
+  register,
+  login,
+  getUsers,
+  deleteUser,
+  addFavRecipes,
+  addFavWorkout,
+  addTodoRecipe,
+  addTodoWorkout,
+  deleteFavRecipes,
+};
