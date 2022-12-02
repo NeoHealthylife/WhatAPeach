@@ -17,7 +17,9 @@ const {
   addTodoRecipe,
   addTodoWorkout,
   addCompletedRecipe,
-  addCompletedWorkout
+  deleteCompletedRecipe,
+  addCompletedWorkout,
+  deleteCompletedWorkout
 } = require('./controller');
 
 UserRoutes.get('/auth/facebook', passport.authenticate('facebook'));
@@ -57,7 +59,9 @@ UserRoutes.patch('/deletefavrecipe', deleteFavRecipe);
 UserRoutes.patch('/deletefavworkout', deleteFavWorkout);
 UserRoutes.patch("/todorecipe", addTodoRecipe);
 UserRoutes.patch('/todoworkout', addTodoWorkout);
-UserRoutes.patch("/addcomplrecipe", addCompletedRecipe)
-UserRoutes.patch("/addcomplworkout", addCompletedWorkout)
+UserRoutes.patch("/addcomplrecipe", addCompletedRecipe);
+UserRoutes.patch("/addcomplworkout", addCompletedWorkout);
+UserRoutes.patch("/deletecomplrecipe", deleteCompletedRecipe);
+UserRoutes.patch("/deletecomplworkout", deleteCompletedWorkout);
 
 module.exports = UserRoutes;

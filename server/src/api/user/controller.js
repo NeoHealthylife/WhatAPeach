@@ -194,6 +194,23 @@ const addCompletedRecipe = async (req, res, next) => {
   }
 };
 
+const deleteCompletedRecipe = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const { recipeId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { completedRecipes: recipeId },
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const addCompletedWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
@@ -204,6 +221,23 @@ const addCompletedWorkout = async (req, res, next) => {
         $pull: { toDoWorkouts: workoutId },
         $push: { completedWorkouts: workoutId },
         
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const deleteCompletedWorkout = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const { workoutId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { completedWorkouts: workoutId },
       },
       { new: true }
     );
@@ -225,6 +259,8 @@ module.exports = {
   addTodoRecipe,
   addTodoWorkout,
   addCompletedRecipe,
-  addCompletedWorkout
+  deleteCompletedRecipe,
+  addCompletedWorkout,
+  deleteCompletedWorkout
   
 };
