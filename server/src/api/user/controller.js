@@ -73,7 +73,7 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-const addFavRecipes = async (req, res, next) => {
+const addFavRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
@@ -90,9 +90,9 @@ const addFavRecipes = async (req, res, next) => {
   }
 };
 
-const deleteFavRecipes = async (req, res, next) => {
+const deleteFavRecipe = async (req, res, next) => {
   try {
-    const { userId } = req.params;
+    const { userId } = req.body;
     const { recipeId } = req.body;
     const upadateUser = await User.findByIdAndUpdate(
       userId,
@@ -115,6 +115,23 @@ const addFavWorkout = async (req, res, next) => {
       userId,
       {
         $push: { favWorkouts: workoutId },
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const deleteFavWorkout = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const { workoutId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { favWorkout: workoutId },
       },
       { new: true }
     );
@@ -158,14 +175,92 @@ const addTodoWorkout = async (req, res, next) => {
   }
 };
 
+const addCompletedRecipe = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const { recipeId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { toDoRecipes: recipeId },
+        $push: { completedRecipes: recipeId },
+        
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const deleteCompletedRecipe = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const { recipeId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { completedRecipes: recipeId },
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const addCompletedWorkout = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const { workoutId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { toDoWorkouts: workoutId },
+        $push: { completedWorkouts: workoutId },
+        
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const deleteCompletedWorkout = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const { workoutId } = req.body;
+    const upadateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { completedWorkouts: workoutId },
+      },
+      { new: true }
+    );
+    return res.status(200).json(upadateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 module.exports = {
   register,
   login,
   getUsers,
   deleteUser,
-  addFavRecipes,
+  addFavRecipe,
   addFavWorkout,
+  deleteFavRecipe,
+  deleteFavWorkout,
   addTodoRecipe,
   addTodoWorkout,
-  deleteFavRecipes,
+  addCompletedRecipe,
+  deleteCompletedRecipe,
+  addCompletedWorkout,
+  deleteCompletedWorkout
+  
 };
