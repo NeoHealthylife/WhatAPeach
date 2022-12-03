@@ -42,10 +42,11 @@ passport.use(
     {
       clientID: config.google.id,
       clientSecret: config.google.secret,
-      callbackURL: 'http://localhost:3000/auth/google/callback',
+      callbackURL: 'http://localhost:3000/api/users/auth/google/callback',
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
+      console.log(profile);
       User.findOrCreate({ googleId: profile.id }, function (err, user) {
         return done(err, user);
       });
