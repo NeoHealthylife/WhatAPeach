@@ -12,7 +12,7 @@ const isLoggedIn = require('../../middlewares/socialLoginAuth');
 UserRoutes.use(
   cookieSession({
     name: 'google-auth-session',
-    keys: ['key1', 'key2'],
+    keys: ['key1', ' key2'],
   })
 );
 UserRoutes.use(passport.initialize());
