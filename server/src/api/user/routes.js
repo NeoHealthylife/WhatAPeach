@@ -35,7 +35,10 @@ const {
   deleteCompletedWorkout,
 } = require('./controller');
 
-UserRoutes.get('/auth/facebook', passport.authenticate('facebook'));
+UserRoutes.get(
+  '/auth/facebook',
+  passport.authenticate('facebook', { scope: ['email', 'user_location'] })
+);
 UserRoutes.get(
   '/auth/facebook/callback',
   passport.authenticate('facebook', {

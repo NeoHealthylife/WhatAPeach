@@ -184,7 +184,6 @@ const addCompletedRecipe = async (req, res, next) => {
       {
         $pull: { toDoRecipes: recipeId },
         $push: { completedRecipes: recipeId },
-        
       },
       { new: true }
     );
@@ -220,7 +219,6 @@ const addCompletedWorkout = async (req, res, next) => {
       {
         $pull: { toDoWorkouts: workoutId },
         $push: { completedWorkouts: workoutId },
-        
       },
       { new: true }
     );
@@ -261,6 +259,5 @@ module.exports = {
   addCompletedRecipe,
   deleteCompletedRecipe,
   addCompletedWorkout,
-  deleteCompletedWorkout
-  
+  deleteCompletedWorkout,
 };

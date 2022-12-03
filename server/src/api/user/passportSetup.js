@@ -1,5 +1,7 @@
 const passport = require('passport');
 const config = require('./configs');
+const { getUsers } = require('./controller');
+const User = require('./model');
 
 require('dotenv').config();
 
@@ -19,20 +21,23 @@ passport.use(
     {
       clientID: config.facebook.id,
       clientSecret: config.facebook.secret,
-      callbackURL: 'http://localhost:8080/auth/facebook/callback',
+      callbackURL: 'http://localhost:3000/api/users/auth/facebook/callback',
       profileFields: [
         'id',
         'displayName',
         'name',
         'gender',
-        'picture.type(large)',
         'email',
+        'picture.type(large)',
       ],
     },
     function (accessToken, refreshToken, profile, done) {
+      console.log({ profile });
+      /*
       User.findOrCreate({ facebook: profile.id }, function (err, user) {
         return done(err, user);
       });
+      */
     }
   )
 );
@@ -42,13 +47,13 @@ passport.use(
     {
       clientID: config.google.id,
       clientSecret: config.google.secret,
-      callbackURL: 'http://localhost:3000/auth/google/callback',
+      callbackURL: 'http://localhost:3000/api/users/auth/google/callback',
       passReqToCallback: true,
     },
-    function (request, accessToken, refreshToken, profile, done) {
-      User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        return done(err, user);
-      });
+    async (request, accessToken, refreshToken, profile, done) => {
+      const { email } = profile;
+      const dbUser = User.findOne({ email: email });
+      console.log(dbUser);
     }
   )
 );

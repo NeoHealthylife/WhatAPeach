@@ -17,6 +17,7 @@ it('can get todos', async () => {
 
 //opción 2
 const getData = async () => {
+  // Necesario importar axios como dependencia
   const res = await axios.get('https://api.example.com');
 
   const data = res.data;
