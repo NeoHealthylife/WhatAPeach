@@ -94,9 +94,6 @@ const postNewWorkout = async () => {
   return response;
 };
 
-/* const getFirstPaintingName = require('./index');
-  const axios = require('axios'); */
-
 jest.mock('axios');
 
 test('return the number of items', async () => {
