@@ -90,10 +90,6 @@ UserRoutes.get('/logout', (req, res) => {
 //WEB ROUTES
 UserRoutes.post('/register', register);
 
-UserRoutes.get('/dashboard', isLoggedIn, (req, res) => {
-  res.render('dashboard.ejs', { name: req.user.displayName });
-});
-
 UserRoutes.post('/login', login);
 UserRoutes.get('/', getUsers);
 UserRoutes.delete('/:id', deleteUser);
