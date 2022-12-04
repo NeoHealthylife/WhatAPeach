@@ -5,8 +5,6 @@ import FaceButton from './components/FacebookButton';
 import GoogleButton from './components/GoogleButton';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
       <FaceButton />

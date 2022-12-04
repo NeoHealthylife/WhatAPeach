@@ -3,11 +3,12 @@ const jwt = require('jsonwebtoken');
 
 const User = require('./model');
 const { setError } = require('../../utils/error/handle.error');
+const { generateNickName } = require('../../utils/string');
 
 const register = async (req, res, next) => {
   try {
     const newUser = new User(req.body);
-    const userDuplicate = await User.findOne({ username: newUser.username });
+    const userDuplicate = await User.findOne({ nickname: newUser.nickname });
 
     if (userDuplicate) return next('User alredy exists');
 
@@ -24,9 +25,9 @@ const register = async (req, res, next) => {
 
 const mapGoogleData = (profile) => {
   return {
-    nickname: profile.email,
+    nickname: generateNickName(profile.email),
     email: profile.email,
-    password: bcrypt.hashSync(profile.email, 10),
+    password: bcrypt.hashSync('healthyPass2022', 10),
     role: 'basic',
     fullname: profile.displayName,
     provider_id: profile.id,
@@ -36,9 +37,9 @@ const mapGoogleData = (profile) => {
 
 const mapFacebookData = (profile) => {
   return {
-    nickname: profile._json.email,
+    nickname: generateNickName(profile._json.email),
     email: profile._json.email,
-    password: bcrypt.hashSync(profile._json.email, 10),
+    password: bcrypt.hashSync('healthyPass2022', 10),
     role: 'basic',
     fullname: profile.displayName,
     provider_id: profile.id,
@@ -68,13 +69,13 @@ const registerFromSocialLogin = async (profile) => {
 
 const login = async (req, res, next) => {
   try {
-    const userInfo = await User.findOne({ username: req.body.username });
+    const userInfo = await User.findOne({ nickname: req.body.nickname });
     if (bcrypt.compareSync(req.body.password, userInfo.password)) {
       userInfo.password = null;
       const token = jwt.sign(
         {
           id: userInfo._id,
-          username: userInfo.username,
+          nickname: userInfo.nickname,
           role: userInfo.role,
         },
         req.app.get('secretKey'),
@@ -100,7 +101,7 @@ const loginFromSocialLogin = async (email) => {
     const token = jwt.sign(
       {
         id: userInfo._id,
-        username: userInfo.username,
+        nickname: userInfo.nickname,
         role: userInfo.role,
       },
       req.app.get('secretKey'),
