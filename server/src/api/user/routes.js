@@ -8,6 +8,7 @@ require('./passportSetup');
 
 const cookieSession = require('cookie-session');
 const isLoggedIn = require('../../middlewares/socialLoginAuth');
+const session = require('express-session');
 
 const {
   register,
@@ -25,13 +26,21 @@ const {
   addCompletedWorkout,
   deleteCompletedWorkout,
 } = require('./controller');
+const config = require('./configs');
 
 UserRoutes.use(
-  cookieSession({
-    name: 'google-auth-session',
-    keys: ['key1', ' key2'],
+  session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
   })
 );
+// UserRoutes.use(
+//   cookieSession({
+//     maxAge: 24 * 60 * 60 * 1000,
+//     keys: [config.cookieKey],
+//   })
+// );
 UserRoutes.use(passport.initialize());
 UserRoutes.use(passport.session());
 
@@ -42,9 +51,12 @@ UserRoutes.get(
 UserRoutes.get(
   '/auth/facebook/callback',
   passport.authenticate('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/fail',
-  })
+    successRedirect: `${process.env.FRONT_ENV}/dashboard`,
+    failureRedirect: `${process.env.FRONT_ENV}/login`,
+  }),
+  function (req, res) {
+    res.redirect('/');
+  }
 );
 
 UserRoutes.get(
@@ -54,11 +66,10 @@ UserRoutes.get(
 UserRoutes.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login',
+    successRedirect: `${process.env.FRONT_ENV}/dashboard`,
+    failureRedirect: `${process.env.FRONT_ENV}/login`,
   }),
   function (req, res) {
-    console.log('AQUI');
     res.redirect('/');
   }
 );
@@ -78,6 +89,10 @@ UserRoutes.get('/logout', (req, res) => {
 
 //WEB ROUTES
 UserRoutes.post('/register', register);
+
+UserRoutes.get('/dashboard', isLoggedIn, (req, res) => {
+  res.render('dashboard.ejs', { name: req.user.displayName });
+});
 
 UserRoutes.post('/login', login);
 UserRoutes.get('/', getUsers);

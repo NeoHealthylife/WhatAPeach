@@ -36,13 +36,32 @@ passport.use(
         'picture.type(large)',
       ],
     },
-    function (accessToken, refreshToken, profile, done) {
-      console.log({ profile });
-      /*
-      User.findOrCreate({ facebook: profile.id }, function (err, user) {
-        return done(err, user);
-      });
-      */
+    async (request, accessToken, refreshToken, profile, cb) => {
+      const { email } = profile._json;
+      const users = await User.find();
+
+      // Find existing user
+      const existingUser = users.find(
+        (u) => u.email.toLowerCase() === email.toLowerCase()
+      );
+
+      if (existingUser) {
+        // Login
+        try {
+          const user = loginFromSocialLogin(email);
+          return cb(null, user);
+        } catch (err) {
+          return cb(err);
+        }
+      } else {
+        // Register
+        try {
+          const newUser = registerFromSocialLogin(profile);
+          return cb(null, newUser);
+        } catch (err) {
+          return cb(err);
+        }
+      }
     }
   )
 );

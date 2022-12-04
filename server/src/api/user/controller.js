@@ -22,17 +22,40 @@ const register = async (req, res, next) => {
   }
 };
 
+const mapGoogleData = (profile) => {
+  return {
+    nickname: profile.email,
+    email: profile.email,
+    password: bcrypt.hashSync(profile.email, 10),
+    role: 'basic',
+    fullname: profile.displayName,
+    provider_id: profile.id,
+    provider: profile.provider,
+  };
+};
+
+const mapFacebookData = (profile) => {
+  return {
+    nickname: profile._json.email,
+    email: profile._json.email,
+    password: bcrypt.hashSync(profile._json.email, 10),
+    role: 'basic',
+    fullname: profile.displayName,
+    provider_id: profile.id,
+    provider: profile.provider,
+  };
+};
+
 const registerFromSocialLogin = async (profile) => {
   try {
-    const newUserBody = {
-      nickname: profile.email,
-      email: profile.email,
-      password: bcrypt.hashSync(profile.email, 10),
-      role: 'basic',
-      fullname: profile.displayName,
-      provider_id: profile.id,
-      provider: profile.provider,
-    };
+    let newUserBody = {};
+    if (profile.provider === 'google') {
+      newUserBody = mapGoogleData(profile);
+    }
+
+    if (profile.provider === 'facebook') {
+      newUserBody = mapFacebookData(profile);
+    }
 
     const newUser = new User(newUserBody);
 
