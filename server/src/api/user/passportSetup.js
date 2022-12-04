@@ -21,6 +21,33 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
+const handleSocialLoginRequest = async (email, profile, cb) => {
+  const users = await User.find();
+
+  // Find existing user
+  const existingUser = users.find(
+    (u) => u.email.toLowerCase() === email.toLowerCase()
+  );
+
+  if (existingUser) {
+    // Login
+    try {
+      const user = loginFromSocialLogin(email);
+      return cb(null, user);
+    } catch (err) {
+      return cb(err);
+    }
+  } else {
+    // Register
+    try {
+      const newUser = registerFromSocialLogin(profile);
+      return cb(null, newUser);
+    } catch (err) {
+      return cb(err);
+    }
+  }
+};
+
 passport.use(
   new facebookStrategy(
     {
@@ -37,31 +64,7 @@ passport.use(
       ],
     },
     async (request, accessToken, refreshToken, profile, cb) => {
-      const { email } = profile._json;
-      const users = await User.find();
-
-      // Find existing user
-      const existingUser = users.find(
-        (u) => u.email.toLowerCase() === email.toLowerCase()
-      );
-
-      if (existingUser) {
-        // Login
-        try {
-          const user = loginFromSocialLogin(email);
-          return cb(null, user);
-        } catch (err) {
-          return cb(err);
-        }
-      } else {
-        // Register
-        try {
-          const newUser = registerFromSocialLogin(profile);
-          return cb(null, newUser);
-        } catch (err) {
-          return cb(err);
-        }
-      }
+      await handleSocialLoginRequest(profile._json.email, profile, cb);
     }
   )
 );
@@ -75,31 +78,7 @@ passport.use(
       passReqToCallback: true,
     },
     async (request, accessToken, refreshToken, profile, cb) => {
-      const { email } = profile;
-      const users = await User.find();
-
-      // Find existing user
-      const existingUser = users.find(
-        (u) => u.email.toLowerCase() === email.toLowerCase()
-      );
-
-      if (existingUser) {
-        // Login
-        try {
-          const user = loginFromSocialLogin(email);
-          return cb(null, user);
-        } catch (err) {
-          return cb(err);
-        }
-      } else {
-        // Register
-        try {
-          const newUser = registerFromSocialLogin(profile);
-          return cb(null, newUser);
-        } catch (err) {
-          return cb(err);
-        }
-      }
+      await handleSocialLoginRequest(profile.email, profile, cb);
     }
   )
 );
