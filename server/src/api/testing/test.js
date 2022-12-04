@@ -65,7 +65,7 @@ it('should return a default user on 500', () => {
     .then((res) => expect(res).toMatchObject(defaultUser));
 });
 //headers
-const scope = nock('http://api.example.com', {
+const scope1 = nock('http://api.example.com', {
   reqheaders: {
     authorization: 'Basic Auth',
     'Content-Type': 'application/json',
