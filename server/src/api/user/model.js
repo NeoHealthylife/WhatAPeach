@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema(
     nickname: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },
 
-    provider: { type: String },
     provider_id: { type: String, unique: true },
 
     password: { type: String, required: true, required: true },
@@ -18,14 +17,11 @@ const userSchema = new mongoose.Schema(
     diet: {
       type: String,
       enum: ['vegetarian', 'vegan', 'normal'],
-      required: true,
     },
-    status: { type: String, enum: ['low', 'medium', 'high'], required: true },
+    status: { type: String, enum: ['low', 'medium', 'high'] },
     target: {
       type: String,
-      required: true,
       enum: ['lose weight', 'build muscle', 'definition'],
-      required: true,
     },
     equipment: { type: Boolean },
     favRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'recipes' }],

@@ -22,6 +22,27 @@ const register = async (req, res, next) => {
   }
 };
 
+const registerFromSocialLogin = async (profile) => {
+  try {
+    const newUserBody = {
+      nickname: profile.email,
+      email: profile.email,
+      password: bcrypt.hashSync(profile.email, 10),
+      role: 'basic',
+      fullname: profile.displayName,
+      provider_id: profile.id,
+      provider: profile.provider,
+    };
+
+    const newUser = new User(newUserBody);
+
+    newUser.save();
+    return newUser;
+  } catch (err) {
+    return setError(500, 'User register fail');
+  }
+};
+
 const login = async (req, res, next) => {
   try {
     const userInfo = await User.findOne({ username: req.body.username });
@@ -47,6 +68,29 @@ const login = async (req, res, next) => {
     }
   } catch (error) {
     return next(setError(500, 'User login fail'));
+  }
+};
+
+const loginFromSocialLogin = async (email) => {
+  try {
+    const userInfo = await User.findOne({ email: email });
+    const token = jwt.sign(
+      {
+        id: userInfo._id,
+        username: userInfo.username,
+        role: userInfo.role,
+      },
+      req.app.get('secretKey'),
+      { expiresIn: '10h' }
+    );
+    return res.json({
+      status: 200,
+      message: 'welcome User',
+      user: userInfo,
+      token: token,
+    });
+  } catch (error) {
+    return setError(500, 'User login fail');
   }
 };
 
@@ -247,6 +291,8 @@ const deleteCompletedWorkout = async (req, res, next) => {
 
 module.exports = {
   register,
+  registerFromSocialLogin,
+  loginFromSocialLogin,
   login,
   getUsers,
   deleteUser,

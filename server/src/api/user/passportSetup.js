@@ -1,6 +1,11 @@
 const passport = require('passport');
 const config = require('./configs');
-const { getUsers } = require('./controller');
+const {
+  getUsers,
+  _register,
+  registerFromSocialLogin,
+  loginFromSocialLogin,
+} = require('./controller');
 const User = require('./model');
 
 require('dotenv').config();
@@ -50,10 +55,32 @@ passport.use(
       callbackURL: 'http://localhost:3000/api/users/auth/google/callback',
       passReqToCallback: true,
     },
-    async (request, accessToken, refreshToken, profile, done) => {
+    async (request, accessToken, refreshToken, profile, cb) => {
       const { email } = profile;
-      const dbUser = User.findOne({ email: email });
-      console.log(dbUser);
+      const users = await User.find();
+
+      // Find existing user
+      const existingUser = users.find(
+        (u) => u.email.toLowerCase() === email.toLowerCase()
+      );
+
+      if (existingUser) {
+        // Login
+        try {
+          const user = loginFromSocialLogin(email);
+          return cb(null, user);
+        } catch (err) {
+          return cb(err);
+        }
+      } else {
+        // Register
+        try {
+          const newUser = registerFromSocialLogin(profile);
+          return cb(null, newUser);
+        } catch (err) {
+          return cb(err);
+        }
+      }
     }
   )
 );

@@ -9,15 +9,6 @@ require('./passportSetup');
 const cookieSession = require('cookie-session');
 const isLoggedIn = require('../../middlewares/socialLoginAuth');
 
-UserRoutes.use(
-  cookieSession({
-    name: 'google-auth-session',
-    keys: ['key1', ' key2'],
-  })
-);
-UserRoutes.use(passport.initialize());
-UserRoutes.use(passport.session());
-
 const {
   register,
   login,
@@ -34,6 +25,15 @@ const {
   addCompletedWorkout,
   deleteCompletedWorkout,
 } = require('./controller');
+
+UserRoutes.use(
+  cookieSession({
+    name: 'google-auth-session',
+    keys: ['key1', ' key2'],
+  })
+);
+UserRoutes.use(passport.initialize());
+UserRoutes.use(passport.session());
 
 UserRoutes.get(
   '/auth/facebook',
@@ -54,10 +54,11 @@ UserRoutes.get(
 UserRoutes.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/fail',
+    successRedirect: '/dashboard',
+    failureRedirect: '/login',
   }),
   function (req, res) {
+    console.log('AQUI');
     res.redirect('/');
   }
 );
