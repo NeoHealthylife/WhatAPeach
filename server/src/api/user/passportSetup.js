@@ -32,7 +32,8 @@ const handleSocialLoginRequest = async (email, profile, cb) => {
   if (existingUser) {
     // Login
     try {
-      const user = loginFromSocialLogin(email);
+      const user = loginFromSocialLogin(email, profile); //inicialmente pasabamos solo el email por parametro
+      //pero he metido profile tbn en vistas a que de esa forma le llege el objeto entero a la función de registro. No estoy seguro de este paso
       return cb(null, user);
     } catch (err) {
       return cb(err);
@@ -75,10 +76,28 @@ passport.use(
       clientID: config.google.id,
       clientSecret: config.google.secret,
       callbackURL: 'http://localhost:3000/api/users/auth/google/callback',
-      passReqToCallback: true,
+      passReqToCallback: true, //esto para que lo ponemos?
     },
     async (request, accessToken, refreshToken, profile, cb) => {
-      await handleSocialLoginRequest(profile.email, profile, cb);
+      await handleSocialLoginRequest(profile.email, profile); // hemos comprobado que solo si traemos aquí profile se consigue generar
+      //el token para que luego se le pueda pasar a la función de login.
+      const token = jwt.sign(
+        { email: profile.email },
+        process.env.SECRET_KEY_JWT,
+        { expiresIn: '1d' }
+      );
+      const user = {
+        //pero no estoy seguro si retornando este "user", le llega a handlesocialloginrequest y por tanto podemos logear
+        nickname: generateNickName(profile._json.email),
+        email: profile._json.email,
+        password: bcrypt.hashSync('healthyPass2022', 10),
+        role: 'basic',
+        fullname: profile.displayName,
+        provider_id: profile.id,
+        provider: profile.provider,
+        token,
+      };
+      return done(null, user);
     }
   )
 );

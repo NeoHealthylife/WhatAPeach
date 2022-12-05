@@ -24,6 +24,9 @@ const register = async (req, res, next) => {
 };
 
 const mapGoogleData = (profile) => {
+  //esta función de mapeo estaba previamente a crear "user" dentro de la estrategia de Google
+  // que ahora tbn mapea. pero al haber creado el handlererror no sé como adaptarlo con la funcion registerFromSocialLogin y poder
+  //renunciar de esta función de mapeo y que a su vez le llegue el user del que te hablaba.
   return {
     nickname: generateNickName(profile.email),
     email: profile.email,

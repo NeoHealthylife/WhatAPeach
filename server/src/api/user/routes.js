@@ -85,6 +85,7 @@ UserRoutes.get('/logout', (req, res) => {
   req.session = null;
   req.logout();
   res.redirect('/');
+  res.send('You are now logged out!');
 });
 
 //WEB ROUTES
