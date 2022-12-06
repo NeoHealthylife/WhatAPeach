@@ -1,5 +1,6 @@
 const passport = require('passport');
 const config = require('./configs');
+const bcrypt = require('bcrypt');
 const {
   getUsers,
   _register,
@@ -7,6 +8,7 @@ const {
   loginFromSocialLogin,
 } = require('./controller');
 const User = require('./model');
+const { generateNickName } = require('../../utils/string');
 
 require('dotenv').config();
 
@@ -21,31 +23,33 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-const handleSocialLoginRequest = async (email, profile, cb) => {
-  const users = await User.find();
+const handleSocialLoginRequest = async (profile) => {
+  console.log('handle social login request');
+  // Buscamos el usuario filtrando por email
+  const existingUser = await User.findOne({ email: profile.email });
 
-  // Find existing user
-  const existingUser = users.find(
-    (u) => u.email.toLowerCase() === email.toLowerCase()
-  );
-
+  // Si encuentro el usuario, lo devuelvo
   if (existingUser) {
-    // Login
-    try {
-      const user = loginFromSocialLogin(email, profile); //inicialmente pasabamos solo el email por parametro
-      //pero he metido profile tbn en vistas a que de esa forma le llege el objeto entero a la función de registro. No estoy seguro de este paso
-      return cb(null, user);
-    } catch (err) {
-      return cb(err);
-    }
+    return existingUser;
+  } else if (existingUser.provider != 'google') {
+    return done(null, false, {
+      message: `You have previously signed up with a different signin method`,
+    });
   } else {
-    // Register
-    try {
-      const newUser = registerFromSocialLogin(profile);
-      return cb(null, newUser);
-    } catch (err) {
-      return cb(err);
-    }
+    // Si no encuentro el usuario, lo creo y lo devuelvo
+    const userData = {
+      nickname: generateNickName(profile.email), //yo pondría aquí mejor displayName que te devuelve google
+      email: profile.email,
+      password: null /* bcrypt.hashSync('healthyPass2022', 10), */,
+      role: 'basic',
+      fullname: profile.displayName,
+      provider_id: profile.id,
+      provider: profile.provider,
+    };
+    const newUser = new User(userData);
+    await newUser.save();
+
+    return newUser;
   }
 };
 
@@ -78,25 +82,11 @@ passport.use(
       callbackURL: 'http://localhost:3000/api/users/auth/google/callback',
       passReqToCallback: true, //esto para que lo ponemos?
     },
-    async (request, accessToken, refreshToken, profile, cb) => {
-      await handleSocialLoginRequest(profile.email, profile); // hemos comprobado que solo si traemos aquí profile se consigue generar
-      //el token para que luego se le pueda pasar a la función de login.
-      const token = jwt.sign(
-        { email: profile.email },
-        process.env.SECRET_KEY_JWT,
-        { expiresIn: '1d' }
-      );
-      const user = {
-        //pero no estoy seguro si retornando este "user", le llega a handlesocialloginrequest y por tanto podemos logear
-        nickname: generateNickName(profile._json.email),
-        email: profile._json.email,
-        password: bcrypt.hashSync('healthyPass2022', 10),
-        role: 'basic',
-        fullname: profile.displayName,
-        provider_id: profile.id,
-        provider: profile.provider,
-        token,
-      };
+    async (request, accessToken, refreshToken, profile, done) => {
+      // Aquí tengo el usuario que ya existía o el que acabo de crear y lo devuelvo en el callback "done". Passport lo inserta en la request
+      // y llama a la url de callback configurada en la variable callbackURL.
+
+      const user = await handleSocialLoginRequest(profile);
       return done(null, user);
     }
   )

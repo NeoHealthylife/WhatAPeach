@@ -17,6 +17,7 @@ const {
   deleteUser,
   addFavRecipe,
   addFavWorkout,
+  loginFromSocialLogin,
   deleteFavRecipe,
   deleteFavWorkout,
   addTodoRecipe,
@@ -65,13 +66,8 @@ UserRoutes.get(
 );
 UserRoutes.get(
   '/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: `${process.env.FRONT_ENV}/dashboard`,
-    failureRedirect: `${process.env.FRONT_ENV}/login`,
-  }),
-  function (req, res) {
-    res.redirect('/');
-  }
+  passport.authenticate('google', { session: false }),
+  loginFromSocialLogin
 );
 
 UserRoutes.get('/fail', (req, res) => {

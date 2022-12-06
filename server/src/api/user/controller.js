@@ -23,53 +23,6 @@ const register = async (req, res, next) => {
   }
 };
 
-const mapGoogleData = (profile) => {
-  //esta función de mapeo estaba previamente a crear "user" dentro de la estrategia de Google
-  // que ahora tbn mapea. pero al haber creado el handlererror no sé como adaptarlo con la funcion registerFromSocialLogin y poder
-  //renunciar de esta función de mapeo y que a su vez le llegue el user del que te hablaba.
-  return {
-    nickname: generateNickName(profile.email),
-    email: profile.email,
-    password: bcrypt.hashSync('healthyPass2022', 10),
-    role: 'basic',
-    fullname: profile.displayName,
-    provider_id: profile.id,
-    provider: profile.provider,
-  };
-};
-
-const mapFacebookData = (profile) => {
-  return {
-    nickname: generateNickName(profile._json.email),
-    email: profile._json.email,
-    password: bcrypt.hashSync('healthyPass2022', 10),
-    role: 'basic',
-    fullname: profile.displayName,
-    provider_id: profile.id,
-    provider: profile.provider,
-  };
-};
-
-const registerFromSocialLogin = async (profile) => {
-  try {
-    let newUserBody = {};
-    if (profile.provider === 'google') {
-      newUserBody = mapGoogleData(profile);
-    }
-
-    if (profile.provider === 'facebook') {
-      newUserBody = mapFacebookData(profile);
-    }
-
-    const newUser = new User(newUserBody);
-
-    newUser.save();
-    return newUser;
-  } catch (err) {
-    return setError(500, 'User register fail');
-  }
-};
-
 const login = async (req, res, next) => {
   try {
     const userInfo = await User.findOne({ nickname: req.body.nickname });
@@ -98,26 +51,35 @@ const login = async (req, res, next) => {
   }
 };
 
-const loginFromSocialLogin = async (email) => {
+/**
+ * Esta función es llamada por la ruta /auth/google/callback.
+ * En el parámetro req ya viene insertado el user y se puede
+ * acceder a él utilizando req.user.
+ * Este controlador lo único que hace es generar un JWT y devolverlo al frontend
+ * junto al user.
+ */
+const loginFromSocialLogin = async (req, res, next) => {
+  console.log('LoginFromSocialLogin', req.user);
   try {
-    const userInfo = await User.findOne({ email: email });
     const token = jwt.sign(
       {
-        id: userInfo._id,
-        nickname: userInfo.nickname,
-        role: userInfo.role,
+        id: req.user._id,
+        nickname: req.user.nickname,
+        role: req.user.role,
       },
       req.app.get('secretKey'),
       { expiresIn: '10h' }
     );
+
     return res.json({
       status: 200,
       message: 'welcome User',
-      user: userInfo,
+      user: req.user,
       token: token,
     });
   } catch (error) {
-    return setError(500, 'User login fail');
+    console.log('error', error);
+    return next(setError(500, 'User login fail'));
   }
 };
 
@@ -318,7 +280,6 @@ const deleteCompletedWorkout = async (req, res, next) => {
 
 module.exports = {
   register,
-  registerFromSocialLogin,
   loginFromSocialLogin,
   login,
   getUsers,
