@@ -14,15 +14,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <GlobalContextProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="/" element={<App />}>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="workouts" element={<Workouts />} />
+            <Route path="profile"element={<Profile />} />
+            <Route path="workouts"element={<Workouts />} />
             <Route path="workouts/:id" element={<WorkoutCard />} />
-            <Route path="recipes" element={<Recipes />} />
-            <Route path="recipes/:id" element={<RecipeCard />} />
+            <Route path="recipes"element={<Recipes />} />
+            <Route path="recipes/:id"element={<RecipeCard />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
