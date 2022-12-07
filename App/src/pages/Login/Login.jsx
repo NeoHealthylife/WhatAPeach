@@ -2,14 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+
 import { loginUser } from "../../services/API";
 
-
 const Login = () => {
-  const { user, setUser } = useState
+  const [userLogin, setUserLogin] = useState("");
   const [eye, setEye] = useState(false);
-  const navigate = useNavigate();
+
   const toggleEye = (ev) => {
     ev.preventDefault();
     setEye(!eye);
@@ -21,11 +20,11 @@ const Login = () => {
   } = useForm();
 
   const onFormSubmit = (values) => {
-    ev.preventDefault();
+    values.preventDefault();
     loginUser({
       nickname: values.nickname,
       password: values.password,
-    }).then(navigate(`dashboard/`));
+    });
   };
 
   return (
@@ -47,13 +46,9 @@ const Login = () => {
                   minLength: 2,
                 })}
                 type="text"
-                onChange={(ev) => setUser({...user, nickname:ev.target.value})}
+                onChange={(ev) => setUserLogin({ ...userLogin, nickname: ev.target.value })}
               />
-              {errors.username ? (
-                <p className="error">
-                  Este campo es requerido y debe tener al menos 2 caracteres
-                </p>
-              ) : null}
+              {errors.username ? <p className="error">Este campo es requerido y debe tener al menos 2 caracteres</p> : null}
             </label>
           </div>
           <div className="alignCenter password">
@@ -74,17 +69,13 @@ const Login = () => {
                       pattern: /^\S*$/,
                       validate: {
                         format: (Contraseña) => {
-                          return (
-                            /[A-Z]/g.test(Contraseña) &&
-                            /[a-z]/g.test(Contraseña) &&
-                            /[0-9]/g.test(Contraseña)
-                          );
+                          return /[A-Z]/g.test(Contraseña) && /[a-z]/g.test(Contraseña) && /[0-9]/g.test(Contraseña);
                         },
                       },
                     })}
                     placeholder="*****"
                     type={eye ? "text" : "password"}
-                    onChange={(ev) => setUser({...user, password:ev.target.value})}
+                    onChange={(ev) => setUserLogin({ ...userLogin, password: ev.target.value })}
                   />
 
                   {errors.Contraseña ? (
