@@ -33,7 +33,7 @@ const Login = () => {
       <div className="loginPage">
         <form onSubmit={handleSubmit(onFormSubmit)}>
           <div className="ucademyDiv">
-            <img src={imagen del melocotonsito que es nuestro logo} alt="logo" />
+            <img src="imagen del melocotonsito que es nuestro logo" alt="logo" />
           </div>
           <div className="alignCenter ">
             <span>Nickname:</span>

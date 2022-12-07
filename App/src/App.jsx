@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
-import './App.css';
 import FaceButton from './components/FacebookButton';
 import GoogleButton from './components/GoogleButton';
 

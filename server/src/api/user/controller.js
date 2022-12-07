@@ -59,7 +59,6 @@ const login = async (req, res, next) => {
  * junto al user.
  */
 const loginFromSocialLogin = async (req, res, next) => {
-  console.log('LoginFromSocialLogin', req.user);
   try {
     const token = jwt.sign(
       {
