@@ -8,15 +8,7 @@ require('./passportSetup');
 
 const cookieSession = require('cookie-session');
 const isLoggedIn = require('../../middlewares/socialLoginAuth');
-
-UserRoutes.use(
-  cookieSession({
-    name: 'google-auth-session',
-    keys: ['key1', ' key2'],
-  })
-);
-UserRoutes.use(passport.initialize());
-UserRoutes.use(passport.session());
+const session = require('express-session');
 
 const {
   register,
@@ -25,6 +17,7 @@ const {
   deleteUser,
   addFavRecipe,
   addFavWorkout,
+  loginFromSocialLogin,
   deleteFavRecipe,
   deleteFavWorkout,
   addTodoRecipe,
@@ -34,14 +27,37 @@ const {
   addCompletedWorkout,
   deleteCompletedWorkout,
 } = require('./controller');
+const config = require('./configs');
 
-UserRoutes.get('/auth/facebook', passport.authenticate('facebook'));
+UserRoutes.use(
+  session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+// UserRoutes.use(
+//   cookieSession({
+//     maxAge: 24 * 60 * 60 * 1000,
+//     keys: [config.cookieKey],
+//   })
+// );
+UserRoutes.use(passport.initialize());
+UserRoutes.use(passport.session());
+
+UserRoutes.get(
+  '/auth/facebook',
+  passport.authenticate('facebook', { scope: ['email', 'user_location'] })
+);
 UserRoutes.get(
   '/auth/facebook/callback',
   passport.authenticate('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/fail',
-  })
+    successRedirect: `${process.env.FRONT_ENV}/dashboard`,
+    failureRedirect: `${process.env.FRONT_ENV}/login`,
+  }),
+  function (req, res) {
+    res.redirect('/');
+  }
 );
 
 UserRoutes.get(
@@ -50,13 +66,8 @@ UserRoutes.get(
 );
 UserRoutes.get(
   '/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/fail',
-  }),
-  function (req, res) {
-    res.redirect('/');
-  }
+  passport.authenticate('google', { session: false }),
+  loginFromSocialLogin
 );
 
 UserRoutes.get('/fail', (req, res) => {
@@ -70,6 +81,7 @@ UserRoutes.get('/logout', (req, res) => {
   req.session = null;
   req.logout();
   res.redirect('/');
+  res.send('You are now logged out!');
 });
 
 //WEB ROUTES

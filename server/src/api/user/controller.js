@@ -3,11 +3,12 @@ const jwt = require('jsonwebtoken');
 
 const User = require('./model');
 const { setError } = require('../../utils/error/handle.error');
+const { generateNickName } = require('../../utils/string');
 
 const register = async (req, res, next) => {
   try {
     const newUser = new User(req.body);
-    const userDuplicate = await User.findOne({ username: newUser.username });
+    const userDuplicate = await User.findOne({ nickname: newUser.nickname });
 
     if (userDuplicate) return next('User alredy exists');
 
@@ -24,13 +25,13 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const userInfo = await User.findOne({ username: req.body.username });
+    const userInfo = await User.findOne({ nickname: req.body.nickname });
     if (bcrypt.compareSync(req.body.password, userInfo.password)) {
       userInfo.password = null;
       const token = jwt.sign(
         {
           id: userInfo._id,
-          username: userInfo.username,
+          nickname: userInfo.nickname,
           role: userInfo.role,
         },
         req.app.get('secretKey'),
@@ -46,6 +47,38 @@ const login = async (req, res, next) => {
       return next('Incorrect password');
     }
   } catch (error) {
+    return next(setError(500, 'User login fail'));
+  }
+};
+
+/**
+ * Esta función es llamada por la ruta /auth/google/callback.
+ * En el parámetro req ya viene insertado el user y se puede
+ * acceder a él utilizando req.user.
+ * Este controlador lo único que hace es generar un JWT y devolverlo al frontend
+ * junto al user.
+ */
+const loginFromSocialLogin = async (req, res, next) => {
+  console.log('LoginFromSocialLogin', req.user);
+  try {
+    const token = jwt.sign(
+      {
+        id: req.user._id,
+        nickname: req.user.nickname,
+        role: req.user.role,
+      },
+      req.app.get('secretKey'),
+      { expiresIn: '10h' }
+    );
+
+    return res.json({
+      status: 200,
+      message: 'welcome User',
+      user: req.user,
+      token: token,
+    });
+  } catch (error) {
+    console.log('error', error);
     return next(setError(500, 'User login fail'));
   }
 };
@@ -184,7 +217,6 @@ const addCompletedRecipe = async (req, res, next) => {
       {
         $pull: { toDoRecipes: recipeId },
         $push: { completedRecipes: recipeId },
-        
       },
       { new: true }
     );
@@ -220,7 +252,6 @@ const addCompletedWorkout = async (req, res, next) => {
       {
         $pull: { toDoWorkouts: workoutId },
         $push: { completedWorkouts: workoutId },
-        
       },
       { new: true }
     );
@@ -249,6 +280,7 @@ const deleteCompletedWorkout = async (req, res, next) => {
 
 module.exports = {
   register,
+  loginFromSocialLogin,
   login,
   getUsers,
   deleteUser,
@@ -261,6 +293,5 @@ module.exports = {
   addCompletedRecipe,
   deleteCompletedRecipe,
   addCompletedWorkout,
-  deleteCompletedWorkout
-  
+  deleteCompletedWorkout,
 };
