@@ -24,7 +24,6 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "chakra": "^0.0.3",
     "cloudinary": "^1.32.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
