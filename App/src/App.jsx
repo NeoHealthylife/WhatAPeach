@@ -1,16 +1,18 @@
-import { Card, CardBody, Text } from "@chakra-ui/react";
+import {Card, CardBody, Text } from "@chakra-ui/react";
 import FaceButton from "./components/FacebookButton";
 import GoogleButton from "./components/GoogleButton";
 import UiButton from "./components/UIButton";
 import UiInput from "./components/UIInput";
 import { Header } from "./components/Header";
 import SubHeading from "./components/Subheading";
-import SimpleSidebar from "./components/NavBar";
+import CardComp from "./components/Card";
+import AgnosticIconBtn from "./components/AgnosticIconBtn";
 function App() {
   return (
     <div className="App">
-    <SimpleSidebar/>
-      <SubHeading fontsize="3xl" position="relative" barColor="blue.200" text="peach" />
+    <CardComp imgSrc="https://sophiepeanut.com/wp-content/uploads/2017/01/get-spicy-featured.jpg" altImg="no se que es eso" textLabel1="Huevos" headingCard="Huevos con chorizo" bodyText='te vas a poner las botas con este delicioso y grasiento plato'/>
+    <AgnosticIconBtn/>
+      <SubHeading fontsize="lg" position="relative" barColor="blue.200" text="peach" />
       <Header />
       <UiInput />
       <UiButton>Example default</UiButton>

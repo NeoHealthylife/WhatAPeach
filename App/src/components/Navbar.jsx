@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+/* import React, { ReactNode } from 'react';
 import {
   IconButton,
   Box,
@@ -52,8 +52,8 @@ export default function SimpleSidebar({ children }: { children: ReactNode }) {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
-      <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
+      {/* mobilenav */
+      /*{ <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
@@ -152,4 +152,4 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       </Text>
     </Flex>
   );
-};
+}; */
