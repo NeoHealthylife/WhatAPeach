@@ -29,7 +29,7 @@ const StyledButton = styled.button`
 
 const UiButton = (props) => {
   return (
-    <StyledButton {...props} variant={props.variant ?? "primary"}>
+    <StyledButton {...props} boderRadius="md">
       {props.children}
     </StyledButton>
   );
