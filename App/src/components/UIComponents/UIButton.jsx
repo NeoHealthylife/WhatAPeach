@@ -20,7 +20,10 @@ const StyledButton = styled.button`
     props.variant === "secondary" &&
     css`
       color: #232323;
-      background-color: #82bfcc;
+      background-color: #14bfe6;
+      :hover {
+        background-color: #ff572e;
+      }
     `}
 `;
 

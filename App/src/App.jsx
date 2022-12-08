@@ -1,9 +1,9 @@
 import { Card, CardBody, Text } from "@chakra-ui/react";
-import UiButton from "./components/UIButton";
-import SubHeading from "./components/Subheading";
-import CardComp from "./components/Card";
-import JoinOurTeam from "./pages/Login/ChakraLogin";
 import ButtonTest from "./components/Button";
+import CardComp from "./components/Card";
+import SubHeading from "./components/Subheading";
+import UiButton from "./components/UIComponents/UIButton";
+import JoinOurTeam from "./pages/Login/ChakraLogin";
 
 function App() {
   return (

@@ -14,7 +14,7 @@ import {
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
-import UiButton from "../../components/UIButton";
+import UiButton from "../../components/UIComponents/UIButton";
 import { loginUser } from "../../services/API";
 export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false);
