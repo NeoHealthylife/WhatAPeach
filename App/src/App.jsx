@@ -1,14 +1,22 @@
 import { Card, CardBody, Text } from "@chakra-ui/react";
-import FaceButton from "./components/FacebookButton";
-import GoogleButton from "./components/GoogleButton";
 import UiButton from "./components/UIButton";
+import SubHeading from "./components/Subheading";
+import CardComp from "./components/Card";
+import JoinOurTeam from "./pages/Login/ChakraLogin";
 import ButtonTest from "./components/Button";
 
 function App() {
   return (
     <div className="App">
-      <FaceButton />
-      <GoogleButton />
+      <CardComp
+        imgSrc="https://sophiepeanut.com/wp-content/uploads/2017/01/get-spicy-featured.jpg"
+        altImg="no se que es eso"
+        textLabel1="Huevos"
+        headingCard="Huevos con chorizo"
+        bodyText="te vas a poner las botas con este delicioso y grasiento plato"
+      />
+      <SubHeading fontsize="lg" position="relative" barColor="blue.200" text="peach" />
+      <JoinOurTeam />
       <UiButton>Example default</UiButton>
       <UiButton onClick={() => alert("pepe")} variant="primary">
         Example primary
