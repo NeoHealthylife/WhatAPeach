@@ -15,11 +15,13 @@ import Profile from "./pages/Profile/Profile";
 import Recipes from "./pages/Recipes/Recipes";
 import Register from "./pages/Register/Register";
 import Workouts from "./pages/Workouts/Workouts";
+import { myTheme } from "./components/UIComponents/Theme";
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalContextProvider>
-      <ChakraProvider>
+      <ChakraProvider theme={myTheme}>
         <BrowserRouter>
           <Routes>
             <Route path="login" element={<Login />} />

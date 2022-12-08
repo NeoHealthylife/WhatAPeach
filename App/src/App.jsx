@@ -1,7 +1,7 @@
 import { Card, CardBody, Text } from "@chakra-ui/react";
 import FaceButton from "./components/FacebookButton";
 import GoogleButton from "./components/GoogleButton";
-import UiButton from "./components/UIButton";
+import UiButton from "./components/UIComponents/UIButton";
 import UiInput from "./components/UIInput";
 
 function App() {
