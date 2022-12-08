@@ -1,7 +1,8 @@
 import React from "react";
+import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 
 const Recipes = () => {
-  return <div>Recipes</div>;
+  return <LayoutWrapper>Recipes</LayoutWrapper>;
 };
 
 export default Recipes;
