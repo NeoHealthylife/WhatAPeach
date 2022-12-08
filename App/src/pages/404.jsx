@@ -1,7 +1,8 @@
 import React from "react";
+import LayoutWrapper from "../components/Layout/LayoutWrapper";
 
 const NotFound = () => {
-  return <div>404</div>;
+  return <LayoutWrapper>404</LayoutWrapper>;
 };
 
 export default NotFound;
