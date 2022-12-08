@@ -84,19 +84,31 @@ const CardComp=({imgSrc,altImg,textLabel1,headingCard, bodyText})=>{
             {liked ? (
              <IconButton 
              _hover={{ background: 'none',
-             borderColor:'none', }}
+             border:'none', }}
             _active={{
                 background: 'none',
-                borderColor: 'none',
+                border: 'none',
             }}
             _focus={{
+              outline:'none',
                 boxShadow:
                 'none !important',
                 borderColor:'none',
             }} 
              variant="ghost" icon={ <RiHeart2Fill fill="red" fontSize={'24px'} />} />
             ) : (
-                <IconButton variant="ghost" icon={ <RiHeart2Line color="red" fontSize={'24px'} />} />
+                <IconButton _hover={{ background: 'none',
+             border:'none', }}
+            _active={{
+                background: 'none',
+                border: 'none',
+            }}
+            _focus={{
+              outline:'none',
+                boxShadow:
+                'none !important',
+                borderColor:'none',
+            }}  variant="ghost" icon={ <RiHeart2Line color="red" fontSize={'24px'} />} />
             )}
           </Flex>
         </HStack>

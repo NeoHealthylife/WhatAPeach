@@ -7,13 +7,17 @@ import { Header } from "./components/Header";
 import SubHeading from "./components/Subheading";
 import CardComp from "./components/Card";
 import AgnosticIconBtn from "./components/AgnosticIconBtn";
+import JoinOurTeam from "./pages/Login/ChakraLogin";
+import SimpleSidebar from "./components/NavBar";
 function App() {
   return (
     <div className="App">
+    <SimpleSidebar/>
     <CardComp imgSrc="https://sophiepeanut.com/wp-content/uploads/2017/01/get-spicy-featured.jpg" altImg="no se que es eso" textLabel1="Huevos" headingCard="Huevos con chorizo" bodyText='te vas a poner las botas con este delicioso y grasiento plato'/>
     <AgnosticIconBtn/>
       <SubHeading fontsize="lg" position="relative" barColor="blue.200" text="peach" />
       <Header />
+      <JoinOurTeam />
       <UiInput />
       <UiButton>Example default</UiButton>
       <UiButton onClick={() => alert("pepe")} variant="primary">

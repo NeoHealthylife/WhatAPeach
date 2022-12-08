@@ -15,6 +15,14 @@ const StyledButton = styled.button`
         background-color: #ff572e;
       }
     `}
+    ${(props) =>
+    props.variant === "socialLogin" &&
+    css`
+      color:#ff9179;
+      background-color: #FFFFFF;
+      border-radius:20px;
+      border-color: #ff9179;
+    `}
 
   ${(props) =>
     props.variant === "secondary" &&

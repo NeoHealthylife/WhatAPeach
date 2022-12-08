@@ -1,4 +1,4 @@
-/* import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   IconButton,
   Box,
@@ -11,28 +11,21 @@ import {
   DrawerContent,
   Text,
   useDisclosure,
-  BoxProps,
-  FlexProps,
 } from '@chakra-ui/react';
 
-import { IconType} from 'react-icons';
 import { GiChewedHeart} from 'react-icons/gi';
 import { TiInputCheckedOutline } from 'react-icons/ti';
 import { TiInputChecked } from 'react-icons/ti';
 import { TfiViewList } from "react-icons/tfi"
-import { ReactText } from 'react';
 
-interface LinkItemProps {
-  name: string;
-  icon: IconType;
-}
-const LinkItems: Array <LinkItemProps> = [
+
+const LinkItems = [
   { name: 'Mis Favoritos', icon: GiChewedHeart },
   { name: 'Pendientes', icon: TiInputCheckedOutline },
   { name: 'Completados', icon: TiInputChecked },
 ];
 
-export default function SimpleSidebar({ children }: { children: ReactNode }) {
+export default function SimpleSidebar({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue('orange.100', 'orange.900')}>
@@ -52,8 +45,8 @@ export default function SimpleSidebar({ children }: { children: ReactNode }) {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */
-      /*{ <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
+      {/* mobilenav */}
+     <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
@@ -61,11 +54,7 @@ export default function SimpleSidebar({ children }: { children: ReactNode }) {
   );
 }
 
-interface SidebarProps extends BoxProps {
-  onClose: () => void;
-}
-
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
       bg={useColorModeValue('orange', 'orange.900')}
@@ -90,11 +79,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-interface NavItemProps extends FlexProps {
-  icon: IconType;
-  children: ReactText;
-}
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, ...rest }) => {
   return (
     <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
@@ -125,10 +110,8 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   );
 };
 
-interface MobileProps extends FlexProps {
-  onOpen: () => void;
-}
-const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+
+const MobileNav = ({ onOpen, ...rest }) => {
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -146,10 +129,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<TfiViewList />}
       />
-
+      
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
         What a Peach!
       </Text>
     </Flex>
   );
-}; */
+}; 
