@@ -2,28 +2,42 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const StyledButton = styled.button`
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 10px;
 
   ${(props) =>
     props.variant === "primary" &&
     css`
-      color: #232323;
-      background-color: #ff9179;
-
+      color:#FFFFFF ;
+      background-color: #EF623F;
+      box-shadow: #161616 4px 4px 0 0;
       :hover {
-        background-color: #ff572e;
+        background-color: #f2866a;
       }
+  :active {
+  box-shadow: #161616 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}      
     `}
 
   ${(props) =>
     props.variant === "secondary" &&
     css`
-      color: #232323;
-      background-color: #14bfe6;
+    display: flex;
+    gap:1rem;
+      color: #EF623F;
+      border:1px solid #EF623F;
+      background-color: #FFFFFF;
       :hover {
-        background-color: #ff572e;
+        background-color: #e0e0e0;
       }
+      box-shadow: #161616 4px 4px 0 0;
+      
+      :active {
+      box-shadow: #161616 2px 2px 0 0;
+      transform: translate(2px, 2px);
+      
+}      
     `}
 `;
 
@@ -34,5 +48,4 @@ const UiButton = (props) => {
     </StyledButton>
   );
 };
-
 export default UiButton;
