@@ -104,20 +104,7 @@ const Footer = () => {
   return (
     <StyledFooter>
       <Box bg={useColorModeValue("#FF562D")} color={useColorModeValue("white")}>
-        <Container
-          as={Stack}
-          maxW={"6xl"}
-          py={4}
-          spacing={4}
-          justify={"center"}
-          align={"center"}
-        >
-          <Logo />
-          <Stack direction={"row"} spacing={6}>
-            <Link href="/home">Home</Link>
-            <Link href="/about-us">About</Link>
-          </Stack>
-        </Container>
+       
 
         <Box
           borderTopWidth={1}
