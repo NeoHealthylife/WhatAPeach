@@ -2,12 +2,9 @@ import {
   Avatar,
   Box,
   Flex,
-  Icon,
-  Text,
   Link,
   Image,
   Button,
-  Heading,
   Stack,
   VStack,
   Drawer,
@@ -30,7 +27,8 @@ import { GiChewedHeart } from "react-icons/gi";
 import { TiInputCheckedOutline, TiInputChecked } from "react-icons/ti";
 import { CiForkAndKnife } from "react-icons/ci";
 import { BiDumbbell } from "react-icons/bi";
-
+import { NavItemLink } from "../NavItemLink";
+import LayoutWrapper from "./LayoutWrapper";
 
 export default function Sidebar() {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -99,33 +97,36 @@ const SidebarContent = ({ ...props }) => (
     <VStack h="full" w="full" alignItems="flex-start" justify="space-between">
       <Box w="full">
         <Flex px="4" py="5" align="center" justifyContent="center">
-          <Image src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670527144/HealthyLife/logo_blanco_l865op.svg" alt="logo"/>
-          
+    
+          <Button
+            src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670527144/HealthyLife/logo_blanco_l865op.svg"
+            alt="logo"
+            onClick={() => <LayoutWrapper/>}
+          />
         </Flex>
-        
+
         <Flex
           direction="column"
           as="nav"
           fontSize="md"
           color="black.300"
           aria-label="Main Navigation"
-        > 
-         
-          <NavItem icon={CiForkAndKnife}>Recetas</NavItem>
-          <NavItem icon={BiDumbbell}>Workouts</NavItem>
+        >
+          <NavItemLink icon={CiForkAndKnife} name="Recetas" href="/recipes" />
+          <NavItemLink icon={BiDumbbell} name="Workout" href="/workouts"/>
         </Flex>
         <Box mt="20">
-        <Flex
-          direction="column"
-          as="nav"
-          fontSize="md"
-          color="black.300"
-          aria-label="Main Navigation"
-        > 
-          <NavItem icon={GiChewedHeart}>Mis Favoritos</NavItem>
-          <NavItem icon={TiInputCheckedOutline}>Pendientes</NavItem>
-          <NavItem icon={TiInputChecked}>Completados</NavItem>
-        </Flex>
+          <Flex
+            direction="column"
+            as="nav"
+            fontSize="md"
+            color="black.300"
+            aria-label="Main Navigation"
+          >
+            <NavItemLink icon={GiChewedHeart}>Mis Favoritos</NavItemLink>
+            <NavItemLink icon={TiInputCheckedOutline}>Pendientes</NavItemLink>
+            <NavItemLink icon={TiInputChecked}>Completados</NavItemLink>
+          </Flex>
         </Box>
       </Box>
 
@@ -157,36 +158,4 @@ const SidebarContent = ({ ...props }) => (
   </Box>
 );
 
-const NavItem = ({ icon, children }) => {
-  const color = useColorModeValue("gray.600", "gray.300");
 
-  return (
-    <Flex
-      align="center"
-      px="4"
-      py="3"
-      cursor="pointer"
-      role="group"
-      fontWeight="semibold"
-      transition=".15s ease"
-      color={useColorModeValue("inherit", "gray.400")}
-      _hover={{
-        bg: useColorModeValue("gray.100", "gray.900"),
-        color: useColorModeValue("gray.900", "gray.200"),
-      }}
-      // {...rest}
-    >
-      {icon && (
-        <Icon
-          mx="2"
-          boxSize="4"
-          _groupHover={{
-            color: color,
-          }}
-          as={icon}
-        />
-      )}
-      {children}
-    </Flex>
-  );
-};

@@ -5,7 +5,6 @@ import CardComp from "../../components/Card";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import UiButton from "../../components/UIComponents/UIButton";
 import {BsGoogle} from "react-icons/bs";
-import CardComp from "../../components/Card";
 import GlobalContext from "../../context/GlobalContext";
 import Dashboard from "../Dashboard/Dashboard";
 
