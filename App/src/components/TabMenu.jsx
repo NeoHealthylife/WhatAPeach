@@ -1,7 +1,6 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Button } from "@chakra-ui/react";
 
 import React, { useCallback, useState } from "react";
-import UiButton from "./UIComponents/UIButton";
 
 export const TabMenu = () => {
   return (
@@ -12,7 +11,7 @@ export const TabMenu = () => {
       </TabList>
       <TabPanels>
         <TabPanel>
-          <Button variant="secondary">Workout</Button>
+          <Button as="a" variant="secondary" href="/workouts"></Button>
         </TabPanel>
         <TabPanel>
           <p>two!</p>
