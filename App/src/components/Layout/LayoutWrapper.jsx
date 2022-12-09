@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "./Footer";
-import Header from "./Header";
+// import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 const StyledMainContent = styled.div`
   position: absolute;
@@ -19,7 +20,7 @@ const StyledMainContent = styled.div`
 const LayoutWrapper = (props) => {
   return (
     <div>
-      <Header />
+      <Sidebar />
       <StyledMainContent>{props.children}</StyledMainContent>
       <Footer />
     </div>
