@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import CardComp from "../../components/Card";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 
 import GlobalContext from "../../context/GlobalContext";
@@ -15,10 +16,7 @@ const Home = () => {
         {!isLogged && (
           <>
             <div>
-              <h3>ALGUNAS PALABRAS DE BIENVENIDA</h3>
-              <p>
-                un parrafo con algunas palabras y debajo habrá botones de login o registro
-              </p>
+              <CardComp/>
             </div>
             <div className="HomeBtns">
               <NavLink to="register">Registrarse</NavLink>

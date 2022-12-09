@@ -3,7 +3,7 @@ import {ButtonUI as Button } from "./ButtonUI"
 
 export const myTheme = extendTheme ({
     colors: {
-      "primary": '#fa662b',
+      "primary": '#FF562d',
       "soft-primary": "#fe9166",
       "secondary": '#024b42',
       "soft-secondary": '#b31212',
@@ -14,6 +14,19 @@ export const myTheme = extendTheme ({
       lg: "18px",
       md: "13px",
       sm: "10px"
+    },
+    sizes: {
+      lg: "18px",
+      md: "13px",
+      sm: "10px"
+    },
+    boxShadow: {
+      shadoww: "3px 6px 0 0 #fe9166"
+    },
+    variants: {
+      shadow: {
+        boxShadow: "3px 6px 0 #fe9166"
+      }
     },
     components: {
       Button

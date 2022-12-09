@@ -27,7 +27,7 @@ const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
         bg="white"
         border={"1px"}
         borderColor="black"
-        boxShadow={useColorModeValue("3px 6px 0 orange", "6px 6px 0 cyan")}
+        boxShadow={useColorModeValue("3px 6px 0 #fe9166", "6px 6px 0 cyan")}
       >
         <Box h={"200px"} borderBottom={"1px"} borderColor="black">
           <Img
