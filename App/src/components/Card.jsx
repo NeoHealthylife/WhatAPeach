@@ -13,7 +13,7 @@ import { useState } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 
-const CardComp = ({ textLabel1, headingCard, bodyText }) => {
+const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
   const [liked, setLiked] = useState(false);
 
   return (
@@ -36,9 +36,8 @@ const CardComp = ({ textLabel1, headingCard, bodyText }) => {
             objectFit="cover"
             h="full"
             w="full"
-            src={
-              "https://res.cloudinary.com/drh0lkvxh/image/upload/v1670237459/HealthyLife/ensalada-de-aguacate-00552796_4d7c6937_1134x1512_pkogwq.jpg"
-            }
+            alt={altImg}
+            src={imgSrc}
           />
         </Box>
         <Box p={4}>
