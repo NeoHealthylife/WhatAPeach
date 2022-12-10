@@ -1,14 +1,26 @@
+import { FormControl, FormLabel, Select, FormErrorMessage } from "@chakra-ui/react";
 import React from "react";
-import styled from "styled-components";
-
-const StyledSelect = styled.select`
-  border-radius: 10px;
-  padding: 5px;
-  color: #232323;
-`;
 
 const UISelect = (props) => {
-  return <StyledSelect {...props} />;
+  const { options, label, placeholder, onChange, isError } = props;
+
+  const handleChange = (e) => {
+    onChange(e);
+  };
+
+  return (
+    <FormControl isInvalid={isError}>
+      {label && <FormLabel>{label}</FormLabel>}
+      <Select placeholder={placeholder} onChange={(e) => onChange && handleChange(e)}>
+        {options.map((option, index) => (
+          <option key={index} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </Select>
+      {isError && <FormErrorMessage>{isError}</FormErrorMessage>}
+    </FormControl>
+  );
 };
 
 export default UISelect;
