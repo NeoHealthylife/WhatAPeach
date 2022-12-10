@@ -17,12 +17,24 @@ const StyledMainContent = styled.div`
   }
 `;
 
+const StyledFooter = styled.div`
+  width: 100%;
+
+  @media (min-width: 600px) {
+    width: calc(100% - var(--chakra-sizes-60));
+    margin-left: var(--chakra-sizes-60);
+  }
+`;
+
 const LayoutWrapper = (props) => {
   return (
     <div>
       <Sidebar />
       <StyledMainContent>{props.children}</StyledMainContent>
-      <Footer />
+
+      <StyledFooter>
+        <Footer />
+      </StyledFooter>
     </div>
   );
 };
