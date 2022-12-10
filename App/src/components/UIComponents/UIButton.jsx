@@ -24,6 +24,7 @@ const StyledButton = styled.button`
     props.variant === "secondary" &&
     css`
     display: flex;
+    align-items: center;
     gap:1rem;
       color: #EF623F;
       border:1px solid #EF623F;

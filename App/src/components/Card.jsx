@@ -3,9 +3,9 @@ import {
   Center,
   Flex,
   Heading,
+  Image,
   HStack,
   IconButton,
-  Img,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -13,13 +13,14 @@ import { useState } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 
+
 const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
   const [liked, setLiked] = useState(false);
 
   return (
     <Center py={6}>
       <Box
-        w="xs"
+       
         rounded={"lg"}
         my={5}
         mx={[0, 5]}
@@ -27,16 +28,19 @@ const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
         bg="white"
         border={"1px"}
         borderColor="black"
+        h= "42vh"
+        w= "30vh"
         boxShadow={useColorModeValue("3px 6px 0 #fe9166", "6px 6px 0 cyan")}
       >
         <Box h={"200px"} borderBottom={"1px"} borderColor="black">
-          <Img
-            src={imgSrc}
-            roundedTop={"sm"}
-            objectFit="cover"
-            h="full"
-            w="full"
-            alt={altImg}
+          <Image 
+           roundedTop= "sm"
+           objectFit= "cover"
+           h= "full"
+           w= "full"
+            src={"https://res.cloudinary.com/drh0lkvxh/image/upload/v1670237459/HealthyLife/ensalada-de-aguacate-00552796_4d7c6937_1134x1512_pkogwq.jpg"}
+           
+            
           />
         </Box>
         <Box p={4}>
@@ -85,32 +89,12 @@ const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
           >
             {liked ? (
               <IconButton
-                _hover={{ background: "none", border: "none" }}
-                _active={{
-                  background: "none",
-                  border: "none",
-                }}
-                _focus={{
-                  outline: "none",
-                  boxShadow: "none !important",
-                  borderColor: "none",
-                }}
-                variant="ghost"
+              variant="primary"
                 icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
               />
             ) : (
               <IconButton
-                _hover={{ background: "none", border: "none" }}
-                _active={{
-                  background: "none",
-                  border: "none",
-                }}
-                _focus={{
-                  outline: "none",
-                  boxShadow: "none !important",
-                  borderColor: "none",
-                }}
-                variant="ghost"
+               variant="primary"
                 icon={<RiHeart2Line color="red" fontSize={"24px"} />}
               />
             )}

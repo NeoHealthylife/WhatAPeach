@@ -1,10 +1,10 @@
-export const ButtonUI = {
+export const ButtonStyles = {
   
   defaultStyle: {
     bg: "softprim",
     color: "dark",
     _hover: {
-      bg: "none",
+      bg: "green",
       border: "none",
     },
     _active: {
@@ -47,6 +47,19 @@ export const ButtonUI = {
   },
   //default value de size y variant
   defaultProps: {
-    
+    bg: "softprim",
+    color: "dark",
+    _hover: {
+      bg: "green",
+      border: "none",
+    },
+    _active: {
+      background: "none",
+      border: "none",
+    },
+    _focus: {
+      outline: "none",
+      borderColor: "none",
+    },
   },
 };

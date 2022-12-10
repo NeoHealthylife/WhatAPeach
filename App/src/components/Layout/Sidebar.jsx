@@ -12,6 +12,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Divider,
   DrawerContent,
   IconButton,
   useDisclosure,
@@ -29,6 +30,7 @@ import { CiForkAndKnife } from "react-icons/ci";
 import { BiDumbbell } from "react-icons/bi";
 import { NavItemLink } from "../NavItemLink";
 import LayoutWrapper from "./LayoutWrapper";
+import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -97,25 +99,27 @@ const SidebarContent = ({ ...props }) => (
     <VStack h="full" w="full" alignItems="flex-start" justify="space-between">
       <Box w="full">
         <Flex px="4" py="5" align="center" justifyContent="center">
-    
-          <Button
-            src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670527144/HealthyLife/logo_blanco_l865op.svg"
-            alt="logo"
-            onClick={() => <LayoutWrapper/>}
-          />
+          <NavLink to="/">
+            <Image
+              src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670527144/HealthyLife/logo_blanco_l865op.svg"
+              alt="logo"
+            />
+          </NavLink>
         </Flex>
 
         <Flex
           direction="column"
           as="nav"
+          mb="5"
           fontSize="md"
           color="black.300"
           aria-label="Main Navigation"
         >
           <NavItemLink icon={CiForkAndKnife} name="Recetas" href="/recipes" />
-          <NavItemLink icon={BiDumbbell} name="Workout" href="/workouts"/>
+          <NavItemLink icon={BiDumbbell} name="Workout" href="/workouts" />
         </Flex>
-        <Box mt="20">
+        <Divider  bg="white" margin="auto" width="200px" alignContent="center" orientation='horizontal' />
+        <Box mt="5">
           <Flex
             direction="column"
             as="nav"
@@ -123,9 +127,9 @@ const SidebarContent = ({ ...props }) => (
             color="black.300"
             aria-label="Main Navigation"
           >
-            <NavItemLink icon={GiChewedHeart}>Mis Favoritos</NavItemLink>
-            <NavItemLink icon={TiInputCheckedOutline}>Pendientes</NavItemLink>
-            <NavItemLink icon={TiInputChecked}>Completados</NavItemLink>
+            <NavItemLink icon={GiChewedHeart} name="Mis Favoritos" href="/favorites"/>
+            <NavItemLink icon={TiInputCheckedOutline} name="Pendientes" href="/pending"/>
+            <NavItemLink icon={TiInputChecked} name="Completados" href="/commpleted"/>
           </Flex>
         </Box>
       </Box>
@@ -157,5 +161,3 @@ const SidebarContent = ({ ...props }) => (
     </VStack>
   </Box>
 );
-
-

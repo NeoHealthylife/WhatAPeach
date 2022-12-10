@@ -10,6 +10,7 @@ export const NavItemLink = ({ icon, name, href }) => {
   return (
     <NavLink to={href}>
       <Flex
+        fontSize="lg"
         align="center"
         px="4"
         py="3"
@@ -17,7 +18,7 @@ export const NavItemLink = ({ icon, name, href }) => {
         role="group"
         fontWeight="semibold"
         transition=".15s ease"
-        color={useColorModeValue("inherit", "gray.400")}
+        color={useColorModeValue("blackAlpha.700", "gray.400")}
         _hover={{
           bg: useColorModeValue("gray.100", "gray.900"),
           color: useColorModeValue("gray.900", "gray.200"),

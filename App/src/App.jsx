@@ -1,9 +1,11 @@
+import './index.css';
 import { Card, CardBody, Text } from "@chakra-ui/react";
 import ButtonTest from "./components/Button";
 import CardComp from "./components/Card";
 import SubHeading from "./components/Subheading";
 import UiButton from "./components/UIComponents/UIButton";
 import JoinOurTeam from "./pages/Login/ChakraLogin";
+import { TabMenu } from './components/TabMenu';
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
           <Text>View a summary of all your customers over the last month.</Text>
         </CardBody>
       </Card>
+      
     </div>
   );
 }
