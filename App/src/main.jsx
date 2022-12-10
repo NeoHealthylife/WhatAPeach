@@ -12,7 +12,7 @@ import NotFound from "./pages/404";
 import Favorites from "./pages/Favorites/Favorites";
 import Form from "./pages/Form/Form";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/login";
+import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import Recipes from "./pages/Recipes/Recipes";
 import Register from "./pages/Register/Register";
