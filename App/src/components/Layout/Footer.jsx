@@ -12,15 +12,6 @@ import {
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import styled from "styled-components";
 
-const StyledFooter = styled.div`
-  width: 100%;
-
-  @media (min-width: 600px) {
-    width: calc(100% - var(--chakra-sizes-60));
-    margin-left: 240px;
-  }
-`;
-
 const Logo = (props) => {
   return (
     <svg
@@ -100,40 +91,38 @@ const SocialButton = ({ children, label, href }) => {
 
 const Footer = () => {
   return (
-    <StyledFooter>
-      <Box bg={useColorModeValue("#FF562D")} color={useColorModeValue("white")}>
-        <Box
-          borderTopWidth={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
+    <Box bg={useColorModeValue("#FF562D")} color={useColorModeValue("white")}>
+      <Box
+        borderTopWidth={1}
+        borderStyle={"solid"}
+        borderColor={useColorModeValue("gray.200", "gray.700")}
+      >
+        <Container
+          as={Stack}
+          maxW={"6xl"}
+          py={4}
+          direction={{ base: "column", md: "row" }}
+          spacing={4}
+          justify={{ base: "center", md: "space-between" }}
+          align={{ base: "center", md: "center" }}
         >
-          <Container
-            as={Stack}
-            maxW={"6xl"}
-            py={4}
-            direction={{ base: "column", md: "row" }}
-            spacing={4}
-            justify={{ base: "center", md: "space-between" }}
-            align={{ base: "center", md: "center" }}
-          >
-            <Text>
-              © 2022 Made with love by Gloria, Álvaro and María. All rights reserved
-            </Text>
-            <Stack direction={"row"} spacing={6}>
-              <SocialButton label={"Twitter"} href={"#"}>
-                <FaTwitter />
-              </SocialButton>
-              <SocialButton label={"YouTube"} href={"#"}>
-                <FaYoutube />
-              </SocialButton>
-              <SocialButton label={"Instagram"} href={"#"}>
-                <FaInstagram />
-              </SocialButton>
-            </Stack>
-          </Container>
-        </Box>
+          <Text>
+            © 2022 Made with love by Gloria, Álvaro and María. All rights reserved
+          </Text>
+          <Stack direction={"row"} spacing={6}>
+            <SocialButton label={"Twitter"} href={"#"}>
+              <FaTwitter />
+            </SocialButton>
+            <SocialButton label={"YouTube"} href={"#"}>
+              <FaYoutube />
+            </SocialButton>
+            <SocialButton label={"Instagram"} href={"#"}>
+              <FaInstagram />
+            </SocialButton>
+          </Stack>
+        </Container>
       </Box>
-    </StyledFooter>
+    </Box>
   );
 };
 
