@@ -50,7 +50,7 @@ export default function Sidebar() {
           align="center"
           w="full"
           px="4"
-          d={{ base: "flex", md: "none" }}
+          display={{ base: "flex", md: "none" }}
           borderBottomWidth="1px"
           borderColor={useColorModeValue("inherit", "gray.700")}
           bg={useColorModeValue("soft-primary", "gray.800")}
@@ -118,7 +118,13 @@ const SidebarContent = ({ ...props }) => (
           <NavItemLink icon={CiForkAndKnife} name="Recetas" href="/recipes" />
           <NavItemLink icon={BiDumbbell} name="Workout" href="/workouts" />
         </Flex>
-        <Divider  bg="white" margin="auto" width="200px" alignContent="center" orientation='horizontal' />
+        <Divider
+          bg="white"
+          margin="auto"
+          width="200px"
+          alignContent="center"
+          orientation="horizontal"
+        />
         <Box mt="5">
           <Flex
             direction="column"
@@ -127,9 +133,9 @@ const SidebarContent = ({ ...props }) => (
             color="black.300"
             aria-label="Main Navigation"
           >
-            <NavItemLink icon={GiChewedHeart} name="Mis Favoritos" href="/favorites"/>
-            <NavItemLink icon={TiInputCheckedOutline} name="Pendientes" href="/pending"/>
-            <NavItemLink icon={TiInputChecked} name="Completados" href="/commpleted"/>
+            <NavItemLink icon={GiChewedHeart} name="Mis Favoritos" href="/favorites" />
+            <NavItemLink icon={TiInputCheckedOutline} name="Pendientes" href="/pending" />
+            <NavItemLink icon={TiInputChecked} name="Completados" href="/commpleted" />
           </Flex>
         </Box>
       </Box>

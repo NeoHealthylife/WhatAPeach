@@ -12,7 +12,7 @@ const StyledMainContent = styled.div`
   @media (min-width: 600px) {
     padding: 20px;
     width: calc(100% - var(--chakra-sizes-60));
-    top: var(--chakra-sizes-20);
+    top: 0;
     right: 0;
   }
 `;

@@ -17,9 +17,7 @@ const StyledFooter = styled.div`
 
   @media (min-width: 600px) {
     width: calc(100% - var(--chakra-sizes-60));
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    margin-left: 240px;
   }
 `;
 
@@ -104,8 +102,6 @@ const Footer = () => {
   return (
     <StyledFooter>
       <Box bg={useColorModeValue("#FF562D")} color={useColorModeValue("white")}>
-       
-
         <Box
           borderTopWidth={1}
           borderStyle={"solid"}

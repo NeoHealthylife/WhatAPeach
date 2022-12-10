@@ -7,6 +7,7 @@ import UiButton from "../../components/UIComponents/UIButton";
 import { BsGoogle } from "react-icons/bs";
 import GlobalContext from "../../context/GlobalContext";
 import Dashboard from "../Dashboard/Dashboard";
+import UIInput from "../../components/UIComponents/UIInput";
 import UISelect from "../../components/UIComponents/UISelect";
 
 const Home = () => {
@@ -34,13 +35,19 @@ const Home = () => {
                 onChange={(e) => filtrar()}
                 isError=""
               />
-              <UiButton variant="primary">Hoeeeeeeeeeeeeeeeeeeeeeeeeeeeela</UiButton>
+              <UiButton variant="primary">Hoeeeeeeeeela</UiButton>
               <UiButton variant="secondary">
                 <BsGoogle />
-                Hoeeeeeeeeeeeeee
+                Hoeeeeeeeeee
               </UiButton>
 
               <CardComp />
+
+              <UIInput
+                label="Nombre del usuario"
+                placeholder="Introduce un nombre válido"
+                helpText="Aquí va el nombre de usuario"
+              />
             </div>
           </>
         )}
