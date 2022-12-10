@@ -7,7 +7,7 @@ import UiButton from "../../components/UIComponents/UIButton";
 import { BsGoogle } from "react-icons/bs";
 import GlobalContext from "../../context/GlobalContext";
 import Dashboard from "../Dashboard/Dashboard";
-import UISelect from "../../components/UISelect";
+import UISelect from "../../components/UIComponents/UISelect";
 
 const Home = () => {
   const { isLogged } = useContext(GlobalContext);
