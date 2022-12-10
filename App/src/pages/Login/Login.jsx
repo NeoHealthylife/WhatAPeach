@@ -12,32 +12,25 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import UiButton from "../../components/UIComponents/UIButton";
-import UIInput from "../../components/UIComponents/UIInput";
+import UIInput from "../../components/UIComponents/UIFormInput";
 import { loginUser } from "../../services/API";
+import { FormProvider, useForm } from "react-hook-form";
+import UIFormInput from "../../components/UIComponents/UIFormInput";
 
-const Login=()=> {
-  const [showPassword, setShowPassword] = useState(false);
+const Login = () => {
   const { user, setUser } = useState;
-  const navigate = useNavigate();
-  const toggleEye = (ev) => {
-    ev.preventDefault();
-    setEye(!eye);
-  };
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm();
 
-  const onFormSubmit = (values) => {
-    ev.preventDefault();
-    loginUser({
-      nickname: values.nickname,
-      password: values.password,
-    }).then(navigate(`dashboard/`));
+  const methods = useForm();
+  const navigate = useNavigate();
+
+  const onFormSubmit = () => {
+    console.log("SUBMIT");
+    // loginUser({
+    //   nickname: ev.nickname,
+    //   password: ev.password,
+    // }).then(navigate(`dashboard/`));
   };
 
   return (
@@ -47,91 +40,83 @@ const Login=()=> {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <form onSubmit={handleSubmit(onFormSubmit)}>
-        <Stack  spacing={8} maxWidth='400px' py={12} px={6}>
-          <Stack align={"center"}>
-            <Image src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670515077/HealthyLife/logo_1_kano6g.svg" />
-            <Text fontSize={"lg"} color={"gray.600"}>
-              si queremos poner una intro de nuestra web
-            </Text>
-          </Stack>
-          <Box
-            rounded={"lg"}
-            bg={useColorModeValue("white", "gray.700")}
-            boxShadow="#101010 4px 6px 0 0"
-            p={8}
-          >
-            <Stack spacing={4}>
-              <Box>
-              <UIInput placeholder="Nickname" error={errors.nickname ? 'Este campo es requerido y debe tener al menos 2 caracteres' : ''} {...register("nickname", {
-                      required: true,
-                      minLength: 2,
-                    })}
-                    onChange={(ev) => setUser({ ...user, nickname: ev.target.value })}>
-              </UIInput>
-
-
-              </Box>
-              <Box>
-            
-                <FormControl id="password" isRequired>
-                  <InputGroup>
-                    <Input
-                      className="input"
-                      {...register("Contraseña", {
-                        required: true,
-                        minLength: 6,
-                        pattern: /^\S*$/,
-                        validate: {
-                          format: (Contraseña) => {
-                            return (
-                              /[A-Z]/g.test(Contraseña) &&
-                              /[a-z]/g.test(Contraseña) &&
-                              /[0-9]/g.test(Contraseña)
-                            );
-                          },
-                        },
-                      })}
-                      placeholder="*****"
-                      type={showPassword ? "text" : "password"}
-                      onChange={(ev) => setUser({ ...user, password: ev.target.value })}
-                    />
-                    <InputRightElement h={"full"}>
-                      <Button
-                        variant={"ghost"}
-                        onClick={() => setShowPassword((showPassword) => !showPassword)}
-                      >
-                        O
-                      </Button>
-                    </InputRightElement>
-                    {errors.Contraseña ? (
-                      <p className="error">
-                        {errors.Contraseña.type === "format"
-                          ? "La contraseña debe contener al menos una mayúscula, una minúscula y un número"
-                          : "Este campo es requerido y debe tener al menos 6 caracteres"}
-                      </p>
-                    ) : null}
-                  </InputGroup>
-                </FormControl>
-              </Box>
-              <Stack spacing={10} pt={2}>
-                <button className="loginBtn" type="submit">
-                  Entrar
-                </button>
-              </Stack>
-              <UiButton variant="socialLogin"> Hola </UiButton>
-              <Stack pt={6}>
-                <Text align={"center"}>
-                  Si no tienes cuenta puedes registrarte{" "}
-                  <NavLink color={"blue.400"}>aquí</NavLink>
-                </Text>
-              </Stack>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onFormSubmit)}>
+          <Stack spacing={8} maxWidth="400px" py={12} px={6}>
+            <Stack align={"center"}>
+              <Image src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670515077/HealthyLife/logo_1_kano6g.svg" />
+              <Text fontSize={"lg"} color={"gray.600"}>
+                si queremos poner una intro de nuestra web
+              </Text>
             </Stack>
-          </Box>
-        </Stack>
-      </form>
+            <Box
+              rounded={"lg"}
+              bg={useColorModeValue("white", "gray.700")}
+              boxShadow="#101010 4px 6px 0 0"
+              p={8}
+            >
+              <Stack spacing={4}>
+                <Box>
+                  <UIFormInput
+                    name="nickname"
+                    placeholder="Nickname"
+                    onChange={(ev) => setUser({ ...user, nickname: ev.target.value })}
+                    validations={{
+                      required: "Esto es requerido",
+                      minLength: {
+                        value: 2,
+                        message: "Necesita un minimo de 2 caracteres",
+                      },
+                    }}
+                  ></UIFormInput>
+                </Box>
+                <Box>
+                  <UIInput
+                    name="password"
+                    placeholder="******"
+                    onChange={(ev) => setUser({ ...user, password: ev.target.value })}
+                    validations={{
+                      required: "Esto es requerido",
+                      minLength: {
+                        value: 6,
+                        message: "Este campo debe tener al menos 6 caracteres",
+                      },
+                      pattern: {
+                        value: /^\S*$/,
+                        message: "El formato no es correcto", // JS only: <p>error message</p> TS only support string
+                      },
+                      validate: {
+                        format: (password) => {
+                          return (
+                            (/[A-Z]/g.test(password) &&
+                              /[a-z]/g.test(password) &&
+                              /[0-9]/g.test(password)) ||
+                            "La contraseña debe contener al menos una mayúscula, una minúscula y un número"
+                          );
+                        },
+                      },
+                    }}
+                  ></UIInput>
+                </Box>
+                <Stack spacing={10} pt={2}>
+                  <button className="loginBtn" type="submit">
+                    Entrar
+                  </button>
+                </Stack>
+                <UiButton variant="socialLogin"> Hola </UiButton>
+                <Stack pt={6}>
+                  <Text align={"center"}>
+                    Si no tienes cuenta puedes registrarte{" "}
+                    <NavLink color={"blue.400"}>aquí</NavLink>
+                  </Text>
+                </Stack>
+              </Stack>
+            </Box>
+          </Stack>
+        </form>
+      </FormProvider>
     </Flex>
   );
-}
+};
 
-export default Login
+export default Login;
