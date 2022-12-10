@@ -14,10 +14,10 @@ const StyledButton = styled.button`
       :hover {
         background-color: #f2866a;
       }
-  :active {
-  box-shadow: #161616 2px 2px 0 0;
-  transform: translate(2px, 2px);
-}      
+      :active {
+      box-shadow: #161616 2px 2px 0 0;
+      transform: translate(2px, 2px);
+    }      
     `}
 
   ${(props) =>
@@ -25,6 +25,7 @@ const StyledButton = styled.button`
     css`
     display: flex;
     align-items: center;
+    justify-content: center;
     gap:1rem;
       color: #EF623F;
       border:1px solid #EF623F;

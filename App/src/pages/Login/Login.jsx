@@ -17,6 +17,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import UiButton from "../../components/UIComponents/UIButton";
 import UIInput from "../../components/UIComponents/UIInput";
 import { loginUser } from "../../services/API";
+import { BsGoogle } from "react-icons/bs";
+import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
 
 const Login=()=> {
   const [showPassword, setShowPassword] = useState(false);
@@ -61,8 +63,8 @@ const Login=()=> {
             boxShadow="#101010 4px 6px 0 0"
             p={8}
           >
-            <Stack spacing={4}>
-              <Box>
+            <Stack spacing={6}>
+              <Box >
               <UIInput placeholder="Nickname" error={errors.nickname ? 'Este campo es requerido y debe tener al menos 2 caracteres' : ''} {...register("nickname", {
                       required: true,
                       minLength: 2,
@@ -104,26 +106,27 @@ const Login=()=> {
                         O
                       </Button>
                     </InputRightElement>
-                    {errors.Contraseña ? (
+                  </InputGroup>
+                  <Box>
+                  {errors.Contraseña ? (
                       <p className="error">
                         {errors.Contraseña.type === "format"
                           ? "La contraseña debe contener al menos una mayúscula, una minúscula y un número"
                           : "Este campo es requerido y debe tener al menos 6 caracteres"}
                       </p>
                     ) : null}
-                  </InputGroup>
+                  </Box>
                 </FormControl>
               </Box>
-              <Stack spacing={10} pt={2}>
-                <button className="loginBtn" type="submit">
-                  Entrar
-                </button>
+              <Stack spacing={1} pt={2}>
+              <UiButton variant="primary" type="submit">Entrar</UiButton>
+              <Flex justifyContent='center' ><Text fontSize='md'>o</Text></Flex>
+              <UiButton variant="secondary"><BsGoogle />Accede con Google</UiButton>
               </Stack>
-              <UiButton variant="socialLogin"> Hola </UiButton>
               <Stack pt={6}>
                 <Text align={"center"}>
                   Si no tienes cuenta puedes registrarte{" "}
-                  <NavLink color={"blue.400"}>aquí</NavLink>
+                  <NavItemLinkNoHover name='aquí' href='' hoverProps='' fontSize=''/>
                 </Text>
               </Stack>
             </Stack>
