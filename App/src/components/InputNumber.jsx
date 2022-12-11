@@ -19,6 +19,7 @@ export const InputNumber = ({ flex, min, maxW, mr, fontSize, boxSize }) => {
   return (
     <Flex>
       <NumberInput
+        w='100px'
         min={min}
         keepWithinRange={true}
         maxW={maxW}

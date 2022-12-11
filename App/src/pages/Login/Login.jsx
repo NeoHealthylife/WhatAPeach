@@ -32,20 +32,21 @@ const Login = () => {
       <Flex align={"center"} justify={"center"}>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onFormSubmit)}>
-            <Stack spacing={8} maxWidth="400px" py={12} px={6}>
-              <Stack align={"center"}>
-                <Image src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670515077/HealthyLife/logo_1_kano6g.svg" />
-                <Text fontSize={"lg"} color={"gray.600"}>
-                  si queremos poner una intro de nuestra web
-                </Text>
-              </Stack>
+            <Stack spacing={8} w="430px" py={12} px={6}>
               <Box
                 rounded={"lg"}
                 bg={useColorModeValue("white", "gray.700")}
                 boxShadow="#101010 4px 6px 0 0"
                 p={8}
               >
-                <Stack spacing={4}>
+               <Stack align={"center"}>
+                <Image src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670515077/HealthyLife/logo_1_kano6g.svg" />
+                <Text fontSize={"lg"} color={"gray.600"}>
+                  si queremos poner una intro de nuestra web
+                </Text>
+              </Stack>
+               
+                <Stack  spacing={4}>
                   <Box>
                     <UIFormInput
                       name="nickname"
@@ -101,7 +102,7 @@ const Login = () => {
                     </UiButton>
                   </Stack>
                   <Stack pt={6}>
-                    <Text align={"center"}>
+                    <Text fontSize='13px' align={"center"}>
                       Si no tienes cuenta puedes registrarte{" "}
                       <NavItemLinkNoHover
                         name="aquí"
