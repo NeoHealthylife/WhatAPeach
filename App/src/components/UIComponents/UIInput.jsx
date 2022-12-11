@@ -1,18 +1,11 @@
+import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
 import React from "react";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
-} from "@chakra-ui/react";
 
-const UIInput = ({ label, placeholder, error, helpText, text }) => {
+const UIInput = ({ label, placeholder, helpText, text }) => {
   return (
-    <FormControl isRequired>
+    <FormControl>
       <FormLabel>{label}</FormLabel>
       <Input placeholder={placeholder} value={text} />
-      {error && <FormErrorMessage>{error}</FormErrorMessage>}
       {helpText && <FormHelperText>{helpText}</FormHelperText>}
     </FormControl>
   );
