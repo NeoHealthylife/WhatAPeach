@@ -11,3 +11,4 @@ const getProfile = async () => {
   const Error = (error) => `<p>Error:${error}</p>`;
   
   export default getProfile;
+

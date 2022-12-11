@@ -1,111 +1,122 @@
-import React from "react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { Box, Flex, Image, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import LayoutWrapper from "../../components/Layout/LayoutWrapper";
-import { loginUser } from "../../services/API";
+import UiButton from "../../components/UIComponents/UIButton";
+import { BsGoogle } from "react-icons/bs";
+
+import {
+  default as UIFormInput,
+  default as UIInput,
+} from "../../components/UIComponents/UIFormInput";
+import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
+import { myTheme } from "../../components/UIComponents/Theme";
+import PeachWrapper from "../../components/Layout/PeachWrapper";
 
 const Login = () => {
   const { user, setUser } = useState;
-  const [eye, setEye] = useState(false);
-  const navigate = useNavigate();
-  const toggleEye = (ev) => {
-    ev.preventDefault();
-    setEye(!eye);
-  };
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm();
 
-  const onFormSubmit = (values) => {
-    ev.preventDefault();
-    loginUser({
-      nickname: values.nickname,
-      password: values.password,
-    }).then(navigate(`dashboard/`));
+  const methods = useForm();
+  const navigate = useNavigate();
+
+  const onFormSubmit = () => {
+    console.log("SUBMIT");
+    // loginUser({
+    //   nickname: ev.nickname,
+    //   password: ev.password,
+    // }).then(navigate(`dashboard/`));
   };
 
   return (
-    <LayoutWrapper>
-      <div className="loginContainer">
-        <div className="loginPage">
-          <form onSubmit={handleSubmit(onFormSubmit)}>
-            <div className="ucademyDiv">
-              <img src="imagen del melocotonsito que es nuestro logo" alt="logo" />
-            </div>
-            <div className="alignCenter ">
-              <span>Nickname:</span>
-            </div>
-            <div className="alignCenter inputBox">
-              <label className="userlabel">
-                <input
-                  className="input"
-                  {...register("username", {
-                    required: true,
-                    minLength: 2,
-                  })}
-                  type="text"
-                  onChange={(ev) => setUser({ ...user, nickname: ev.target.value })}
-                />
-                {errors.username ? (
-                  <p className="error">
-                    Este campo es requerido y debe tener al menos 2 caracteres
-                  </p>
-                ) : null}
-              </label>
-            </div>
-            <div className="alignCenter password">
-              <label className="passwordDiv">
-                <div>
-                  <span>Contraseña:</span>
-                </div>
-                <div className="inputBox">
-                  <label>
-                    <button className="passwordBtn" onClick={(ev) => toggleEye(ev)}>
-                      {eye ? <BsEyeSlash /> : <BsEye />}
-                    </button>
-                    <input
-                      className="input"
-                      {...register("Contraseña", {
-                        required: true,
-                        minLength: 6,
-                        pattern: /^\S*$/,
+    <PeachWrapper>
+      <Flex align={"center"} justify={"center"}>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onFormSubmit)}>
+            <Stack spacing={8} maxWidth="400px" py={12} px={6}>
+              <Stack align={"center"}>
+                <Image src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670515077/HealthyLife/logo_1_kano6g.svg" />
+                <Text fontSize={"lg"} color={"gray.600"}>
+                  si queremos poner una intro de nuestra web
+                </Text>
+              </Stack>
+              <Box
+                rounded={"lg"}
+                bg={useColorModeValue("white", "gray.700")}
+                boxShadow="#101010 4px 6px 0 0"
+                p={8}
+              >
+                <Stack spacing={4}>
+                  <Box>
+                    <UIFormInput
+                      name="nickname"
+                      placeholder="Nickname"
+                      onChange={(ev) => setUser({ ...user, nickname: ev.target.value })}
+                      validations={{
+                        required: "Esto es requerido",
+                        minLength: {
+                          value: 2,
+                          message: "Necesita un minimo de 2 caracteres",
+                        },
+                      }}
+                    ></UIFormInput>
+                  </Box>
+                  <Box>
+                    <UIInput
+                      name="password"
+                      placeholder="******"
+                      onChange={(ev) => setUser({ ...user, password: ev.target.value })}
+                      validations={{
+                        required: "Esto es requerido",
+                        minLength: {
+                          value: 6,
+                          message: "Este campo debe tener al menos 6 caracteres",
+                        },
+                        pattern: {
+                          value: /^\S*$/,
+                          message: "El formato no es correcto", // JS only: <p>error message</p> TS only support string
+                        },
                         validate: {
-                          format: (Contraseña) => {
+                          format: (password) => {
                             return (
-                              /[A-Z]/g.test(Contraseña) &&
-                              /[a-z]/g.test(Contraseña) &&
-                              /[0-9]/g.test(Contraseña)
+                              (/[A-Z]/g.test(password) &&
+                                /[a-z]/g.test(password) &&
+                                /[0-9]/g.test(password)) ||
+                              "La contraseña debe contener al menos una mayúscula, una minúscula y un número"
                             );
                           },
                         },
-                      })}
-                      placeholder="*****"
-                      type={eye ? "text" : "password"}
-                      onChange={(ev) => setUser({ ...user, password: ev.target.value })}
-                    />
-
-                    {errors.Contraseña ? (
-                      <p className="error">
-                        {errors.Contraseña.type === "format"
-                          ? "La contraseña debe contener al menos una mayúscula, una minúscula y un número"
-                          : "Este campo es requerido y debe tener al menos 6 caracteres"}
-                      </p>
-                    ) : null}
-                  </label>
-                </div>
-              </label>
-            </div>
-            <button className="loginBtn" type="submit">
-              Iniciar sesión
-            </button>
+                      }}
+                    ></UIInput>
+                  </Box>
+                  <Stack spacing={1} pt={2}>
+                    <UiButton variant="primary" type="submit">
+                      Entrar
+                    </UiButton>
+                    <Flex justifyContent="center">
+                      <Text fontSize="md">o</Text>
+                    </Flex>
+                    <UiButton variant="secondary">
+                      <BsGoogle />
+                      Accede con Google
+                    </UiButton>
+                  </Stack>
+                  <Stack pt={6}>
+                    <Text align={"center"}>
+                      Si no tienes cuenta puedes registrarte{" "}
+                      <NavItemLinkNoHover
+                        name="aquí"
+                        href="/register"
+                        hoverColor={myTheme.colors.primary}
+                      />
+                    </Text>
+                  </Stack>
+                </Stack>
+              </Box>
+            </Stack>
           </form>
-        </div>
-      </div>
-    </LayoutWrapper>
+        </FormProvider>
+      </Flex>
+    </PeachWrapper>
   );
 };
 
