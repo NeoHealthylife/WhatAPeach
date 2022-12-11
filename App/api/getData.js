@@ -1,6 +1,6 @@
-const getProfile = async () => {
+const getData = async (param) => {
     try {
-      const data = await fetch(`http://localhost:3000/api/users/6388ed8479194aa01afffb9f`);
+      const data = await fetch(`http://localhost:3000/api/${param}`);
       const res = await data.json();
       return res;
     } catch (error) {
@@ -10,4 +10,5 @@ const getProfile = async () => {
   
   const Error = (error) => `<p>Error:${error}</p>`;
   
-  export default getProfile;
+  
+  export default getData;

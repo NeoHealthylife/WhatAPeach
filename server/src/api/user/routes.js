@@ -14,7 +14,9 @@ const {
   register,
   login,
   getUsers,
+  getUser,
   deleteUser,
+  updatetUser,
   addFavRecipe,
   addFavWorkout,
   loginFromSocialLogin,
@@ -74,9 +76,9 @@ UserRoutes.get('/fail', (req, res) => {
   res.send('Failed attempt');
 });
 
-UserRoutes.get('/', isLoggedIn, (req, res) =>
-  res.send(`Welcome ${req.user.displayName}! \n ${req.user.photos['value']}`)
-);
+// UserRoutes.get('/', isLoggedIn, (req, res) =>
+//   res.send(`Welcome ${req.user.displayName}! \n ${req.user.photos['value']}`)
+// );
 UserRoutes.get('/logout', (req, res) => {
   req.session = null;
   req.logout();
@@ -89,8 +91,9 @@ UserRoutes.post('/register', register);
 
 UserRoutes.post('/login', login);
 UserRoutes.get('/', getUsers);
+UserRoutes.get("/:id", getUser);
 UserRoutes.delete('/:id', deleteUser);
-
+UserRoutes.patch('/:id', updatetUser);
 UserRoutes.patch('/addfavrecipe', addFavRecipe);
 UserRoutes.patch('/addfavworkout', addFavWorkout);
 UserRoutes.patch('/deletefavrecipe', deleteFavRecipe);

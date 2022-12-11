@@ -95,11 +95,33 @@ const getUsers = async (req, res, next) => {
   }
 };
 
+const getUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userbyid = await User.findById(id);
+    return res.status(200).json(userbyid);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const deleteUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     await User.findByIdAndDelete(id);
     return res.status(200).json('User deleted');
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const updatetUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = new User(req.body);
+    user._id = id;
+    const editUser = await User.findByIdAndUpdate(id);
+    return res.status(200).json(editUser);
   } catch (err) {
     return next(err);
   }
@@ -282,6 +304,8 @@ module.exports = {
   loginFromSocialLogin,
   login,
   getUsers,
+  getUser,
+  updatetUser,
   deleteUser,
   addFavRecipe,
   addFavWorkout,

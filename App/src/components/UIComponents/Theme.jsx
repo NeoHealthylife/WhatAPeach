@@ -2,6 +2,7 @@
 import { extendTheme } from '@chakra-ui/react'
 import {ButtonStyles as Button } from "./ButtonStyles"
 import { IconButtonStyles as IconButton } from "./IconButtonStyles"
+import  { HeadingStyles as Heading } from "./HeadingStyles"
 
 export const myTheme = extendTheme ({
     colors: {
@@ -24,7 +25,8 @@ export const myTheme = extendTheme ({
     },
     components: {
       Button,
-      IconButton
+      IconButton,
+      Heading
     }
   });
   
@@ -33,6 +35,7 @@ export const myTheme = extendTheme ({
 
 
 import { useBoolean } from '@chakra-ui/react'
+import { HeadingStyles } from './HeadingStyles'
 
 export function ButtonToggle() {
   const [flag, setFlag] = useBoolean()
