@@ -11,10 +11,12 @@ const {
 const { isBasic } = require('../../middlewares/basic.middlewares');
 const { isAdmin } = require('../../middlewares/admin.middlewares');
 
-RecipesRoutes.get('/', /*[isBasic], */ getRecipes);
+
+RecipesRoutes.get('/', [isBasic], getRecipes);
 RecipesRoutes.get('/:id', /*[isBasic], */ getRecipe);
-RecipesRoutes.post('/', /* [isAdmin], */ postRecipe);
-RecipesRoutes.patch('/:id', /* [isAdmin], */ patchRecipe);
-RecipesRoutes.delete('/:id', /* [isAdmin], */ deleteRecipe);
+RecipesRoutes.post('/', [isAdmin], postRecipe);
+RecipesRoutes.patch('/:id', [isAdmin], patchRecipe);
+RecipesRoutes.delete('/:id', [isAdmin], deleteRecipe);
+
 
 module.exports = RecipesRoutes;

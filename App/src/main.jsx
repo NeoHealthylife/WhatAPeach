@@ -17,6 +17,7 @@ import Profile from "./pages/Profile/Profile";
 import Recipes from "./pages/Recipes/Recipes";
 import Register from "./pages/Register/Register";
 import Workouts from "./pages/Workouts/Workouts";
+import RequiredAuth from "./components/RequiredAuth";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -28,11 +29,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="register/form" element={<Form />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="workouts" element={<Workouts />} />
-            <Route path="recipes" element={<Recipes />} />
-            <Route path="favorites" element={<Favorites />} />
+            <Route path="profile" element={<RequiredAuth><Profile /></RequiredAuth>} />
+            <Route path="workouts" element={<RequiredAuth><Workouts /></RequiredAuth>} />
+            <Route path="recipes" element={<RequiredAuth><Recipes /></RequiredAuth>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

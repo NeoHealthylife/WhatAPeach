@@ -4,7 +4,6 @@ import CardComp from "../../components/Card";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import UiButton from "../../components/UIComponents/UIButton";
 import UIInput from "../../components/UIComponents/UIInput";
-import UISelect from "../../components/UIComponents/UISelect";
 import GlobalContext from "../../context/GlobalContext";
 import Dashboard from "../Dashboard/Dashboard";
 
@@ -26,13 +25,7 @@ const Home = () => {
         {!isLogged && (
           <>
             <div>
-              <UISelect
-                options={exampleOptions}
-                label="Ejemplo de select"
-                placeholder="Selecciona nutriente"
-                onChange={(e) => filtrar()}
-                isError=""
-              />
+            
               <UiButton variant="primary">Hoeeeeeeeeela</UiButton>
               <UiButton variant="secondary">
                 <BsGoogle />

@@ -90,19 +90,21 @@ UserRoutes.get('/logout', (req, res) => {
 UserRoutes.post('/register', register);
 
 UserRoutes.post('/login', login);
-UserRoutes.get('/', getUsers);
+
+UserRoutes.get('/', [isAdmin], getUsers);
+UserRoutes.delete('/:id', [isAdmin], deleteUser);
 UserRoutes.get("/:id", getUser);
-UserRoutes.delete('/:id', deleteUser);
 UserRoutes.patch('/:id', updatetUser);
-UserRoutes.patch('/addfavrecipe', addFavRecipe);
-UserRoutes.patch('/addfavworkout', addFavWorkout);
-UserRoutes.patch('/deletefavrecipe', deleteFavRecipe);
-UserRoutes.patch('/deletefavworkout', deleteFavWorkout);
-UserRoutes.patch('/todorecipe', addTodoRecipe);
-UserRoutes.patch('/todoworkout', addTodoWorkout);
-UserRoutes.patch('/addcomplrecipe', addCompletedRecipe);
-UserRoutes.patch('/addcomplworkout', addCompletedWorkout);
-UserRoutes.patch('/deletecomplrecipe', deleteCompletedRecipe);
-UserRoutes.patch('/deletecomplworkout', deleteCompletedWorkout);
+UserRoutes.patch('/addfavrecipe', [isBasic], addFavRecipe);
+UserRoutes.patch('/addfavworkout', [isBasic], addFavWorkout);
+UserRoutes.patch('/deletefavrecipe', [isBasic], deleteFavRecipe);
+UserRoutes.patch('/deletefavworkout', [isBasic], deleteFavWorkout);
+UserRoutes.patch('/todorecipe', [isBasic], addTodoRecipe);
+UserRoutes.patch('/todoworkout', [isBasic], addTodoWorkout);
+UserRoutes.patch('/addcomplrecipe', [isBasic], addCompletedRecipe);
+UserRoutes.patch('/addcomplworkout', [isBasic], addCompletedWorkout);
+UserRoutes.patch('/deletecomplrecipe', [isBasic], deleteCompletedRecipe);
+UserRoutes.patch('/deletecomplworkout', [isBasic], deleteCompletedWorkout);
+
 
 module.exports = UserRoutes;
