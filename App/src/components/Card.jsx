@@ -8,15 +8,19 @@ import {
   IconButton,
   Text,
   useColorModeValue,
+  Button
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useState, useContext } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 
-const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
+
+const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText, tags }) => {
   const [liked, setLiked] = useState(false);
 
-  return (
+  
+return (
     <Center py={6}>
       <Box
         rounded={"lg"}
@@ -40,20 +44,22 @@ const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
             src={imgSrc}
           />
         </Box>
-        <Box p={4}>
+        <Box p={5}>
+        {tags.map((tag) => ( 
           <Box
+          key={uuidv4()}
             bg="orange.500"
             display={"inline-block"}
             borderRadius="20px"
-            px={2}
+            px={3}
             py={1}
             color="white"
             mb={2}
+            fontSize={"xs"} fontWeight="medium"
           >
-            <Text fontSize={"xs"} fontWeight="medium">
-              {textLabel1}
-            </Text>
+            {tag}
           </Box>
+           ))} 
           <Heading color={"black"} fontSize={"2xl"} noOfLines={1}>
             {headingCard}
           </Heading>
@@ -63,16 +69,16 @@ const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
         </Box>
         <HStack borderTop={"1px"} color="black">
           <Flex
-            p={4}
+            p={3}
             alignItems="center"
             justifyContent={"space-between"}
             roundedBottom={"sm"}
             cursor={"pointer"}
             w="full"
           >
-            <Text fontSize={"md"} fontWeight={"semibold"}>
+            <Button  variant="secondary">
               Ver más
-            </Text>
+            </Button>
             <BsArrowUpRight />
           </Flex>
           <Flex
@@ -88,7 +94,7 @@ const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
               <IconButton
                 variant="primary"
                 icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
-              />
+                             />
             ) : (
               <IconButton
                 variant="primary"

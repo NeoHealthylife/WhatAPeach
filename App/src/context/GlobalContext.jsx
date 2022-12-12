@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-
 const GlobalContext = createContext();
 
 const GlobalContextProvider = ({ children }) => {
@@ -29,8 +28,10 @@ const GlobalContextProvider = ({ children }) => {
     setJwt,
     user,
     setUser
+
   };
 
+ 
   return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>;
 };
 

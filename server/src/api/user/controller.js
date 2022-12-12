@@ -95,6 +95,16 @@ const getUsers = async (req, res, next) => {
   }
 };
 
+const getUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userbyid = await User.findById(id);
+    return res.status(200).json(userbyid);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const deleteUser = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -105,18 +115,30 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+const updatetUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = new User(req.body);
+    user._id = id;
+    const editUser = await User.findByIdAndUpdate(id);
+    return res.status(200).json(editUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const addFavRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $push: { favRecipes: recipeId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -126,14 +148,14 @@ const deleteFavRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { favRecipes: recipeId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -143,14 +165,14 @@ const addFavWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { workoutId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $push: { favWorkouts: workoutId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -160,14 +182,14 @@ const deleteFavWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { workoutId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { favWorkout: workoutId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -177,14 +199,14 @@ const addTodoRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $push: { toDoRecipes: recipeId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -194,14 +216,14 @@ const addTodoWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { workoutId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $push: { toDoWorkouts: workoutId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -211,7 +233,7 @@ const addCompletedRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { toDoRecipes: recipeId },
@@ -219,7 +241,7 @@ const addCompletedRecipe = async (req, res, next) => {
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -229,14 +251,14 @@ const deleteCompletedRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { completedRecipes: recipeId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -246,7 +268,7 @@ const addCompletedWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { workoutId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { toDoWorkouts: workoutId },
@@ -254,7 +276,7 @@ const addCompletedWorkout = async (req, res, next) => {
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -264,14 +286,14 @@ const deleteCompletedWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { workoutId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { completedWorkouts: workoutId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -282,6 +304,8 @@ module.exports = {
   loginFromSocialLogin,
   login,
   getUsers,
+  getUser,
+  updatetUser,
   deleteUser,
   addFavRecipe,
   addFavWorkout,

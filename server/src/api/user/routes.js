@@ -14,7 +14,9 @@ const {
   register,
   login,
   getUsers,
+  getUser,
   deleteUser,
+  updatetUser,
   addFavRecipe,
   addFavWorkout,
   loginFromSocialLogin,
@@ -74,9 +76,9 @@ UserRoutes.get('/fail', (req, res) => {
   res.send('Failed attempt');
 });
 
-UserRoutes.get('/', isLoggedIn, (req, res) =>
-  res.send(`Welcome ${req.user.displayName}! \n ${req.user.photos['value']}`)
-);
+// UserRoutes.get('/', isLoggedIn, (req, res) =>
+//   res.send(`Welcome ${req.user.displayName}! \n ${req.user.photos['value']}`)
+// );
 UserRoutes.get('/logout', (req, res) => {
   req.session = null;
   req.logout();
@@ -88,9 +90,11 @@ UserRoutes.get('/logout', (req, res) => {
 UserRoutes.post('/register', register);
 
 UserRoutes.post('/login', login);
+
 UserRoutes.get('/', [isAdmin], getUsers);
 UserRoutes.delete('/:id', [isAdmin], deleteUser);
-
+UserRoutes.get("/:id", getUser);
+UserRoutes.patch('/:id', updatetUser);
 UserRoutes.patch('/addfavrecipe', [isBasic], addFavRecipe);
 UserRoutes.patch('/addfavworkout', [isBasic], addFavWorkout);
 UserRoutes.patch('/deletefavrecipe', [isBasic], deleteFavRecipe);
@@ -101,5 +105,6 @@ UserRoutes.patch('/addcomplrecipe', [isBasic], addCompletedRecipe);
 UserRoutes.patch('/addcomplworkout', [isBasic], addCompletedWorkout);
 UserRoutes.patch('/deletecomplrecipe', [isBasic], deleteCompletedRecipe);
 UserRoutes.patch('/deletecomplworkout', [isBasic], deleteCompletedWorkout);
+
 
 module.exports = UserRoutes;

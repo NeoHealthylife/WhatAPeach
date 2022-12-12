@@ -31,9 +31,6 @@ const Home = () => {
                 <BsGoogle />
                 Hoeeeeeeeeee
               </UiButton>
-
-              <CardComp />
-
               <UIInput
                 label="Nombre del usuario"
                 placeholder="Introduce un nombre válido"
