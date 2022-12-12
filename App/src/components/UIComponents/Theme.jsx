@@ -28,8 +28,4 @@ export const myTheme = extendTheme ({
       Heading
     }
   });
-  
-
-
-
 

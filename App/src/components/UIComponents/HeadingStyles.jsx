@@ -7,7 +7,8 @@ export const HeadingStyles = {
             fontSize: "26px",  
             fontFamily: "Poppins",
             fontWeight: "800",
-            letterSpacing: "1px",  
+            letterSpacing: "1px", 
+           
         }),
         H2: (props) => ({
             color: "dark",
@@ -16,8 +17,6 @@ export const HeadingStyles = {
             fontWeight: "500",
             letterSpacing: "1px",
             textDecoration: ""
-
-            
         }),
       },
 }

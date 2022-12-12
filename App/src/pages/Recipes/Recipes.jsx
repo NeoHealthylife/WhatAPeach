@@ -1,15 +1,14 @@
 import React from "react";
-import { useEffect, useContext, createContext } from "react";
-import getData from "../../../api/getData";
-import GlobalContext from "../../context/GlobalContext";
+import { useEffect, useState, createContext } from "react";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import { Heading, Center, Flex } from "@chakra-ui/react";
 import CardComp from "../../components/Card";
+import { getData } from "../../services/API";
 
-export const RecipesContext = createContext();
+// export const RecipesContext = createContext();
 
 const Recipes = () => {
-  const { recipes, setRecipes } = useContext(GlobalContext);
+  const [ recipes, setRecipes ] = useState([]);
 
   useEffect(() => {
     getData("recipes").then((res) => setRecipes(res.data.recipes));
@@ -18,15 +17,14 @@ const Recipes = () => {
 
   return (
     <LayoutWrapper>
-      <Center>
-        <Flex>
-          <Heading variant="H1">RECETAS</Heading>
+          <Heading variant="H1">recetas</Heading>
+          <Flex>
           {recipes
           .map((recipe) => (
-            <CardComp imgSrc={recipe.image} tags={recipe.tags}/>
+            <CardComp key={recipe.id} imgSrc={recipe.image} tags={recipe.tags}/>
           ))}
         </Flex>
-      </Center>
+      
     </LayoutWrapper>
   );
 };

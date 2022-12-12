@@ -10,16 +10,14 @@ import {
   useColorModeValue,
   Button
 } from "@chakra-ui/react";
-
+import { v4 as uuidv4 } from "uuid";
 import { useState, useContext } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import GlobalContext from "../context/GlobalContext";
-import { RecipesContext } from "../pages/Recipes/Recipes";
+
 
 const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText, tags }) => {
   const [liked, setLiked] = useState(false);
-
 
   
 return (
@@ -47,7 +45,9 @@ return (
           />
         </Box>
         <Box p={5}>
+        {tags.map((tag) => ( 
           <Box
+          key={uuidv4()}
             bg="orange.500"
             display={"inline-block"}
             borderRadius="20px"
@@ -55,14 +55,11 @@ return (
             py={1}
             color="white"
             mb={2}
+            fontSize={"xs"} fontWeight="medium"
           >
-            
-           {/* {tags.map((tag) => (  */}
-            <Text fontSize={"xs"} fontWeight="medium">{tags}</Text>
-            {/* ))}  */}
-           
-            
+            {tag}
           </Box>
+           ))} 
           <Heading color={"black"} fontSize={"2xl"} noOfLines={1}>
             {headingCard}
           </Heading>

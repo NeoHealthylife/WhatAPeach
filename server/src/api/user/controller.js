@@ -131,14 +131,14 @@ const addFavRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $push: { favRecipes: recipeId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -148,14 +148,14 @@ const deleteFavRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { favRecipes: recipeId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -165,14 +165,14 @@ const addFavWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { workoutId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $push: { favWorkouts: workoutId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -182,14 +182,14 @@ const deleteFavWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { workoutId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { favWorkout: workoutId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -199,14 +199,14 @@ const addTodoRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $push: { toDoRecipes: recipeId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -216,14 +216,14 @@ const addTodoWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { workoutId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $push: { toDoWorkouts: workoutId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -233,7 +233,7 @@ const addCompletedRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { toDoRecipes: recipeId },
@@ -241,7 +241,7 @@ const addCompletedRecipe = async (req, res, next) => {
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -251,14 +251,14 @@ const deleteCompletedRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { recipeId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { completedRecipes: recipeId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -268,7 +268,7 @@ const addCompletedWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { workoutId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { toDoWorkouts: workoutId },
@@ -276,7 +276,7 @@ const addCompletedWorkout = async (req, res, next) => {
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
@@ -286,14 +286,14 @@ const deleteCompletedWorkout = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const { workoutId } = req.body;
-    const upadateUser = await User.findByIdAndUpdate(
+    const updateUser = await User.findByIdAndUpdate(
       userId,
       {
         $pull: { completedWorkouts: workoutId },
       },
       { new: true }
     );
-    return res.status(200).json(upadateUser);
+    return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
   }
