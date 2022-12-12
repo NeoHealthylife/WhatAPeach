@@ -1,9 +1,10 @@
-import { Box, Flex, Image, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Image, Stack, Text, useColorModeValue, Button, InputRightElement, InputGroup} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import UiButton from "../../components/UIComponents/UIButton";
 import { BsGoogle } from "react-icons/bs";
+import { API } from "../../services/API";
 
 import {
   default as UIFormInput,
@@ -14,18 +15,20 @@ import { myTheme } from "../../components/UIComponents/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
 
 const Register = () => {
-  const { user, setUser } = useState;
+ 
+  const [show, setShow] = React.useState(false)
+  const handleClick = () => setShow(!show)
 
   const methods = useForm();
   const navigate = useNavigate();
 
-  const onFormSubmit = () => {
-    console.log("SUBMIT");
-    // RegisterUser({
-    //   nickname: ev.nickname,
-    //   password: ev.password,
-    // }).then(navigate(`register/form/`));
-  };
+  const onFormSubmit = (data) => {
+    API.post('/users/register', data).then((res)=>{
+      console.log(data)
+      if (res.data.status===200){
+          navigate('/')
+      }    
+    })};
 
   return (
     <PeachWrapper>
@@ -50,7 +53,6 @@ const Register = () => {
                     <UIFormInput
                       name="nickname"
                       placeholder="Nickname"
-              
                       validations={{
                         required: "Esto es requerido",
                         minLength: {
@@ -60,9 +62,10 @@ const Register = () => {
                       }}
                     ></UIFormInput>
                   </Box>
-                  <Box>
+                  <InputGroup>
                     <UIInput
                       name="password"
+                      type={show ? 'text' : 'password'}
                       placeholder="******"
                       validations={{
                         required: "Esto es requerido",
@@ -86,7 +89,12 @@ const Register = () => {
                         },
                       }}
                     ></UIInput>
-                  </Box>
+                    <InputRightElement >
+                      <Button h='1.75rem' size='sm' onClick={handleClick}>
+                        {show ? 'Hide' : 'Show'}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
                   <Stack spacing={1} pt={8}>
                     <UiButton variant="primary" type="submit">
                       Crear cuenta

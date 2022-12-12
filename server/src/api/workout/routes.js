@@ -10,7 +10,7 @@ const {
 const { isBasic } = require('../../middlewares/basic.middlewares');
 const { isAdmin } = require('../../middlewares/admin.middlewares');
 
-WorkoutRoutes.get('/', getWorkouts);
+WorkoutRoutes.get('/', [isBasic], getWorkouts);
 WorkoutRoutes.post('/', [isAdmin], postWorkout);
 WorkoutRoutes.patch('/:id', [isAdmin], patchWorkout);
 WorkoutRoutes.delete('/:id', [isAdmin], deleteWorkout);

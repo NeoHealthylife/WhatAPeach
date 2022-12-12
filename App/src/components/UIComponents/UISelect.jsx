@@ -3,7 +3,7 @@ import React from "react";
 import { useFormContext, useFormState } from "react-hook-form";
 
 const UISelect = (props) => {
-  const { options, label, placeholder, onChange, isError, name, validations } = props;
+  const { options, label, placeholder, isError, name } = props;
   const { register } = useFormContext();
   const { errors } = useFormState();
   

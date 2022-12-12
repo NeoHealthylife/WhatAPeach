@@ -23,7 +23,7 @@ const targetChoices =[{value: 'Perder peso'}, {value:'Musculación'},{value:'Def
   const navigate = useNavigate();
 
   const onFormSubmit = (data) => {
-    registerUser(data)
+    /* registerUser(data) */
     // RegisterUser({
     //   age: ev.age,
     //    height: ev.height,

@@ -18,6 +18,8 @@ import {
   useDisclosure,
   DrawerOverlay,
   useColorModeValue,
+  Text,
+  useRadio
 } from "@chakra-ui/react";
 // Here we have used react-icons package for the icons
 import { AiOutlineTeam, AiOutlineHome } from "react-icons/ai";
@@ -31,9 +33,12 @@ import { BiDumbbell } from "react-icons/bi";
 import { NavItemLink } from "../NavItemLink";
 import LayoutWrapper from "./LayoutWrapper";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import GlobalContext from "../../context/GlobalContext";
 
 export default function Sidebar() {
   const { isOpen, onClose, onOpen } = useDisclosure();
+
 
   return (
     <Box as="section" bg={useColorModeValue("gray.50", "gray.700")} minH="100vh">
@@ -65,6 +70,7 @@ export default function Sidebar() {
             icon={<FiMenu />}
             size="md"
           />
+          
         </Flex>
         <Box as="main" p={14} minH="30rem" bg={useColorModeValue("auto", "gray.800")}>
           <Stack
@@ -79,7 +85,9 @@ export default function Sidebar() {
   );
 }
 
-const SidebarContent = ({ ...props }) => (
+const SidebarContent = ({ ...props }) => {
+  const {user}= useContext(GlobalContext)
+  return(
   <Box
     as="nav"
     pos="fixed"
@@ -155,6 +163,7 @@ const SidebarContent = ({ ...props }) => (
               name="Ahmad"
               src="https://avatars2.githubusercontent.com/u/37842853?v=4"
             />
+            <Text fontSize='md'>{user.nickname}</Text>
           </MenuButton>
           <MenuList fontSize={17} zIndex={5555}>
             <MenuItem as={Link} to="#">
@@ -166,4 +175,4 @@ const SidebarContent = ({ ...props }) => (
       </Flex>
     </VStack>
   </Box>
-);
+)}
