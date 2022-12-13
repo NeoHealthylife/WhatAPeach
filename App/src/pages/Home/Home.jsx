@@ -1,12 +1,7 @@
 import React, { useContext } from "react";
-import { BsGoogle } from "react-icons/bs";
-import CardComp from "../../components/Card";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
-import UiButton from "../../components/UIComponents/UIButton";
-import UIInput from "../../components/UIComponents/UIInput";
 import GlobalContext from "../../context/GlobalContext";
 import Dashboard from "../Dashboard/Dashboard";
-import RegisterForm from "../Register/RegisterWForm";
 
 const Home = () => {
   const { isLogged } = useContext(GlobalContext);
@@ -22,18 +17,7 @@ const Home = () => {
   return (
     //meter layout de la pagina creado con styled
     <LayoutWrapper>
-      <div className="HomeDiv">
-        {!isLogged && (
-          <>
-            <div>
-              <RegisterForm/>
-              
-    
-            </div>
-          </>
-        )}
-        {isLogged && <Dashboard />}
-      </div>
+      <div className="HomeDiv">{isLogged && <Dashboard />}</div>
     </LayoutWrapper>
   );
 };

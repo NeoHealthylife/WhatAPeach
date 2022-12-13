@@ -6,7 +6,7 @@ import UiButton from "../../components/UIComponents/UIButton";
 import { BsGoogle } from "react-icons/bs";
 import { API } from "../../services/API";
 import { useContext } from "react";
-import  GlobalContext  from "../../context/GlobalContext";
+import GlobalContext from "../../context/GlobalContext";
 
 import {
   default as UIFormInput,
@@ -15,28 +15,40 @@ import {
 import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
 import { myTheme } from "../../components/UIComponents/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
+import { useToast } from "@chakra-ui/react";
 
 const Login = () => {
- /*  const { user, setUser } = useState; */
- const { setJwt, setUser } = useContext(GlobalContext);
+  /*  const { user, setUser } = useState; */
+  const toast = useToast();
+  const { setJwt, setUser } = useContext(GlobalContext);
   const methods = useForm();
   const navigate = useNavigate();
 
   const handleGoogleClick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     window.location.href = "http://localhost:3000/api/users/auth/google";
   };
 
   const onFormSubmit = (data) => {
-    API.post('/users/login', data).then((res)=>{
-      if(res.data.status === 200) {
-          localStorage.setItem('token', res.data.token)
-          localStorage.setItem('user', JSON.stringify(res.data.user));
+    API.post("/users/login", data)
+      .then((res) => {
+        if (res.data.status === 200) {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
           setJwt(res.data.token);
-          setUser(res.data.user)
-          navigate('/')
-      }
-    })
+          setUser(res.data.user);
+          navigate("/");
+        }
+      })
+      .catch(() => {
+        toast({
+          position: "top",
+          title: "Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
   };
 
   return (
@@ -51,13 +63,13 @@ const Login = () => {
                 boxShadow="#101010 4px 6px 0 0"
                 p={8}
               >
-               <Stack align={"center"}>
-                <Image src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670515077/HealthyLife/logo_1_kano6g.svg" />
-                <Text fontSize={"lg"} color={"gray.600"}>
-                  si queremos poner una intro de nuestra web
-                </Text>
-              </Stack>
-               
+                <Stack align={"center"}>
+                  <Image src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670515077/HealthyLife/logo_1_kano6g.svg" />
+                  <Text fontSize={"lg"} color={"gray.600"}>
+                    si queremos poner una intro de nuestra web
+                  </Text>
+                </Stack>
+
                 <Stack spacing={2}>
                   <Box>
                     <UIFormInput
@@ -76,7 +88,7 @@ const Login = () => {
                     <UIInput
                       name="password"
                       placeholder="******"
-                      type='password'
+                      type="password"
                       validations={{
                         required: "Este campo es requerido",
                         minLength: {
@@ -113,7 +125,7 @@ const Login = () => {
                     </UiButton>
                   </Stack>
                   <Stack pt={6}>
-                    <Text fontSize='13px' align={"center"}>
+                    <Text fontSize="13px" align={"center"}>
                       Si no tienes cuenta puedes registrarte{" "}
                       <NavItemLinkNoHover
                         name="aquí"

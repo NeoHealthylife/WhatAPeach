@@ -26,12 +26,40 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<App />} />
-            <Route index element={<Home />} />
+            <Route
+              index
+              element={
+                <RequiredAuth>
+                  <Home />
+                </RequiredAuth>
+              }
+            />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="profile" element={<RequiredAuth><Profile /></RequiredAuth>} />
-            <Route path="workouts" element={<RequiredAuth><Workouts /></RequiredAuth>} />
-            <Route path="recipes" element={<RequiredAuth><Recipes /></RequiredAuth>} />
+            <Route
+              path="profile"
+              element={
+                <RequiredAuth>
+                  <Profile />
+                </RequiredAuth>
+              }
+            />
+            <Route
+              path="workouts"
+              element={
+                <RequiredAuth>
+                  <Workouts />
+                </RequiredAuth>
+              }
+            />
+            <Route
+              path="recipes"
+              element={
+                <RequiredAuth>
+                  <Recipes />
+                </RequiredAuth>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

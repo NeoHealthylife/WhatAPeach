@@ -57,26 +57,30 @@ const Register = () => {
   const onFormSubmit = (data) => {
     data.equipment = data.equipment === "true" ? true : false;
     console.log(data);
-    API.post("/users/register", data).then((res) => {
-      console.log(res);
-      if (res.data.status === 201) {
+    API.post("/users/register", data)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === 201) {
+          toast({
+            position: "top",
+            title: "Usuario registrato correctamente",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+          navigate("/");
+        }
+      })
+      .catch(() => {
         toast({
-          title: "Usuario registrato correctamente",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
-        navigate("/");
-      } else {
-        toast({
+          position: "top",
           title: "No es posible crear la cuenta. Intentalo de nuevo",
           description: "no se puede crear",
-          status: "success",
+          status: "error",
           duration: 3000,
           isClosable: true,
         });
-      }
-    });
+      });
   };
 
   return (
