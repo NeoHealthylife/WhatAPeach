@@ -25,7 +25,6 @@ const Home = () => {
         {!isLogged && (
           <>
             <div>
-            
               <UiButton variant="primary">Hoeeeeeeeeela</UiButton>
               <UiButton variant="secondary">
                 <BsGoogle />
