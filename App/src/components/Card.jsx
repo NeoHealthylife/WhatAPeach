@@ -8,20 +8,32 @@ import {
   IconButton,
   Text,
   useColorModeValue,
+  Button,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { BsArrowUpRight } from "react-icons/bs";
+import { v4 as uuidv4 } from "uuid";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
+import { useState, useContext } from "react";
+import GlobalContext from "../context/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
-const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
-  const [liked, setLiked] = useState(false);
+const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, recipe }) => {
+  const { liked, setLiked } = useState(false);
+  const { setRecipe } = useContext(GlobalContext);
+
+  const navigate = useNavigate();
+  const goToDetail = (recipe) => {
+    setRecipe(recipe);
+    sessionStorage.recipe = JSON.stringify(recipe);
+    //PROBAD CON UN SESSION
+    navigate("/recipes/detail");
+  };
 
   return (
     <Center py={6}>
       <Box
         rounded={"lg"}
         my={5}
-        mx={[0, 5]}
+        mx={5}
         overflow={"hidden"}
         bg="white"
         border={"1px"}
@@ -40,20 +52,23 @@ const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
             src={imgSrc}
           />
         </Box>
-        <Box p={4}>
-          <Box
-            bg="orange.500"
-            display={"inline-block"}
-            borderRadius="20px"
-            px={2}
-            py={1}
-            color="white"
-            mb={2}
-          >
-            <Text fontSize={"xs"} fontWeight="medium">
-              {textLabel1}
-            </Text>
-          </Box>
+        <Box p={5}>
+          {tags.map((tag) => (
+            <Box
+              key={uuidv4()}
+              bg="orange.500"
+              display={"inline-block"}
+              borderRadius="20px"
+              px={3}
+              py={1}
+              color="white"
+              mb={2}
+              fontSize={"xs"}
+              fontWeight="medium"
+            >
+              {tag}
+            </Box>
+          ))}
           <Heading color={"black"} fontSize={"2xl"} noOfLines={1}>
             {headingCard}
           </Heading>
@@ -63,17 +78,16 @@ const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText }) => {
         </Box>
         <HStack borderTop={"1px"} color="black">
           <Flex
-            p={4}
+            p={3}
             alignItems="center"
             justifyContent={"space-between"}
             roundedBottom={"sm"}
             cursor={"pointer"}
             w="full"
           >
-            <Text fontSize={"md"} fontWeight={"semibold"}>
-              Ver más
-            </Text>
-            <BsArrowUpRight />
+            <Button variant="secondary" onClick={() => goToDetail(recipe)}>
+              Ver detalle
+            </Button>
           </Flex>
           <Flex
             p={1}

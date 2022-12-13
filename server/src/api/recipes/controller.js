@@ -15,6 +15,15 @@ const getRecipes = async (req, res, next) => {
   }
 };
 
+const getRecipe = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const recipebyid = await Recipe.findById(id);
+    return res.status(200).json(recipebyid);
+  } catch (err) {
+    return next(err);
+  }
+};
 const postRecipe = async (req, res, next) => {
   try {
     const newRecipe = new Recipe(req.body);
@@ -74,6 +83,7 @@ const deleteRecipe = async (req, res, next) => {
 
 module.exports = {
   getRecipes,
+  getRecipe,
   postRecipe,
   patchRecipe,
   deleteRecipe,
