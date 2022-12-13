@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, recipe }) => {
   const { liked, setLiked } = useState(false);
   const { setRecipe } = useContext(GlobalContext);
-  
+
   const navigate = useNavigate();
   const goToDetail = (recipe) => {
     setRecipe(recipe);
@@ -33,7 +33,7 @@ const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, recipe }) => {
       <Box
         rounded={"lg"}
         my={5}
-        mx={[0, 5]}
+        mx={5}
         overflow={"hidden"}
         bg="white"
         border={"1px"}

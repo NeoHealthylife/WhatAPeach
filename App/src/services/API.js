@@ -1,6 +1,6 @@
 import axios from "axios";
 //HEADER
-const apiHeaders= {
+const apiHeaders = {
   Accept: "application/json",
   "Content-Type": "application/json",
   "Access-Control-Allow-Origin": "*",
@@ -9,15 +9,13 @@ const apiHeaders= {
       return `Bearer ${localStorage.getItem("token")}`;
     },
   },
-}
+};
 
-export const API = axios.create ({
-  headers: apiHeaders, 
+export const API = axios.create({
+  headers: apiHeaders,
   timeout: 6000,
-  baseURL: 'http://localhost:3000/api'
-})
-
-
+  baseURL: "http://localhost:3000/api",
+});
 
 /* export const loginUser = async (user) => {
   try {
@@ -33,9 +31,3 @@ export const API = axios.create ({
     console.log(error);
   }
 }; */
-
-
-
-
-
-
