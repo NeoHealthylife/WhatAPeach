@@ -6,18 +6,21 @@ import { ErrorStyled } from "./UIFormInput";
 const UISelect = ({ options, label, placeholder, name, validations }) => {
   const { register } = useFormContext();
   const { errors } = useFormState();
-  
+
   return (
     <FormControl>
       {label && <FormLabel>{label}</FormLabel>}
       <Select placeholder={placeholder} {...register(name, validations)}>
-        {options && options.map((option, index) => (
-          <option key={index} value={option.value}>
-            {option.label || option.value}
-          </option>
-        ))} 
+        {options &&
+          options.map((option, index) => (
+            <option key={index} value={option.value}>
+              {option.label || option.value}
+            </option>
+          ))}
       </Select>
-      <ErrorStyled><ErrorMessage errors={errors} name={name} /></ErrorStyled>
+      <ErrorStyled>
+        <ErrorMessage errors={errors} name={name} />
+      </ErrorStyled>
     </FormControl>
   );
 };
