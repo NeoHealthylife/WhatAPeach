@@ -18,6 +18,10 @@ import Recipes from "./pages/Recipes/Recipes";
 import Register from "./pages/Register/Register";
 import Workouts from "./pages/Workouts/Workouts";
 import RequiredAuth from "./components/RequiredAuth";
+import { DescriptCard } from "./components/Layout/DescriptCard";
+
+
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -32,6 +36,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="profile" element={<RequiredAuth><Profile /></RequiredAuth>} />
             <Route path="workouts" element={<RequiredAuth><Workouts /></RequiredAuth>} />
             <Route path="recipes" element={<RequiredAuth><Recipes /></RequiredAuth>} />
+            <Route path="/recipes/detail" element={<RequiredAuth><DescriptCard /></RequiredAuth>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -3,7 +3,7 @@
 export const HeadingStyles = {
     variants: {
         H1: (props) => ({
-            color: "primary",
+            color: "dark",
             fontSize: "26px",  
             fontFamily: "Poppins",
             fontWeight: "800",
@@ -11,6 +11,14 @@ export const HeadingStyles = {
            
         }),
         H2: (props) => ({
+            color: "primary",
+            fontSize: "18px", 
+            fontFamily: "Poppins",
+            fontWeight: "800",
+            letterSpacing: "1px",
+            textDecoration: ""
+        }),
+        H3: (props) => ({
             color: "dark",
             fontSize: "16px", 
             fontFamily: "Poppins",
@@ -18,5 +26,6 @@ export const HeadingStyles = {
             letterSpacing: "1px",
             textDecoration: ""
         }),
+
       },
 }

@@ -1,30 +1,31 @@
 import React from "react";
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState } from "react";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
-import { Heading, Center, Flex } from "@chakra-ui/react";
+import { Heading, Flex } from "@chakra-ui/react";
 import CardComp from "../../components/Card";
-import { getData } from "../../services/API";
+import { API } from "../../services/API";
 
-// export const RecipesContext = createContext();
 
 const Recipes = () => {
-  const [ recipes, setRecipes ] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
-  useEffect(() => {
-    getData("recipes").then((res) => setRecipes(res.data.recipes));
-  }, []);
-  console.log("recipes", recipes);
+  useEffect(
+    () => async () => {
+      API.get("/recipes").then((res) => setRecipes(res.data.data.recipes));
+    },
+    []);
+
+  
 
   return (
     <LayoutWrapper>
-          <Heading variant="H1">recetas</Heading>
-          <Flex>
-          {recipes
-          .map((recipe) => (
-            <CardComp key={recipe.id} imgSrc={recipe.image} tags={recipe.tags}/>
-          ))}
-        </Flex>
-      
+      <Heading variant="H1">recetas</Heading>
+
+      <Flex>
+        {recipes.map((recipe) => (
+          <CardComp key={recipe._id} altImg={recipe.title} imgSrc={recipe.image} tags={recipe.tags} recipe={recipe}/>
+        ))}
+      </Flex>
     </LayoutWrapper>
   );
 };
