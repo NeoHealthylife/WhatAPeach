@@ -10,7 +10,9 @@ const UISelect = ({ options, label, placeholder, name, validations }) => {
   return (
     <FormControl>
       {label && <FormLabel>{label}</FormLabel>}
-      <Select placeholder={placeholder} {...register(name, validations)}>
+      <Select 
+      fontSize="sm"
+      placeholder={placeholder} {...register(name, validations)}>
         {options &&
           options.map((option, index) => (
             <option key={index} value={option.value}>

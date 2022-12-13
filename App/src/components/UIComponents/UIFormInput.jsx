@@ -6,10 +6,11 @@ import { useFormContext, useFormState } from "react-hook-form";
 import styled from "styled-components";
 import { myTheme } from "./Theme";
 const ErrorStyled = styled.div`
-  color: red;
-  font-size: ${myTheme.fontSizes.md};
+  color: #ff3300;
+  font-size: ${myTheme.fontSizes.xsm};
   margin-top: 5px;
 `;
+
 const UIFormInput = ({ name, label, placeholder, text, validations, type }) => {
   const { register } = useFormContext();
   const { errors } = useFormState();
@@ -17,6 +18,7 @@ const UIFormInput = ({ name, label, placeholder, text, validations, type }) => {
     <FormControl>
       <FormLabel>{label}</FormLabel>
       <Input
+      fontSize="sm"
         {...register(name, validations)}
         placeholder={placeholder}
         value={text}

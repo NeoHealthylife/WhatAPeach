@@ -15,7 +15,8 @@ export const myTheme = extendTheme ({
     fontSizes: {
       lg: "22px",
       md: "16px",
-      sm: "13px"
+      sm: "13px",
+      xsm: "12px"
     },
     sizes: {
       lg: "18px",
