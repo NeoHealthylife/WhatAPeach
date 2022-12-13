@@ -86,7 +86,12 @@ const CardList = (props) => {
     <StyledCardListWrapper>
       <Slider {...settings}>
         {items.map((item) => (
-          <CardComp key={item.id} className="card" imgSrc={item.image} tags={item.tags} />
+          <CardComp
+            key={item._id}
+            className="card"
+            imgSrc={item.image}
+            tags={item.tags}
+          />
         ))}
       </Slider>
     </StyledCardListWrapper>
