@@ -59,7 +59,13 @@ const Register = () => {
     console.log(data);
     API.post("/users/register", data).then((res) => {
       console.log(res);
-      if (res.data.status === 200) {
+      if (res.data.status === 201) {
+        toast({
+          title: "Usuario registrato correctamente",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
         navigate("/");
       } else {
         toast({
