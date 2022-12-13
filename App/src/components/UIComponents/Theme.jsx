@@ -13,9 +13,9 @@ export const myTheme = extendTheme ({
       "sof-dark": "#4B1E19"
     },
     fontSizes: {
-      lg: "18px",
-      md: "13px",
-      sm: "10px"
+      lg: "22px",
+      md: "16px",
+      sm: "13px"
     },
     sizes: {
       lg: "18px",

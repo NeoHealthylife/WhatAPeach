@@ -59,8 +59,7 @@ const Register = () => {
     console.log(data);
     API.post("/users/register", data)
       .then((res) => {
-        console.log(res);
-        if (res.data.status === 201) {
+        if (res.data.status === 201 || res.data.status === 200) {
           toast({
             position: "top",
             title: "Usuario registrato correctamente",
@@ -128,7 +127,7 @@ const Register = () => {
                             }}
                           ></UIFormInput>
                         </Box>
-                        <InputGroup>
+                        <InputGroup position="relative">
                           <UIInput
                             name="password"
                             type={show ? "text" : "password"}
@@ -155,7 +154,12 @@ const Register = () => {
                               },
                             }}
                           ></UIInput>
-                          <InputRightElement h="full" width="initial">
+                          <InputRightElement
+                            position="absolute"
+                            top="8px"
+                            right="8px"
+                            width="initial"
+                          >
                             <IconButton
                               variant="primary"
                               bg="transparent"
