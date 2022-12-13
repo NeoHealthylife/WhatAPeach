@@ -8,24 +8,22 @@ import {
   IconButton,
   Text,
   useColorModeValue,
-  Button
+  Button,
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 import { useState, useContext } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 
-
 const CardComp = ({ imgSrc, altImg, textLabel1, headingCard, bodyText, tags }) => {
   const [liked, setLiked] = useState(false);
 
-  
-return (
+  return (
     <Center py={6}>
       <Box
         rounded={"lg"}
         my={5}
-        mx={[0, 5]}
+        mx={5}
         overflow={"hidden"}
         bg="white"
         border={"1px"}
@@ -45,21 +43,23 @@ return (
           />
         </Box>
         <Box p={5}>
-        {tags.map((tag) => ( 
-          <Box
-          key={uuidv4()}
-            bg="orange.500"
-            display={"inline-block"}
-            borderRadius="20px"
-            px={3}
-            py={1}
-            color="white"
-            mb={2}
-            fontSize={"xs"} fontWeight="medium"
-          >
-            {tag}
-          </Box>
-           ))} 
+          {tags &&
+            tags.map((tag) => (
+              <Box
+                key={uuidv4()}
+                bg="orange.500"
+                display={"inline-block"}
+                borderRadius="20px"
+                px={3}
+                py={1}
+                color="white"
+                mb={2}
+                fontSize={"xs"}
+                fontWeight="medium"
+              >
+                {tag}
+              </Box>
+            ))}
           <Heading color={"black"} fontSize={"2xl"} noOfLines={1}>
             {headingCard}
           </Heading>
@@ -76,9 +76,7 @@ return (
             cursor={"pointer"}
             w="full"
           >
-            <Button  variant="secondary">
-              Ver más
-            </Button>
+            <Button variant="secondary">Ver más</Button>
             <BsArrowUpRight />
           </Flex>
           <Flex
@@ -94,7 +92,7 @@ return (
               <IconButton
                 variant="primary"
                 icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
-                             />
+              />
             ) : (
               <IconButton
                 variant="primary"

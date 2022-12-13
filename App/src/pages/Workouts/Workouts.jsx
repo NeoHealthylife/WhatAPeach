@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
+import { useEffect, useState, createContext } from "react";
+import GlobalContext from "../../context/GlobalContext";
+import { API } from "../../services/API";
+import { Heading } from "@chakra-ui/react";
+import CardList from "../../components/CardList";
 
 const Workouts = () => {
-  return <LayoutWrapper>Workouts</LayoutWrapper>;
+  const [workouts, setWorkout] = useState([]);
+  const { user } = useContext(GlobalContext);
+
+  useEffect(() => {
+    API.get("/workouts").then((res) => setWorkout(res.data.data.workouts));
+  }, []);
+
+  return (
+    <LayoutWrapper>
+      <Heading variant="H1">Workouts</Heading>
+      <CardList items={workouts} />
+    </LayoutWrapper>
+  );
 };
 
 export default Workouts;
