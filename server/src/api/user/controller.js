@@ -7,6 +7,11 @@ const { generateNickName } = require('../../utils/string');
 
 const register = async (req, res, next) => {
   try {
+    if (!req.body.provider_id) {
+      const now = new Date();
+      req.body.providerid = `organic${now.getTime()}`;
+      req.body.provider = 'organic';
+    }
     const newUser = new User(req.body);
     const userDuplicate = await User.findOne({ nickname: newUser.nickname });
 

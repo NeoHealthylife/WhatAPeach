@@ -10,9 +10,9 @@ import {
   useColorModeValue,
   Button,
 } from "@chakra-ui/react";
+import { useState, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import { useState, useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
 
