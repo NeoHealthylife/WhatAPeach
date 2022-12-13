@@ -10,7 +10,6 @@ import {
   useColorModeValue,
   Button
 } from "@chakra-ui/react";
-import { v4 as uuidv4 } from "uuid";
 import { useState, useContext } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";

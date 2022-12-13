@@ -41,6 +41,7 @@ const StyledButton = styled.button`
       
 }      
     `}
+    
 `;
 
 const UiButton = (props) => {

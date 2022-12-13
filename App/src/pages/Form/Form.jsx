@@ -81,20 +81,20 @@ const targetChoices =[{value: 'Perder peso'}, {value:'Musculación'},{value:'Def
                     <HStack>
                     <Box w='50%'>
                     <UISelect placeholder='Dieta' name='diet' options={foodChoices} validations={{
-                        required: "Esto es requerido",
+                        required: "Este campo es requerido",
                        }}/>
                     
                   </Box>                  
                   <Box w='50%'>                    
                     <UISelect placeholder='Estado físico' name='status' options={statusChoices} validations={{
-                        required: "Esto es requerido",
+                        required: "Este campo es requerido",
                        }}/>
                     
                   </Box>
                   </HStack>
                   <Box>                    
                     <UISelect placeholder='Define tus objetivos' name='target' options={targetChoices} validations={{
-                        required: "Esto es requerido",
+                        required: "Este campo es requerido",
                        }}/>
                     
                   </Box>        

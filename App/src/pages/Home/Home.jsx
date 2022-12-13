@@ -6,6 +6,7 @@ import UiButton from "../../components/UIComponents/UIButton";
 import UIInput from "../../components/UIComponents/UIInput";
 import GlobalContext from "../../context/GlobalContext";
 import Dashboard from "../Dashboard/Dashboard";
+import RegisterForm from "../Register/RegisterWForm";
 
 const Home = () => {
   const { isLogged } = useContext(GlobalContext);
@@ -25,25 +26,9 @@ const Home = () => {
         {!isLogged && (
           <>
             <div>
-            
-              <UiButton variant="primary">Hoeeeeeeeeela</UiButton>
-              <UiButton variant="secondary">
-                <BsGoogle />
-                Hoeeeeeeeeee
-              </UiButton>
-              <UIInput
-                label="Nombre del usuario"
-                placeholder="Introduce un nombre válido"
-                helpText="Aquí va el nombre de usuario"
-                name="nickname"
-                validations={{
-                  required: "Esto es requerido",
-                  minLength: {
-                    value: 2,
-                    message: "Necesita un minimo de 2 caracteres",
-                  },
-                }}
-              />
+              <RegisterForm/>
+              
+    
             </div>
           </>
         )}

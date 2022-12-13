@@ -22,6 +22,11 @@ const Login = () => {
   const methods = useForm();
   const navigate = useNavigate();
 
+  const handleGoogleClick = (e) => {
+    e.preventDefault()
+    window.location.href = "http://localhost:3000/api/users/auth/google";
+  };
+
   const onFormSubmit = (data) => {
     API.post('/users/login', data).then((res)=>{
       if(res.data.status === 200) {
@@ -53,13 +58,13 @@ const Login = () => {
                 </Text>
               </Stack>
                
-                <Stack  spacing={4}>
+                <Stack spacing={2}>
                   <Box>
                     <UIFormInput
                       name="nickname"
                       placeholder="Nickname"
                       validations={{
-                        required: "Esto es requerido",
+                        required: "Este campo es requerido",
                         minLength: {
                           value: 2,
                           message: "Necesita un minimo de 2 caracteres",
@@ -73,7 +78,7 @@ const Login = () => {
                       placeholder="******"
                       type='password'
                       validations={{
-                        required: "Esto es requerido",
+                        required: "Este campo es requerido",
                         minLength: {
                           value: 6,
                           message: "Este campo debe tener al menos 6 caracteres",
@@ -102,7 +107,7 @@ const Login = () => {
                     <Flex justifyContent="center">
                       <Text fontSize="md">o</Text>
                     </Flex>
-                    <UiButton variant="secondary">
+                    <UiButton variant="secondary" onClick={(e) => handleGoogleClick(e)}>
                       <BsGoogle />
                       Accede con Google
                     </UiButton>
