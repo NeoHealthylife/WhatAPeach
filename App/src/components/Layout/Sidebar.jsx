@@ -174,7 +174,7 @@ const SidebarContent = ({ ...props }) => {
                 name="Ahmad"
                 src="https://avatars2.githubusercontent.com/u/37842853?v=4"
               />
-              <Text fontSize="md">{user.nickname}</Text>
+              <Text fontSize="md">{user?.nickname}</Text>
             </MenuButton>
             <MenuList fontSize={17} zIndex={5555}>
               <MenuItem as={Link} to="#">

@@ -91,6 +91,7 @@ const CardList = (props) => {
             className="card"
             imgSrc={item.image}
             tags={item.tags}
+            recipe={item}
           />
         ))}
       </Slider>
