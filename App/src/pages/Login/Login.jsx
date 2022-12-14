@@ -1,5 +1,15 @@
-import { Box, Flex, Image, Stack, Text, useColorModeValue } from "@chakra-ui/react";
-import React, { useState } from "react";
+import {
+  Box,
+  Flex,
+  Image,
+  Stack,
+  Text,
+  useColorModeValue,
+  InputGroup,
+  InputRightElement,
+  IconButton,
+} from "@chakra-ui/react";
+import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import UiButton from "../../components/UIComponents/UIButton";
@@ -16,9 +26,11 @@ import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-No
 import { myTheme } from "../../components/UIComponents/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
 import { useToast } from "@chakra-ui/react";
+import { HiOutlineEyeSlash, HiOutlineEye } from "react-icons/hi2";
 
 const Login = () => {
-  /*  const { user, setUser } = useState; */
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
   const toast = useToast();
   const { setJwt, setUser } = useContext(GlobalContext);
   const methods = useForm();
@@ -84,11 +96,11 @@ const Login = () => {
                       }}
                     ></UIFormInput>
                   </Box>
-                  <Box>
+                  <InputGroup position="relative">
                     <UIInput
                       name="password"
+                      type={show ? "text" : "password"}
                       placeholder="******"
-                      type="password"
                       validations={{
                         required: "Este campo es requerido",
                         minLength: {
@@ -111,7 +123,24 @@ const Login = () => {
                         },
                       }}
                     ></UIInput>
-                  </Box>
+                    <InputRightElement
+                      position="absolute"
+                      top="8px"
+                      right="8px"
+                      width="initial"
+                    >
+                      <IconButton
+                        variant="primary"
+                        bg="transparent"
+                        h="1.75rem"
+                        size="lg"
+                        color="primary"
+                        onClick={handleClick}
+                      >
+                        {show ? <HiOutlineEyeSlash /> : <HiOutlineEye />}
+                      </IconButton>
+                    </InputRightElement>
+                  </InputGroup>
                   <Stack spacing={1} pt={2}>
                     <UiButton variant="primary" type="submit">
                       Entrar

@@ -18,7 +18,7 @@ const UIFormInput = ({ name, label, placeholder, text, validations, type }) => {
     <FormControl>
       <FormLabel>{label}</FormLabel>
       <Input
-      fontSize="sm"
+        fontSize="sm"
         {...register(name, validations)}
         placeholder={placeholder}
         value={text}
