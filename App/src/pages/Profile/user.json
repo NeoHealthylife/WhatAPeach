@@ -1,0 +1,85 @@
+
+    {
+        "_id": "639728c1d7f411ff9052cf9f",
+        "nickname": "GloriaM88",
+        "email": "gloriam88@hotmail.com",
+        "password": "$2b$10$cUj/2K6M/.Ovw1kJSq0dQO5kcx62bSVKiskNjxP.YwZCbgWytXWK.",
+        "role": "basic",
+        "fullname": "Gloria M",
+        "favRecipes": [
+          {
+            "_id": "638f8a4cdceefb0aade7ce19",
+            "title": "ENSALADA DE AGUACATE, CHERRYS, BONITO Y MOZZARELLA",
+            "time": 20,
+            "ingredients": [
+              "1 aguacate",
+              "40 g de espinacas baby",
+              "200 g de tomatitos cherry de colores",
+              "200 g de bonito del norte en aceite de oliva",
+              "100 g de bolitas de queso mozzarella",
+              "40 g de aceitunas verdes deshuesadas",
+              "Unos tallos de cebollino",
+              "Vinagre de jerez",
+              "Aceite de oliva",
+              "Pimienta negra sal"
+            ],
+            "image": "https://res.cloudinary.com/dsaayrh18/image/upload/v1670237877/HealthyLife/ensalada-de-aguacate-00552796_4d7c6937_1134x1512_fn2b8g.jpg",
+            "recipe": [
+              " Parte el aguacate por la mitad y retírale el hueso. Pélalo y corta la pulpa en trozos. Lava el cebollino, sécalo y pícalo muy menudo.",
+              "Lava los tomatitos cherry, sécalos con papel de cocina y pártelos por la mitad. Escurre el bonito del norte de su aceite y trocéalo. Limpia las espinacas y lávalas.",
+              "Pasa las bolitas de queso a un colador y deja que escurran el suero. Escurre también las aceitunas, enjuágalas y vuelve a escurrirlas.",
+              "Coloca las espinacas en una ensaladera, junto con los tomatitos, el aguacate, la mozzarella y las aceitunas. Aliña la ensalada con un chorro de aceite, 1 cucharada de vinagre, sal y pimienta.",
+              "Mezcla los ingredientes removiendo con 2 cucharas. Disponla en una fuente de servir ovalada y coloca encima los trozos de bonito. Espolvoréala con el cebollino y sírvela en seguida."
+            ],
+            "tags": [
+              "ensaladas",
+              "lose weight"
+            ],
+            "createdAt": "2022-12-06T18:30:36.233Z",
+            "updatedAt": "2022-12-06T18:30:36.233Z",
+            "__v": 0
+          },
+          {
+            "_id": "638fd720dceefb0aade7ce1e",
+            "title": "BERENJENAS CON GAMBAS AL PESTO",
+            "time": 60,
+            "ingredients": [
+              "2 berenjenas",
+              "400 g de gambas",
+              "1 manojo de ajetes",
+              "2 ajos",
+              "3 pimientos del piquillo",
+              "40 g de queso manchego",
+              "Pesto: queso rallado, 1 huevo, albahaca, 20g piñones",
+              "2 vasos de leche",
+              "20 g de harina integral y pan rallado",
+              "aceite, sal"
+            ],
+            "image": "https://res.cloudinary.com/dsaayrh18/image/upload/v1670254254/HealthyLife/berenjenas-00551071_899c74ba_510x680_lpafjq.jpg",
+            "recipe": [
+              "Lava bien las berenjenas, córtalas por la mitad a lo largo y cuécelas entre 18 y 20 minutos en agua con sal. Escúrrelas, refréscalas y retira la pulpa con cuidado de no romper la piel.",
+              "Limpia los ajetes y trocéalos. Escurre los pimientos y pártelos en tiras. Después, sofríelos en un poco de aceite.",
+              "Añade los pimientos y las gambas peladas y saltea 2 minutos. Incorpora la harina, tuéstala y añade la leche. Cuece hasta que empiece a espesar.",
+              "Agrega la pulpa de berenjena y lleva a ebullición. Retira y rellena las berenjenas con la mezcla. Espolvoréalas con queso rallado y gratínalas bajo el grill.",
+              "Parte el queso manchego en dados. Pásalos por el huevo batido y el pan rallado y fríelos en aceite bien caliente. Déjalos escurrir sobre papel absorbente.",
+              "Haz un pesto majando los ajos pelados, los piñones, la albahaca lavada, aceite y un poco de sal. Sirve las berenjenas con el queso frito y el pesto."
+            ],
+            "tags": [
+              "verduras",
+              "proteinas"
+            ],
+            "createdAt": "2022-12-06T23:58:24.648Z",
+            "updatedAt": "2022-12-06T23:58:24.648Z",
+            "__v": 0
+          }
+        ],
+        "favWorkouts": [],
+        "toDoRecipes": [],
+        "toDoWorkouts": [],
+        "completedWorkouts": [],
+        "completedRecipes": [],
+        "createdAt": "2022-12-12T13:12:33.078Z",
+        "updatedAt": "2022-12-14T16:55:21.641Z",
+        "__v": 0
+      }
+

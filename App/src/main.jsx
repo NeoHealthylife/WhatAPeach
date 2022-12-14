@@ -20,6 +20,7 @@ import Workouts from "./pages/Workouts/Workouts";
 import RequiredAuth from "./components/RequiredAuth";
 import { DescriptCard } from "./components/DescriptCard";
 import RecipeDetails from "./pages/RecipeDetails/RecipeDetails";
+import { MyRecipes } from "./pages/Profile/MyRecipes";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -67,6 +68,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               element={
                 <RequiredAuth>
                   <RecipeDetails />
+                </RequiredAuth>
+              }
+            />
+               <Route
+              path="/profile/myrecipes"
+              element={
+                <RequiredAuth>
+                  <MyRecipes />
                 </RequiredAuth>
               }
             />

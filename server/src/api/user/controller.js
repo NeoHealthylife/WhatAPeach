@@ -89,7 +89,7 @@ const loginFromSocialLogin = async (req, res, next) => {
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await User.find().populate("favRecipes")
     return res.json({
       status: 200,
       message: 'Recovered all Users',
@@ -103,7 +103,7 @@ const getUsers = async (req, res, next) => {
 const getUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const userbyid = await User.findById(id);
+    const userbyid = await User.findById(id).populate("favRecipes")
     return res.status(200).json(userbyid);
   } catch (err) {
     return next(err);
@@ -120,17 +120,17 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-const updatetUser = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const user = new User(req.body);
-    user._id = id;
-    const editUser = await User.findByIdAndUpdate(id);
-    return res.status(200).json(editUser);
-  } catch (err) {
-    return next(err);
-  }
-};
+// const updatetUser = async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     const user = new User(req.body);
+//     user._id = id;
+//     const editUser = await User.findByIdAndUpdate(id);
+//     return res.status(200).json(editUser);
+//   } catch (err) {
+//     return next(err);
+//   }
+// };
 
 const addFavRecipe = async (req, res, next) => {
   try {
@@ -310,7 +310,7 @@ module.exports = {
   login,
   getUsers,
   getUser,
-  updatetUser,
+  // updatetUser,
   deleteUser,
   addFavRecipe,
   addFavWorkout,

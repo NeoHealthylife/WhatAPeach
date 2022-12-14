@@ -1,8 +1,15 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Button } from "@chakra-ui/react";
-
+import { CardList } from "./CardList"
 import React, { useCallback, useState } from "react";
 
 export const TabMenu = () => {
+  const [recipes, setRecipes] = useState([]);
+  
+  useEffect(() => {
+    API.get("/users").then((res) => setRecipes(res.data.data.recipes));
+  }, []);
+
+
+
   return (
     <Tabs isFitted variant="enclosed">
       <TabList mb="1em">
@@ -11,7 +18,7 @@ export const TabMenu = () => {
       </TabList>
       <TabPanels>
         <TabPanel>
-          <Button as="a" variant="secondary" href="/workouts"></Button>
+          <CardList item={favWorkouts}/>
         </TabPanel>
         <TabPanel>
           <p>two!</p>
