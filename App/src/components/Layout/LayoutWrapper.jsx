@@ -12,7 +12,7 @@ const StyledMainContent = styled.div`
   padding: 10px;
   min-height: 100vh;
 
-  @media (min-width: 600px) {
+  @media (min-width: 991px) {
     position: absolute;
     top: var(--chakra-sizes-20);
     padding: 20px;
@@ -25,7 +25,7 @@ const StyledMainContent = styled.div`
 const StyledFooter = styled.div`
   width: 100%;
 
-  @media (min-width: 600px) {
+  @media (min-width: 991px) {
     width: calc(100% - var(--chakra-sizes-60));
     margin-left: var(--chakra-sizes-60);
   }

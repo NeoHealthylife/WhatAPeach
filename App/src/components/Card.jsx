@@ -16,7 +16,7 @@ import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 import GlobalContext from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
 
-const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, recipe }) => {
+const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, node }) => {
   const { liked, setLiked } = useState(false);
   const { setRecipe } = useContext(GlobalContext);
 
@@ -38,62 +38,79 @@ const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, recipe }) => {
         bg="white"
         border={"1px"}
         borderColor="black"
-        h="42vh"
-        w="30vh"
+        h="360px"
+        w="250px"
         boxShadow={useColorModeValue("3px 6px 0 #fe9166", "6px 6px 0 cyan")}
       >
-        <Box h={"200px"} borderBottom={"1px"} borderColor="black">
+        <Box h={"230px"} borderBottom={"1px"} borderColor="black" position={"relative"}>
           <Image
-            roundedTop="sm"
+            roundedTop="xs"
             objectFit="cover"
             h="full"
             w="full"
             alt={altImg}
             src={imgSrc}
           />
+          <Heading
+            color={"white"}
+            fontSize={"l"}
+            position={"absolute"}
+            background={"rgba(0,0,0,0.5)"}
+            bottom={"0"}
+            padding={"1"}
+          >
+            {node.title}
+          </Heading>
         </Box>
-        <Box p={5}>
+        <Box h={"70px"} p={{ base: 1, lg: 2 }}>
           {tags.map((tag) => (
             <Box
               key={uuidv4()}
               bg="orange.500"
               display={"inline-block"}
               borderRadius="20px"
-              px={3}
-              py={1}
+              px={2}
+              py={0}
               color="white"
-              mb={2}
+              m={"2px"}
               fontSize={"xs"}
               fontWeight="medium"
             >
               {tag}
             </Box>
           ))}
-          <Heading color={"black"} fontSize={"2xl"} noOfLines={1}>
-            {headingCard}
-          </Heading>
           <Text color={"gray.500"} noOfLines={2}>
             {bodyText}
           </Text>
         </Box>
         <HStack borderTop={"1px"} color="black">
           <Flex
-            p={3}
+            p={2}
             alignItems="center"
             justifyContent={"space-between"}
             roundedBottom={"sm"}
             cursor={"pointer"}
             w="full"
           >
-            <Button variant="secondary" onClick={() => goToDetail(recipe)}>
+            <Button
+              display={{ base: "none", lg: "inline-block" }}
+              variant="secondary"
+              onClick={() => goToDetail(node)}
+            >
               Ver detalle
+            </Button>
+            <Button
+              display={{ base: "inline-block", lg: "none" }}
+              variant="secondary"
+              onClick={() => goToDetail(node)}
+            >
+              + Info
             </Button>
           </Flex>
           <Flex
             p={1}
             alignItems="center"
             justifyContent={"space-between"}
-            roundedBottom={"sm"}
             borderLeft={"1px"}
             cursor="pointer"
             onClick={() => setLiked(!liked)}

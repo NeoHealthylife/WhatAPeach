@@ -44,32 +44,32 @@ export default function Sidebar() {
     <Box
       as="section"
       bg={useColorModeValue("gray.50", "gray.700")}
-      minH={{ base: 0, md: "100vh" }}
+      minH={{ base: 0, lg: "100vh" }}
     >
-      <SidebarContent display={{ base: "none", md: "unset" }} />
+      <SidebarContent display={{ base: "none", lg: "unset" }} />
       <Drawer isOpen={isOpen} onClose={onClose} placement="left">
         <DrawerOverlay />
         <DrawerContent>
           <SidebarContent w="full" borderRight="none" />
         </DrawerContent>
       </Drawer>
-      <Box ml={{ base: 0, md: 60 }} transition=".3s ease">
+      <Box ml={{ base: 0, lg: 60 }} transition=".3s ease">
         <Flex
           as="header"
           align="center"
           w="full"
           px="4"
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", lg: "none" }}
           borderBottomWidth="1px"
           borderColor={useColorModeValue("inherit", "gray.700")}
           bg={useColorModeValue("soft-primary", "gray.800")}
-          justify={{ base: "space-between", md: "flex-end" }}
+          justify={{ base: "space-between", lg: "flex-end" }}
           boxShadow="lg"
           h="14"
         >
           <IconButton
             aria-label="Menu"
-            display={{ base: "inline-flex", md: "none" }}
+            display={{ base: "inline-flex", lg: "none" }}
             onClick={onOpen}
             icon={<FiMenu />}
             size="md"
@@ -77,12 +77,12 @@ export default function Sidebar() {
         </Flex>
         <Box
           as="main"
-          p={{ base: 0, md: 14 }}
-          minH={{ base: 0, md: "30rem" }}
+          p={{ base: 0, lg: 14 }}
+          minH={{ base: 0, lg: "30rem" }}
           bg={useColorModeValue("auto", "gray.800")}
         >
           <Stack
-            direction={{ base: "column", sm: "row" }}
+            direction={{ base: "column", lg: "row" }}
             alignItems="center"
             justifyContent="center"
             h="100%"
