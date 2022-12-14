@@ -35,6 +35,7 @@ import LayoutWrapper from "./LayoutWrapper";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -93,7 +94,8 @@ export default function Sidebar() {
 }
 
 const SidebarContent = ({ ...props }) => {
-  const { user } = useContext(GlobalContext);
+  const { user, logout } = useContext(GlobalContext);
+  let navigate = useNavigate();
   return (
     <Box
       as="nav"
@@ -177,10 +179,10 @@ const SidebarContent = ({ ...props }) => {
               <Text fontSize="md">{user?.nickname}</Text>
             </MenuButton>
             <MenuList fontSize={17} zIndex={5555}>
-              <MenuItem as={Link} to="#">
-                My profile
-              </MenuItem>
-              <MenuItem>Logout</MenuItem>
+              <Button w="full">Mi perfil</Button>
+              <Button w="full" onClick={() => logout() & navigate("/login")}>
+                Cerrar sesión
+              </Button>
             </MenuList>
           </Menu>
         </Flex>
