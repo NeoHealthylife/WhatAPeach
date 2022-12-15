@@ -16,7 +16,14 @@ const GridUI = (props) => {
     >
       {items.map((item) => (
         <GridItem key={item._id} justifyContent={"center"}>
-          <CardComp key={item._id} className="card" item={item} type={type} />
+          <CardComp
+            width="250px"
+            heigth="360px"
+            key={item._id}
+            className="card"
+            item={item}
+            type={type}
+          />
         </GridItem>
       ))}
     </Grid>

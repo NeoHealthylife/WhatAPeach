@@ -71,8 +71,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 </RequiredAuth>
               }
             />
-               <Route
-              path="/profile/myrecipes"
+            <Route
+              path="/perfil/misrecetas"
               element={
                 <RequiredAuth>
                   <MyRecipes />

@@ -120,7 +120,7 @@ const SidebarContent = ({ ...props }) => {
             aria-label="Main Navigation"
           >
             <NavItemLink icon={GiForkKnifeSpoon} name="Recetas" href="/recipes" />
-            <NavItemLink icon={BiDumbbell} name="Workout" href="/workouts" />
+            <NavItemLink icon={BiDumbbell} name="Workouts" href="/workouts" />
           </Flex>
           <Divider
             bg="white"
@@ -166,7 +166,9 @@ const SidebarContent = ({ ...props }) => {
               <Text fontSize="md">{user?.nickname}</Text>
             </MenuButton>
             <MenuList fontSize={17} zIndex={5555}>
-              <Button w="full">Mi perfil</Button>
+              <Button w="full" onClick={() => navigate("/perfil/misrecetas")}>
+                Mis Recetas
+              </Button>
               <Button w="full" onClick={() => logout() & navigate("/login")}>
                 Cerrar sesión
               </Button>
