@@ -1,5 +1,3 @@
-import LayoutWrapper from "./Layout/LayoutWrapper";
-// import { recipes } from "../../services/recipe";
 import {
   Box,
   Center,
@@ -22,59 +20,29 @@ import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 import { Navigate } from "react-router-dom";
 import { API } from "../services/API";
 
-export const DescriptCard = () => {
+export const DetailWorkout = () => {
   const { item, user, setUser } = useContext(GlobalContext);
-  const isFavourite = () => !!user.favRecipes.find((id) => id === item._id);
+  const isFavourite = () => !!user.favWorkouts.find((id) => id === item._id);
+
   const [liked, setLiked] = useState(isFavourite);
-  const isToDo = () => !!user.toDoRecipes.find((id) => id === item._id);
-  const [todo, setToDo] = useState(isToDo);
-  const isComplete = () => !!user.completedRecipes.find((id) => id === item._id);
-  const [complete, setComplete] = useState(isComplete);
   const userId = user._id;
 
-  const addToFav = (recipeId) => {
-    API.patch("/users/addfavrecipe", { userId, recipeId }).then((response) => {
+  const addToFav = (workoutId) => {
+    API.patch("/users/addfavworkout", { userId, workoutId }).then((response) => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
     });
   };
 
-  const deleteToFav = (recipeId) => {
-    API.patch("/users/deletefavrecipe", { userId, recipeId }).then((response) => {
+  const deleteToFav = (workoutId) => {
+    API.patch("/users/deletefavworkout", { userId, workoutId }).then((response) => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
     });
   };
-  const addToDo = (recipeId) => {
-    API.patch("/users/todorecipe", { userId, recipeId }).then((response) => {
-      const editedUser = response.data;
-      setUser(editedUser);
-      localStorage.setItem("user", JSON.stringify(editedUser));
-    });
-  };
-  const deleteToDo = (recipeId) => {
-    API.patch("/users/deletetodorecipe", { userId, recipeId }).then((response) => {
-      const editedUser = response.data;
-      setUser(editedUser);
-      localStorage.setItem("user", JSON.stringify(editedUser));
-    });
-  };
-  const addComplete = (recipeId) => {
-    API.patch("/users/addcompleterecipe", { userId, recipeId }).then((response) => {
-      const editedUser = response.data;
-      setUser(editedUser);
-      localStorage.setItem("user", JSON.stringify(editedUser));
-    });
-  };
-  const deleteComplete = (recipeId) => {
-    API.patch("/users/deletecompleterecipe", { userId, recipeId }).then((response) => {
-      const editedUser = response.data;
-      setUser(editedUser);
-      localStorage.setItem("user", JSON.stringify(editedUser));
-    });
-  };
+
   return (
     <>
       {item !== null ? (
@@ -104,35 +72,8 @@ export const DescriptCard = () => {
                   roundedBottom={"sm"}
                   cursor={"pointer"}
                   w="full"
-                  onClick={() => setToDo(!todo)}
                 >
-                  {!todo ? (
-                    <Button variant="secondary" onClick={() => addToDo(item._id)}>
-                      Let's do it!
-                    </Button>
-                  ) : (
-                    <Button variant="secondary" onClick={() => deleteToDo(item._id)}>
-                      No me interesa 😥
-                    </Button>
-                  )}
-                </Flex>
-                <Flex
-                  p={2}
-                  alignItems="center"
-                  justifyContent={"flex-end"}
-                  roundedBottom={"sm"}
-                  cursor={"pointer"}
-                  w="full"
-                  onClick={() => setComplete(!complete)}
-                >
-                  {todo && (
-                    <Button onClick={() => addComplete(item._id)}>Completar</Button>
-                  )}
-                  {/* (!complete ? (
-                      <Button onClick={() => deleteComplete(item._id)}>Completado</Button>
-                    ) : (
-                      <Button onClick={() => addComplete(item._id)}>Completar</Button>
-                    ))} */}
+                  <Button variant="secondary">Añade a tus retos</Button>
                 </Flex>
                 <Flex
                   p={1}
@@ -196,10 +137,10 @@ export const DescriptCard = () => {
               flexDirection={{ base: "column-reverse", md: "row" }}
             >
               <Box width="65%">
-                <Heading variant="H2">Instrucciones:</Heading>
+                <Heading variant="H2">Workout</Heading>
                 <OrderedList mt="1rem">
-                  {item.recipe.length &&
-                    item.recipe.map((num, index) => (
+                  {item.workout.length &&
+                    item.workout.map((num, index) => (
                       <ListItem key={`paso_${index}`} mb="1rem" fontSize="md" gap="8">
                         {num}
                       </ListItem>
@@ -212,9 +153,9 @@ export const DescriptCard = () => {
                   <Text fontSize="md"> {item.time} min</Text>
                 </Box>
                 <Box>
-                  <Heading variant="H2">Ingredientes (4 pers):</Heading>
+                  <Heading variant="H2">material</Heading>
                   <UnorderedList mt="1rem">
-                    {item.ingredients.map((num) => (
+                    {item.material.map((num) => (
                       <ListItem mb="1rem" fontSize="md" key={uuidv4()}>
                         {num}
                       </ListItem>
@@ -226,7 +167,7 @@ export const DescriptCard = () => {
           </Box>
         </Center>
       ) : (
-        <Navigate to="/recipes" />
+        <Navigate to="/workouts" />
       )}
     </>
   );

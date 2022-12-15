@@ -6,12 +6,12 @@ const userSchema = new mongoose.Schema(
     nickname: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },
 
-    provider_id: { type: String, unique: true },
+    provider_id: { type: String },
     provider: { type: String },
 
-    password: { type: String, required: true, required: true },
+    password: { type: String, required: true },
     role: { type: String, enum: ['admin', 'basic'], default: 'basic' },
-    fullname: { type: String, unique: true, required: true },
+    fullname: { type: String },
     age: { type: Number },
     height: { type: Number },
     weight: { type: Number },
@@ -46,4 +46,4 @@ userSchema.pre('save', function (next) {
   next();
 });
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('users', userSchema);

@@ -1,74 +1,62 @@
 import {
   Avatar,
   Box,
-  Flex,
-  Link,
-  Image,
   Button,
-  Stack,
-  VStack,
+  Divider,
   Drawer,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  IconButton,
+  Image,
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
-  Divider,
-  DrawerContent,
-  IconButton,
-  useDisclosure,
-  DrawerOverlay,
-  useColorModeValue,
+  Stack,
   Text,
-  useRadio,
+  useColorModeValue,
+  useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
 // Here we have used react-icons package for the icons
-import { AiOutlineTeam, AiOutlineHome } from "react-icons/ai";
-import { BsFolder2, BsCalendarCheck } from "react-icons/bs";
-import { FiMenu } from "react-icons/fi";
-import { RiFlashlightFill } from "react-icons/ri";
-import { GiChewedHeart } from "react-icons/gi";
-import { TiInputCheckedOutline, TiInputChecked } from "react-icons/ti";
-import { CiForkAndKnife } from "react-icons/ci";
-import { BiDumbbell } from "react-icons/bi";
-import { NavItemLink } from "../NavItemLink";
-import LayoutWrapper from "./LayoutWrapper";
-import { NavLink } from "react-router-dom";
 import { useContext } from "react";
+import { BiDumbbell } from "react-icons/bi";
+import { FiMenu } from "react-icons/fi";
+import { GiChewedHeart, GiForkKnifeSpoon } from "react-icons/gi";
+import { TiInputChecked, TiInputCheckedOutline } from "react-icons/ti";
+import { NavLink, useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
+import { NavItemLink } from "../NavItemLink";
 
 export default function Sidebar() {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
-    <Box
-      as="section"
-      bg={useColorModeValue("gray.50", "gray.700")}
-      minH={{ base: 0, md: "100vh" }}
-    >
-      <SidebarContent display={{ base: "none", md: "unset" }} />
+    <Box as="section" minH={{ base: 0, lg: "100vh" }}>
+      <SidebarContent display={{ base: "none", lg: "unset" }} />
       <Drawer isOpen={isOpen} onClose={onClose} placement="left">
         <DrawerOverlay />
         <DrawerContent>
           <SidebarContent w="full" borderRight="none" />
         </DrawerContent>
       </Drawer>
-      <Box ml={{ base: 0, md: 60 }} transition=".3s ease">
+      <Box ml={{ base: 0, lg: 60 }} transition=".3s ease">
         <Flex
           as="header"
           align="center"
           w="full"
           px="4"
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", lg: "none" }}
           borderBottomWidth="1px"
           borderColor={useColorModeValue("inherit", "gray.700")}
           bg={useColorModeValue("soft-primary", "gray.800")}
-          justify={{ base: "space-between", md: "flex-end" }}
+          justify={{ base: "space-between", lg: "flex-end" }}
           boxShadow="lg"
           h="14"
         >
           <IconButton
             aria-label="Menu"
-            display={{ base: "inline-flex", md: "none" }}
+            display={{ base: "inline-flex", lg: "none" }}
             onClick={onOpen}
             icon={<FiMenu />}
             size="md"
@@ -76,12 +64,12 @@ export default function Sidebar() {
         </Flex>
         <Box
           as="main"
-          p={{ base: 0, md: 14 }}
-          minH={{ base: 0, md: "30rem" }}
+          p={{ base: 0, lg: 14 }}
+          minH={{ base: 0, lg: "30rem" }}
           bg={useColorModeValue("auto", "gray.800")}
         >
           <Stack
-            direction={{ base: "column", sm: "row" }}
+            direction={{ base: "column", lg: "row" }}
             alignItems="center"
             justifyContent="center"
             h="100%"
@@ -93,7 +81,8 @@ export default function Sidebar() {
 }
 
 const SidebarContent = ({ ...props }) => {
-  const { user } = useContext(GlobalContext);
+  const { user, logout } = useContext(GlobalContext);
+  let navigate = useNavigate();
   return (
     <Box
       as="nav"
@@ -130,8 +119,8 @@ const SidebarContent = ({ ...props }) => {
             color="black.300"
             aria-label="Main Navigation"
           >
-            <NavItemLink icon={CiForkAndKnife} name="Recetas" href="/recipes" />
-            <NavItemLink icon={BiDumbbell} name="Workout" href="/workouts" />
+            <NavItemLink icon={GiForkKnifeSpoon} name="Recetas" href="/recipes" />
+            <NavItemLink icon={BiDumbbell} name="Workouts" href="/workouts" />
           </Flex>
           <Divider
             bg="white"
@@ -177,10 +166,12 @@ const SidebarContent = ({ ...props }) => {
               <Text fontSize="md">{user?.nickname}</Text>
             </MenuButton>
             <MenuList fontSize={17} zIndex={5555}>
-              <MenuItem as={Link} to="#">
-                My profile
-              </MenuItem>
-              <MenuItem>Logout</MenuItem>
+              <Button w="full" onClick={() => navigate("/perfil/misrecetas")}>
+                Mis Recetas
+              </Button>
+              <Button w="full" onClick={() => logout() & navigate("/login")}>
+                Cerrar sesión
+              </Button>
             </MenuList>
           </Menu>
         </Flex>

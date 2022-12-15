@@ -20,6 +20,9 @@ import Workouts from "./pages/Workouts/Workouts";
 import RequiredAuth from "./components/RequiredAuth";
 import { DescriptCard } from "./components/DescriptCard";
 import RecipeDetails from "./pages/RecipeDetails/RecipeDetails";
+import { MyRecipes } from "./pages/Profile/MyRecipes";
+import { DetailWorkout } from "./components/DetailWorkout";
+import WorkoutDetails from "./pages/WorkoutDetails/WorkoutDetails";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -28,7 +31,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<App />} />
-            <Route index element={<Home />} />
+            <Route
+              index
+              element={
+                <RequiredAuth>
+                  <Home />
+                </RequiredAuth>
+              }
+            />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route
@@ -60,6 +70,22 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               element={
                 <RequiredAuth>
                   <RecipeDetails />
+                </RequiredAuth>
+              }
+            />
+            <Route
+              path="/workouts/detail"
+              element={
+                <RequiredAuth>
+                  <WorkoutDetails />
+                </RequiredAuth>
+              }
+            />
+            <Route
+              path="/perfil/misrecetas"
+              element={
+                <RequiredAuth>
+                  <MyRecipes />
                 </RequiredAuth>
               }
             />

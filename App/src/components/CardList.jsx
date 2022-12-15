@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -7,10 +8,18 @@ import styled from "styled-components";
 
 const StyledCardListWrapper = styled.div`
   max-width: initial;
-  margin-left: initial;
+
+  .slick-arrow {
+    display: none;
+  }
   @media (min-width: 600px) {
     max-width: 90%;
-    margin-left: 20px;
+    padding: 15px 0;
+    margin: auto;
+
+    .slick-arrow {
+      display: block;
+    }
   }
 
   & .card {
@@ -43,7 +52,7 @@ function SamplePrevArrow(props) {
 }
 
 const CardList = (props) => {
-  const { items } = props;
+  const { items, width, heigth, type } = props;
 
   var settings = {
     className: "center",
@@ -52,31 +61,33 @@ const CardList = (props) => {
     infinite: false,
     speed: 500,
     slidesToShow: 4,
-    //slidesToScroll: 5,
+    slidesToScroll: 4,
     initialSlide: 0,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
       {
-        breakpoint: 600,
+        breakpoint: 1400,
         settings: {
-          centerPadding: "60px",
-          nextArrow: null,
-          prevArrow: null,
-          centerMode: true,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1000,
+        settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
+          initialSlide: 2,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          centerPadding: "60px",
-          nextArrow: null,
-          prevArrow: null,
-          centerMode: true,
           slidesToShow: 1,
           slidesToScroll: 1,
+          nextArrow: null,
+          prevArrow: null,
         },
       },
     ],
@@ -85,15 +96,16 @@ const CardList = (props) => {
   return (
     <StyledCardListWrapper>
       <Slider {...settings}>
-        {items.map((item) => (
-          <CardComp
-            key={item._id}
-            className="card"
-            imgSrc={item.image}
-            tags={item.tags}
-            recipe={item}
-          />
-        ))}
+        {items &&
+          items.map((item) => (
+            <CardComp
+              key={item._id}
+              item={item}
+              width={width}
+              heigth={heigth}
+              type={type}
+            />
+          ))}
       </Slider>
     </StyledCardListWrapper>
   );
