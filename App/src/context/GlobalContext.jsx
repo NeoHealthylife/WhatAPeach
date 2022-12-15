@@ -6,9 +6,9 @@ const GlobalContextProvider = ({ children }) => {
   const [homeContent, setHomeContent] = useState("intro");
   const [isLogged, setIsLogged] = useState(false);
 
-  const [recipe, setRecipe] = useState(() => {
-    const localRecipe = sessionStorage.getItem("recipe");
-    const initialValue = JSON.parse(localRecipe);
+  const [item, setItem] = useState(() => {
+    const localItem = sessionStorage.getItem("item");
+    const initialValue = JSON.parse(localItem);
     return initialValue || null;
   });
 
@@ -39,8 +39,8 @@ const GlobalContextProvider = ({ children }) => {
     setJwt,
     user,
     setUser,
-    recipe,
-    setRecipe,
+    item,
+    setItem,
     logout,
   };
 

@@ -1,41 +1,32 @@
 import {
   Avatar,
   Box,
-  Flex,
-  Link,
-  Image,
   Button,
-  Stack,
-  VStack,
+  Divider,
   Drawer,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  IconButton,
+  Image,
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
-  Divider,
-  DrawerContent,
-  IconButton,
-  useDisclosure,
-  DrawerOverlay,
-  useColorModeValue,
+  Stack,
   Text,
-  useRadio,
+  useColorModeValue,
+  useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
 // Here we have used react-icons package for the icons
-import { AiOutlineTeam, AiOutlineHome } from "react-icons/ai";
-import { BsFolder2, BsCalendarCheck } from "react-icons/bs";
-import { FiMenu } from "react-icons/fi";
-import { RiFlashlightFill } from "react-icons/ri";
-import { GiChewedHeart } from "react-icons/gi";
-import { TiInputCheckedOutline, TiInputChecked } from "react-icons/ti";
-import { CiForkAndKnife } from "react-icons/ci";
-import { BiDumbbell } from "react-icons/bi";
-import { NavItemLink } from "../NavItemLink";
-import LayoutWrapper from "./LayoutWrapper";
-import { NavLink } from "react-router-dom";
 import { useContext } from "react";
+import { BiDumbbell } from "react-icons/bi";
+import { FiMenu } from "react-icons/fi";
+import { GiChewedHeart, GiForkKnifeSpoon } from "react-icons/gi";
+import { TiInputChecked, TiInputCheckedOutline } from "react-icons/ti";
+import { NavLink, useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
-import { useNavigate } from "react-router-dom";
+import { NavItemLink } from "../NavItemLink";
 
 export default function Sidebar() {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -128,7 +119,7 @@ const SidebarContent = ({ ...props }) => {
             color="black.300"
             aria-label="Main Navigation"
           >
-            <NavItemLink icon={CiForkAndKnife} name="Recetas" href="/recipes" />
+            <NavItemLink icon={GiForkKnifeSpoon} name="Recetas" href="/recipes" />
             <NavItemLink icon={BiDumbbell} name="Workout" href="/workouts" />
           </Flex>
           <Divider

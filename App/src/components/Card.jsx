@@ -1,31 +1,55 @@
 import {
   Box,
+  Button,
   Center,
   Flex,
   Heading,
-  Image,
   HStack,
   IconButton,
-  Text,
+  Image,
   useColorModeValue,
-  Button,
 } from "@chakra-ui/react";
-import { useState, useContext } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useContext, useEffect, useState } from "react";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import GlobalContext from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import GlobalContext from "../context/GlobalContext";
+import { API } from "../services/API";
 
-const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, node }) => {
-  const { liked, setLiked } = useState(false);
-  const { setRecipe } = useContext(GlobalContext);
+const CardComp = ({ item }) => {
+  const { setItem, user, setUser } = useContext(GlobalContext);
+  const isFavourite = () => !!user.favRecipes.find((id) => id === item._id);
+  // const isFavourite = () => {
+  //   const idReceta = user.favRecipes.find((id) => id === item._id);
+  //   if (idReceta) {
+  //     return true;
+  //   }
+  //   return false;
+  // };
+  const [liked, setLiked] = useState(isFavourite);
+  const userId = user._id;
 
   const navigate = useNavigate();
-  const goToDetail = (recipe) => {
-    setRecipe(recipe);
-    sessionStorage.recipe = JSON.stringify(recipe);
-    //PROBAD CON UN SESSION
+  const goToDetail = (item) => {
+    setItem(item);
+    sessionStorage.item = JSON.stringify(item);
     navigate("/recipes/detail");
+  };
+
+  const addToFav = (recipeId) => {
+    API.patch("/users/addfavrecipe", { userId, recipeId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+    });
+  };
+
+  const deleteToFav = (recipeId) => {
+    API.patch("/users/deletefavrecipe", { userId, recipeId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+    });
   };
 
   return (
@@ -46,8 +70,8 @@ const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, node }) => {
             objectFit="cover"
             h="full"
             w="full"
-            alt={altImg}
-            src={imgSrc}
+            alt={item.title}
+            src={item.image}
           />
           <Heading
             color={"white"}
@@ -57,11 +81,11 @@ const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, node }) => {
             bottom={"0"}
             padding={"1"}
           >
-            {node.title}
+            {item.title}
           </Heading>
         </Box>
         <Box h={"70px"} p={{ base: 1, lg: 2 }}>
-          {tags.map((tag) => (
+          {item.tags.map((tag) => (
             <Box
               key={uuidv4()}
               bg="orange.500"
@@ -77,9 +101,9 @@ const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, node }) => {
               {tag}
             </Box>
           ))}
-          <Text color={"gray.500"} noOfLines={2}>
+          {/* <Text color={"gray.500"} noOfLines={2}>
             {bodyText}
-          </Text>
+          </Text> */}
         </Box>
         <HStack borderTop={"1px"} color="black">
           <Flex
@@ -93,14 +117,14 @@ const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, node }) => {
             <Button
               display={{ base: "none", lg: "inline-block" }}
               variant="secondary"
-              onClick={() => goToDetail(node)}
+              onClick={() => goToDetail(item)}
             >
               Ver detalle
             </Button>
             <Button
               display={{ base: "inline-block", lg: "none" }}
               variant="secondary"
-              onClick={() => goToDetail(node)}
+              onClick={() => goToDetail(item)}
             >
               + Info
             </Button>
@@ -115,11 +139,13 @@ const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, node }) => {
           >
             {liked ? (
               <IconButton
+                onClick={() => deleteToFav(item._id)}
                 variant="primary"
                 icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
               />
             ) : (
               <IconButton
+                onClick={() => addToFav(item._id)}
                 variant="primary"
                 icon={<RiHeart2Line color="red" fontSize={"24px"} />}
               />

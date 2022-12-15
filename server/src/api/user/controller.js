@@ -89,7 +89,7 @@ const loginFromSocialLogin = async (req, res, next) => {
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await User.find().populate('favRecipes');
     return res.json({
       status: 200,
       message: 'Recovered all Users',
@@ -103,7 +103,9 @@ const getUsers = async (req, res, next) => {
 const getUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const userbyid = await User.findById(id);
+    const userbyid = await User.findById(id).populate(
+      'favRecipes favWorkouts toDoRecipes toDoWorkouts completedWorkouts completedRecipes'
+    );
     return res.status(200).json(userbyid);
   } catch (err) {
     return next(err);
@@ -120,22 +122,22 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-const updatetUser = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const user = new User(req.body);
-    user._id = id;
-    const editUser = await User.findByIdAndUpdate(id);
-    return res.status(200).json(editUser);
-  } catch (err) {
-    return next(err);
-  }
-};
+// const updatetUser = async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     const user = new User(req.body);
+//     user._id = id;
+//     const editUser = await User.findByIdAndUpdate(id);
+//     return res.status(200).json(editUser);
+//   } catch (err) {
+//     return next(err);
+//   }
+// };
 
 const addFavRecipe = async (req, res, next) => {
   try {
-    const { userId } = req.body;
-    const { recipeId } = req.body;
+    const { userId, recipeId } = req.body;
+    console.log(req.body);
     const updateUser = await User.findByIdAndUpdate(
       userId,
       {
@@ -143,6 +145,7 @@ const addFavRecipe = async (req, res, next) => {
       },
       { new: true }
     );
+    console.log(updateUser);
     return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
@@ -310,7 +313,7 @@ module.exports = {
   login,
   getUsers,
   getUser,
-  updatetUser,
+  // updatetUser,
   deleteUser,
   addFavRecipe,
   addFavWorkout,

@@ -14,7 +14,7 @@ const { isAdmin } = require('../../middlewares/admin.middlewares');
 
 RecipesRoutes.get('/', [isBasic], getRecipes);
 RecipesRoutes.get('/:id', /*[isBasic], */ getRecipe);
-RecipesRoutes.post('/', [isAdmin], postRecipe);
+RecipesRoutes.post('/', [isBasic], postRecipe);
 RecipesRoutes.patch('/:id', [isAdmin], patchRecipe);
 RecipesRoutes.delete('/:id', [isAdmin], deleteRecipe);
 

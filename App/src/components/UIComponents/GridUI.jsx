@@ -15,14 +15,8 @@ const GridUI = (props) => {
       gap={6}
     >
       {items.map((item) => (
-        <GridItem key={"item"} justifyContent={"center"}>
-          <CardComp
-            key={item._id}
-            className="card"
-            imgSrc={item.image}
-            tags={item.tags}
-            node={item}
-          />
+        <GridItem key={item._id} justifyContent={"center"}>
+          <CardComp key={item._id} className="card" item={item} />
         </GridItem>
       ))}
     </Grid>

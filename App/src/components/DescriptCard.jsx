@@ -16,18 +16,38 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 import { Navigate } from "react-router-dom";
+import { API } from "../services/API";
 
 export const DescriptCard = () => {
-  const { liked, setLiked } = useContext(GlobalContext);
-  const { recipe } = useContext(GlobalContext);
+  const { item, user, setUser } = useContext(GlobalContext);
+  const isFavourite = () => !!user.favRecipes.find((id) => id === item._id);
+
+  const [liked, setLiked] = useState(isFavourite);
+  const userId = user._id;
+
+  const addToFav = (recipeId) => {
+    API.patch("/users/addfavrecipe", { userId, recipeId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+    });
+  };
+
+  const deleteToFav = (recipeId) => {
+    API.patch("/users/deletefavrecipe", { userId, recipeId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+    });
+  };
 
   return (
     <>
-      {recipe !== null ? (
+      {item !== null ? (
         <Center py={2}>
           <Box
             h="100%"
@@ -37,13 +57,13 @@ export const DescriptCard = () => {
             p={{ base: "10px", md: "20px" }}
           >
             <Box w="80%">
-              <Box key={recipe._id} h={"45vh"} alignContent="center">
+              <Box key={item._id} h={"45vh"} alignContent="center">
                 <Image
                   borderRadius="10px"
                   objectFit="cover"
                   h="full"
-                  alt={recipe.title}
-                  src={recipe.image}
+                  alt={item.title}
+                  src={item.image}
                 />
               </Box>
               <HStack mt="1rem">
@@ -67,11 +87,13 @@ export const DescriptCard = () => {
                 >
                   {liked ? (
                     <IconButton
+                      onClick={() => deleteToFav(item._id)}
                       variant="primary"
                       icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
                     />
                   ) : (
                     <IconButton
+                      onClick={() => addToFav(item._id)}
                       variant="primary"
                       icon={<RiHeart2Line color="red" fontSize={"24px"} />}
                     />
@@ -86,10 +108,10 @@ export const DescriptCard = () => {
                 mb="1.5rem"
                 textTransform="lowercase"
               >
-                {recipe.title}
+                {item.title}
               </Heading>
-              {recipe.tags.length &&
-                recipe.tags.map((tag) => (
+              {item.tags.length &&
+                item.tags.map((tag) => (
                   <Box
                     key={uuidv4()}
                     bg="orange.500"
@@ -119,9 +141,9 @@ export const DescriptCard = () => {
               <Box width="65%">
                 <Heading variant="H2">Instrucciones:</Heading>
                 <OrderedList mt="1rem">
-                  {recipe.recipe.length &&
-                    recipe.recipe.map((num) => (
-                      <ListItem mb="1rem" fontSize="md" gap="8">
+                  {item.recipe.length &&
+                    item.recipe.map((num, index) => (
+                      <ListItem key={`paso_${index}`} mb="1rem" fontSize="md" gap="8">
                         {num}
                       </ListItem>
                     ))}
@@ -130,12 +152,12 @@ export const DescriptCard = () => {
               <Box display="block">
                 <Box display="flex" mb="2rem">
                   <Heading variant="H2">Tiempo:</Heading>
-                  <Text fontSize="md"> {recipe.time} min</Text>
+                  <Text fontSize="md"> {item.time} min</Text>
                 </Box>
                 <Box>
                   <Heading variant="H2">Ingredientes (4 pers):</Heading>
                   <UnorderedList mt="1rem">
-                    {recipe.ingredients.map((num) => (
+                    {item.ingredients.map((num) => (
                       <ListItem mb="1rem" fontSize="md" key={uuidv4()}>
                         {num}
                       </ListItem>
