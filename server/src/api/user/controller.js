@@ -134,8 +134,8 @@ const deleteUser = async (req, res, next) => {
 
 const addFavRecipe = async (req, res, next) => {
   try {
-    const { userId } = req.body;
-    const { recipeId } = req.body;
+    const { userId, recipeId } = req.body;
+    console.log(req.body)
     const updateUser = await User.findByIdAndUpdate(
       userId,
       {
@@ -143,6 +143,7 @@ const addFavRecipe = async (req, res, next) => {
       },
       { new: true }
     );
+    console.log(updateUser)
     return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
