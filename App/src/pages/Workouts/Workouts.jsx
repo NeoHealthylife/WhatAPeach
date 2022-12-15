@@ -17,7 +17,7 @@ const Workouts = () => {
   return (
     <LayoutWrapper>
       <Heading variant="H1">Workouts</Heading>
-      <GridUI items={workouts} />
+      <GridUI items={workouts} type="workout" />
     </LayoutWrapper>
   );
 };

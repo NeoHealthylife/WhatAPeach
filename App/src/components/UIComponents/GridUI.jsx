@@ -3,7 +3,7 @@ import CardComp from "../Card";
 import { Grid, GridItem } from "@chakra-ui/react";
 
 const GridUI = (props) => {
-  const { items } = props;
+  const { items, type } = props;
   return (
     <Grid
       m="20px"
@@ -16,7 +16,7 @@ const GridUI = (props) => {
     >
       {items.map((item) => (
         <GridItem key={item._id} justifyContent={"center"}>
-          <CardComp key={item._id} className="card" item={item} />
+          <CardComp key={item._id} className="card" item={item} type={type} />
         </GridItem>
       ))}
     </Grid>
