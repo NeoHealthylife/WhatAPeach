@@ -29,7 +29,13 @@ export const DescriptCard = () => {
     <>
       {recipe !== null ? (
         <Center py={2}>
-          <Box h="100%" margin="1rem 1rem">
+          <Box
+            h="100%"
+            margin={{ base: 0, md: "1rem" }}
+            bg="white"
+            borderRadius="20px"
+            p={{ base: "10px", md: "20px" }}
+          >
             <Box w="80%">
               <Box key={recipe._id} h={"45vh"} alignContent="center">
                 <Image
@@ -108,6 +114,7 @@ export const DescriptCard = () => {
               p="2"
               mt="2rem"
               justifyContent="space-between"
+              flexDirection={{ base: "column-reverse", md: "row" }}
             >
               <Box width="65%">
                 <Heading variant="H2">Instrucciones:</Heading>

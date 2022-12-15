@@ -10,7 +10,7 @@ const StyledMainWrapper = styled.div`
 
 const RightContentWrapper = styled.div`
   width: 100%;
-  @media (min-width: 700px) {
+  @media (min-width: 991px) {
     position: absolute;
     width: calc(100% - var(--chakra-sizes-60));
     top: 0;
@@ -19,6 +19,7 @@ const RightContentWrapper = styled.div`
 `;
 
 const StyledMainContent = styled.div`
+  box-sizing: content-box;
   padding: 10px;
   min-height: 100vh;
 
