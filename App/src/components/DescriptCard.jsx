@@ -20,10 +20,30 @@ import { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 import { Navigate } from "react-router-dom";
+import { API } from "../services/API";
 
 export const DescriptCard = () => {
-  const [liked, setLiked] = useState(false);
-  const { item } = useContext(GlobalContext);
+  const { item, user, setUser } = useContext(GlobalContext);
+  const isFavourite = () => !!user.favRecipes.find((id) => id === item._id);
+
+  const [liked, setLiked] = useState(isFavourite);
+  const userId = user._id;
+
+  const addToFav = (recipeId) => {
+    API.patch("/users/addfavrecipe", { userId, recipeId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+    });
+  };
+
+  const deleteToFav = (recipeId) => {
+    API.patch("/users/deletefavrecipe", { userId, recipeId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+    });
+  };
 
   return (
     <>
@@ -67,11 +87,13 @@ export const DescriptCard = () => {
                 >
                   {liked ? (
                     <IconButton
+                      onClick={() => deleteToFav(item._id)}
                       variant="primary"
                       icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
                     />
                   ) : (
                     <IconButton
+                      onClick={() => addToFav(item._id)}
                       variant="primary"
                       icon={<RiHeart2Line color="red" fontSize={"24px"} />}
                     />
@@ -120,8 +142,8 @@ export const DescriptCard = () => {
                 <Heading variant="H2">Instrucciones:</Heading>
                 <OrderedList mt="1rem">
                   {item.recipe.length &&
-                    item.recipe.map((num) => (
-                      <ListItem mb="1rem" fontSize="md" gap="8">
+                    item.recipe.map((num, index) => (
+                      <ListItem key={`paso_${index}`} mb="1rem" fontSize="md" gap="8">
                         {num}
                       </ListItem>
                     ))}

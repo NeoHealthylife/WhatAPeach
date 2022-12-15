@@ -18,13 +18,16 @@ import { API } from "../services/API";
 
 const CardComp = ({ item }) => {
   const { setItem, user, setUser } = useContext(GlobalContext);
-  const isLiked = () => !!user.favRecipes.find((id) => id === item._id);
-  const [liked, setLiked] = useState(isLiked);
+  const isFavourite = () => !!user.favRecipes.find((id) => id === item._id);
+  // const isFavourite = () => {
+  //   const idReceta = user.favRecipes.find((id) => id === item._id);
+  //   if (idReceta) {
+  //     return true;
+  //   }
+  //   return false;
+  // };
+  const [liked, setLiked] = useState(isFavourite);
   const userId = user._id;
-
-  useEffect(() => {
-    setLiked(isLiked);
-  }, [user, setUser]);
 
   const navigate = useNavigate();
   const goToDetail = (item) => {

@@ -89,7 +89,7 @@ const loginFromSocialLogin = async (req, res, next) => {
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = await User.find().populate("favRecipes")
+    const users = await User.find().populate('favRecipes');
     return res.json({
       status: 200,
       message: 'Recovered all Users',
@@ -103,7 +103,9 @@ const getUsers = async (req, res, next) => {
 const getUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const userbyid = await User.findById(id).populate("favRecipes")
+    const userbyid = await User.findById(id).populate(
+      'favRecipes favWorkouts toDoRecipes toDoWorkouts completedWorkouts completedRecipes'
+    );
     return res.status(200).json(userbyid);
   } catch (err) {
     return next(err);
@@ -135,7 +137,7 @@ const deleteUser = async (req, res, next) => {
 const addFavRecipe = async (req, res, next) => {
   try {
     const { userId, recipeId } = req.body;
-    console.log(req.body)
+    console.log(req.body);
     const updateUser = await User.findByIdAndUpdate(
       userId,
       {
@@ -143,7 +145,7 @@ const addFavRecipe = async (req, res, next) => {
       },
       { new: true }
     );
-    console.log(updateUser)
+    console.log(updateUser);
     return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
