@@ -95,7 +95,9 @@ const CardComp = ({ item, type }) => {
             color={"white"}
             fontSize={"l"}
             position={"absolute"}
-            background={"rgba(0,0,0,0.5)"}
+            w="full"
+            background="secondary"
+            opacity="80%"
             bottom={"0"}
             padding={"1"}
           >
