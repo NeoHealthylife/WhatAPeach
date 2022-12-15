@@ -16,7 +16,7 @@ import { v4 as uuidv4 } from "uuid";
 import GlobalContext from "../context/GlobalContext";
 import { API } from "../services/API";
 
-const CardComp = ({ item, type }) => {
+const CardComp = ({ item, type, width, heigth }) => {
   const { setItem, user, setUser } = useContext(GlobalContext);
   const isFavourite = () => {
     if (type === "recipe") {
@@ -78,8 +78,8 @@ const CardComp = ({ item, type }) => {
         bg="white"
         border={"1px"}
         borderColor="black"
-        h="360px"
-        w="250px"
+        h={heigth}
+        w={width}
         boxShadow={useColorModeValue("3px 6px 0 #fe9166", "6px 6px 0 cyan")}
       >
         <Box h={"230px"} borderBottom={"1px"} borderColor="black" position={"relative"}>
