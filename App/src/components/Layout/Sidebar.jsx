@@ -53,7 +53,7 @@ export default function Sidebar() {
           <SidebarContent w="full" borderRight="none" />
         </DrawerContent>
       </Drawer>
-      <Box ml={{ base: 0, lg: 60 }} transition=".3s ease">
+      <Box ml={{ base: 0, md: 60 }} transition=".3s ease">
         <Flex
           as="header"
           align="center"
