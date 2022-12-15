@@ -50,7 +50,7 @@ const Recipes = () => {
   return (
     <LayoutWrapper>
       <Heading variant="H1">Recetas</Heading>
-      <GridUI items={recipes} />
+      <GridUI items={recipes} type="recipe" />
     </LayoutWrapper>
   );
 };

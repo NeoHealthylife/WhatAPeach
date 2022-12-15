@@ -193,7 +193,7 @@ const deleteFavWorkout = async (req, res, next) => {
     const updateUser = await User.findByIdAndUpdate(
       userId,
       {
-        $pull: { favWorkout: workoutId },
+        $pull: { favWorkouts: workoutId },
       },
       { new: true }
     );

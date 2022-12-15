@@ -16,16 +16,16 @@ import { v4 as uuidv4 } from "uuid";
 import GlobalContext from "../context/GlobalContext";
 import { API } from "../services/API";
 
-const CardComp = ({ item }) => {
+const CardComp = ({ item, type }) => {
   const { setItem, user, setUser } = useContext(GlobalContext);
-  const isFavourite = () => !!user.favRecipes.find((id) => id === item._id);
-  // const isFavourite = () => {
-  //   const idReceta = user.favRecipes.find((id) => id === item._id);
-  //   if (idReceta) {
-  //     return true;
-  //   }
-  //   return false;
-  // };
+  const isFavourite = () => {
+    if (type === "recipe") {
+      return !!user.favRecipes.find((id) => id === item._id);
+    }
+    if (type === "workout") {
+      return !!user.favWorkouts.find((id) => id === item._id);
+    }
+  };
   const [liked, setLiked] = useState(isFavourite);
   const userId = user._id;
 
@@ -33,20 +33,38 @@ const CardComp = ({ item }) => {
   const goToDetail = (item) => {
     setItem(item);
     sessionStorage.item = JSON.stringify(item);
-    navigate("/recipes/detail");
+    if (type === "recipe") {
+      navigate("/recipes/detail");
+    }
+    if (type === "workout") {
+      navigate("/workouts/detail");
+    }
   };
 
-  const addToFav = (recipeId) => {
-    API.patch("/users/addfavrecipe", { userId, recipeId }).then((response) => {
+  const addToFav = (id) => {
+    const config = {
+      recipe: { url: "/users/addfavrecipe", data: { userId, recipeId: id } },
+      workout: { url: "/users/addfavworkout", data: { userId, workoutId: id } },
+    };
+
+    API.patch(config[type].url, config[type].data).then((response) => {
       const editedUser = response.data;
+      console.log(editedUser);
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
     });
   };
 
-  const deleteToFav = (recipeId) => {
-    API.patch("/users/deletefavrecipe", { userId, recipeId }).then((response) => {
+  const deleteToFav = (id) => {
+    const config = {
+      recipe: { url: "/users/deletefavrecipe", data: { userId, recipeId: id } },
+      workout: { url: "/users/deletefavworkout", data: { userId, workoutId: id } },
+    };
+
+    API.patch(config[type].url, config[type].data).then((response) => {
       const editedUser = response.data;
+      console.log(editedUser);
+
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
     });
