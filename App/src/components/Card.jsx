@@ -29,11 +29,9 @@ const CardComp = ({ imgSrc, altImg, headingCard, bodyText, tags, node }) => {
   };
 
   return (
-    <Center py={6}>
+    <Center>
       <Box
         rounded={"lg"}
-        my={5}
-        mx={5}
         overflow={"hidden"}
         bg="white"
         border={"1px"}

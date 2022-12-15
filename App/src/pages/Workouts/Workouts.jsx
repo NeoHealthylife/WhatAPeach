@@ -4,7 +4,7 @@ import { useEffect, useState, createContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { API } from "../../services/API";
 import { Heading } from "@chakra-ui/react";
-import CardList from "../../components/CardList";
+import GridUI from "../../components/UIComponents/GridUI";
 
 const Workouts = () => {
   const [workouts, setWorkout] = useState([]);
@@ -17,7 +17,7 @@ const Workouts = () => {
   return (
     <LayoutWrapper>
       <Heading variant="H1">Workouts</Heading>
-      <CardList items={workouts} />
+      <GridUI items={workouts} />
     </LayoutWrapper>
   );
 };

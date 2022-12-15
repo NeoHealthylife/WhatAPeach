@@ -5,7 +5,7 @@ import { Heading, Center, Flex } from "@chakra-ui/react";
 import CardList from "../../components/CardList";
 import { API } from "../../services/API";
 import GlobalContext from "../../context/GlobalContext";
-
+import GridUI from "../../components/UIComponents/GridUI";
 const recipesCategoriesByDiet = {
   vegetarian: [
     "vegetariano",
@@ -53,7 +53,7 @@ const Recipes = () => {
   return (
     <LayoutWrapper>
       <Heading variant="H1">Recetas</Heading>
-      <CardList items={recipes} />
+      <GridUI items={recipes} />
     </LayoutWrapper>
   );
 };
