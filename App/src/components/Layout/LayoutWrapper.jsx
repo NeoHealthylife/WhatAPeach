@@ -8,26 +8,24 @@ const StyledMainWrapper = styled.div`
   max-width: 100vw;
 `;
 
-const StyledMainContent = styled.div`
-  padding: 10px;
-  min-height: 100vh;
-
+const RightContentWrapper = styled.div`
+  width: 100%;
   @media (min-width: 991px) {
     position: absolute;
-    top: var(--chakra-sizes-20);
-    padding: 20px;
     width: calc(100% - var(--chakra-sizes-60));
     top: 0;
     right: 0;
   }
 `;
 
-const StyledFooter = styled.div`
-  width: 100%;
+const StyledMainContent = styled.div`
+  box-sizing: content-box;
+  padding: 10px;
+  min-height: 100vh;
 
   @media (min-width: 991px) {
-    width: calc(100% - var(--chakra-sizes-60));
-    margin-left: var(--chakra-sizes-60);
+    top: var(--chakra-sizes-20);
+    padding: 20px;
   }
 `;
 
@@ -35,11 +33,10 @@ const LayoutWrapper = (props) => {
   return (
     <StyledMainWrapper>
       <Sidebar />
-      <StyledMainContent>{props.children}</StyledMainContent>
-
-      <StyledFooter>
+      <RightContentWrapper>
+        <StyledMainContent>{props.children}</StyledMainContent>
         <Footer />
-      </StyledFooter>
+      </RightContentWrapper>
     </StyledMainWrapper>
   );
 };

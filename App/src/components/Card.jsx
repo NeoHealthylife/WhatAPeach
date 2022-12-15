@@ -1,39 +1,58 @@
 import {
   Box,
+  Button,
   Center,
   Flex,
   Heading,
-  Image,
   HStack,
   IconButton,
-  Text,
+  Image,
   useColorModeValue,
-  Button,
 } from "@chakra-ui/react";
-import { useState, useContext } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useContext, useEffect, useState } from "react";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import GlobalContext from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
-import { NavItemLink } from "./NavItemLink";
+import { v4 as uuidv4 } from "uuid";
+import GlobalContext from "../context/GlobalContext";
+import { API } from "../services/API";
 
 const CardComp = ({ item }) => {
-  const { liked, setLiked } = useState(false);
-  const { setItem } = useContext(GlobalContext);
+  const { setItem, user, setUser } = useContext(GlobalContext);
+  const isLiked = () => !!user.favRecipes.find((id) => id === item._id);
+  const [liked, setLiked] = useState(isLiked);
+  const userId = user._id;
+
+  useEffect(() => {
+    setLiked(isLiked);
+  }, [user, setUser]);
 
   const navigate = useNavigate();
   const goToDetail = (item) => {
     setItem(item);
     sessionStorage.item = JSON.stringify(item);
-    navigate(`/recipes/detail`);
+    navigate("/recipes/detail");
+  };
+
+  const addToFav = (recipeId) => {
+    API.patch("/users/addfavrecipe", { userId, recipeId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+    });
+  };
+
+  const deleteToFav = (recipeId) => {
+    API.patch("/users/deletefavrecipe", { userId, recipeId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+    });
   };
 
   return (
-    <Center py={6}>
+    <Center>
       <Box
         rounded={"lg"}
-        my={5}
-        mx={5}
         overflow={"hidden"}
         bg="white"
         border={"1px"}
@@ -117,11 +136,13 @@ const CardComp = ({ item }) => {
           >
             {liked ? (
               <IconButton
+                onClick={() => deleteToFav(item._id)}
                 variant="primary"
                 icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
               />
             ) : (
               <IconButton
+                onClick={() => addToFav(item._id)}
                 variant="primary"
                 icon={<RiHeart2Line color="red" fontSize={"24px"} />}
               />
