@@ -1,7 +1,7 @@
 export const foodChoices = [
   { label: "Vegetariana", value: "vegetarian" },
   { label: "Vegana", value: "vegan" },
-  { label: "Normal", value: "normal" },
+  { label: "Onmívora", value: "eat all" },
 ];
 export const statusChoices = [
   { label: "Baja forma", value: "low" },

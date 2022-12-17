@@ -31,6 +31,7 @@ export const DescriptCard = () => {
   const isCompleted = () => !!user.completedRecipes.find((id) => id === item._id);
   const [completed, setCompleted] = useState(isCompleted);
   const userId = user._id;
+  
 
   const addToFav = (recipeId) => {
     API.patch("/users/addfavrecipe", { userId, recipeId }).then((response) => {

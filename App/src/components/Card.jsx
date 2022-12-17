@@ -16,10 +16,10 @@ import { v4 as uuidv4 } from "uuid";
 import GlobalContext from "../context/GlobalContext";
 import { API } from "../services/API";
 
-const CardComp = ({ item, type, width, heigth }) => {
+const CardComp = ({ item, type, width, heigth, setChangeValue, section}) => {
   const { setItem, user, setUser } = useContext(GlobalContext);
   const isFavourite = () => {
-    if (type === "recipe") {
+    if (type === "recipes") {
       return !!user.favRecipes.find((id) => id === item._id);
     }
     if (type === "workout") {
@@ -52,6 +52,7 @@ const CardComp = ({ item, type, width, heigth }) => {
       console.log(editedUser);
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      setChangeValue(JSON.stringify(editedUser))
     });
   };
 
@@ -67,6 +68,7 @@ const CardComp = ({ item, type, width, heigth }) => {
 
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      setChangeValue(JSON.stringify(editedUser))
     });
   };
 
@@ -90,6 +92,7 @@ const CardComp = ({ item, type, width, heigth }) => {
             w="full"
             alt={item.title}
             src={item.image}
+            borderRadius="8px"
           />
           <Heading
             color={"white"}
@@ -149,7 +152,8 @@ const CardComp = ({ item, type, width, heigth }) => {
               + Info
             </Button>
           </Flex>
-          <Flex
+        {section === "favorite" ?  
+            <Flex
             p={1}
             alignItems="center"
             justifyContent={"space-between"}
@@ -171,6 +175,8 @@ const CardComp = ({ item, type, width, heigth }) => {
               />
             )}
           </Flex>
+          : null }
+          
         </HStack>
       </Box>
     </Center>

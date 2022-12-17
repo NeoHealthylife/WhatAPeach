@@ -8,7 +8,7 @@ export const myTheme = extendTheme ({
       "primary": '#FF562d',
       "soft-primary": "#fe9166",
       "secondary": '#024b42',
-      "soft-secondary": '#b31212',
+      "soft-secondary": '#12b396',
       "dark": "#100102",
       "sof-dark": "#4B1E19"
     },
