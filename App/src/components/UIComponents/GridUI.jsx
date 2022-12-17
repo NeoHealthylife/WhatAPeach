@@ -3,7 +3,7 @@ import CardComp from "../Card";
 import { Grid, GridItem } from "@chakra-ui/react";
 
 const GridUI = (props) => {
-  const { items, type } = props;
+  const { items, type, section } = props;
   return (
     <Grid
       m="20px"
@@ -23,6 +23,7 @@ const GridUI = (props) => {
             className="card"
             item={item}
             type={type}
+            section={section}
           />
         </GridItem>
       ))}

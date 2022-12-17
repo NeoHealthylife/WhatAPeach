@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
     weight: { type: Number },
     diet: {
       type: String,
-      enum: ['vegetarian', 'vegan', 'normal'],
+      enum: ['vegetarian', 'vegan', 'eat all'],
     },
     status: { type: String, enum: ['low', 'medium', 'high'] },
     target: {
