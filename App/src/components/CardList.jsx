@@ -16,8 +16,6 @@ const StyledCardListWrapper = styled.div`
     max-width: 90%;
     padding: 18px 0;
     margin: auto;
-    
-    
 
     .slick-arrow {
       display: block;
@@ -29,32 +27,39 @@ const StyledCardListWrapper = styled.div`
   }
 `;
 
+const StyledArrow = styled.div`
+  ::before {
+    color: whitesmoke;
+  }
+`;
+
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
+
   return (
-    <div className={className} style={{ background: "#fff" }} onClick={onClick}>
+    <StyledArrow className={className} onClick={onClick}>
       <img
         style={{ width: "20px" }}
         src="https://www.pngfind.com/pngs/m/302-3023323_arrow-pointing-to-right-comments-right-arrow-png.png"
       />
-    </div>
+    </StyledArrow>
   );
 }
 
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
   return (
-    <div className={className} style={{ background: "#fff" }} onClick={onClick}>
+    <StyledArrow className={className} onClick={onClick}>
       <img
         style={{ width: "20px" }}
         src="https://toppng.com/uploads/preview/arrow-pointing-to-the-left-115501167743epfu1fapc.png"
       />
-    </div>
+    </StyledArrow>
   );
 }
 
 const CardList = (props) => {
-  const { items, width, heigth, type, setChangeValue,  section } = props;
+  const { items, width, heigth, type, setChangeValue, section } = props;
 
   var settings = {
     className: "center",
@@ -101,8 +106,8 @@ const CardList = (props) => {
         {items &&
           items.map((item) => (
             <CardComp
-            section={section}
-            setChangeValue={setChangeValue}
+              section={section}
+              setChangeValue={setChangeValue}
               key={item._id}
               item={item}
               width={width}

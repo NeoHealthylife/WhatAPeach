@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap'); 
+
 
 *{
   font-family: 'Poppins', sans-serif;
+  color: #384D62;
+}
+
+h1 {
+
+  font-family: "Pacifico", cursive;
+  
+}
+
+h2{
+  font-size: medium;
 }

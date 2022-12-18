@@ -16,7 +16,7 @@ import { v4 as uuidv4 } from "uuid";
 import GlobalContext from "../context/GlobalContext";
 import { API } from "../services/API";
 
-const CardComp = ({ item, type, width, heigth, setChangeValue, section}) => {
+const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
   const { setItem, user, setUser } = useContext(GlobalContext);
   const isFavourite = () => {
     if (type === "recipes") {
@@ -52,7 +52,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section}) => {
       console.log(editedUser);
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
-      setChangeValue(JSON.stringify(editedUser))
+      setChangeValue(JSON.stringify(editedUser));
     });
   };
 
@@ -68,7 +68,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section}) => {
 
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
-      setChangeValue(JSON.stringify(editedUser))
+      setChangeValue(JSON.stringify(editedUser));
     });
   };
 
@@ -152,31 +152,30 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section}) => {
               + Info
             </Button>
           </Flex>
-        {section === "favorite" ?  
+          {section === "favorite" ? (
             <Flex
-            p={1}
-            alignItems="center"
-            justifyContent={"space-between"}
-            borderLeft={"1px"}
-            cursor="pointer"
-            onClick={() => setLiked(!liked)}
-          >
-            {liked ? (
-              <IconButton
-                onClick={() => deleteToFav(item._id)}
-                variant="primary"
-                icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
-              />
-            ) : (
-              <IconButton
-                onClick={() => addToFav(item._id)}
-                variant="primary"
-                icon={<RiHeart2Line color="red" fontSize={"24px"} />}
-              />
-            )}
-          </Flex>
-          : null }
-          
+              p={1}
+              alignItems="center"
+              justifyContent={"space-between"}
+              borderLeft={"1px"}
+              cursor="pointer"
+              onClick={() => setLiked(!liked)}
+            >
+              {liked ? (
+                <IconButton
+                  onClick={() => deleteToFav(item._id)}
+                  variant="primary"
+                  icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
+                />
+              ) : (
+                <IconButton
+                  onClick={() => addToFav(item._id)}
+                  variant="primary"
+                  icon={<RiHeart2Line color="red" fontSize={"24px"} />}
+                />
+              )}
+            </Flex>
+          ) : null}
         </HStack>
       </Box>
     </Center>
