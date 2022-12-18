@@ -8,6 +8,8 @@ const GlobalContextProvider = ({ children }) => {
   const [interruptor, setInterruptor] = useState(false);
   const [homeContent, setHomeContent] = useState("intro");
 
+  const [activePage, setActivePage] = useState("");
+
   const [item, setItem] = useState(() => {
     const localItem = sessionStorage.getItem("item");
     const initialValue = JSON.parse(localItem);
@@ -64,6 +66,8 @@ const GlobalContextProvider = ({ children }) => {
     setItem,
     logout,
     showToast,
+    activePage,
+    setActivePage,
   };
 
   return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>;
