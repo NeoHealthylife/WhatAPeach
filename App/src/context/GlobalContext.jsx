@@ -4,7 +4,6 @@ const GlobalContext = createContext();
 const GlobalContextProvider = ({ children }) => {
   const [interruptor, setInterruptor] = useState(false);
   const [homeContent, setHomeContent] = useState("intro");
-  const [isLogged, setIsLogged] = useState(false);
 
   const [item, setItem] = useState(() => {
     const localItem = sessionStorage.getItem("item");
@@ -22,6 +21,14 @@ const GlobalContextProvider = ({ children }) => {
     const initialValue = JSON.parse(savedUser);
     return initialValue || null;
   });
+  //IsLogged no funcionaba y el dashboard no se pintaba en home porque el UseState estaba seteado en false
+  const [isLogged, setIsLogged] = useState(() => {
+    const savedUser = localStorage.getItem("user");
+    const initialValue = JSON.parse(savedUser);
+
+    return user || initialValue;
+  });
+
   const logout = () => {
     setUser(null);
     setJwt(null);
