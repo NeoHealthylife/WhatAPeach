@@ -32,7 +32,7 @@ const Login = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const toast = useToast();
-  const { setJwt, setUser } = useContext(GlobalContext);
+  const { setJwt, setUser, setIsLogged } = useContext(GlobalContext);
   const methods = useForm();
   const navigate = useNavigate();
 
@@ -63,6 +63,7 @@ const Login = () => {
           localStorage.setItem("user", JSON.stringify(res.data.user));
           setJwt(res.data.token);
           setUser(res.data.user);
+          setIsLogged(true);
           navigate("/");
         }
       })

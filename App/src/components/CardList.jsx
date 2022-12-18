@@ -27,27 +27,34 @@ const StyledCardListWrapper = styled.div`
   }
 `;
 
+const StyledArrow = styled.div`
+  ::before {
+    color: whitesmoke;
+  }
+`;
+
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
+
   return (
-    <div className={className} style={{ background: "#fff" }} onClick={onClick}>
+    <StyledArrow className={className} onClick={onClick}>
       <img
         style={{ width: "20px" }}
         src="https://www.pngfind.com/pngs/m/302-3023323_arrow-pointing-to-right-comments-right-arrow-png.png"
       />
-    </div>
+    </StyledArrow>
   );
 }
 
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
   return (
-    <div className={className} style={{ background: "#fff" }} onClick={onClick}>
+    <StyledArrow className={className} onClick={onClick}>
       <img
         style={{ width: "20px" }}
         src="https://toppng.com/uploads/preview/arrow-pointing-to-the-left-115501167743epfu1fapc.png"
       />
-    </div>
+    </StyledArrow>
   );
 }
 

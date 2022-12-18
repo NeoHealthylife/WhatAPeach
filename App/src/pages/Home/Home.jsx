@@ -6,16 +6,9 @@ import Dashboard from "../Dashboard/Dashboard";
 const Home = () => {
   const { isLogged } = useContext(GlobalContext);
 
-  const exampleOptions = [
-    { value: "fruta", label: "Fruta" },
-    { value: "hidratos", label: "Hidratos" },
-    { value: "carnes", label: "Carnes" },
-  ];
-
-  const filtrar = () => {};
+  /* const filtrar = () => {};*/
 
   return (
-    //meter layout de la pagina creado con styled
     <LayoutWrapper>
       <div className="HomeDiv">{isLogged && <Dashboard />}</div>
     </LayoutWrapper>

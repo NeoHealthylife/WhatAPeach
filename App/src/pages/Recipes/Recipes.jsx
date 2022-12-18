@@ -14,60 +14,20 @@ import {
 import { API } from "../../services/API";
 import GridUI from "../../components/UIComponents/GridUI";
 import GlobalContext from "../../context/GlobalContext";
-import { outlinedClasses } from "./CheckboxStyles";
 import "./styles.css";
 import { FaCheckDouble } from "react-icons/fa";
 import UISpan from "../../components/UIComponents/UISpan";
-
-// const recipesCategoriesByDiet = {
-//   vegetarian: [
-//     "vegetariano",
-//     "vegano",
-//     "vegan",
-//     "vegetarian",
-//     "ensaladas",
-//     "postres",
-//     "hidratos de carbono",
-//   ],
-//   vegan: ["vegan", "vegano", "ensaladas", "proteinas", "hidratos de carbono", "postres"],
-//   normal: [
-//     "carne",
-//     "pescado",
-//     "vegetariano",
-//     "vegano",
-//     "proteinas",
-//     "hidratos de carbono",
-//     "postres",
-//   ],
-// };
-
-// const recipesCategoriesByTarget = {
-//   "lose weight": ["verduras", "vegano", "proteinas"],
-//   "build muscle": [
-//     "vegetariano",
-//     "vegano",
-//     "hidratos de carbono",
-//     "proteinas",
-//     "carne",
-//     "pescado",
-//   ],
-//   definition: ["verduras", "proteinas", "carne", "pescado", "ensaladas"],
-// };
+import UIInput from "../../components/UIComponents/UIInput";
+import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
 
 const tags = ["lose weight", "vegetarian", "vegan", "eat all", "verduras", "pescado"];
-
-function searchStringInArray(str, strArray) {
-  for (var j = 0; j < strArray.length; j++) {
-    if (strArray[j].includes(str)) return true;
-  }
-  return false;
-}
 
 const Recipes = () => {
   const { user } = useContext(GlobalContext);
   const [recipes, setRecipes] = useState([]);
   const [activatedTags, setActivatedTags] = useState([user.diet, user.target]);
   const [showContent, setShowContent] = useState([]);
+  const [search, setSearch] = useState("");
   const [filters, setFilters] = useState([user.diet, user.target]);
   const [ingredients, setIngredients] = useState({
     Huevo: false,
@@ -131,8 +91,12 @@ const Recipes = () => {
       .filter((key) => ingredients[key] === true)
       .map((ing) => ing.toLowerCase());
 
-    if (filters.length || activeIngredients.length) {
-      const filteredByTag = recipes.filter((recipe) => {
+    if (filters.length || activeIngredients.length || search !== "") {
+      const filteredBySearch = recipes.filter((recipe) => {
+        return recipe.title.toLowerCase().includes(search.toLocaleLowerCase());
+      });
+
+      const filteredByDiet = recipes.filter((recipe) => {
         return recipe.tags.includes(filters[0]) && recipe.tags.includes(filters[1]);
       });
 
@@ -140,17 +104,27 @@ const Recipes = () => {
         return recipe.nutrients.some((r) => activeIngredients.indexOf(r) >= 0);
       });
 
-      const finalRecipes = [...new Set([...filteredByTag, ...filteredByNutrients])];
-      setShowContent(finalRecipes);
+      const rawFinalRecipes = [...new Set([...filteredByDiet, ...filteredByNutrients])];
+      const finalRecipes = rawFinalRecipes.length ? rawFinalRecipes : recipes;
+
+      const resultRecipes = filteredBySearch.filter((el) => finalRecipes.includes(el));
+
+      setShowContent(resultRecipes);
     } else {
       setShowContent(recipes);
     }
-  }, [filters, recipes, activatedTags, ingredients]);
+  }, [filters, recipes, activatedTags, ingredients, search]);
 
   return (
     <LayoutWrapper>
       <Heading variant="H1">Recetas</Heading>
-      <Box display="flex" alignItems="center" justifyContent="center" p={4}>
+      <Box alignItems="center" justifyContent="center" p={4}>
+        <Stack>
+          <UIInput
+            placeholder="Buscar recetas"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </Stack>
         <Stack
           display="flex"
           flexDirection="row"

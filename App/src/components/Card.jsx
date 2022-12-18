@@ -20,14 +20,16 @@ import { useToast } from "@chakra-ui/react";
 const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
   const toast = useToast();
   const { setItem, user, setUser } = useContext(GlobalContext);
+
   const isFavourite = () => {
-    if (type === "recipes") {
+    if (type === "recipe") {
       return !!user.favRecipes.find((id) => id === item._id);
     }
     if (type === "workout") {
       return !!user.favWorkouts.find((id) => id === item._id);
     }
   };
+
   const [liked, setLiked] = useState(isFavourite);
   const userId = user._id;
 
