@@ -56,110 +56,97 @@ import UISpan from "../../components/UIComponents/UISpan";
 
 const tags = ["lose weight", "vegetarian", "vegan", "eat all", "verduras", "pescado"];
 
+function searchStringInArray(str, strArray) {
+  for (var j = 0; j < strArray.length; j++) {
+    if (strArray[j].match(str)) return true;
+  }
+  return false;
+}
+
 const Recipes = () => {
   const { user } = useContext(GlobalContext);
   const [recipes, setRecipes] = useState([]);
   const [activatedTags, setActivatedTags] = useState([user.diet, user.target]);
   const [showContent, setShowContent] = useState([]);
   const [filters, setFilters] = useState([user.diet, user.target]);
-  const [ingredients, setIngredients] = useState({
-    ingredient1: false,
-    ingredient2: false,
-    ingredient3: false,
-    ingredient4: false,
-    ingredient5: false,
-    ingredient6: false,
-    ingredient7: false,
-  });
-  /* const [ingrediente1, setIngredinet1] = useState(false);
-  const [ingrediente2, setIngredinet2] = useState(false);
-  const [ingrediente3, setIngredinet3] = useState(false);
-  const [ingrediente4, setIngredinet4] = useState(false);
-  const [ingrediente5, setIngredinet5] = useState(false);
-  const [ingrediente6, setIngredinet6] = useState(false);
-  const [ingrediente7, setIngredinet7] = useState(false); */
-  const nutrients = [
+  const [ingredients, setIngredients] = useState([
+    { name: "Huevos", value: false },
+    { name: "Fruta", value: false },
+    { name: "Verduras", value: false },
+    { name: "Lácteos", value: false },
+    { name: "Pescado", value: false },
+    { name: "Carne", value: false },
+    { name: "Legumbres", value: false },
+  ]);
+
+  const nutrientsToDisplay = [
     {
       img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
       name: "Huevos",
-      isChecked: ingredients.ingredient1,
+      isChecked: false,
     },
     {
       img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671294409/HealthyLife/iconfruta_r3bj8b.png",
       name: "Fruta",
-      isChecked: ingredients.ingredient2,
+      isChecked: false,
     },
     {
       img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1669489891/paintings/idq57yew22xitacjftua.jpg",
       name: "Verduras",
-      isChecked: ingredients.ingredient3,
+      isChecked: false,
     },
     {
       img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671294347/HealthyLife/iconlacteos_qm4wmy.png",
       name: "Lácteos",
-      isChecked: ingredients.ingredient4,
+      isChecked: false,
     },
     {
       img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671294273/HealthyLife/iconpescado_cja0wg.png",
       name: "Pescado",
-      isChecked: ingredients.ingredient5,
+      isChecked: false,
     },
     {
       img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671294435/HealthyLife/iconcarne_vtvdea.png",
       name: "Carne",
-      isChecked: ingredients.ingredient6,
+      isChecked: false,
     },
     {
       img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671294108/HealthyLife/iconlegumbres_pbscnn.png",
       name: "Legumbres",
-      isChecked: ingredients.ingredient7,
+      isChecked: false,
     },
   ];
-  const handleCheckboxChange = (event) => {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name; // debemos buscar el recipe.ingredient; para llegar a recipe se debe haber mapeado previamente las recipes
 
-    // Actualizamos el estado del checkbox según su nombre
-    if (name === "Huevos") {
-      setIngredients(value);
-    } else if (name === "Fruta") {
-      setIngredients(value);
-    } else if (name === "Verduras") {
-      setIngredients(value);
-    } else if (name === "Lácteos") {
-      setIngredients(value);
-    } else if (name === "Pescado") {
-      setIngredients(value);
-    } else if (name === "Carne") {
-      setIngredients(value);
-    } else if (name === "Legumbres") {
-      setIngredients(value);
-    }
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    setIngredients([...ingredients, { name: value, value: checked }]);
   };
 
   useEffect(() => {
     API.get("/recipes").then((res) => setRecipes(res.data.data.recipes));
   }, []);
+
   useEffect(() => {
-    let ingredientsFiltered = nutrients;
-    if (ingredients.ingredient1) {
-      ingredientsFiltered = recipes.filter((recipe) => {
-        return recipe.ingredients.includes(ingredients.ingredient1);
-      });
-      setIngredients(ingredientsFiltered);
-    }
-  }, [ingredients]);
-  useEffect(() => {
+    const activeIngredients = ingredients.filter((ing) => ing.value);
+
     if (filters.length) {
-      const filteredRecipes = recipes.filter((recipe) => {
+      const filteredByTagRecipes = recipes.filter((recipe) => {
         return recipe.tags.includes(filters[0]) && recipe.tags.includes(filters[1]);
       });
+
+      const filteredRecipes = filteredByTagRecipes.filter((recipe) => {
+        let included = false;
+        activeIngredients.forEach((ing) => {
+          included = searchStringInArray(ing, recipe.nutrients);
+        });
+        return included;
+      });
+
       setShowContent(filteredRecipes);
     } else {
       setShowContent(recipes);
     }
-  }, [filters, recipes, activatedTags]);
+  }, [filters, recipes, activatedTags, ingredients]);
 
   return (
     <LayoutWrapper>
@@ -176,9 +163,8 @@ const Recipes = () => {
           <Heading variant="H2" mr="50px">
             Recetas con...
           </Heading>
-          {nutrients.map(({ img, name, isChecked }) => (
+          {nutrientsToDisplay.map(({ img, name, isChecked }) => (
             <Checkbox
-              icon={<FaCheckDouble />}
               sx={outlinedClasses}
               spacing="18px"
               key={name}
@@ -188,7 +174,6 @@ const Recipes = () => {
               borderRadius="24px"
               border="1px"
               borderColor="primary"
-              isChecked={isChecked}
             >
               <Flex alignItems="center">
                 <Image borderRadius="full" boxSize="35px" src={img} alt={name} mr={2} />
@@ -207,7 +192,7 @@ const Recipes = () => {
           variant="secondary"
           onClick={() =>
             setFilters([user.diet, user.target]) &
-            setActivatedTags([[user.diet, user.target]])
+            setActivatedTags([user.diet, user.target])
           }
         >
           Show my diet
@@ -217,19 +202,20 @@ const Recipes = () => {
         </Button>
 
         {tags.map((tag) => (
-          /* <span
+          <UISpan
             key={tag}
+            variant="tag"
             className={activatedTags.includes(tag) ? "allMarked" : "tagsActive"}
           >
-            {tag}
-          </span> */
-
-          <UISpan key={tag} variant="tag">
             {tag}
           </UISpan>
         ))}
       </Box>
-      <GridUI items={showContent} type="recipe" section="favorite" />
+      {showContent.length ? (
+        <GridUI items={showContent} type="recipe" section="favorite" />
+      ) : (
+        <>Aun no tienes recetas sugeridas por el sistema. Prueba a buscar una!</>
+      )}
     </LayoutWrapper>
   );
 };

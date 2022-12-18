@@ -5,6 +5,7 @@ const StyledSpan = styled.span`
   ${(props) =>
     props.variant === "tag" &&
     css`
+      margin: 0 10px;
       padding: 6px 14px;
       font-size: 12px;
       background-color: transparent;
