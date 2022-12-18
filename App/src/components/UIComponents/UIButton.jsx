@@ -8,40 +8,63 @@ const StyledButton = styled.button`
   ${(props) =>
     props.variant === "primary" &&
     css`
-      color:#FFFFFF ;
-      background-color: #EF623F;
+      color: #ffffff;
+      background-color: #ef623f;
       box-shadow: #161616 4px 4px 0 0;
       :hover {
         background-color: #f2866a;
       }
       :active {
-      box-shadow: #161616 2px 2px 0 0;
-      transform: translate(2px, 2px);
-    }      
+        box-shadow: #161616 2px 2px 0 0;
+        transform: translate(2px, 2px);
+      }
     `}
 
   ${(props) =>
     props.variant === "secondary" &&
     css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap:1rem;
-      color: #EF623F;
-      border:1px solid #EF623F;
-      background-color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: #ef623f;
+      border: 1px solid #ef623f;
+      background-color: #ffffff;
+      box-shadow: #161616 4px 4px 0 0;
+
       :hover {
         background-color: #e0e0e0;
       }
-      box-shadow: #161616 4px 4px 0 0;
-      
       :active {
-      box-shadow: #161616 2px 2px 0 0;
-      transform: translate(2px, 2px);
-      
-}      
+        box-shadow: #161616 2px 2px 0 0;
+        transform: translate(2px, 2px);
+      }
     `}
-    
+    ${(props) =>
+    props.variant === "back" &&
+    css`
+      padding: 0px;
+      height: 35px;
+      width: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: #ef623f;
+      border: 1px solid #ef623f;
+      background-color: #ffffff;
+      margin-bottom: 15px;
+      box-shadow: #161616 4px 4px 0 0;
+      border-radius: 10px;
+      :hover {
+        background-color: #e0e0e0;
+      }
+
+      :active {
+        box-shadow: #161616 2px 2px 0 0;
+        transform: translate(2px, 2px);
+      }
+    `}
 `;
 
 const UiButton = (props) => {

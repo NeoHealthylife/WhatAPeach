@@ -15,17 +15,21 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import GlobalContext from "../context/GlobalContext";
 import { API } from "../services/API";
+import { useToast } from "@chakra-ui/react";
 
 const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
+  const toast = useToast();
   const { setItem, user, setUser } = useContext(GlobalContext);
+
   const isFavourite = () => {
-    if (type === "recipes") {
+    if (type === "recipe") {
       return !!user.favRecipes.find((id) => id === item._id);
     }
     if (type === "workout") {
       return !!user.favWorkouts.find((id) => id === item._id);
     }
   };
+
   const [liked, setLiked] = useState(isFavourite);
   const userId = user._id;
 
@@ -49,10 +53,27 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
 
     API.patch(config[type].url, config[type].data).then((response) => {
       const editedUser = response.data;
-      console.log(editedUser);
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
       setChangeValue(JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        toast({
+          position: "top",
+          title: "Añadido a favoritos correctamente 😍",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:
+            "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     });
   };
 
@@ -64,7 +85,6 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
 
     API.patch(config[type].url, config[type].data).then((response) => {
       const editedUser = response.data;
-      console.log(editedUser);
 
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
@@ -75,6 +95,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
   return (
     <Center>
       <Box
+        cursor="pointer"
         rounded={"lg"}
         overflow={"hidden"}
         bg="white"

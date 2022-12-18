@@ -4,7 +4,7 @@ import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 
 import { useFormContext, useFormState } from "react-hook-form";
 import styled from "styled-components";
-import { myTheme } from "./Theme";
+import { myTheme } from "../ChakraComponents/Theme";
 const ErrorStyled = styled.div`
   color: #ff3300;
   font-size: ${myTheme.fontSizes.xsm};

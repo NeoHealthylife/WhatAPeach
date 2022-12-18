@@ -56,7 +56,7 @@ const CardStyled = styled.button`
 `;
 const HeadingStyled = styled.div`
   color: #384d62;
-  font-size: xx-large;
+  font-size: 3rem;
   padding: 20px;
   display: flex;
   justify-content: center;

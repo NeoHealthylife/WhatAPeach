@@ -22,7 +22,7 @@ import {
   default as UIInput,
 } from "../../components/UIComponents/UIFormInput";
 import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
-import { myTheme } from "../../components/UIComponents/Theme";
+import { myTheme } from "../../components/ChakraComponents/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
 import { useToast } from "@chakra-ui/react";
 import { foodChoices } from "../../utils/FormChoices";
@@ -39,7 +39,6 @@ const Register = () => {
 
   const onFormSubmit = (data) => {
     data.equipment = data.equipment === "true" ? true : false;
-    console.log(data);
     API.post("/users/register", data)
       .then((res) => {
         if (res.data.status === 201 || res.data.status === 200) {
