@@ -19,8 +19,10 @@ import { v4 as uuidv4 } from "uuid";
 import { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import { Navigate } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import { API } from "../services/API";
+import UiButton from "./UIComponents/UIButton";
+import { ImArrowLeft2 } from "react-icons/im";
 
 export const DescriptCard = () => {
   const { item, user, setUser } = useContext(GlobalContext);
@@ -31,7 +33,6 @@ export const DescriptCard = () => {
   const isCompleted = () => !!user.completedRecipes.find((id) => id === item._id);
   const [completed, setCompleted] = useState(isCompleted);
   const userId = user._id;
-  
 
   const addToFav = (recipeId) => {
     API.patch("/users/addfavrecipe", { userId, recipeId }).then((response) => {
@@ -89,6 +90,11 @@ export const DescriptCard = () => {
             borderRadius="20px"
             p={{ base: "10px", md: "20px" }}
           >
+            <NavLink to="/recipes">
+              <UiButton variant="back">
+                <ImArrowLeft2 />
+              </UiButton>
+            </NavLink>
             <Box w="80%">
               <Box key={item._id} h={"45vh"} alignContent="center">
                 <Image
@@ -131,7 +137,9 @@ export const DescriptCard = () => {
                 >
                   {todo && !completed && (
                     <>
-                      <Button onClick={() => addToCompleted(item._id)}>Completar</Button>
+                      <Button onClick={() => addToCompleted(item._id)}>
+                        Completar 🥳
+                      </Button>
                     </>
                   )}
                   {completed && (
@@ -177,7 +185,7 @@ export const DescriptCard = () => {
                 item.tags.map((tag) => (
                   <Box
                     key={uuidv4()}
-                    bg="orange.500"
+                    bg="primary"
                     display={"inline-block"}
                     borderRadius="20px"
                     px={3}

@@ -80,7 +80,7 @@ passport.use(
       clientID: config.google.id,
       clientSecret: config.google.secret,
       callbackURL: 'http://localhost:3000/api/users/auth/google/callback',
-      passReqToCallback: true, //esto para que lo ponemos?
+      passReqToCallback: true,
     },
     async (request, accessToken, refreshToken, profile, done) => {
       // Aquí tengo el usuario que ya existía o el que acabo de crear y lo devuelvo en el callback "done". Passport lo inserta en la request
@@ -88,7 +88,6 @@ passport.use(
 
       const user = await handleSocialLoginRequest(profile);
       return done(null, user);
-
     }
   )
 );

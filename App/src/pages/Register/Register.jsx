@@ -22,7 +22,7 @@ import {
   default as UIInput,
 } from "../../components/UIComponents/UIFormInput";
 import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
-import { myTheme } from "../../components/UIComponents/Theme";
+import { myTheme } from "../../components/ChakraComponents/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
 import { useToast } from "@chakra-ui/react";
 import { foodChoices } from "../../utils/FormChoices";
