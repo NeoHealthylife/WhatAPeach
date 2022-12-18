@@ -14,8 +14,10 @@ const StyledCardListWrapper = styled.div`
   }
   @media (min-width: 600px) {
     max-width: 90%;
-    padding: 15px 0;
+    padding: 18px 0;
     margin: auto;
+    
+    
 
     .slick-arrow {
       display: block;
@@ -52,7 +54,7 @@ function SamplePrevArrow(props) {
 }
 
 const CardList = (props) => {
-  const { items, width, heigth, type } = props;
+  const { items, width, heigth, type, setChangeValue,  section } = props;
 
   var settings = {
     className: "center",
@@ -99,6 +101,8 @@ const CardList = (props) => {
         {items &&
           items.map((item) => (
             <CardComp
+            section={section}
+            setChangeValue={setChangeValue}
               key={item._id}
               item={item}
               width={width}
