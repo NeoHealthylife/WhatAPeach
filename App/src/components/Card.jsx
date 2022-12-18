@@ -15,9 +15,12 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import GlobalContext from "../context/GlobalContext";
 import { API } from "../services/API";
+import { useToast } from "@chakra-ui/react";
 
-const CardComp = ({ item, type, width, heigth }) => {
+const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
+  const toast = useToast();
   const { setItem, user, setUser } = useContext(GlobalContext);
+
   const isFavourite = () => {
     if (type === "recipe") {
       return !!user.favRecipes.find((id) => id === item._id);
@@ -26,6 +29,7 @@ const CardComp = ({ item, type, width, heigth }) => {
       return !!user.favWorkouts.find((id) => id === item._id);
     }
   };
+
   const [liked, setLiked] = useState(isFavourite);
   const userId = user._id;
 
@@ -49,9 +53,27 @@ const CardComp = ({ item, type, width, heigth }) => {
 
     API.patch(config[type].url, config[type].data).then((response) => {
       const editedUser = response.data;
-      console.log(editedUser);
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      setChangeValue(JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        toast({
+          position: "top",
+          title: "Añadido a favoritos correctamente 😍",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:
+            "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     });
   };
 
@@ -63,16 +85,17 @@ const CardComp = ({ item, type, width, heigth }) => {
 
     API.patch(config[type].url, config[type].data).then((response) => {
       const editedUser = response.data;
-      console.log(editedUser);
 
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      setChangeValue(JSON.stringify(editedUser));
     });
   };
 
   return (
     <Center>
       <Box
+        cursor="pointer"
         rounded={"lg"}
         overflow={"hidden"}
         bg="white"
@@ -90,6 +113,7 @@ const CardComp = ({ item, type, width, heigth }) => {
             w="full"
             alt={item.title}
             src={item.image}
+            borderRadius="8px"
           />
           <Heading
             color={"white"}
@@ -149,28 +173,30 @@ const CardComp = ({ item, type, width, heigth }) => {
               + Info
             </Button>
           </Flex>
-          <Flex
-            p={1}
-            alignItems="center"
-            justifyContent={"space-between"}
-            borderLeft={"1px"}
-            cursor="pointer"
-            onClick={() => setLiked(!liked)}
-          >
-            {liked ? (
-              <IconButton
-                onClick={() => deleteToFav(item._id)}
-                variant="primary"
-                icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
-              />
-            ) : (
-              <IconButton
-                onClick={() => addToFav(item._id)}
-                variant="primary"
-                icon={<RiHeart2Line color="red" fontSize={"24px"} />}
-              />
-            )}
-          </Flex>
+          {section === "favorite" ? (
+            <Flex
+              p={1}
+              alignItems="center"
+              justifyContent={"space-between"}
+              borderLeft={"1px"}
+              cursor="pointer"
+              onClick={() => setLiked(!liked)}
+            >
+              {liked ? (
+                <IconButton
+                  onClick={() => deleteToFav(item._id)}
+                  variant="primary"
+                  icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
+                />
+              ) : (
+                <IconButton
+                  onClick={() => addToFav(item._id)}
+                  variant="primary"
+                  icon={<RiHeart2Line color="red" fontSize={"24px"} />}
+                />
+              )}
+            </Flex>
+          ) : null}
         </HStack>
       </Box>
     </Center>

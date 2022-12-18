@@ -11,14 +11,15 @@ import { GiChewedHeart } from "react-icons/gi";
 
 export const MyRecipes = () => {
   const [profile, setProfile] = useState({});
+  const [changeValue, setChangeValue] = useState("");
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     const initialValue = JSON.parse(savedUser);
     const userId = initialValue._id;
     API.get(`/users/${userId}`).then((res) => setProfile(res.data));
-  }, []);
-  console.log(profile);
+  }, [changeValue]);
+
   return (
     <LayoutWrapper>
       <Heading
@@ -32,7 +33,14 @@ export const MyRecipes = () => {
         <GiChewedHeart size="25px" /> Favoritas
       </Heading>
       {profile.favRecipes?.length && (
-        <CardList width="250px" heigth="360px" items={profile.favRecipes} type="recipe" />
+        <CardList
+          section="favorite"
+          width="250px"
+          heigth="360px"
+          items={profile.favRecipes}
+          type="recipe"
+          setChangeValue={setChangeValue}
+        />
       )}
       <Heading
         variant="H2"
@@ -51,6 +59,7 @@ export const MyRecipes = () => {
           heigth="360px"
           items={profile.toDoRecipes}
           type="recipe"
+          section="pending"
         />
       )}
       <Heading

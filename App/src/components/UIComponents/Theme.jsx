@@ -11,6 +11,7 @@ export const myTheme = extendTheme({
       },
     },
   },
+
   colors: {
     primary: "#FF562d",
     "soft-primary": "#fe9166",

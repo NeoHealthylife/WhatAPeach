@@ -11,7 +11,6 @@ const Profile = () => {
   useEffect(() => {
     getProfile("profile").then((res) => setProfile(res));
   }, []);
-console.log(profile)
   return (
     <LayoutWrapper>
       <Center>

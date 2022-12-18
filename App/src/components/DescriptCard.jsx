@@ -19,17 +19,19 @@ import { v4 as uuidv4 } from "uuid";
 import { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import { Navigate } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import { API } from "../services/API";
+import UiButton from "./UIComponents/UIButton";
+import { ImArrowLeft2 } from "react-icons/im";
 
 export const DescriptCard = () => {
-  const { item, user, setUser } = useContext(GlobalContext);
+  const { item, user, setUser, showToast } = useContext(GlobalContext);
   const isFavourite = () => !!user.favRecipes.find((id) => id === item._id);
   const [liked, setLiked] = useState(isFavourite);
   const isToDo = () => !!user.toDoRecipes.find((id) => id === item._id);
   const [todo, setToDo] = useState(isToDo);
-  const isComplete = () => !!user.completedRecipes.find((id) => id === item._id);
-  const [complete, setComplete] = useState(isComplete);
+  const isCompleted = () => !!user.completedRecipes.find((id) => id === item._id);
+  const [completed, setCompleted] = useState(isCompleted);
   const userId = user._id;
 
   const addToFav = (recipeId) => {
@@ -37,6 +39,14 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido añadida a lista de favoritos 😍");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+        );
+      }
     });
   };
 
@@ -45,6 +55,14 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido eliminada de la lista de favoritos");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+        );
+      }
     });
   };
   const addToDo = (recipeId) => {
@@ -52,6 +70,14 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido añadida a lista de pendientes 😍");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu receta a tu lista de pendientes de nuevo",
+        );
+      }
     });
   };
   const deleteToDo = (recipeId) => {
@@ -59,20 +85,46 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido eliminada de la lista de pendientes");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta eliminar tu receta de tu lista de pendientes de nuevo",
+        );
+      }
     });
   };
-  const addComplete = (recipeId) => {
+  const addToCompleted = (recipeId) => {
     API.patch("/users/addcompleterecipe", { userId, recipeId }).then((response) => {
       const editedUser = response.data;
       setUser(editedUser);
+      setCompleted(true);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido añadida a lista de completados 😍");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu receta a tu lista de completados de nuevo",
+        );
+      }
     });
   };
-  const deleteComplete = (recipeId) => {
+  const deleteFromCompleted = (recipeId) => {
     API.patch("/users/deletecompleterecipe", { userId, recipeId }).then((response) => {
       const editedUser = response.data;
       setUser(editedUser);
+      setCompleted(false);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido añadida a tu lista de completados");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta eliminar tu receta de tu lista de completados de nuevo",
+        );
+      }
     });
   };
   return (
@@ -86,6 +138,11 @@ export const DescriptCard = () => {
             borderRadius="20px"
             p={{ base: "10px", md: "20px" }}
           >
+            <NavLink to="/recipes">
+              <UiButton variant="back">
+                <ImArrowLeft2 />
+              </UiButton>
+            </NavLink>
             <Box w="80%">
               <Box key={item._id} h={"45vh"} alignContent="center">
                 <Image
@@ -106,11 +163,13 @@ export const DescriptCard = () => {
                   w="full"
                   onClick={() => setToDo(!todo)}
                 >
-                  {!todo ? (
+                  {!todo && !completed && (
                     <Button variant="secondary" onClick={() => addToDo(item._id)}>
                       Let's do it!
                     </Button>
-                  ) : (
+                  )}
+
+                  {todo && !completed && (
                     <Button variant="secondary" onClick={() => deleteToDo(item._id)}>
                       No me interesa 😥
                     </Button>
@@ -123,16 +182,19 @@ export const DescriptCard = () => {
                   roundedBottom={"sm"}
                   cursor={"pointer"}
                   w="full"
-                  onClick={() => setComplete(!complete)}
                 >
-                  {todo && (
-                    <Button onClick={() => addComplete(item._id)}>Completar</Button>
+                  {todo && !completed && (
+                    <>
+                      <Button onClick={() => addToCompleted(item._id)}>
+                        Completar 🥳
+                      </Button>
+                    </>
                   )}
-                  {/* (!complete ? (
-                      <Button onClick={() => deleteComplete(item._id)}>Completado</Button>
-                    ) : (
-                      <Button onClick={() => addComplete(item._id)}>Completar</Button>
-                    ))} */}
+                  {completed && (
+                    <Button onClick={() => deleteFromCompleted(item._id)}>
+                      Completado
+                    </Button>
+                  )}
                 </Flex>
                 <Flex
                   p={1}
@@ -171,7 +233,7 @@ export const DescriptCard = () => {
                 item.tags.map((tag) => (
                   <Box
                     key={uuidv4()}
-                    bg="orange.500"
+                    bg="primary"
                     display={"inline-block"}
                     borderRadius="20px"
                     px={3}
