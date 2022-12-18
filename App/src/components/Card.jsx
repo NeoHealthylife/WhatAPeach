@@ -51,7 +51,6 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
 
     API.patch(config[type].url, config[type].data).then((response) => {
       const editedUser = response.data;
-      console.log(editedUser);
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
       setChangeValue(JSON.stringify(editedUser));
@@ -84,7 +83,6 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
 
     API.patch(config[type].url, config[type].data).then((response) => {
       const editedUser = response.data;
-      console.log(editedUser);
 
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));

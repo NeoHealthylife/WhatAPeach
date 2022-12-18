@@ -25,7 +25,6 @@ function MyFilter() {
   // Utilizamos el hook useEffect para realizar una acción cuando el estado de algún checkbox cambie
   useEffect(() => {
     // Aquí podrías hacer una llamada a una API o cualquier otra acción que necesites realizar cuando el estado de algún checkbox cambie
-    console.log("El estado de algún checkbox ha cambiado");
   }, [checkbox1, checkbox2, checkbox3]);
 
   return (

@@ -1,7 +1,10 @@
+import { useToast } from "@chakra-ui/react";
 import { createContext, useState } from "react";
 const GlobalContext = createContext();
 
 const GlobalContextProvider = ({ children }) => {
+  const toast = useToast();
+
   const [interruptor, setInterruptor] = useState(false);
   const [homeContent, setHomeContent] = useState("intro");
   const [isLogged, setIsLogged] = useState(false);
@@ -28,6 +31,17 @@ const GlobalContextProvider = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
   };
+
+  const showToast = (type, message) => {
+    toast({
+      position: "top",
+      title: message,
+      status: type,
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
   const value = {
     interruptor,
     setInterruptor,
@@ -42,6 +56,7 @@ const GlobalContextProvider = ({ children }) => {
     item,
     setItem,
     logout,
+    showToast,
   };
 
   return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>;

@@ -39,7 +39,6 @@ const Register = () => {
 
   const onFormSubmit = (data) => {
     data.equipment = data.equipment === "true" ? true : false;
-    console.log(data);
     API.post("/users/register", data)
       .then((res) => {
         if (res.data.status === 201 || res.data.status === 200) {

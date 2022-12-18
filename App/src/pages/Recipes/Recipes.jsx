@@ -58,7 +58,7 @@ const tags = ["lose weight", "vegetarian", "vegan", "eat all", "verduras", "pesc
 
 function searchStringInArray(str, strArray) {
   for (var j = 0; j < strArray.length; j++) {
-    if (strArray[j].match(str)) return true;
+    if (strArray[j].includes(str)) return true;
   }
   return false;
 }
@@ -69,20 +69,20 @@ const Recipes = () => {
   const [activatedTags, setActivatedTags] = useState([user.diet, user.target]);
   const [showContent, setShowContent] = useState([]);
   const [filters, setFilters] = useState([user.diet, user.target]);
-  const [ingredients, setIngredients] = useState([
-    { name: "Huevos", value: false },
-    { name: "Fruta", value: false },
-    { name: "Verduras", value: false },
-    { name: "Lácteos", value: false },
-    { name: "Pescado", value: false },
-    { name: "Carne", value: false },
-    { name: "Legumbres", value: false },
-  ]);
+  const [ingredients, setIngredients] = useState({
+    Huevo: false,
+    Fruta: false,
+    Verduras: false,
+    Lácteos: false,
+    Pescado: false,
+    Carne: false,
+    Legumbres: false,
+  });
 
   const nutrientsToDisplay = [
     {
       img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
-      name: "Huevos",
+      name: "Huevo",
       isChecked: false,
     },
     {
@@ -119,7 +119,7 @@ const Recipes = () => {
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
-    setIngredients([...ingredients, { name: value, value: checked }]);
+    setIngredients({ ...ingredients, [value]: checked });
   };
 
   useEffect(() => {
@@ -127,22 +127,21 @@ const Recipes = () => {
   }, []);
 
   useEffect(() => {
-    const activeIngredients = ingredients.filter((ing) => ing.value);
+    const activeIngredients = Object.keys(ingredients)
+      .filter((key) => ingredients[key] === true)
+      .map((ing) => ing.toLowerCase());
 
-    if (filters.length) {
-      const filteredByTagRecipes = recipes.filter((recipe) => {
+    if (filters.length || activeIngredients.length) {
+      const filteredByTag = recipes.filter((recipe) => {
         return recipe.tags.includes(filters[0]) && recipe.tags.includes(filters[1]);
       });
 
-      const filteredRecipes = filteredByTagRecipes.filter((recipe) => {
-        let included = false;
-        activeIngredients.forEach((ing) => {
-          included = searchStringInArray(ing, recipe.nutrients);
-        });
-        return included;
+      const filteredByNutrients = recipes.filter((recipe) => {
+        return recipe.nutrients.some((r) => activeIngredients.indexOf(r) >= 0);
       });
 
-      setShowContent(filteredRecipes);
+      const finalRecipes = [...new Set([...filteredByTag, ...filteredByNutrients])];
+      setShowContent(finalRecipes);
     } else {
       setShowContent(recipes);
     }
