@@ -23,8 +23,10 @@ import { Navigate, NavLink } from "react-router-dom";
 import { API } from "../services/API";
 import UiButton from "./UIComponents/UIButton";
 import { ImArrowLeft2 } from "react-icons/im";
+import { useToast } from "@chakra-ui/react";
 
 export const DescriptCard = () => {
+  const toast = useToast();
   const { item, user, setUser } = useContext(GlobalContext);
   const isFavourite = () => !!user.favRecipes.find((id) => id === item._id);
   const [liked, setLiked] = useState(isFavourite);
@@ -36,9 +38,28 @@ export const DescriptCard = () => {
 
   const addToFav = (recipeId) => {
     API.patch("/users/addfavrecipe", { userId, recipeId }).then((response) => {
+      console.log(response);
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        toast({
+          position: "top",
+          title: "La receta ha sido añadida a lista de favoritos 😍",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:
+            "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     });
   };
 
@@ -47,6 +68,24 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        toast({
+          position: "top",
+          title: "La receta ha sido eliminada de la lista de favoritos",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:
+            "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     });
   };
   const addToDo = (recipeId) => {
@@ -54,6 +93,24 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        toast({
+          position: "top",
+          title: "La receta ha sido añadida a lista de pendientes 😍",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:
+            "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     });
   };
   const deleteToDo = (recipeId) => {
@@ -61,6 +118,24 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        toast({
+          position: "top",
+          title: "La receta ha sido eliminada de la lista de pendientes",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:
+            "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     });
   };
   const addToCompleted = (recipeId) => {
@@ -69,6 +144,24 @@ export const DescriptCard = () => {
       setUser(editedUser);
       setCompleted(true);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        toast({
+          position: "top",
+          title: "La receta ha sido añadida a lista de completados 😍",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:
+            "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     });
   };
   const deleteFromCompleted = (recipeId) => {
@@ -77,6 +170,24 @@ export const DescriptCard = () => {
       setUser(editedUser);
       setCompleted(false);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        toast({
+          position: "top",
+          title: "La receta ha sido eliminada de lista de favoritos",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:
+            "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     });
   };
   return (

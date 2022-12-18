@@ -15,8 +15,10 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import GlobalContext from "../context/GlobalContext";
 import { API } from "../services/API";
+import { useToast } from "@chakra-ui/react";
 
 const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
+  const toast = useToast();
   const { setItem, user, setUser } = useContext(GlobalContext);
   const isFavourite = () => {
     if (type === "recipes") {
@@ -53,6 +55,24 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
       setChangeValue(JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        toast({
+          position: "top",
+          title: "Añadido a favoritos correctamente 😍",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:
+            "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     });
   };
 
@@ -75,7 +95,6 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
   return (
     <Center>
       <Box
-        onClick={() => goToDetail(item)}
         cursor="pointer"
         rounded={"lg"}
         overflow={"hidden"}

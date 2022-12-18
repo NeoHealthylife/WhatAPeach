@@ -17,6 +17,7 @@ import GlobalContext from "../../context/GlobalContext";
 import { outlinedClasses } from "./CheckboxStyles";
 import "./styles.css";
 import { FaCheckDouble } from "react-icons/fa";
+import UISpan from "../../components/UIComponents/UISpan";
 
 // const recipesCategoriesByDiet = {
 //   vegetarian: [
@@ -214,13 +215,18 @@ const Recipes = () => {
         <Button variant="secondary" onClick={() => setFilters([]) & setActivatedTags([])}>
           Show all
         </Button>
+
         {tags.map((tag) => (
-          <span
+          /* <span
             key={tag}
-            className={activatedTags.includes(tag) ? "tagsActive" : "allMarked"}
+            className={activatedTags.includes(tag) ? "allMarked" : "tagsActive"}
           >
             {tag}
-          </span>
+          </span> */
+
+          <UISpan key={tag} variant="tag">
+            {tag}
+          </UISpan>
         ))}
       </Box>
       <GridUI items={showContent} type="recipe" section="favorite" />
