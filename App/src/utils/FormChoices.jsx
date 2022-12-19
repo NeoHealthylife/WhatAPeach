@@ -1,17 +1,17 @@
 export const foodChoices = [
-  { label: "Vegetariana", value: "vegetarian" },
-  { label: "Vegana", value: "vegan" },
-  { label: "Onmívora", value: "eat all" },
+  { label: "Vegetariana", value: "vegetariana" },
+  { label: "Vegana", value: "vegana" },
+  { label: "Onmívora", value: "omnívora" },
 ];
 export const statusChoices = [
-  { label: "Baja forma", value: "low" },
-  { label: "Buena forma", value: "medium" },
-  { label: "Muy buena forma", value: "high" },
+  { label: "Baja forma", value: "baja forma" },
+  { label: "Buena forma", value: "buena forma" },
+  { label: "Muy buena forma", value: "muy buena forma" },
 ];
 export const targetChoices = [
-  { label: "Perder peso", value: "lose weight" },
-  { label: "Musculación", value: "build muscle" },
-  { label: "Definición", value: "definition" },
+  { label: "Perder peso", value: "perder peso" },
+  { label: "Musculación", value: "musculación" },
+  { label: "Definición", value: "definición" },
 ];
 export const equipmentChoices = [
   { label: "Sí (Ejemplo: comba, mancuerna, banda elástica...)", value: "true" },

@@ -11,7 +11,7 @@ const workoutSchema = new mongoose.Schema(
     equipment: { type: Boolean, required: true },
     description: { type: String, required: true },
     workout: [{ type: String, required: true }],
-    descriptionChallenge: [{ type: String, required: true }],
+    descriptionChallenge: [{ type: String }],
     tags: [{ type: String }],
   },
   {
