@@ -8,6 +8,7 @@ import {
   IconButton,
   Image,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
@@ -15,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import GlobalContext from "../context/GlobalContext";
 import { API } from "../services/API";
-import { useToast } from "@chakra-ui/react";
 
 const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
   const toast = useToast();
@@ -59,7 +59,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
       if (response.status === 201 || response.status === 200) {
         toast({
           position: "top",
-          title: "Añadido a favoritos correctamente 😍",
+          title: "Añadido a favoritos correctamente ",
           status: "success",
           duration: 3000,
           isClosable: true,
@@ -77,7 +77,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
     });
   };
 
-  const deleteToFav = (id) => {
+const deleteToFav = (id) => {
     const config = {
       recipe: { url: "/users/deletefavrecipe", data: { userId, recipeId: id } },
       workout: { url: "/users/deletefavworkout", data: { userId, workoutId: id } },
@@ -95,7 +95,6 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
   return (
     <Center>
       <Box
-        cursor="pointer"
         rounded={"lg"}
         overflow={"hidden"}
         bg="white"
@@ -153,7 +152,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
           <Flex
             p={2}
             alignItems="center"
-            justifyContent={"space-between"}
+            justifyContent={"center"}
             roundedBottom={"sm"}
             cursor={"pointer"}
             w="full"
@@ -173,30 +172,31 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
               + Info
             </Button>
           </Flex>
-          {section === "favorite" ? (
+        {section === "favorite" ?  
             <Flex
-              p={1}
-              alignItems="center"
-              justifyContent={"space-between"}
-              borderLeft={"1px"}
-              cursor="pointer"
-              onClick={() => setLiked(!liked)}
-            >
-              {liked ? (
-                <IconButton
-                  onClick={() => deleteToFav(item._id)}
-                  variant="primary"
-                  icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
-                />
-              ) : (
-                <IconButton
-                  onClick={() => addToFav(item._id)}
-                  variant="primary"
-                  icon={<RiHeart2Line color="red" fontSize={"24px"} />}
-                />
-              )}
-            </Flex>
-          ) : null}
+            p={1}
+            alignItems="center"
+            justifyContent={"space-between"}
+            borderLeft={"1px"}
+            cursor="pointer"
+            onClick={() => setLiked(!liked)}
+          >
+            {liked ? (
+              <IconButton
+                onClick={() => deleteToFav(item._id)}
+                variant="primary"
+                icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
+              />
+            ) : (
+              <IconButton
+                onClick={() => addToFav(item._id)}
+                variant="primary"
+                icon={<RiHeart2Line color="red" fontSize={"24px"} />}
+              />
+            )}
+          </Flex>
+          : null }
+          
         </HStack>
       </Box>
     </Center>
