@@ -9,7 +9,7 @@ export const myTheme = extendTheme({
     "soft-primary": "#fe9166",
     secondary: "#024b42",
     "soft-secondary": "#12b396",
-    dark: "#100102",
+    dark: "#4b1e19e1",
     "sof-dark": "#4B1E19",
   },
   fontSizes: {

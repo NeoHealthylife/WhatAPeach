@@ -39,8 +39,23 @@ const Register = () => {
 
   const onFormSubmit = (data) => {
     data.equipment = data.equipment === "true" ? true : false;
+    // data.avatar = data.avatar[0];
+    // const formData = new FormData();
+    // formData.append("nickname", data.nickname)
+    // formData.append("password", data.password)
+    // formData.append("email", data.email)
+    // formData.append("height", data.height)
+    // formData.append("weight", data.weight)
+    // formData.append("age", data.age)
+    // formData.append("diet", data.diet)
+    // formData.append("status", data.status)
+    // formData.append("target", data.target)
+    // formData.append("avatar", data.avatar[0])
+    // formData.append("equipment", data.equipment === "true" ? true : false)
+    
     API.post("/users/register", data)
       .then((res) => {
+        console.log(res)
         if (res.data.status === 201 || res.data.status === 200) {
           toast({
             position: "top",
@@ -68,7 +83,7 @@ const Register = () => {
     <PeachWrapper>
       <Flex align={"center"} justify={"center"}>
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onFormSubmit)}>
+          <form  onSubmit={methods.handleSubmit(onFormSubmit)}>
             <Box>
               <Stack w="430px" py={8} px={6}>
                 <Box
@@ -91,6 +106,7 @@ const Register = () => {
                       </Box>
                     </Flex>
                     <Box>
+                      {/* <UIFormInput type="file" name="avatar" id="avatar"/> */}
                       <UIFormInput
                         name="nickname"
                         placeholder="Nickname"

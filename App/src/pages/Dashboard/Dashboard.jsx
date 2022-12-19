@@ -48,7 +48,7 @@ const CardStyled = styled.button`
   }
 
   &.recipes {
-    background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671276369/HealthyLife/recipes_utbxbb.jpg");
+    background-image: url("https://images-ext-1.discordapp.net/external/yzeFHDpSlbQaX83tmTvE8Jpm3RoUxE9JPkNHQ-QAC10/https/res.cloudinary.com/drh0lkvxh/image/upload/v1671474001/shutterstock_736615915_1_1_jnko6s.jpg?width=1005&height=670");
   }
   &.workouts {
     background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671276169/HealthyLife/workout2_wgipac.webp");

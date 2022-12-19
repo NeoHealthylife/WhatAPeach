@@ -17,14 +17,19 @@ import { v4 as uuidv4 } from "uuid";
 import { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import { Navigate } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import { API } from "../services/API";
+import UiButton from "./UIComponents/UIButton";
+import { ImArrowLeft2 } from "react-icons/im";
 
 export const DetailWorkout = () => {
-  const { item, user, setUser } = useContext(GlobalContext);
+  const { item, user, setUser, showToast } = useContext(GlobalContext);
   const isFavourite = () => !!user.favWorkouts.find((id) => id === item._id);
-
   const [liked, setLiked] = useState(isFavourite);
+  const isToDo = () => !!user.toDoWorkouts.find((id) => id === item._id);
+  const [todo, setToDo] = useState(isToDo);
+  const isCompleted = () => !!user.completedWorkouts.find((id) => id === item._id);
+  const [completed, setCompleted] = useState(isCompleted);
   const userId = user._id;
 
   const addToFav = (workoutId) => {
@@ -32,6 +37,14 @@ export const DetailWorkout = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "El workout ha sido añadido a lista de favoritos 😍");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu workout a favoritos más tarde",
+        );
+      }
     });
   };
 
@@ -40,9 +53,78 @@ export const DetailWorkout = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "El workout ha sido eliminado de la lista de favoritos");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu workout a favoritos más tarde",
+        );
+      }
     });
   };
-
+  const addToDo = (workoutId) => {
+    API.patch("/users/todoworkout", { userId, workoutId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "El workout ha sido añadido a lista de pendientes 😍");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu workout a tu lista de pendientes más tarde",
+        );
+      }
+    });
+  };
+  const deleteToDo = (workoutId) => {
+    API.patch("/users/deletetodoworkout", { userId, workoutId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "El workout ha sido eliminado de la lista de pendientes");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta eliminar tu workout de tu lista de pendientes más tarde",
+        );
+      }
+    });
+  };
+  const addToCompleted = (workoutId) => {
+    API.patch("/users/addcompleteworkout", { userId, workoutId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      setCompleted(true);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "El workout ha sido añadido a lista de completados 😍");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu workout a tu lista de completados más tarde",
+        );
+      }
+    });
+  };
+  const deleteFromCompleted = (workoutId) => {
+    API.patch("/users/deletecompleteworkout", { userId, workoutId }).then((response) => {
+      const editedUser = response.data;
+      setUser(editedUser);
+      setCompleted(false);
+      localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido añadida a tu lista de completados");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta eliminar tu receta de tu lista de completados de nuevo",
+        );
+      }
+    });
+  };
   return (
     <>
       {item !== null ? (
@@ -53,59 +135,86 @@ export const DetailWorkout = () => {
             bg="white"
             borderRadius="20px"
             p={{ base: "10px", md: "20px" }}
+            bgGradient="linear(to-r, #c03c031e , #f68c1336, #0ed28734)"
           >
-            <Box w="80%">
-              <Box key={item._id} h={"45vh"} alignContent="center">
-                <Image
-                  borderRadius="10px"
-                  objectFit="cover"
-                  h="full"
-                  alt={item.title}
-                  src={item.image}
-                />
-              </Box>
-              <HStack mt="1rem">
+            <NavLink to="/workouts">
+              <UiButton variant="back">
+                <ImArrowLeft2 />
+              </UiButton>
+            </NavLink>
+            <Box maxWidth={"100%"} maxHeight={"480px"} display="flex" justifyContent={"center"}  alignContent="center" >
+              <Image
+                borderRadius="10px"
+                objectFit={"cover"}
+                h="full"
+                width={"60%"}
+                alt={item.title}
+                src={item.image}
+              />
+            </Box>
+            <Box  width={"80%"} display={"flex"} justifyContent="flex-end" mt="4rem" mr="22px">
+                <Flex
+                   p={2}
+                   flexDirection={"row"}
+                   ml="50px"
+                   roundedBottom={"sm"}
+                   cursor={"pointer"}
+                   onClick={() => setToDo(!todo)}
+                >
+                  {!todo && !completed && (
+                    <Button variant="secondary" onClick={() => addToDo(item._id)}>
+                      Let's do it!
+                    </Button>
+                  )}
+
+                  {todo && !completed && (
+                    <Button variant="secondary" onClick={() => deleteToDo(item._id)}>
+                      No me interesa 😥
+                    </Button>
+                  )}
+                </Flex>
                 <Flex
                   p={2}
                   alignItems="center"
-                  justifyContent={"flex-end"}
                   roundedBottom={"sm"}
                   cursor={"pointer"}
-                  w="full"
+                  w="150px"
                 >
-                  <Button variant="secondary">Añade a tus retos</Button>
-                </Flex>
-                <Flex
-                  p={1}
-                  alignItems="center"
-                  justifyContent={"space-between"}
-                  roundedBottom={"sm"}
-                  cursor="pointer"
-                  onClick={() => setLiked(!liked)}
-                >
-                  {liked ? (
-                    <IconButton
-                      onClick={() => deleteToFav(item._id)}
-                      variant="primary"
-                      icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
-                    />
-                  ) : (
-                    <IconButton
-                      onClick={() => addToFav(item._id)}
-                      variant="primary"
-                      icon={<RiHeart2Line color="red" fontSize={"24px"} />}
-                    />
+                  {todo && !completed && (
+                    <>
+                      <Button onClick={() => addToCompleted(item._id)}>Completar</Button>
+                    </>
+                  )}
+                  {completed && (
+                    <Button onClick={() => deleteFromCompleted(item._id)}>
+                      Completado
+                    </Button>
                   )}
                 </Flex>
-              </HStack>
+              <Flex
+                p={1}
+                alignItems="center"
+                roundedBottom={"sm"}
+                cursor="pointer"
+                onClick={() => setLiked(!liked)}
+              >
+                {liked ? (
+                  <IconButton
+                    onClick={() => deleteToFav(item._id)}
+                    variant="primary"
+                    icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
+                  />
+                ) : (
+                  <IconButton
+                    onClick={() => addToFav(item._id)}
+                    variant="primary"
+                    icon={<RiHeart2Line color="red" fontSize={"24px"} />}
+                  />
+                )}
+              </Flex>
             </Box>
             <Box mt="1rem">
-              <Heading
-                alignContent="center"
-                variant="H1"
-                mb="1.5rem"
-                textTransform="lowercase"
-              >
+              <Heading alignContent="center" variant="H1" mb="1.5rem">
                 {item.title}
               </Heading>
               {item.tags.length &&
@@ -130,13 +239,13 @@ export const DetailWorkout = () => {
             <Flex
               alignContent="center"
               display="flex"
-              columnGap="10rem"
+              columnGap="150px"
               p="2"
               mt="2rem"
-              justifyContent="space-between"
+           
               flexDirection={{ base: "column-reverse", md: "row" }}
             >
-              <Box width="65%">
+              <Box width="60%">
                 <Heading variant="H2">Workout</Heading>
                 <OrderedList mt="1rem">
                   {item.workout.length &&

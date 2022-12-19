@@ -7,17 +7,21 @@ const { generateNickName } = require('../../utils/string');
 
 const register = async (req, res, next) => {
   try {
-    if (!req.body.provider_id) {
-      const now = new Date();
-      req.body.providerid = `organic${now.getTime()}`;
-      req.body.provider = 'organic';
-    }
+    // if (!req.body.provider_id) {
+    //   const now = new Date();
+    //   req.body.providerid = `organic${now.getTime()}`;
+    //   req.body.provider = 'organic';
+    // }
     const newUser = new User(req.body);
+   
     const userDuplicate = await User.findOne({ nickname: newUser.nickname });
 
     if (userDuplicate) return next('User alredy exists');
-
-    newUser.save();
+    // if (req.file) {
+    //   newUser.avatar = req.file.path;
+    // }
+    console.log(newUser)
+     await newUser.save();
     return res.json({
       status: 201,
       message: 'user registered',
@@ -253,6 +257,23 @@ const addTodoWorkout = async (req, res, next) => {
   }
 };
 
+const deleteTodoWorkout = async (req, res, next) => {
+  try {
+    const { userId, workoutId } = req.body;
+    const updateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { toDoWorkouts: workoutId },
+      },
+      { new: true }
+    );
+
+    return res.status(200).json(updateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const addCompletedRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
@@ -341,5 +362,6 @@ module.exports = {
   addCompletedRecipe,
   deleteCompletedRecipe,
   addCompletedWorkout,
+  deleteTodoWorkout,
   deleteCompletedWorkout,
 };

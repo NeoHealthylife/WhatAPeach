@@ -35,7 +35,7 @@ export const MyWorkouts = () => {
           width="250px"
           heigth="360px"
           items={profile.favWorkouts}
-          type="workouts"
+          type="workout"
           setChangeValue={setChangeValue}
         />
       )}
@@ -54,8 +54,8 @@ export const MyWorkouts = () => {
         <CardList
           width="250px"
           heigth="360px"
-          items={profile.toDoRecipes}
-          type="recipe"
+          items={profile.toDoWorkouts}
+          type="workout"
           section="pending"
         />
       )}
@@ -72,10 +72,10 @@ export const MyWorkouts = () => {
       </Heading>
       {profile.completedWorkouts?.length && (
         <CardList
-          width="150px"
-          heigth="260px"
+          width="250px"
+          heigth="360px"
           items={profile.completedWorkouts}
-          type="recipe"
+          type="workout"
         />
       )}
     </LayoutWrapper>
