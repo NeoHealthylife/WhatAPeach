@@ -18,9 +18,7 @@ const getWorkouts = async (req, res, next) => {
 const postWorkout = async (req, res, next) => {
   try {
     const newWorkout = new Workout(req.body);
-    if (req.file) {
-      newWorkout.image = req.file.path;
-    }
+    console.log(req.body);
     await newWorkout.save();
     return res.status(201).json({
       message: 'Created Workout',

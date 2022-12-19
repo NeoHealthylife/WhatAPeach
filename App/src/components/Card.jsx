@@ -95,12 +95,12 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section}) => {
             borderRadius="8px"
           />
           <Heading
-            color={"white"}
+            variant="H2"
+            color={"#4c57ad"}
             fontSize={"l"}
             position={"absolute"}
             w="full"
-            background="secondary"
-            opacity="80%"
+            background="whiteAlpha.700"
             bottom={"0"}
             padding={"1"}
           >
@@ -111,7 +111,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section}) => {
           {item.tags.map((tag) => (
             <Box
               key={uuidv4()}
-              bg="orange.500"
+              bg="primary"
               display={"inline-block"}
               borderRadius="20px"
               px={2}
