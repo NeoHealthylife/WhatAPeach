@@ -48,7 +48,7 @@ const Workouts = () => {
       isChecked: false,
     },
     {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671412286/hombro_2_abudra.png",
+      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671479929/espalda_1_ks92ti.png",
       name: "Hombros",
       isChecked: false,
     },
@@ -88,7 +88,7 @@ const Workouts = () => {
       isChecked: false,
     },
     {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
+      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671479930/volumen_1_qiwnst.png",
       name: "Volumen",
       isChecked: false,
     },
@@ -183,10 +183,10 @@ const Workouts = () => {
         </Stack>
       </Box>
       <Box>
-        <Button variant="secondary" onClick={() => setFilters([user.target])}>
+        <Button ml="20px" variant="secondary" onClick={() => setFilters([user.target])}>
           Show my target
         </Button>
-        <Button variant="secondary" onClick={() => setFilters([])}>
+        <Button ml="10px" variant="secondary" onClick={() => setFilters([])}>
           Show all
         </Button>
       </Box>

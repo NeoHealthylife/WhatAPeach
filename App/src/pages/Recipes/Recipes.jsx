@@ -51,7 +51,7 @@ const Recipes = () => {
       isChecked: false,
     },
     {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671323780/3244993-eggplant-vegetable-vegetables-veggie-veggies_107069_1_1_arohhu.png",
+      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671483025/vegetable_1_kfdf5p.png",
       name: "Verduras",
       isChecked: false,
     },
@@ -162,6 +162,7 @@ const Recipes = () => {
       </Box>
       <Box>
         <Button
+          ml="20px"
           variant="secondary"
           onClick={() =>
             setFilters([user.diet, user.target]) &
@@ -170,7 +171,11 @@ const Recipes = () => {
         >
           Show my diet
         </Button>
-        <Button variant="secondary" onClick={() => setFilters([]) & setActivatedTags([])}>
+        <Button
+          ml="10px"
+          variant="secondary"
+          onClick={() => setFilters([]) & setActivatedTags([])}
+        >
           Show all
         </Button>
 

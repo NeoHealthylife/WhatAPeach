@@ -11,7 +11,15 @@ const ErrorStyled = styled.div`
   margin-top: 5px;
 `;
 
-const UIFormInput = ({ name, label, placeholder, text, validations, type }) => {
+const UIFormInput = ({
+  name,
+  label,
+  placeholder,
+  text,
+  validations,
+  type,
+  defaultValue,
+}) => {
   const { register } = useFormContext();
   const { errors } = useFormState();
   return (
@@ -23,6 +31,7 @@ const UIFormInput = ({ name, label, placeholder, text, validations, type }) => {
         placeholder={placeholder}
         value={text}
         type={type}
+        defaultValue={defaultValue}
       />
 
       <ErrorStyled>

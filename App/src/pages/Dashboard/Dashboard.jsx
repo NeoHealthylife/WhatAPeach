@@ -28,6 +28,7 @@ const CardStyled = styled.button`
   justify-content: center;
   align-items: center;
   color: #fe9066;
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
   font-size: xx-large;
   margin-top: 2rem;
   text-align: center;
@@ -48,7 +49,7 @@ const CardStyled = styled.button`
   }
 
   &.recipes {
-    background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671276369/HealthyLife/recipes_utbxbb.jpg");
+    background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671474001/shutterstock_736615915_1_1_jnko6s.jpg");
   }
   &.workouts {
     background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671276169/HealthyLife/workout2_wgipac.webp");
@@ -72,10 +73,12 @@ const CardTextStyled = styled.div`
   color: #fe9066;
   font-size: xx-large;
   margin: 2rem 0 1rem;
+  padding-left: 75px;
+  padding-top: 30px;
 `;
 
 const challengeHasExpired = (item, savedDate) => {
-  const difference = new Date(savedDate) - new Date();
+  const difference = new Date(savedDate) - new Date(); //esto me da la fecha de ahora mismo
   const totalDays = Math.ceil(difference / (1000 * 3600 * 24));
   return totalDays > 7;
 };
@@ -149,7 +152,7 @@ const Dashboard = () => {
       </DashboardCards>
 
       <CardTextStyled>Últimas recetas</CardTextStyled>
-      <CardList width="250px" heigth="360px" items={recipes} type="recipe" />
+      <CardList width="250px" heigth="360px" items={recipes} type="recipe" pb="100px" />
       <CardTextStyled>Últimos workouts</CardTextStyled>
       <CardList width="250px" heigth="360px" items={workouts} type="workout" />
     </>

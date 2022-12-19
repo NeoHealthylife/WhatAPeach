@@ -25,8 +25,11 @@ export const NavItemLink = ({ icon, name, href }) => {
         color={activePage === href ? "primary" : "white"}
         bg={activePage === href ? "white" : "soft-primary"}
         _hover={{
-          bg: useColorModeValue("white", "gray.900"),
-          color: useColorModeValue("primary", "gray.200"),
+          bg: useColorModeValue("white"),
+          color: useColorModeValue("primary"),
+        }}
+        _focus={{
+          color: "primary!important",
         }}
         // {...rest}
       >
@@ -36,7 +39,10 @@ export const NavItemLink = ({ icon, name, href }) => {
             boxSize="4"
             color="white"
             _groupHover={{
-              color: color,
+              color: "primary",
+            }}
+            _groupFocus={{
+              color: "primary!important",
             }}
             as={icon}
           />

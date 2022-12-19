@@ -52,11 +52,11 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
     };
 
     API.patch(config[type].url, config[type].data).then((response) => {
-      const editedUser = response.data;
-      setUser(editedUser);
-      localStorage.setItem("user", JSON.stringify(editedUser));
-      setChangeValue(JSON.stringify(editedUser));
       if (response.status === 201 || response.status === 200) {
+        const editedUser = response.data;
+        setUser(editedUser);
+        localStorage.setItem("user", JSON.stringify(editedUser));
+        setChangeValue(JSON.stringify(editedUser));
         toast({
           position: "top",
           title: "Añadido a favoritos correctamente ",
@@ -77,7 +77,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
     });
   };
 
-const deleteToFav = (id) => {
+  const deleteToFav = (id) => {
     const config = {
       recipe: { url: "/users/deletefavrecipe", data: { userId, recipeId: id } },
       workout: { url: "/users/deletefavworkout", data: { userId, workoutId: id } },
@@ -115,12 +115,13 @@ const deleteToFav = (id) => {
             borderRadius="8px"
           />
           <Heading
+            pl="10px!important"
             variant="H2"
             color={"#4c57ad"}
             fontSize={"l"}
             position={"absolute"}
             w="full"
-            background="whiteAlpha.700"
+            background="whiteAlpha.800"
             bottom={"0"}
             padding={"1"}
           >
@@ -172,31 +173,30 @@ const deleteToFav = (id) => {
               + Info
             </Button>
           </Flex>
-        {section === "favorite" ?  
+          {section === "favorite" ? (
             <Flex
-            p={1}
-            alignItems="center"
-            justifyContent={"space-between"}
-            borderLeft={"1px"}
-            cursor="pointer"
-            onClick={() => setLiked(!liked)}
-          >
-            {liked ? (
-              <IconButton
-                onClick={() => deleteToFav(item._id)}
-                variant="primary"
-                icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
-              />
-            ) : (
-              <IconButton
-                onClick={() => addToFav(item._id)}
-                variant="primary"
-                icon={<RiHeart2Line color="red" fontSize={"24px"} />}
-              />
-            )}
-          </Flex>
-          : null }
-          
+              p={1}
+              alignItems="center"
+              justifyContent={"space-between"}
+              borderLeft={"1px"}
+              cursor="pointer"
+              onClick={() => setLiked(!liked)}
+            >
+              {liked ? (
+                <IconButton
+                  onClick={() => deleteToFav(item._id)}
+                  variant="primary"
+                  icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
+                />
+              ) : (
+                <IconButton
+                  onClick={() => addToFav(item._id)}
+                  variant="primary"
+                  icon={<RiHeart2Line color="red" fontSize={"24px"} />}
+                />
+              )}
+            </Flex>
+          ) : null}
         </HStack>
       </Box>
     </Center>

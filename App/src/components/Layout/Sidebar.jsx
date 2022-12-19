@@ -117,7 +117,7 @@ const SidebarContent = ({ ...props }) => {
             fontSize="md"
             aria-label="Main Navigation"
           >
-            <Box m="1" borderRadius="5px" overflow="hidden">
+            <Box m="1" borderRadius="5px" overflow="hidden" color="red">
               <NavItemLink icon={FiHome} name="Home" href="/" />
             </Box>
             <Box m="1" borderRadius="5px" overflow="hidden">
@@ -156,9 +156,12 @@ const SidebarContent = ({ ...props }) => {
               />
               <Text fontSize="md">{user?.nickname}</Text>
             </MenuButton>
-            <MenuList fontSize={17} zIndex={5555}>
+            <MenuList fontSize={17} zIndex={5555} w="200px">
               <Button w="full" onClick={() => navigate("/perfil/misrecetas")}>
                 Mis Recetas
+              </Button>
+              <Button w="full" onClick={() => navigate("/perfil/editar")}>
+                Editar Perfil
               </Button>
               <Button w="full" onClick={() => navigate("/perfil/miswokouts")}>
                 Mis workouts
