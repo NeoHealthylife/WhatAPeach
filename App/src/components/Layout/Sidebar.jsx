@@ -156,9 +156,12 @@ const SidebarContent = ({ ...props }) => {
               />
               <Text fontSize="md">{user?.nickname}</Text>
             </MenuButton>
-            <MenuList fontSize={17} zIndex={5555}>
+            <MenuList fontSize={17} zIndex={5555} width="200px">
               <Button w="full" onClick={() => navigate("/perfil/misrecetas")}>
                 Mis Recetas
+              </Button>
+              <Button w="full" onClick={() => navigate("/perfil/editarperfil")}>
+                Editar perfil
               </Button>
               <Button w="full" onClick={() => logout() & navigate("/login")}>
                 Cerrar sesión

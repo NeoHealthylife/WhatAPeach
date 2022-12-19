@@ -2,7 +2,7 @@ const COLORS_OUTLINED = {
   borderColor: "#6877eb",
   hoverBorderColor: "#FE9166",
   controlColor: "#FE9166",
-  checkedBG: "white",
+  checkedBG: "transparent",
 };
 
 export const outlinedClasses = {

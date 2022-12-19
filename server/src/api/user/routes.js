@@ -16,7 +16,7 @@ const {
   getUsers,
   getUser,
   deleteUser,
-  // updatetUser,
+  updatetUser,
   addFavRecipe,
   addFavWorkout,
   loginFromSocialLogin,
@@ -95,7 +95,7 @@ UserRoutes.post('/login', login);
 UserRoutes.get('/', getUsers);
 UserRoutes.delete('/:id', [isAdmin], deleteUser);
 UserRoutes.get('/:id', getUser);
-// UserRoutes.patch('/:id', updatetUser);
+UserRoutes.patch('/:id', updatetUser);
 UserRoutes.patch('/addfavrecipe', [isBasic], addFavRecipe);
 UserRoutes.patch('/addfavworkout', [isBasic], addFavWorkout);
 UserRoutes.patch('/deletefavrecipe', [isBasic], deleteFavRecipe);

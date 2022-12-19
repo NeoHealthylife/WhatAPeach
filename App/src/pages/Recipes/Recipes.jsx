@@ -138,6 +138,7 @@ const Recipes = () => {
           </Heading>
           {nutrientsToDisplay.map(({ img, name, isChecked }) => (
             <Checkbox
+              icon={<FaCheckDouble />}
               sx={outlinedClasses}
               spacing="18px"
               key={name}
