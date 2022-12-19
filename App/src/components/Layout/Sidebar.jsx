@@ -169,6 +169,9 @@ const SidebarContent = ({ ...props }) => {
               <Button w="full" onClick={() => navigate("/perfil/misrecetas")}>
                 Mis Recetas
               </Button>
+              <Button w="full" onClick={() => navigate("/perfil/miswokouts")}>
+                Mis workouts
+              </Button>
               <Button w="full" onClick={() => logout() & navigate("/login")}>
                 Cerrar sesión
               </Button>

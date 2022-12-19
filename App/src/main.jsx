@@ -23,6 +23,7 @@ import RecipeDetails from "./pages/RecipeDetails/RecipeDetails";
 import { MyRecipes } from "./pages/Profile/MyRecipes";
 import { DetailWorkout } from "./components/DetailWorkout";
 import WorkoutDetails from "./pages/WorkoutDetails/WorkoutDetails";
+import { MyWorkouts } from "./pages/Profile/MyWorkouts";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -86,6 +87,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               element={
                 <RequiredAuth>
                   <MyRecipes />
+                </RequiredAuth>
+              }
+            />
+             <Route
+              path="/perfil/miswokouts"
+              element={
+                <RequiredAuth>
+                  <MyWorkouts/>
                 </RequiredAuth>
               }
             />

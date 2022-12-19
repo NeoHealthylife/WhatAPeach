@@ -31,7 +31,6 @@ export const DescriptCard = () => {
   const isCompleted = () => !!user.completedRecipes.find((id) => id === item._id);
   const [completed, setCompleted] = useState(isCompleted);
   const userId = user._id;
-  
 
   const addToFav = (recipeId) => {
     API.patch("/users/addfavrecipe", { userId, recipeId }).then((response) => {
@@ -81,69 +80,78 @@ export const DescriptCard = () => {
   return (
     <>
       {item !== null ? (
-        <Center py={2}>
+        <Center py={2}   >
           <Box
             h="100%"
             margin={{ base: 0, md: "1rem" }}
             bg="white"
             borderRadius="20px"
             p={{ base: "10px", md: "20px" }}
+            bgGradient="linear(to-r, #c03c031e , #f68c1336, #0ed28734)"
           >
-            <Box w="80%">
-              <Box key={item._id} h={"45vh"} alignContent="center">
+            <Box display="flex-block" w="80%" ml="80px">
+              <Flex key={item._id} w="950px" h={"350px"} justifyContent="center">
                 <Image
                   borderRadius="10px"
-                  objectFit="cover"
+                  objectFit={"cover"}
                   h="full"
+                  width={"65%"}
                   alt={item.title}
                   src={item.image}
+                  display="flex"
+                  justifyContent={"center"}
                 />
-              </Box>
-              <HStack mt="1rem">
-                <Flex
-                  p={2}
-                  alignItems="center"
-                  justifyContent={"flex-end"}
-                  roundedBottom={"sm"}
-                  cursor={"pointer"}
-                  w="full"
-                  onClick={() => setToDo(!todo)}
-                >
-                  {!todo && !completed && (
-                    <Button variant="secondary" onClick={() => addToDo(item._id)}>
-                      Let's do it!
-                    </Button>
-                  )}
+              </Flex>
+              <HStack display={"flex"} justifyContent="flex-end" mt="1rem" mr="22px">
+                <HStack display={"flex"} justifyContent="center" >
+                  <Flex
+                    p={2}
+                    flexDirection={"row"}
+                    justifyContent={"flex-end"}
+                    ml="50px"
+                    roundedBottom={"sm"}
+                    cursor={"pointer"}
+                    
+                    onClick={() => setToDo(!todo)}
+                  >
+                    {!todo && !completed && (
+                      <Button variant="secondary" onClick={() => addToDo(item._id)}>
+                        Let's do it!
+                      </Button>
+                    )}
 
-                  {todo && !completed && (
-                    <Button variant="secondary" onClick={() => deleteToDo(item._id)}>
-                      No me interesa 😥
-                    </Button>
-                  )}
-                </Flex>
-                <Flex
-                  p={2}
-                  alignItems="center"
-                  justifyContent={"flex-end"}
-                  roundedBottom={"sm"}
-                  cursor={"pointer"}
-                  w="full"
-                >
-                  {todo && !completed && (
-                    <>
-                      <Button onClick={() => addToCompleted(item._id)}>Completar</Button>
-                    </>
-                  )}
-                  {completed && (
-                    <Button onClick={() => deleteFromCompleted(item._id)}>
-                      Completado
-                    </Button>
-                  )}
-                </Flex>
+                    {todo && !completed && (
+                      <Button variant="secondary" onClick={() => deleteToDo(item._id)}>
+                        No me interesa 😥
+                      </Button>
+                    )}
+                  </Flex>
+                  <Flex
+                    p={2}
+                    alignItems="center"
+                    justifyContent={"flex-end"}
+                    roundedBottom={"sm"}
+                    cursor={"pointer"}
+                    w="150px"
+                  >
+                    {todo && !completed && (
+                      <>
+                        <Button onClick={() => addToCompleted(item._id)}>
+                          Completar
+                        </Button>
+                      </>
+                    )}
+                    {completed && (
+                      <Button onClick={() => deleteFromCompleted(item._id)}>
+                        Completado
+                      </Button>
+                    )}
+                  </Flex>
+                </HStack>
                 <Flex
                   p={1}
                   alignItems="center"
-                  justifyContent={"space-between"}
+                  justifyContent={"space-around"}
                   roundedBottom={"sm"}
                   cursor="pointer"
                   onClick={() => setLiked(!liked)}
@@ -164,13 +172,9 @@ export const DescriptCard = () => {
                 </Flex>
               </HStack>
             </Box>
+
             <Box mt="1rem">
-              <Heading
-                alignContent="center"
-                variant="H1"
-                mb="1.5rem"
-                textTransform="lowercase"
-              >
+              <Heading alignContent="center" variant="H1" mb="1.5rem">
                 {item.title}
               </Heading>
               {item.tags.length &&
