@@ -20,7 +20,7 @@ import UISpan from "../../components/UIComponents/UISpan";
 import UIInput from "../../components/UIComponents/UIInput";
 import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
 
-const tags = ["lose weight", "vegetarian", "vegan", "eat all", "verduras", "pescado"];
+const tags = ["perder peso", "vegetariana", "vegana", "omnívora"];
 
 const Recipes = () => {
   const { user } = useContext(GlobalContext);
@@ -51,7 +51,7 @@ const Recipes = () => {
       isChecked: false,
     },
     {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1669489891/paintings/idq57yew22xitacjftua.jpg",
+      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671323780/3244993-eggplant-vegetable-vegetables-veggie-veggies_107069_1_1_arohhu.png",
       name: "Verduras",
       isChecked: false,
     },
@@ -97,7 +97,7 @@ const Recipes = () => {
       });
 
       const filteredByDiet = recipes.filter((recipe) => {
-        return recipe.tags.includes(filters[0]) && recipe.tags.includes(filters[1]);
+        return recipe.tags.includes(filters[0]) || recipe.tags.includes(filters[1]);
       });
 
       const filteredByNutrients = recipes.filter((recipe) => {
