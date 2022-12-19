@@ -43,17 +43,17 @@ const Workouts = () => {
 
   const partsToDisplay = [
     {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
+      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671411712/culo_r7ppfo.png",
       name: "Glúteos",
       isChecked: false,
     },
     {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
+      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671412286/hombro_2_abudra.png",
       name: "Hombros",
       isChecked: false,
     },
     {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
+      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671411854/espalda_fq5fc3.png",
       name: "Espalda",
       isChecked: false,
     },
@@ -68,7 +68,7 @@ const Workouts = () => {
       isChecked: false,
     },
     {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
+      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671412092/pecho_mx1nys.png",
       name: "Pecho",
       isChecked: false,
     },
@@ -78,7 +78,7 @@ const Workouts = () => {
       isChecked: false,
     },
     {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
+      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671411854/cardio_1_duunsv.png",
       name: "Cardio",
       isChecked: false,
     },
