@@ -19,10 +19,6 @@ const StyledCardListWrapper = styled.div`
     margin: auto;
     background: linear-gradient(95deg, #c03c0349 20%, #f68c134c 25%, #0ed28758 100%); 
     border-radius: 20px;
-    
-
-    border-radius: 10px;
-    background: linear-gradient(95deg, #c03c0349 20%, #f68c134c 25%, #0ed28758 100%);
 
     .slick-arrow {
       display: block;
