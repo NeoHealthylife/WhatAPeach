@@ -17,13 +17,13 @@ import { BsGoogle } from "react-icons/bs";
 import { API } from "../../services/API";
 import { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
-
+import { useEffect } from "react";
 import {
   default as UIFormInput,
   default as UIInput,
 } from "../../components/UIComponents/UIFormInput";
 import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
-import { myTheme } from "../../components/UIComponents/Theme";
+import { myTheme } from "../../components/ChakraComponents/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
 import { useToast } from "@chakra-ui/react";
 import { HiOutlineEyeSlash, HiOutlineEye } from "react-icons/hi2";
@@ -32,13 +32,27 @@ const Login = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const toast = useToast();
-  const { setJwt, setUser } = useContext(GlobalContext);
+  const { setJwt, setUser, setIsLogged } = useContext(GlobalContext);
   const methods = useForm();
   const navigate = useNavigate();
 
   const handleGoogleClick = (e) => {
     e.preventDefault();
-    window.location.href = "http://localhost:3000/api/users/auth/google";
+    API.get("/users/auth/google", {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          setJwt(data.token);
+          setUser(data.user);
+          navigate("/");
+        } else {
+          alert(data.message);
+        }
+      });
   };
 
   const onFormSubmit = (data) => {
@@ -49,6 +63,7 @@ const Login = () => {
           localStorage.setItem("user", JSON.stringify(res.data.user));
           setJwt(res.data.token);
           setUser(res.data.user);
+          setIsLogged(true);
           navigate("/");
         }
       })

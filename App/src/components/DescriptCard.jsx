@@ -19,11 +19,13 @@ import { v4 as uuidv4 } from "uuid";
 import { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import { Navigate } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import { API } from "../services/API";
+import UiButton from "./UIComponents/UIButton";
+import { ImArrowLeft2 } from "react-icons/im";
 
 export const DescriptCard = () => {
-  const { item, user, setUser } = useContext(GlobalContext);
+  const { item, user, setUser, showToast } = useContext(GlobalContext);
   const isFavourite = () => !!user.favRecipes.find((id) => id === item._id);
   const [liked, setLiked] = useState(isFavourite);
   const isToDo = () => !!user.toDoRecipes.find((id) => id === item._id);
@@ -37,6 +39,14 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido añadida a lista de favoritos 😍");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+        );
+      }
     });
   };
 
@@ -45,6 +55,14 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido eliminada de la lista de favoritos");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+        );
+      }
     });
   };
   const addToDo = (recipeId) => {
@@ -52,6 +70,14 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido añadida a lista de pendientes 😍");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu receta a tu lista de pendientes de nuevo",
+        );
+      }
     });
   };
   const deleteToDo = (recipeId) => {
@@ -59,6 +85,14 @@ export const DescriptCard = () => {
       const editedUser = response.data;
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido eliminada de la lista de pendientes");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta eliminar tu receta de tu lista de pendientes de nuevo",
+        );
+      }
     });
   };
   const addToCompleted = (recipeId) => {
@@ -67,6 +101,14 @@ export const DescriptCard = () => {
       setUser(editedUser);
       setCompleted(true);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido añadida a lista de completados 😍");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta añadir tu receta a tu lista de completados de nuevo",
+        );
+      }
     });
   };
   const deleteFromCompleted = (recipeId) => {
@@ -75,6 +117,14 @@ export const DescriptCard = () => {
       setUser(editedUser);
       setCompleted(false);
       localStorage.setItem("user", JSON.stringify(editedUser));
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "La receta ha sido añadida a tu lista de completados");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta eliminar tu receta de tu lista de completados de nuevo",
+        );
+      }
     });
   };
   return (
@@ -89,8 +139,13 @@ export const DescriptCard = () => {
             p={{ base: "10px", md: "20px" }}
             bgGradient="linear(to-r, #c03c031e , #f68c1336, #0ed28734)"
           >
-            <Box display="flex-block" w="80%" ml="80px">
-              <Flex key={item._id} w="950px" h={"350px"} justifyContent="center">
+            <NavLink to="/recipes">
+              <UiButton variant="back">
+                <ImArrowLeft2 />
+              </UiButton>
+            </NavLink>
+            <Box w="80%">
+              <Box key={item._id} h={"45vh"} alignContent="center">
                 <Image
                   borderRadius="10px"
                   objectFit={"cover"}
@@ -101,7 +156,7 @@ export const DescriptCard = () => {
                   display="flex"
                   justifyContent={"center"}
                 />
-              </Flex>
+              </Box>
               <HStack display={"flex"} justifyContent="flex-end" mt="1rem" mr="22px">
                 <HStack display={"flex"} justifyContent="center" >
                   <Flex
@@ -181,7 +236,7 @@ export const DescriptCard = () => {
                 item.tags.map((tag) => (
                   <Box
                     key={uuidv4()}
-                    bg="orange.500"
+                    bg="primary"
                     display={"inline-block"}
                     borderRadius="20px"
                     px={3}

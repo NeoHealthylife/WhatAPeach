@@ -19,13 +19,10 @@ const StyledCardListWrapper = styled.div`
     margin: auto;
     background: linear-gradient(95deg, #c03c0349 20%, #f68c134c 25%, #0ed28758 100%); 
     border-radius: 20px;
-
     
 
     .slick-arrow {
       display: block;
-      margin: 0 -3px;
-      
     }
   }
 
@@ -35,32 +32,40 @@ const StyledCardListWrapper = styled.div`
   }
 `;
 
+
+const StyledArrow = styled.div`
+  ::before {
+    color: whitesmoke;
+  }
+`;
+
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
+
   return (
-    <div className={className} style={{ background: "#fff" }} onClick={onClick}>
+    <StyledArrow className={className} onClick={onClick}>
       <img
         style={{ width: "20px" }}
         src="https://www.pngfind.com/pngs/m/302-3023323_arrow-pointing-to-right-comments-right-arrow-png.png"
       />
-    </div>
+    </StyledArrow>
   );
 }
 
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
   return (
-    <div className={className} style={{ background: "#fff" }} onClick={onClick}>
+    <StyledArrow className={className} onClick={onClick}>
       <img
         style={{ width: "20px" }}
         src="https://toppng.com/uploads/preview/arrow-pointing-to-the-left-115501167743epfu1fapc.png"
       />
-    </div>
+    </StyledArrow>
   );
 }
 
 const CardList = (props) => {
-  const { items, width, heigth, type, setChangeValue,  section } = props;
+  const { items, width, heigth, type, setChangeValue, section } = props;
 
   var settings = {
     className: "center",
@@ -103,12 +108,13 @@ const CardList = (props) => {
 
   return (
     <StyledCardListWrapper>
-      <Slider {...settings}>
+      <Slider {...settings}
+      >
         {items &&
           items.map((item) => (
             <CardComp
-            section={section}
-            setChangeValue={setChangeValue}
+              section={section}
+              setChangeValue={setChangeValue}
               key={item._id}
               item={item}
               width={width}
@@ -122,3 +128,4 @@ const CardList = (props) => {
 };
 
 export default CardList;
+

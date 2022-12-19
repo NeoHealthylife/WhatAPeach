@@ -82,7 +82,6 @@ const loginFromSocialLogin = async (req, res, next) => {
       token: token,
     });
   } catch (error) {
-    console.log('error', error);
     return next(setError(500, 'User login fail'));
   }
 };
@@ -144,7 +143,6 @@ const addFavRecipe = async (req, res, next) => {
       },
       { new: true }
     );
-    console.log(updateUser);
     return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);
@@ -215,7 +213,6 @@ const addTodoRecipe = async (req, res, next) => {
       },
       { new: true }
     );
-    console.log(updateUser);
     return res.status(200).json(updateUser);
   } catch (err) {
     return next(err);

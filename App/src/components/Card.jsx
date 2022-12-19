@@ -132,7 +132,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section}) => {
           <Flex
             p={2}
             alignItems="center"
-            justifyContent={"space-between"}
+            justifyContent={"center"}
             roundedBottom={"sm"}
             cursor={"pointer"}
             w="full"

@@ -21,9 +21,8 @@ import {
 // Here we have used react-icons package for the icons
 import { useContext } from "react";
 import { BiDumbbell } from "react-icons/bi";
-import { FiMenu } from "react-icons/fi";
-import { GiChewedHeart, GiForkKnifeSpoon } from "react-icons/gi";
-import { TiInputChecked, TiInputCheckedOutline } from "react-icons/ti";
+import { FiMenu, FiHome, FiInfo } from "react-icons/fi";
+import { GiForkKnifeSpoon } from "react-icons/gi";
 import { NavLink, useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
 import { NavItemLink } from "../NavItemLink";
@@ -116,11 +115,20 @@ const SidebarContent = ({ ...props }) => {
             as="nav"
             mb="5"
             fontSize="md"
-            color="black.300"
             aria-label="Main Navigation"
           >
-            <NavItemLink icon={GiForkKnifeSpoon} name="Recetas" href="/recipes" />
-            <NavItemLink icon={BiDumbbell} name="Workouts" href="/workouts" />
+            <Box m="1" borderRadius="5px" overflow="hidden">
+              <NavItemLink icon={FiHome} name="Home" href="/" />
+            </Box>
+            <Box m="1" borderRadius="5px" overflow="hidden">
+              <NavItemLink icon={GiForkKnifeSpoon} name="Recetas" href="/recipes" />
+            </Box>
+            <Box m="1" borderRadius="5px" overflow="hidden">
+              <NavItemLink icon={BiDumbbell} name="Workouts" href="/workouts" />
+            </Box>
+            <Box m="1" borderRadius="5px" overflow="hidden">
+              <NavItemLink icon={FiInfo} name="About" href="/about" />
+            </Box>
           </Flex>
           <Divider
             bg="white"
@@ -129,23 +137,6 @@ const SidebarContent = ({ ...props }) => {
             alignContent="center"
             orientation="horizontal"
           />
-          <Box mt="5">
-            <Flex
-              direction="column"
-              as="nav"
-              fontSize="md"
-              color="black.300"
-              aria-label="Main Navigation"
-            >
-              <NavItemLink icon={GiChewedHeart} name="Mis Favoritos" href="/favorites" />
-              <NavItemLink
-                icon={TiInputCheckedOutline}
-                name="Pendientes"
-                href="/pending"
-              />
-              <NavItemLink icon={TiInputChecked} name="Completados" href="/commpleted" />
-            </Flex>
-          </Box>
         </Box>
 
         <Flex px="4" py="5" mt={10} justify="center" alignItems="center">
