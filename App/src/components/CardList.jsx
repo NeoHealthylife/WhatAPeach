@@ -17,12 +17,16 @@ const StyledCardListWrapper = styled.div`
     max-width: 90%;
     padding: 18px 0;
     margin: auto;
+
     background: linear-gradient(95deg, #c03c0349 20%, #f68c134c 25%, #0ed28758 100%); 
     border-radius: 20px;
     
 
+
     .slick-arrow {
       display: block;
+      color: red;
+      margin: 0 -20px;
     }
   }
 
@@ -43,11 +47,8 @@ function SampleNextArrow(props) {
   const { className, style, onClick } = props;
 
   return (
-    <StyledArrow className={className} onClick={onClick}>
-      <img
-        style={{ width: "20px" }}
-        src="https://www.pngfind.com/pngs/m/302-3023323_arrow-pointing-to-right-comments-right-arrow-png.png"
-      />
+    <StyledArrow className={className} onClick={onClick} style={{ width: "30px" }}>
+      <img src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1671413223/Group_2454_bubkx7.png" />
     </StyledArrow>
   );
 }
@@ -55,11 +56,8 @@ function SampleNextArrow(props) {
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
   return (
-    <StyledArrow className={className} onClick={onClick}>
-      <img
-        style={{ width: "20px" }}
-        src="https://toppng.com/uploads/preview/arrow-pointing-to-the-left-115501167743epfu1fapc.png"
-      />
+    <StyledArrow className={className} onClick={onClick} style={{ width: "30px" }}>
+      <img src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1671413113/Group_2417_r4xkcz.png" />
     </StyledArrow>
   );
 }

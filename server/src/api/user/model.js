@@ -18,8 +18,10 @@ const userSchema = new mongoose.Schema(
     diet: {
       type: String,
       enum: ['vegetariana', 'vegana', 'omnívora'],
+
     },
     status: { type: String, enum: ['baja forma', 'buena forma', 'muy buena forma'] },
+
     target: {
       type: String,
       enum: ['perder peso', 'musculación', 'definición'],

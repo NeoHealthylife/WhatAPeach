@@ -51,7 +51,7 @@ const Recipes = () => {
       isChecked: false,
     },
     {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1669489891/paintings/idq57yew22xitacjftua.jpg",
+      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671323780/3244993-eggplant-vegetable-vegetables-veggie-veggies_107069_1_1_arohhu.png",
       name: "Verduras",
       isChecked: false,
     },
