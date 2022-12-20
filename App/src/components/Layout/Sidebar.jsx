@@ -156,7 +156,7 @@ const SidebarContent = ({ ...props }) => {
               />
               <Text fontSize="md">{user?.nickname}</Text>
             </MenuButton>
-            <MenuList fontSize={17} zIndex={5555}>
+            <MenuList fontSize={17} zIndex={5555} w="120px">
               <Button w="full" onClick={() => navigate("/perfil/misrecetas")}>
                 Mis Recetas
               </Button>

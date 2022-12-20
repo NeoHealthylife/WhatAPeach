@@ -44,7 +44,7 @@ export const DescriptCard = () => {
       } else {
         showToast(
           "error",
-          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos más tarde",
         );
       }
     });
@@ -60,7 +60,7 @@ export const DescriptCard = () => {
       } else {
         showToast(
           "error",
-          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos más tarde",
         );
       }
     });
@@ -130,7 +130,7 @@ export const DescriptCard = () => {
   return (
     <>
       {item !== null ? (
-        <Center py={2}   >
+        <Center py={2}>
           <Box
             h="100%"
             margin={{ base: 0, md: "1rem" }}
@@ -144,91 +144,91 @@ export const DescriptCard = () => {
                 <ImArrowLeft2 />
               </UiButton>
             </NavLink>
-            <Box w="80%">
-              <Box key={item._id} h={"45vh"} alignContent="center">
-                <Image
-                  borderRadius="10px"
-                  objectFit={"cover"}
-                  h="full"
-                  width={"65%"}
-                  alt={item.title}
-                  src={item.image}
-                  display="flex"
-                  justifyContent={"center"}
-                />
-              </Box>
-              <HStack display={"flex"} justifyContent="flex-end" mt="1rem" mr="22px">
-                <HStack display={"flex"} justifyContent="center" >
-                  <Flex
-                    p={2}
-                    flexDirection={"row"}
-                    justifyContent={"flex-end"}
-                    ml="50px"
-                    roundedBottom={"sm"}
-                    cursor={"pointer"}
-                    
-                    onClick={() => setToDo(!todo)}
-                  >
-                    {!todo && !completed && (
-                      <Button variant="secondary" onClick={() => addToDo(item._id)}>
-                        Let's do it!
-                      </Button>
-                    )}
-
-                    {todo && !completed && (
-                      <Button variant="secondary" onClick={() => deleteToDo(item._id)}>
-                        No me interesa 😥
-                      </Button>
-                    )}
-                  </Flex>
-                  <Flex
-                    p={2}
-                    alignItems="center"
-                    justifyContent={"flex-end"}
-                    roundedBottom={"sm"}
-                    cursor={"pointer"}
-                    w="150px"
-                  >
-                    {todo && !completed && (
-                      <>
-                        <Button onClick={() => addToCompleted(item._id)}>
-                          Completar
-                        </Button>
-                      </>
-                    )}
-                    {completed && (
-                      <Button onClick={() => deleteFromCompleted(item._id)}>
-                        Completado
-                      </Button>
-                    )}
-                  </Flex>
-                </HStack>
+            <Box
+              width={"100%"}
+              h={"45vh"}
+              display="flex"
+              justifyContent={"center"}
+              alignContent="center"
+            >
+              <Image
+                borderRadius="10px"
+                objectFit={"cover"}
+                h="full"
+                width={{ base: "100%", md: "60%" }}
+                maxWidth={{ base: "100%", md: "600px" }}
+                maxHeight={{ base: "auto", md: "600px" }}
+                alt={item.title}
+                src={item.image}
+              />
+            </Box>
+            <Box
+              width={{ base: "100%", md: "600px" }}
+              display={"flex"}
+              justifyContent="flex-end"
+              m="auto"
+              mt="2rem"
+            >
+              {!completed && (
                 <Flex
-                  p={1}
-                  alignItems="center"
-                  justifyContent={"space-around"}
+                  p={2}
+                  flexDirection={"row"}
                   roundedBottom={"sm"}
-                  cursor="pointer"
-                  onClick={() => setLiked(!liked)}
+                  cursor={"pointer"}
+                  onClick={() => setToDo(!todo)}
                 >
-                  {liked ? (
-                    <IconButton
-                      onClick={() => deleteToFav(item._id)}
-                      variant="primary"
-                      icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
-                    />
-                  ) : (
-                    <IconButton
-                      onClick={() => addToFav(item._id)}
-                      variant="primary"
-                      icon={<RiHeart2Line color="red" fontSize={"24px"} />}
-                    />
+                  {!todo && !completed && (
+                    <Button variant="secondary" onClick={() => addToDo(item._id)}>
+                      Let's do it!
+                    </Button>
+                  )}
+
+                  {todo && !completed && (
+                    <Button variant="secondary" onClick={() => deleteToDo(item._id)}>
+                      No me interesa
+                    </Button>
                   )}
                 </Flex>
-              </HStack>
-            </Box>
+              )}
 
-            <Box mt="1rem">
+              {todo && (
+                <Flex alignItems="center" roundedBottom={"sm"} cursor={"pointer"}>
+                  {todo && !completed && (
+                    <>
+                      <Button onClick={() => addToCompleted(item._id)}>Completar</Button>
+                    </>
+                  )}
+                  {completed && (
+                    <Button onClick={() => deleteFromCompleted(item._id)}>
+                      Completado
+                    </Button>
+                  )}
+                </Flex>
+              )}
+
+              <Flex
+                p={1}
+                alignItems="center"
+                roundedBottom={"sm"}
+                cursor="pointer"
+                onClick={() => setLiked(!liked)}
+              >
+                {liked ? (
+                  <IconButton
+                    onClick={() => deleteToFav(item._id)}
+                    variant="primary"
+                    icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
+                  />
+                ) : (
+                  <IconButton
+                    onClick={() => addToFav(item._id)}
+                    variant="primary"
+                    icon={<RiHeart2Line color="red" fontSize={"24px"} />}
+                  />
+                )}
+              </Flex>
+            </Box>
+            <Box mt="1rem" px={{ base: "auto", md: "3rem" }}>
               <Heading alignContent="center" variant="H1" mb="1.5rem">
                 {item.title}
               </Heading>
@@ -256,16 +256,23 @@ export const DescriptCard = () => {
               display="flex"
               columnGap="10rem"
               p="2"
+              px={{ base: "auto", md: "3rem" }}
               mt="2rem"
               justifyContent="space-between"
               flexDirection={{ base: "column-reverse", md: "row" }}
             >
-              <Box width="65%">
+              <Box width={{ base: "100%", md: "65%" }}>
                 <Heading variant="H2">Instrucciones:</Heading>
                 <OrderedList mt="1rem">
                   {item.recipe.length &&
                     item.recipe.map((num, index) => (
-                      <ListItem key={`paso_${index}`} mb="1rem" fontSize="md" gap="8">
+                      <ListItem
+                        key={`paso_${index}`}
+                        mb="1rem"
+                        fontSize="md"
+                        gap="8"
+                        textAlign="justify"
+                      >
                         {num}
                       </ListItem>
                     ))}
@@ -273,7 +280,9 @@ export const DescriptCard = () => {
               </Box>
               <Box display="block">
                 <Box display="flex" mb="2rem">
-                  <Heading variant="H2">Tiempo:</Heading>
+                  <Heading variant="H2" mr="10px">
+                    Tiempo:
+                  </Heading>
                   <Text fontSize="md"> {item.time} min</Text>
                 </Box>
                 <Box>
