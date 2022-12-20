@@ -130,13 +130,18 @@ export const DetailWorkout = () => {
       {item !== null ? (
         <Center py={2}>
           <Box
+            h="100%"
             margin={{ base: 0, md: "1rem" }}
-            bg="white"
             borderRadius="20px"
             p={{ base: "10px", md: "20px" }}
             bgGradient="linear(to-r, #c03c031e , #f68c1336, #0ed28734)"
           >
-            <Box display="flex" justifyContent={"center"} alignContent="center">
+            <Box
+              width={"100%"}
+              display="flex"
+              justifyContent={"center"}
+              alignContent="center"
+            >
               <Image
                 borderRadius="10px"
                 objectFit={"cover"}
@@ -159,7 +164,6 @@ export const DetailWorkout = () => {
                 <Flex
                   p={2}
                   flexDirection={"row"}
-                  ml="50px"
                   roundedBottom={"sm"}
                   cursor={"pointer"}
                   onClick={() => setToDo(!todo)}
@@ -179,13 +183,7 @@ export const DetailWorkout = () => {
               )}
 
               {todo && (
-                <Flex
-                  p={2}
-                  alignItems="center"
-                  roundedBottom={"sm"}
-                  cursor={"pointer"}
-                  w="150px"
-                >
+                <Flex alignItems="center" roundedBottom={"sm"} cursor={"pointer"}>
                   {todo && !completed && (
                     <>
                       <Button onClick={() => addToCompleted(item._id)}>Completar</Button>
@@ -220,7 +218,7 @@ export const DetailWorkout = () => {
                 )}
               </Flex>
             </Box>
-            <Box mt="1rem">
+            <Box mt="1rem" px={{ base: "auto", md: "3rem" }}>
               <Heading alignContent="center" variant="H1" mb="1.5rem">
                 {item.title}
               </Heading>
@@ -246,13 +244,14 @@ export const DetailWorkout = () => {
             <Flex
               alignContent="center"
               display="flex"
-              columnGap="150px"
+              columnGap="10rem"
               p="2"
               px={{ base: "auto", md: "3rem" }}
               mt="2rem"
+              justifyContent="space-between"
               flexDirection={{ base: "column-reverse", md: "row" }}
             >
-              <Box width={{ base: "100%", md: "65%" }}>
+              <Box width={{ base: "100%", md: "75%" }}>
                 <Heading variant="H2">Workout</Heading>
                 <OrderedList mt="1rem">
                   {item.workout.length &&
@@ -271,7 +270,9 @@ export const DetailWorkout = () => {
               </Box>
               <Box display="block">
                 <Box display="flex" mb="2rem">
-                  <Heading variant="H2">Tiempo:</Heading>
+                  <Heading variant="H2" mr="10px">
+                    Tiempo:
+                  </Heading>
                   <Text fontSize="md"> {item.time} min</Text>
                 </Box>
                 <Box>

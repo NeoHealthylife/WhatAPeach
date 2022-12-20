@@ -134,7 +134,6 @@ export const DescriptCard = () => {
           <Box
             h="100%"
             margin={{ base: 0, md: "1rem" }}
-            bg="white"
             borderRadius="20px"
             p={{ base: "10px", md: "20px" }}
             bgGradient="linear(to-r, #c03c031e , #f68c1336, #0ed28734)"
