@@ -17,7 +17,8 @@ export const myTheme = extendTheme({
     secondary: "#024b42",
     "soft-secondary": "#12b396",
     dark: "#100102",
-    "sof-dark": "#4B1E19",
+    "soft-dark": "#4B1E19",
+    label: "#ffa787",
   },
   fontSizes: {
     lg: "22px",

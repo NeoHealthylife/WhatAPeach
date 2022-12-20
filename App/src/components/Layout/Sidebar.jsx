@@ -59,7 +59,19 @@ export default function Sidebar() {
             onClick={onOpen}
             icon={<FiMenu />}
             size="md"
+            bg="transparent"
+            color="white"
+            fontSize="30px"
+            variant="secondary"
           />
+          <NavLink to="/">
+            <Image
+              mx="2"
+              boxSize="10"
+              src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1671495636/Group_oze64f.png"
+              alt="logo"
+            />
+          </NavLink>
         </Flex>
         <Box
           as="main"
@@ -139,7 +151,7 @@ const SidebarContent = ({ ...props }) => {
           />
         </Box>
 
-        <Flex px="4" py="5" mt={10} justify="center" alignItems="center">
+        <Flex px="25px" py="50px" mt={10} justify="center" alignItems="center">
           <Menu>
             <MenuButton
               as={Button}
@@ -150,7 +162,7 @@ const SidebarContent = ({ ...props }) => {
               _hover={{ textDecoration: "none" }}
             >
               <Avatar
-                size={"md"}
+                size="xl"
                 name="Ahmad"
                 src="https://avatars2.githubusercontent.com/u/37842853?v=4"
               />

@@ -82,12 +82,12 @@ const Edituser = () => {
                   <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onFormSubmit)}>
                       <Box>
-                        <Stack w="430px" py={8} px={6}>
+                        <Stack w="500px" py={8} px={6}>
                           <Box
                             rounded={"lg"}
                             bg={useColorModeValue("white", "gray.700")}
                             boxShadow="#101010 4px 6px 0 0"
-                            p={6}
+                            p={8}
                           >
                             <Stack spacing={1}>
                               {user.nickname && (
@@ -197,6 +197,7 @@ const Edituser = () => {
                                 {user.status && (
                                   <Box w="50%">
                                     <UISelect
+                                      label="Estado Físico"
                                       defaultValue={[user.status]}
                                       placeholder="Estado físico 💪"
                                       name="status"
@@ -211,6 +212,7 @@ const Edituser = () => {
                               {user.target && (
                                 <Box>
                                   <UISelect
+                                    label="Objetivo"
                                     defaultValue={user.target} /////POR QUÉ NO NECESITO ESPECIFICAR QUE ES UN ARRAY??
                                     placeholder="Define tus objetivos 🎯"
                                     name="target"
@@ -224,6 +226,7 @@ const Edituser = () => {
                               {user.equipment !== undefined && (
                                 <Box>
                                   <UISelect
+                                    label="Material"
                                     defaultValue={user.equipment}
                                     name="equipment"
                                     placeholder="¿Tienes material para tus workouts?"

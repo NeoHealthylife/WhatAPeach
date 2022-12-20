@@ -9,7 +9,11 @@ const UISelect = ({ options, label, placeholder, name, validations, defaultValue
 
   return (
     <FormControl>
-      {label && <FormLabel>{label}</FormLabel>}
+      {label && (
+        <FormLabel fontSize="sm" color="label">
+          {label}
+        </FormLabel>
+      )}
       <Select
         fontSize="sm"
         placeholder={placeholder}

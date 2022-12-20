@@ -27,15 +27,17 @@ const CardStyled = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fe9066;
-  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  color: #ffdfd2;
+  letter-spacing: 0.04cm;
+  text-shadow: 4px 6px 5px rgba(0, 0, 0, 0.8);
   font-size: xx-large;
   margin-top: 2rem;
   text-align: center;
 
   :hover {
-    box-shadow: 3px 6px 0 #fe9166;
+    box-shadow: 4px 10px 0 #fe9166;
     margin-top: 1.8rem;
+    transition: 0.4s ease-in-out;
   }
 
   @media (min-width: 600px) {
@@ -49,7 +51,7 @@ const CardStyled = styled.button`
   }
 
   &.recipes {
-    background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671474001/shutterstock_736615915_1_1_jnko6s.jpg");
+    background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671493538/shutterstock_736615915_1_1_jnko6s.jpg");
   }
   &.workouts {
     background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671276169/HealthyLife/workout2_wgipac.webp");

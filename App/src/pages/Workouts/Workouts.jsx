@@ -19,6 +19,7 @@ import { FaCheckDouble } from "react-icons/fa";
 import UISpan from "../../components/UIComponents/UISpan";
 import UIInput from "../../components/UIComponents/UIInput";
 import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
+import { bodyPartsToDisplay } from "../../utils/tagsFilters";
 
 const Workouts = () => {
   const { user } = useContext(GlobalContext);
@@ -40,59 +41,6 @@ const Workouts = () => {
     Definición: false,
     Volumen: false,
   });
-
-  const partsToDisplay = [
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671411712/culo_r7ppfo.png",
-      name: "Glúteos",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671479929/espalda_1_ks92ti.png",
-      name: "Hombros",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671411854/espalda_fq5fc3.png",
-      name: "Espalda",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
-      name: "Piernas",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
-      name: "Cuádriceps",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671412092/pecho_mx1nys.png",
-      name: "Pecho",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
-      name: "Brazos",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671411854/cardio_1_duunsv.png",
-      name: "Cardio",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
-      name: "Definición",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671479930/volumen_1_qiwnst.png",
-      name: "Volumen",
-      isChecked: false,
-    },
-  ];
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
@@ -158,8 +106,9 @@ const Workouts = () => {
           <Heading variant="H2" mr="50px">
             Workouts para...
           </Heading>
-          {partsToDisplay.map(({ img, name, isChecked }) => (
+          {bodyPartsToDisplay.map(({ img, name, isChecked }) => (
             <Checkbox
+              icon={<FaCheckDouble />}
               sx={outlinedClasses}
               spacing="18px"
               key={name}
@@ -169,9 +118,17 @@ const Workouts = () => {
               borderRadius="24px"
               border="1px"
               borderColor="primary"
+              bg="whiteAlpha.600"
             >
               <Flex alignItems="center">
-                <Image borderRadius="full" boxSize="35px" src={img} alt={name} mr={2} />
+                <Image
+                  borderRadius="full"
+                  bg="whiteAlpha.600"
+                  boxSize="35px"
+                  src={img}
+                  alt={name}
+                  mr={2}
+                />
                 <Stack>
                   <Text letterSpacing="0.0275em" fontSize="sm">
                     {name}

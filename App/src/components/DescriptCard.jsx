@@ -130,7 +130,7 @@ export const DescriptCard = () => {
   return (
     <>
       {item !== null ? (
-        <Center py={2}   >
+        <Center py={2}>
           <Box
             h="100%"
             margin={{ base: 0, md: "1rem" }}
@@ -158,7 +158,7 @@ export const DescriptCard = () => {
                 />
               </Box>
               <HStack display={"flex"} justifyContent="flex-end" mt="1rem" mr="22px">
-                <HStack display={"flex"} justifyContent="center" >
+                <HStack display={"flex"} justifyContent="center">
                   <Flex
                     p={2}
                     flexDirection={"row"}
@@ -166,7 +166,6 @@ export const DescriptCard = () => {
                     ml="50px"
                     roundedBottom={"sm"}
                     cursor={"pointer"}
-                    
                     onClick={() => setToDo(!todo)}
                   >
                     {!todo && !completed && (

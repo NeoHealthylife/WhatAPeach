@@ -24,7 +24,9 @@ const UIFormInput = ({
   const { errors } = useFormState();
   return (
     <FormControl>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel fontSize="sm" color="label">
+        {label}
+      </FormLabel>
       <Input
         fontSize="sm"
         {...register(name, validations)}
