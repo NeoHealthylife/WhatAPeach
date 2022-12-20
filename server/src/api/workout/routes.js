@@ -1,4 +1,5 @@
 const WorkoutRoutes = require('express').Router();
+const upload = require('../../middlewares/file');
 /* const upload = require('../../middlewares/file'); */
 const {
   getWorkouts,
@@ -10,9 +11,9 @@ const {
 const { isBasic } = require('../../middlewares/basic.middlewares');
 const { isAdmin } = require('../../middlewares/admin.middlewares');
 
-WorkoutRoutes.get('/', [isBasic], getWorkouts);
-WorkoutRoutes.post('/', [isBasic], postWorkout);
 WorkoutRoutes.patch('/:id', [isAdmin], patchWorkout);
 WorkoutRoutes.delete('/:id', [isBasic], deleteWorkout);
+WorkoutRoutes.get('/', [isBasic], getWorkouts);
+WorkoutRoutes.post('/', [isBasic], upload.single('image'), postWorkout);
 
 module.exports = WorkoutRoutes;

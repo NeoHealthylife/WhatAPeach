@@ -39,8 +39,10 @@ const Register = () => {
 
   const onFormSubmit = (data) => {
     data.equipment = data.equipment === "true" ? true : false;
+
     API.post("/users/register", data)
       .then((res) => {
+        console.log(res);
         if (res.data.status === 201 || res.data.status === 200) {
           toast({
             position: "top",
@@ -83,14 +85,8 @@ const Register = () => {
                         w="137px"
                         src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670515077/HealthyLife/logo_1_kano6g.svg"
                       />
-                      <Box>
-                        <Text pt="15px" fontSize="20px" fontWeight="bold">
-                          ¡Bienvenidx!
-                        </Text>
-                        <Text fontSize="14px">Rellena tus datos y crea tu cuenta 😎</Text>
-                      </Box>
                     </Flex>
-                    <Box>
+                    <Box pt="40px">
                       <UIFormInput
                         name="nickname"
                         placeholder="Nickname"

@@ -19,9 +19,9 @@ import { v4 as uuidv4 } from "uuid";
 import { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import { Navigate, NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { API } from "../services/API";
-import UiButton from "./UIComponents/UIButton";
+
 import { ImArrowLeft2 } from "react-icons/im";
 
 export const DescriptCard = () => {
@@ -44,7 +44,7 @@ export const DescriptCard = () => {
       } else {
         showToast(
           "error",
-          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos más tarde",
         );
       }
     });
@@ -60,7 +60,7 @@ export const DescriptCard = () => {
       } else {
         showToast(
           "error",
-          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos de nuevo",
+          "Ha habido un error inesperado. Intenta añadir tu receta a favoritos más tarde",
         );
       }
     });
@@ -137,30 +137,39 @@ export const DescriptCard = () => {
             bg="white"
             borderRadius="20px"
             p={{ base: "10px", md: "20px" }}
+            bgGradient="linear(to-r, #c03c031e , #f68c1336, #0ed28734)"
           >
-            <NavLink to="/recipes">
-              <UiButton variant="back">
-                <ImArrowLeft2 />
-              </UiButton>
-            </NavLink>
-            <Box w="80%">
-              <Box key={item._id} h={"45vh"} alignContent="center">
-                <Image
-                  borderRadius="10px"
-                  objectFit="cover"
-                  h="full"
-                  alt={item.title}
-                  src={item.image}
-                />
-              </Box>
-              <HStack mt="1rem">
+            <Box
+              width={"100%"}
+              h={"45vh"}
+              display="flex"
+              justifyContent={"center"}
+              alignContent="center"
+            >
+              <Image
+                borderRadius="10px"
+                objectFit={"cover"}
+                h="full"
+                width={{ base: "100%", md: "60%" }}
+                maxWidth={{ base: "100%", md: "600px" }}
+                maxHeight={{ base: "auto", md: "600px" }}
+                alt={item.title}
+                src={item.image}
+              />
+            </Box>
+            <Box
+              width={{ base: "100%", md: "600px" }}
+              display={"flex"}
+              justifyContent="flex-end"
+              m="auto"
+              mt="2rem"
+            >
+              {!completed && (
                 <Flex
                   p={2}
-                  alignItems="center"
-                  justifyContent={"flex-end"}
+                  flexDirection={"row"}
                   roundedBottom={"sm"}
                   cursor={"pointer"}
-                  w="full"
                   onClick={() => setToDo(!todo)}
                 >
                   {!todo && !completed && (
@@ -171,23 +180,17 @@ export const DescriptCard = () => {
 
                   {todo && !completed && (
                     <Button variant="secondary" onClick={() => deleteToDo(item._id)}>
-                      No me interesa 😥
+                      No me interesa
                     </Button>
                   )}
                 </Flex>
-                <Flex
-                  p={2}
-                  alignItems="center"
-                  justifyContent={"flex-end"}
-                  roundedBottom={"sm"}
-                  cursor={"pointer"}
-                  w="full"
-                >
+              )}
+
+              {todo && (
+                <Flex alignItems="center" roundedBottom={"sm"} cursor={"pointer"}>
                   {todo && !completed && (
                     <>
-                      <Button onClick={() => addToCompleted(item._id)}>
-                        Completar 🥳
-                      </Button>
+                      <Button onClick={() => addToCompleted(item._id)}>Completar</Button>
                     </>
                   )}
                   {completed && (
@@ -196,37 +199,32 @@ export const DescriptCard = () => {
                     </Button>
                   )}
                 </Flex>
-                <Flex
-                  p={1}
-                  alignItems="center"
-                  justifyContent={"space-between"}
-                  roundedBottom={"sm"}
-                  cursor="pointer"
-                  onClick={() => setLiked(!liked)}
-                >
-                  {liked ? (
-                    <IconButton
-                      onClick={() => deleteToFav(item._id)}
-                      variant="primary"
-                      icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
-                    />
-                  ) : (
-                    <IconButton
-                      onClick={() => addToFav(item._id)}
-                      variant="primary"
-                      icon={<RiHeart2Line color="red" fontSize={"24px"} />}
-                    />
-                  )}
-                </Flex>
-              </HStack>
-            </Box>
-            <Box mt="1rem">
-              <Heading
-                alignContent="center"
-                variant="H1"
-                mb="1.5rem"
-                textTransform="lowercase"
+              )}
+
+              <Flex
+                p={1}
+                alignItems="center"
+                roundedBottom={"sm"}
+                cursor="pointer"
+                onClick={() => setLiked(!liked)}
               >
+                {liked ? (
+                  <IconButton
+                    onClick={() => deleteToFav(item._id)}
+                    variant="primary"
+                    icon={<RiHeart2Fill fill="red" fontSize={"24px"} />}
+                  />
+                ) : (
+                  <IconButton
+                    onClick={() => addToFav(item._id)}
+                    variant="primary"
+                    icon={<RiHeart2Line color="red" fontSize={"24px"} />}
+                  />
+                )}
+              </Flex>
+            </Box>
+            <Box mt="1rem" px={{ base: "auto", md: "3rem" }}>
+              <Heading alignContent="center" variant="H1" mb="1.5rem">
                 {item.title}
               </Heading>
               {item.tags.length &&
@@ -253,16 +251,23 @@ export const DescriptCard = () => {
               display="flex"
               columnGap="10rem"
               p="2"
+              px={{ base: "auto", md: "3rem" }}
               mt="2rem"
               justifyContent="space-between"
               flexDirection={{ base: "column-reverse", md: "row" }}
             >
-              <Box width="65%">
+              <Box width={{ base: "100%", md: "65%" }}>
                 <Heading variant="H2">Instrucciones:</Heading>
                 <OrderedList mt="1rem">
                   {item.recipe.length &&
                     item.recipe.map((num, index) => (
-                      <ListItem key={`paso_${index}`} mb="1rem" fontSize="md" gap="8">
+                      <ListItem
+                        key={`paso_${index}`}
+                        mb="1rem"
+                        fontSize="md"
+                        gap="8"
+                        textAlign="justify"
+                      >
                         {num}
                       </ListItem>
                     ))}
@@ -270,7 +275,9 @@ export const DescriptCard = () => {
               </Box>
               <Box display="block">
                 <Box display="flex" mb="2rem">
-                  <Heading variant="H2">Tiempo:</Heading>
+                  <Heading variant="H2" mr="10px">
+                    Tiempo:
+                  </Heading>
                   <Text fontSize="md"> {item.time} min</Text>
                 </Box>
                 <Box>

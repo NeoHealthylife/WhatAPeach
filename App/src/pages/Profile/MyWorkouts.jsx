@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import CardList from "../../components/CardList";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import { API } from "../../services/API";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import { TiInputChecked, TiInputCheckedOutline } from "react-icons/ti";
 import { GiChewedHeart } from "react-icons/gi";
 
-export const MyRecipes = () => {
+export const MyWorkouts = () => {
   const [profile, setProfile] = useState({});
   const [changeValue, setChangeValue] = useState("");
 
@@ -29,17 +29,17 @@ export const MyRecipes = () => {
       >
         <GiChewedHeart size="25px" /> Favoritas
       </Heading>
-      {profile.favRecipes?.length !== 0 ? (
+      {profile.favWorkouts?.length !== 0 ? (
         <CardList
           section="favorite"
           width="250px"
           heigth="360px"
-          items={profile.favRecipes}
-          type="recipe"
+          items={profile.favWorkouts}
+          type="workout"
           setChangeValue={setChangeValue}
         />
       ) : (
-        <Text>Añade tus recetas</Text>
+        <Text>Añade tus workouts</Text>
       )}
       <Heading
         variant="H3"
@@ -52,16 +52,16 @@ export const MyRecipes = () => {
       >
         <TiInputCheckedOutline size="40px" /> Pendientes
       </Heading>
-      {profile.toDoRecipes?.length !== 0 ? (
+      {profile.toDoWorkouts?.length !== 0 ? (
         <CardList
           width="250px"
           heigth="360px"
-          items={profile.toDoRecipes}
-          type="recipe"
+          items={profile.toDoWorkouts}
+          type="workout"
           section="pending"
         />
       ) : (
-        <Text>Añade tus recetas</Text>
+        <Text>Añade tus workouts</Text>
       )}
       <Heading
         variant="H3"
@@ -74,15 +74,15 @@ export const MyRecipes = () => {
       >
         <TiInputChecked size="40px" /> Completadas
       </Heading>
-      {profile.completedRecipes?.length !== 0 ? (
+      {profile.completedWorkouts?.length !== 0 ? (
         <CardList
           width="250px"
           heigth="360px"
-          items={profile.completedRecipes}
-          type="recipe"
+          items={profile.completedWorkouts}
+          type="workout"
         />
       ) : (
-        <Text>Añade tus recetas</Text>
+        <Text>Añade tus workouts</Text>
       )}
     </LayoutWrapper>
   );

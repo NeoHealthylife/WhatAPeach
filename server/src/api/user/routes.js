@@ -2,7 +2,7 @@ const UserRoutes = require('express').Router();
 
 const { isAdmin } = require('../../middlewares/admin.middlewares');
 const { isBasic } = require('../../middlewares/basic.middlewares');
-
+// const upload = require ("../../middlewares/file")
 const passport = require('passport');
 require('./passportSetup');
 
@@ -16,15 +16,16 @@ const {
   getUsers,
   getUser,
   deleteUser,
-  // updatetUser,
+  updatetUser,
   addFavRecipe,
   addFavWorkout,
   loginFromSocialLogin,
   deleteFavRecipe,
   deleteFavWorkout,
-  deletetodorecipe,
   addTodoRecipe,
+  deletetodorecipe,
   addTodoWorkout,
+  deleteTodoWorkout,
   addCompletedRecipe,
   deleteCompletedRecipe,
   addCompletedWorkout,
@@ -92,10 +93,6 @@ UserRoutes.post('/register', register);
 
 UserRoutes.post('/login', login);
 
-UserRoutes.get('/', getUsers);
-UserRoutes.delete('/:id', [isAdmin], deleteUser);
-UserRoutes.get('/:id', getUser);
-// UserRoutes.patch('/:id', updatetUser);
 UserRoutes.patch('/addfavrecipe', [isBasic], addFavRecipe);
 UserRoutes.patch('/addfavworkout', [isBasic], addFavWorkout);
 UserRoutes.patch('/deletefavrecipe', [isBasic], deleteFavRecipe);
@@ -103,9 +100,14 @@ UserRoutes.patch('/deletefavworkout', [isBasic], deleteFavWorkout);
 UserRoutes.patch('/todorecipe', [isBasic], addTodoRecipe);
 UserRoutes.patch('/deletetodorecipe', [isBasic], deletetodorecipe);
 UserRoutes.patch('/todoworkout', [isBasic], addTodoWorkout);
+UserRoutes.patch('/deletetodoworkout', [isBasic], deleteTodoWorkout);
 UserRoutes.patch('/addcompleterecipe', [isBasic], addCompletedRecipe);
 UserRoutes.patch('/addcompleteworkout', [isBasic], addCompletedWorkout);
 UserRoutes.patch('/deletecompleterecipe', [isBasic], deleteCompletedRecipe);
 UserRoutes.patch('/deletecompleteworkout', [isBasic], deleteCompletedWorkout);
+UserRoutes.get('/', getUsers);
+UserRoutes.delete('/:id', [isAdmin], deleteUser);
+UserRoutes.get('/:id', getUser);
+UserRoutes.patch('/:id', updatetUser);
 
 module.exports = UserRoutes;

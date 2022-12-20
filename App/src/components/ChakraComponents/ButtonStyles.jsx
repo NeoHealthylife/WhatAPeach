@@ -1,5 +1,4 @@
 export const ButtonStyles = {
-  
   defaultStyle: {
     bg: "softprim",
     color: "dark",

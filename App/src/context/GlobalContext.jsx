@@ -1,11 +1,11 @@
 import { useToast } from "@chakra-ui/react";
 import { createContext, useState } from "react";
+
 const GlobalContext = createContext();
 
 const GlobalContextProvider = ({ children }) => {
   const toast = useToast();
 
-  const [interruptor, setInterruptor] = useState(false);
   const [homeContent, setHomeContent] = useState("intro");
 
   const [activePage, setActivePage] = useState("");
@@ -52,8 +52,6 @@ const GlobalContextProvider = ({ children }) => {
   };
 
   const value = {
-    interruptor,
-    setInterruptor,
     homeContent,
     isLogged,
     setIsLogged,

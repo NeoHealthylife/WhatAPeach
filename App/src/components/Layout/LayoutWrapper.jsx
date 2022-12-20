@@ -3,6 +3,9 @@ import styled from "styled-components";
 import Footer from "./Footer";
 // import Header from "./Header";
 import Sidebar from "./Sidebar";
+import { useNavigate, useLocation } from "react-router-dom";
+import { ImArrowLeft2 } from "react-icons/im";
+import UiButton from "../UIComponents/UIButton";
 
 const StyledMainWrapper = styled.div`
   max-width: 100vw;
@@ -28,13 +31,24 @@ const StyledMainContent = styled.div`
     padding: 20px;
   }
 `;
-
+const backBtnExceptions = ["/"];
 const LayoutWrapper = (props) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <StyledMainWrapper>
       <Sidebar />
       <RightContentWrapper>
-        <StyledMainContent>{props.children}</StyledMainContent>
+        <StyledMainContent>
+          {!backBtnExceptions.includes(location.pathname) && (
+            <UiButton variant="back" onClick={() => navigate(-1)}>
+              <ImArrowLeft2 />
+            </UiButton>
+          )}
+          {props.children}
+        </StyledMainContent>
+
         <Footer />
       </RightContentWrapper>
     </StyledMainWrapper>

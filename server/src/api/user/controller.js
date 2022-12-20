@@ -13,11 +13,12 @@ const register = async (req, res, next) => {
       req.body.provider = 'organic';
     }
     const newUser = new User(req.body);
+
     const userDuplicate = await User.findOne({ nickname: newUser.nickname });
 
     if (userDuplicate) return next('User alredy exists');
 
-    newUser.save();
+    await newUser.save();
     return res.json({
       status: 201,
       message: 'user registered',
@@ -121,17 +122,18 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-// const updatetUser = async (req, res, next) => {
-//   try {
-//     const { id } = req.params;
-//     const user = new User(req.body);
-//     user._id = id;
-//     const editUser = await User.findByIdAndUpdate(id);
-//     return res.status(200).json(editUser);
-//   } catch (err) {
-//     return next(err);
-//   }
-// };
+const updatetUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = new User(req.body);
+    user._id = id;
+    const editUser = await User.findByIdAndUpdate(id, user);
+    editUser.password = user.password;
+    return res.status(200).json(user);
+  } catch (err) {
+    return next(err);
+  }
+};
 
 const addFavRecipe = async (req, res, next) => {
   try {
@@ -253,6 +255,23 @@ const addTodoWorkout = async (req, res, next) => {
   }
 };
 
+const deleteTodoWorkout = async (req, res, next) => {
+  try {
+    const { userId, workoutId } = req.body;
+    const updateUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { toDoWorkouts: workoutId },
+      },
+      { new: true }
+    );
+
+    return res.status(200).json(updateUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const addCompletedRecipe = async (req, res, next) => {
   try {
     const { userId } = req.body;
@@ -329,7 +348,7 @@ module.exports = {
   login,
   getUsers,
   getUser,
-  // updatetUser,
+  updatetUser,
   deletetodorecipe,
   deleteUser,
   addFavRecipe,
@@ -341,5 +360,6 @@ module.exports = {
   addCompletedRecipe,
   deleteCompletedRecipe,
   addCompletedWorkout,
+  deleteTodoWorkout,
   deleteCompletedWorkout,
 };

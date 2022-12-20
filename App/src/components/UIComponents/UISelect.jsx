@@ -3,16 +3,23 @@ import React from "react";
 import { ErrorMessage } from "@hookform/error-message";
 import { useFormContext, useFormState } from "react-hook-form";
 import { ErrorStyled } from "./UIFormInput";
-const UISelect = ({ options, label, placeholder, name, validations }) => {
+const UISelect = ({ options, label, placeholder, name, validations, defaultValue }) => {
   const { register } = useFormContext();
   const { errors } = useFormState();
 
   return (
     <FormControl>
-      {label && <FormLabel>{label}</FormLabel>}
-      <Select 
-      fontSize="sm"
-      placeholder={placeholder} {...register(name, validations)}>
+      {label && (
+        <FormLabel fontSize="sm" color="label">
+          {label}
+        </FormLabel>
+      )}
+      <Select
+        fontSize="sm"
+        placeholder={placeholder}
+        {...register(name, validations)}
+        defaultValue={defaultValue}
+      >
         {options &&
           options.map((option, index) => (
             <option key={index} value={option.value}>

@@ -8,6 +8,7 @@ import {
   IconButton,
   Image,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
@@ -15,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import GlobalContext from "../context/GlobalContext";
 import { API } from "../services/API";
-import { useToast } from "@chakra-ui/react";
 
 const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
   const toast = useToast();
@@ -52,14 +52,14 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
     };
 
     API.patch(config[type].url, config[type].data).then((response) => {
-      const editedUser = response.data;
-      setUser(editedUser);
-      localStorage.setItem("user", JSON.stringify(editedUser));
-      setChangeValue(JSON.stringify(editedUser));
       if (response.status === 201 || response.status === 200) {
+        const editedUser = response.data;
+        setUser(editedUser);
+        localStorage.setItem("user", JSON.stringify(editedUser));
+        setChangeValue(JSON.stringify(editedUser));
         toast({
           position: "top",
-          title: "Añadido a favoritos correctamente 😍",
+          title: "Añadido a favoritos correctamente ",
           status: "success",
           duration: 3000,
           isClosable: true,
@@ -95,7 +95,6 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
   return (
     <Center>
       <Box
-        cursor="pointer"
         rounded={"lg"}
         overflow={"hidden"}
         bg="white"
@@ -116,23 +115,24 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
             borderRadius="8px"
           />
           <Heading
-            color={"white"}
+            pl="10px!important"
+            variant="H2"
+            color={"#4c57ad"}
             fontSize={"l"}
             position={"absolute"}
             w="full"
-            background="secondary"
-            opacity="80%"
+            background="whiteAlpha.800"
             bottom={"0"}
             padding={"1"}
           >
             {item.title}
           </Heading>
         </Box>
-        <Box h={"70px"} p={{ base: 1, lg: 2 }}>
+        <Box h={"60px"} p={{ base: 1, lg: 2 }}>
           {item.tags.map((tag) => (
             <Box
               key={uuidv4()}
-              bg="orange.500"
+              bg="primary"
               display={"inline-block"}
               borderRadius="20px"
               px={2}
@@ -153,7 +153,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
           <Flex
             p={2}
             alignItems="center"
-            justifyContent={"space-between"}
+            justifyContent={"center"}
             roundedBottom={"sm"}
             cursor={"pointer"}
             w="full"

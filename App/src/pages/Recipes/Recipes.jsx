@@ -19,8 +19,9 @@ import { FaCheckDouble } from "react-icons/fa";
 import UISpan from "../../components/UIComponents/UISpan";
 import UIInput from "../../components/UIComponents/UIInput";
 import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
+import { nutrientsToDisplay } from "../../utils/tagsFilters";
 
-const tags = ["lose weight", "vegetarian", "vegan", "eat all", "verduras", "pescado"];
+const tags = ["perder peso", "vegetariana", "vegana", "omnívora"];
 
 const Recipes = () => {
   const { user } = useContext(GlobalContext);
@@ -39,44 +40,6 @@ const Recipes = () => {
     Legumbres: false,
   });
 
-  const nutrientsToDisplay = [
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671295117/HealthyLife/iconhuevo_1_shhwvf.png",
-      name: "Huevo",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671294409/HealthyLife/iconfruta_r3bj8b.png",
-      name: "Fruta",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1669489891/paintings/idq57yew22xitacjftua.jpg",
-      name: "Verduras",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671294347/HealthyLife/iconlacteos_qm4wmy.png",
-      name: "Lácteos",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671294273/HealthyLife/iconpescado_cja0wg.png",
-      name: "Pescado",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671294435/HealthyLife/iconcarne_vtvdea.png",
-      name: "Carne",
-      isChecked: false,
-    },
-    {
-      img: "https://res.cloudinary.com/drh0lkvxh/image/upload/v1671294108/HealthyLife/iconlegumbres_pbscnn.png",
-      name: "Legumbres",
-      isChecked: false,
-    },
-  ];
-
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
     setIngredients({ ...ingredients, [value]: checked });
@@ -93,11 +56,11 @@ const Recipes = () => {
 
     if (filters.length || activeIngredients.length || search !== "") {
       const filteredBySearch = recipes.filter((recipe) => {
-        return recipe.title.toLowerCase().includes(search.toLocaleLowerCase());
+        return recipe.title.toLowerCase().includes(search.toLowerCase());
       });
 
       const filteredByDiet = recipes.filter((recipe) => {
-        return recipe.tags.includes(filters[0]) && recipe.tags.includes(filters[1]);
+        return recipe.tags.includes(filters[0]) || recipe.tags.includes(filters[1]);
       });
 
       const filteredByNutrients = recipes.filter((recipe) => {
@@ -138,6 +101,7 @@ const Recipes = () => {
           </Heading>
           {nutrientsToDisplay.map(({ img, name, isChecked }) => (
             <Checkbox
+              icon={<FaCheckDouble />}
               sx={outlinedClasses}
               spacing="18px"
               key={name}
@@ -147,9 +111,17 @@ const Recipes = () => {
               borderRadius="24px"
               border="1px"
               borderColor="primary"
+              bg="whiteAlpha.600"
             >
               <Flex alignItems="center">
-                <Image borderRadius="full" boxSize="35px" src={img} alt={name} mr={2} />
+                <Image
+                  borderRadius="full"
+                  bg="whiteAlpha.600"
+                  boxSize="35px"
+                  src={img}
+                  alt={name}
+                  mr={2}
+                />
                 <Stack>
                   <Text letterSpacing="0.0275em" fontSize="sm">
                     {name}
@@ -162,6 +134,7 @@ const Recipes = () => {
       </Box>
       <Box>
         <Button
+          ml="20px"
           variant="secondary"
           onClick={() =>
             setFilters([user.diet, user.target]) &
@@ -170,7 +143,11 @@ const Recipes = () => {
         >
           Show my diet
         </Button>
-        <Button variant="secondary" onClick={() => setFilters([]) & setActivatedTags([])}>
+        <Button
+          ml="10px"
+          variant="secondary"
+          onClick={() => setFilters([]) & setActivatedTags([])}
+        >
           Show all
         </Button>
 

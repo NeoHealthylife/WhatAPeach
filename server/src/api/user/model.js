@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema(
 
     provider_id: { type: String },
     provider: { type: String },
-
     password: { type: String, required: true },
     role: { type: String, enum: ['admin', 'basic'], default: 'basic' },
     fullname: { type: String },
@@ -17,12 +16,15 @@ const userSchema = new mongoose.Schema(
     weight: { type: Number },
     diet: {
       type: String,
-      enum: ['vegetarian', 'vegan', 'eat all'],
+      enum: ['vegetariana', 'vegana', 'omnívora'],
     },
-    status: { type: String, enum: ['low', 'medium', 'high'] },
+    status: {
+      type: String,
+      enum: ['baja forma', 'buena forma', 'muy buena forma'],
+    },
     target: {
       type: String,
-      enum: ['lose weight', 'build muscle', 'definition'],
+      enum: ['perder peso', 'musculación', 'definición'],
     },
     equipment: { type: Boolean },
     favRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'recipes' }],
