@@ -228,7 +228,7 @@ export const DetailWorkout = () => {
                 item.tags.map((tag) => (
                   <Box
                     key={uuidv4()}
-                    bg="orange.500"
+                    bg="primary"
                     display={"inline-block"}
                     borderRadius="20px"
                     px={3}

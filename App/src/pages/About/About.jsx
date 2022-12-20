@@ -34,8 +34,9 @@ const About = () => {
           Bienvenido Peacher! Nos presentamos: Somos un equipo de tres desarrolladores
           junior los que hemos dado vida a esta aplicación tan divertida y fácil de usar.
           <div>
-            María Sosa Luna // Junior Full-stack Developer. Amante del Crossfit y fan de
-            la dieta vegetariana.
+            <a href="https://github.com/mariasosaluna">María Sosa Luna //</a>
+            Junior Full-stack Developer. Amante del Crossfit y fan de la dieta
+            vegetariana.
           </div>
           <div>Gloria Junior // Full-stack Developer</div>
           <div> Álvaro Junior // Full-stack Developer</div>
