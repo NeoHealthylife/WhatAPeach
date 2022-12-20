@@ -21,6 +21,8 @@ import UIInput from "../../components/UIComponents/UIInput";
 import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
 import { bodyPartsToDisplay } from "../../utils/tagsFilters";
 
+const tags = ["perder peso", "musculación", "definición"];
+
 const Workouts = () => {
   const { user } = useContext(GlobalContext);
   const [workouts, setWorkouts] = useState([]);
@@ -88,6 +90,9 @@ const Workouts = () => {
   return (
     <LayoutWrapper>
       <Box alignItems="center" justifyContent="center" p={4}>
+        <Heading textAlign="center" display={{ base: "block", md: "none" }}>
+          Workouts
+        </Heading>
         <Stack>
           <UIInput
             placeholder="Buscar workouts"
@@ -101,57 +106,87 @@ const Workouts = () => {
           justifyContent="center"
           alignItems="center"
           gap="6px"
+          my={{ base: "10px", md: "20px" }}
         >
-          <Heading variant="H2" mr="50px">
+          <Heading variant="H2" mr="50px" mt={{ base: "20px", md: "0px" }}>
             Workouts para...
           </Heading>
-          {bodyPartsToDisplay.map(({ img, name, isChecked }) => (
-            <Checkbox
-              icon={<FaCheckDouble />}
-              sx={outlinedClasses}
-              spacing="18px"
-              key={name}
-              onChange={handleCheckboxChange}
-              value={name}
-              maxWidth="200px" //quitarMaxW
-              borderRadius="24px"
-              border="1px"
-              borderColor="primary"
-              bg="whiteAlpha.600"
-            >
-              <Flex alignItems="center">
-                <Image
-                  borderRadius="full"
-                  bg="whiteAlpha.600"
-                  boxSize="35px"
-                  src={img}
-                  alt={name}
-                  mr={2}
-                />
-                <Stack>
-                  <Text letterSpacing="0.0275em" fontSize="sm">
-                    {name}
-                  </Text>
-                </Stack>
-              </Flex>
-            </Checkbox>
-          ))}
+          <Box textAlign="center">
+            {bodyPartsToDisplay.map(({ img, name, isChecked }) => (
+              <Checkbox
+                icon={<FaCheckDouble />}
+                sx={outlinedClasses}
+                spacing="18px"
+                key={name}
+                onChange={handleCheckboxChange}
+                value={name}
+                maxWidth="200px" //quitarMaxW
+                borderRadius="24px"
+                border="1px"
+                borderColor="primary"
+                bg="whiteAlpha.600"
+                m="5px"
+                minWidth={{ base: "150px", md: "unset" }}
+              >
+                <Flex alignItems="center">
+                  <Image
+                    borderRadius="full"
+                    bg="whiteAlpha.600"
+                    boxSize={{ base: "20px", md: "35px" }}
+                    src={img}
+                    alt={name}
+                    mr={2}
+                  />
+                  <Stack>
+                    <Text letterSpacing="0.0275em" fontSize="sm">
+                      {name}
+                    </Text>
+                  </Stack>
+                </Flex>
+              </Checkbox>
+            ))}
+          </Box>
         </Stack>
       </Box>
-      <Box>
-        <Button ml="35px" variant="secondary" onClick={() => setFilters([user.target])}>
-          Show my target
-        </Button>
-        <Button ml="10px" variant="secondary" onClick={() => setFilters([])}>
-          Show all
-        </Button>
+      <Box display={{ base: "block", md: "flex" }}>
+        <Box>
+          <Button
+            ml="35px"
+            variant="secondary"
+            onClick={() => setFilters([user.target]) & setActivatedTags([user.target])}
+          >
+            Show my target
+          </Button>
+          <Button
+            ml="10px"
+            variant="secondary"
+            onClick={() => setFilters([]) & setActivatedTags([])}
+          >
+            Show all
+          </Button>
+        </Box>
+
+        <Box pt="10px">
+          {tags.map((tag) => (
+            <UISpan
+              key={tag}
+              variant="tag"
+              className={activatedTags.includes(tag) ? "allMarked" : ""}
+            >
+              {tag}
+            </UISpan>
+          ))}
+        </Box>
       </Box>
       {showContent.length ? (
         <GridUI items={showContent} type="workout" section="favorite" />
       ) : (
         <Box mt="50px" ml="20px">
-        <Heading variant="H3"> Aun no tienes workouts sugeridos por el sistema 😕. Prueba a buscar uno! </Heading>
-      </Box>
+          <Heading variant="H3">
+            {" "}
+            Aun no tienes workouts sugeridos por el sistema 😕. Prueba a buscar uno!{" "}
+          </Heading>
+        </Box>
       )}
     </LayoutWrapper>
   );
