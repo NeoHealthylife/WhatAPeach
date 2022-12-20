@@ -167,7 +167,7 @@ const SidebarContent = ({ ...props }) => {
                 my="10px"
                 size="lg"
                 name="Ahmad"
-                src="https://avatars2.githubusercontent.com/u/37842853?v=4"
+                src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1671560343/shutterstock_1822147493_Converted_-04_c4r5t2.png"
               />
               <Heading variant="H4">{user?.nickname}</Heading>
             </MenuButton>
