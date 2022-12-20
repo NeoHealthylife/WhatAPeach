@@ -126,6 +126,7 @@ const SidebarContent = ({ ...props }) => {
             direction="column"
             as="nav"
             mb="5"
+            mt="50px"
             fontSize="md"
             aria-label="Main Navigation"
           >
@@ -138,9 +139,6 @@ const SidebarContent = ({ ...props }) => {
             <Box m="1" borderRadius="5px" overflow="hidden">
               <NavItemLink icon={BiDumbbell} name="Workouts" href="/workouts" />
             </Box>
-            <Box m="1" borderRadius="5px" overflow="hidden">
-              <NavItemLink icon={FiInfo} name="About" href="/about" />
-            </Box>
           </Flex>
           <Divider
             bg="white"
@@ -149,6 +147,9 @@ const SidebarContent = ({ ...props }) => {
             alignContent="center"
             orientation="horizontal"
           />
+          <Box m="1" borderRadius="5px" overflow="hidden">
+            <NavItemLink icon={FiInfo} name="About" href="/about" />
+          </Box>
         </Box>
 
         <Flex px="25px" py="50px" mt={10} justify="center" alignItems="center">
@@ -168,7 +169,7 @@ const SidebarContent = ({ ...props }) => {
               />
               <Text fontSize="md">{user?.nickname}</Text>
             </MenuButton>
-            <MenuList fontSize={17} zIndex={5555} w="200px">
+            <MenuList fontSize={17} zIndex={5555} w="150px" mr="8px">
               <Button w="full" onClick={() => navigate("/perfil/misrecetas")}>
                 Mis Recetas
               </Button>

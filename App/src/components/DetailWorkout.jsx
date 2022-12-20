@@ -141,15 +141,15 @@ export const DetailWorkout = () => {
                 borderRadius="10px"
                 objectFit={"cover"}
                 h="full"
-                width={"60%"}
-                maxWidth={"600px"}
-                maxHeight={"600px"}
+                width={{ base: "100%", md: "60%" }}
+                maxWidth={{ base: "100%", md: "600px" }}
+                maxHeight={{ base: "auto", md: "600px" }}
                 alt={item.title}
                 src={item.image}
               />
             </Box>
             <Box
-              width={"600px"}
+              width={{ base: "100%", md: "600px" }}
               display={"flex"}
               justifyContent="flex-end"
               m="auto"
@@ -248,10 +248,11 @@ export const DetailWorkout = () => {
               display="flex"
               columnGap="150px"
               p="2"
+              px={{ base: "auto", md: "3rem" }}
               mt="2rem"
               flexDirection={{ base: "column-reverse", md: "row" }}
             >
-              <Box width="60%">
+              <Box width={{ base: "100%", md: "65%" }}>
                 <Heading variant="H2">Workout</Heading>
                 <OrderedList mt="1rem">
                   {item.workout.length &&
@@ -274,7 +275,7 @@ export const DetailWorkout = () => {
                   <Text fontSize="md"> {item.time} min</Text>
                 </Box>
                 <Box>
-                  <Heading variant="H2">material</Heading>
+                  <Heading variant="H2">Material</Heading>
                   <UnorderedList mt="1rem">
                     {item.material.map((num) => (
                       <ListItem mb="1rem" fontSize="md" key={uuidv4()}>
