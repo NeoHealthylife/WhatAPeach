@@ -25,6 +25,7 @@ import { DetailWorkout } from "./components/DetailWorkout";
 import WorkoutDetails from "./pages/WorkoutDetails/WorkoutDetails";
 import { MyWorkouts } from "./pages/Profile/MyWorkouts";
 import EditProfile from "./pages/Profile/EditProfile";
+import About from "./pages/About/About";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -107,6 +108,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 </RequiredAuth>
               }
             />
+            <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
