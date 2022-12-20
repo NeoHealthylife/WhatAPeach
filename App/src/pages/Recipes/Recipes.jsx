@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import { useEffect, useState } from "react";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
@@ -20,7 +19,6 @@ import UISpan from "../../components/UIComponents/UISpan";
 import UIInput from "../../components/UIComponents/UIInput";
 import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
 import { nutrientsToDisplay } from "../../utils/tagsFilters";
-import { HeadingStyled } from "../Dashboard/Dashboard";
 
 const tags = ["perder peso", "vegetariana", "vegana", "omnívora"];
 
@@ -82,6 +80,9 @@ const Recipes = () => {
   return (
     <LayoutWrapper>
       <Box alignItems="center" justifyContent="center" p={4}>
+        <Heading textAlign="center" display={{ base: "block", md: "none" }}>
+          Recetas
+        </Heading>
         <Stack>
           <UIInput
             placeholder="Buscar recetas"
@@ -95,80 +96,91 @@ const Recipes = () => {
           justifyContent="center"
           alignItems="center"
           gap="6px"
-          width={"90%"}
+          my={{ base: "10px", md: "20px" }}
         >
-          <Heading variant="H2" mr="50px">
+          <Heading variant="H2" mr="50px" mt={{ base: "20px", md: "0px" }}>
             Recetas con...
           </Heading>
-          {nutrientsToDisplay.map(({ img, name, isChecked }) => (
-            <Checkbox
-              icon={<FaCheckDouble />}
-              sx={outlinedClasses}
-              spacing="18px"
-              key={name}
-              onChange={handleCheckboxChange}
-              value={name}
-              maxWidth="200px" //quitarMaxW
-              borderRadius="24px"
-              border="1px"
-              borderColor="primary"
-              bg="whiteAlpha.600"
-            >
-              <Flex alignItems="center">
-                <Image
-                  borderRadius="full"
-                  bg="whiteAlpha.600"
-                  boxSize="35px"
-                  src={img}
-                  alt={name}
-                  mr={2}
-                />
-                <Stack>
-                  <Text letterSpacing="0.0275em" fontSize="sm">
-                    {name}
-                  </Text>
-                </Stack>
-              </Flex>
-            </Checkbox>
-          ))}
+          <Box textAlign="center">
+            {nutrientsToDisplay.map(({ img, name, isChecked }) => (
+              <Checkbox
+                icon={<FaCheckDouble />}
+                sx={outlinedClasses}
+                spacing="18px"
+                key={name}
+                onChange={handleCheckboxChange}
+                value={name}
+                maxWidth="200px" //quitarMaxW
+                borderRadius="24px"
+                border="1px"
+                borderColor="primary"
+                bg="whiteAlpha.600"
+                m="5px"
+                minWidth={{ base: "150px", md: "unset" }}
+              >
+                <Flex alignItems="center">
+                  <Image
+                    borderRadius="full"
+                    bg="whiteAlpha.600"
+                    boxSize={{ base: "20px", md: "35px" }}
+                    src={img}
+                    alt={name}
+                    mr={2}
+                  />
+                  <Stack>
+                    <Text letterSpacing="0.0275em" fontSize="sm">
+                      {name}
+                    </Text>
+                  </Stack>
+                </Flex>
+              </Checkbox>
+            ))}
+          </Box>
         </Stack>
       </Box>
-      <Box>
-        <Button
-          ml="35px"
-          variant="secondary"
-          onClick={() =>
-            setFilters([user.diet, user.target]) &
-            setActivatedTags([user.diet, user.target])
-          }
-        >
-          Show my diet
-        </Button>
-        <Button
-          ml="10px"
-          variant="secondary"
-          onClick={() => setFilters([]) & setActivatedTags([])}
-        >
-          Show all
-        </Button>
-
-        {/* {tags.map((tag) => (
-          <UISpan
-            key={tag}
-            variant="tag"
-            className={activatedTags.includes(tag) ? "allMarked" : "tagsActive"}
+      <Box display={{ base: "block", md: "flex" }}>
+        <Box>
+          <Button
+            ml="35px"
+            variant="secondary"
+            onClick={() =>
+              setFilters([user.diet, user.target]) &
+              setActivatedTags([user.diet, user.target])
+            }
           >
-            {tag}
-          </UISpan>
-        ))} */}
+            Show my diet
+          </Button>
+          <Button
+            ml="10px"
+            variant="secondary"
+            onClick={() => setFilters([]) & setActivatedTags([])}
+          >
+            Show all
+          </Button>
+        </Box>
+
+        <Box pt="10px">
+          {tags.map((tag) => (
+            <UISpan
+              key={tag}
+              variant="tag"
+              className={activatedTags.includes(tag) ? "allMarked" : ""}
+            >
+              {tag}
+            </UISpan>
+          ))}
+        </Box>
       </Box>
+
       {showContent.length ? (
         <GridUI items={showContent} type="recipe" section="favorite" />
       ) : (
         <Box mt="50px" ml="20px">
-          <Heading variant="H3"> Aun no tienes recetas sugeridas por el sistema 😕. Prueba a buscar una! </Heading>
+          <Heading variant="H3">
+            {" "}
+            Aun no tienes recetas sugeridas por el sistema 😕. Prueba a buscar una!{" "}
+          </Heading>
         </Box>
-
       )}
     </LayoutWrapper>
   );
