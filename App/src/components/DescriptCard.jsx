@@ -185,7 +185,7 @@ export const DescriptCard = () => {
                 </Flex>
               )}
 
-              {todo && (
+              {(todo || completed) && (
                 <Flex alignItems="center" roundedBottom={"sm"} cursor={"pointer"}>
                   {todo && !completed && (
                     <>
