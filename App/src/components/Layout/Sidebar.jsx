@@ -162,7 +162,7 @@ const SidebarContent = ({ ...props }) => {
               _hover={{ textDecoration: "none" }}
             >
               <Avatar
-                size="xl"
+                size="lg"
                 name="Ahmad"
                 src="https://avatars2.githubusercontent.com/u/37842853?v=4"
               />
@@ -172,11 +172,11 @@ const SidebarContent = ({ ...props }) => {
               <Button w="full" onClick={() => navigate("/perfil/misrecetas")}>
                 Mis Recetas
               </Button>
-              <Button w="full" onClick={() => navigate("/perfil/editar")}>
-                Editar Perfil
-              </Button>
               <Button w="full" onClick={() => navigate("/perfil/miswokouts")}>
                 Mis workouts
+              </Button>
+              <Button w="full" onClick={() => navigate("/perfil/editar")}>
+                Editar Perfil
               </Button>
               <Button w="full" onClick={() => logout() & navigate("/login")}>
                 Cerrar sesión

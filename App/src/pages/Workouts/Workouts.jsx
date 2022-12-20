@@ -24,10 +24,10 @@ import { bodyPartsToDisplay } from "../../utils/tagsFilters";
 const Workouts = () => {
   const { user } = useContext(GlobalContext);
   const [workouts, setWorkouts] = useState([]);
-  const [activatedTags, setActivatedTags] = useState([user.diet, user.target]);
+  const [activatedTags, setActivatedTags] = useState([user.target]);
   const [showContent, setShowContent] = useState([]);
   const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState([user.target]);
+  const [filters, setFilters] = useState([user.target, user.equipment]);
   const [parts, setParts] = useState({
     Core: false,
     Glúteos: false,
@@ -61,13 +61,13 @@ const Workouts = () => {
         const materials = workout.material.toString();
 
         return (
-          workout.title.toLowerCase().includes(search.toLocaleLowerCase()) ||
-          materials.toLowerCase().includes(search.toLocaleLowerCase())
+          workout.title.toLowerCase().includes(search.toLowerCase()) ||
+          materials.toLowerCase().includes(search.toLowerCase())
         );
       });
 
       const filteredByTarget = workouts.filter((workout) => {
-        return workout.tags.includes(filters[0]);
+        return workout.tags.includes(filters[0]) || workout.equipment == filters[1];
       });
 
       const filteredByParts = workouts.filter((workout) => {

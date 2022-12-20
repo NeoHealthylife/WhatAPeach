@@ -31,6 +31,7 @@ export const NavItemLink = ({ icon, name, href }) => {
         _focus={{
           color: "primary!important",
         }}
+
         // {...rest}
       >
         {icon && (
@@ -44,6 +45,7 @@ export const NavItemLink = ({ icon, name, href }) => {
             _groupFocus={{
               color: "primary!important",
             }}
+            color={activePage === href ? "primary" : "white"}
             as={icon}
           />
         )}

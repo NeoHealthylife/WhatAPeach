@@ -128,7 +128,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
             {item.title}
           </Heading>
         </Box>
-        <Box h={"70px"} p={{ base: 1, lg: 2 }}>
+        <Box h={"60px"} p={{ base: 1, lg: 2 }}>
           {item.tags.map((tag) => (
             <Box
               key={uuidv4()}

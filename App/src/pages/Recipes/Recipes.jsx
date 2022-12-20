@@ -56,7 +56,7 @@ const Recipes = () => {
 
     if (filters.length || activeIngredients.length || search !== "") {
       const filteredBySearch = recipes.filter((recipe) => {
-        return recipe.title.toLowerCase().includes(search.toLocaleLowerCase());
+        return recipe.title.toLowerCase().includes(search.toLowerCase());
       });
 
       const filteredByDiet = recipes.filter((recipe) => {

@@ -61,195 +61,185 @@ const Edituser = () => {
 
   return (
     <LayoutWrapper>
-      <Container
-        w="full"
-        centerContent
-        backgroundImage="https://res.cloudinary.com/drh0lkvxh/image/upload/v1671406411/Rectangle_edm54j.png"
-      >
+      <Container w="full" centerContent>
         <Flex>
-          <Box p={4}>
-            <Wrap spacing={{ base: 20, sm: 3, md: 5, lg: 20 }}>
-              <WrapItem>
-                <Box>
-                  <Heading>Perfil</Heading>
-                  <Text mt={{ sm: 3, md: 3, lg: 5 }} color="primary">
-                    Aquí puedes consultar y editar tus datos
-                  </Text>
-                </Box>
-              </WrapItem>
-              <WrapItem>
-                <Flex align={"center"} justify={"center"}>
-                  <FormProvider {...methods}>
-                    <form onSubmit={methods.handleSubmit(onFormSubmit)}>
-                      <Box>
-                        <Stack w="500px" py={8} px={6}>
-                          <Box
-                            rounded={"lg"}
-                            bg={useColorModeValue("white", "gray.700")}
-                            boxShadow="#101010 4px 6px 0 0"
-                            p={8}
-                          >
-                            <Stack spacing={1}>
-                              {user.nickname && (
-                                <Box>
-                                  <UIFormInput
-                                    label="Nickname"
-                                    defaultValue={user.nickname}
-                                    name="nickname"
-                                    validations={{
-                                      required: "Este campo es requerido",
-                                      minLength: {
-                                        value: 2,
-                                        message: "Necesita un minimo de 2 caracteres",
-                                      },
-                                    }}
-                                  ></UIFormInput>
-                                </Box>
-                              )}
-                              {user.email && (
-                                <Box>
-                                  <UIFormInput
-                                    label="Email"
-                                    defaultValue={user.email}
-                                    name="email"
-                                    validations={{
-                                      required: "Este campo es requerido",
-                                      minLength: {
-                                        value: 2,
-                                        message: "Necesita un minimo de 2 caracteres",
-                                      },
-                                      pattern: {
-                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                        message: "Dirección de e-mail incorrecta",
-                                      },
-                                    }}
-                                  />
-                                </Box>
-                              )}
-                              <Box>
-                                {user.fullname && (
-                                  <UIFormInput text={user.fullname} name="fullname" />
-                                )}
-                              </Box>
-                              <HStack>
-                                {user.age && (
-                                  <Box>
-                                    <UIFormInput
-                                      label="Edad"
-                                      defaultValue={user.age}
-                                      name="age"
-                                      validations={{
-                                        pattern: {
-                                          value: /^(0|[1-9]\d*)(\.\d+)?$/,
-                                          message: "Introduce una edad válida",
-                                        },
-                                      }}
-                                    ></UIFormInput>
-                                  </Box>
-                                )}
-                                {user.height && (
-                                  <Box w="70%">
-                                    <UIInput
-                                      label="Altura"
-                                      defaultValue={user.height}
-                                      name="height"
-                                      validations={{
-                                        pattern: {
-                                          value: /^(0|[1-9]\d*)(\.\d+)?$/,
-                                          message: "Introduce una altura válida",
-                                        },
-                                      }}
-                                    ></UIInput>
-                                  </Box>
-                                )}
-                                {user.weight && (
-                                  <Box>
-                                    <UIInput
-                                      label="Peso"
-                                      defaultValue={user.weight}
-                                      name="weight"
-                                      placeholder="Peso (kg)"
-                                      validations={{
-                                        pattern: {
-                                          value: /^(0|[1-9]\d*)(\.\d+)?$/,
-                                          message: "Introduce un peso válido",
-                                        },
-                                      }}
-                                    ></UIInput>
-                                  </Box>
-                                )}
-                              </HStack>
-                              <HStack>
-                                {user.diet && (
-                                  <Box w="50%">
-                                    <UISelect
-                                      label="Dieta"
-                                      defaultValue={[user.diet]}
-                                      placeholder="Dieta 🥑"
-                                      name="diet"
-                                      options={foodChoices}
-                                      validations={{
-                                        required: "Este campo es requerido",
-                                      }}
-                                    />
-                                  </Box>
-                                )}
-                                {user.status && (
-                                  <Box w="50%">
-                                    <UISelect
-                                      label="Estado Físico"
-                                      defaultValue={[user.status]}
-                                      placeholder="Estado físico 💪"
-                                      name="status"
-                                      options={statusChoices}
-                                      validations={{
-                                        required: "Este campo es requerido",
-                                      }}
-                                    />
-                                  </Box>
-                                )}
-                              </HStack>
-                              {user.target && (
-                                <Box>
-                                  <UISelect
-                                    label="Objetivo"
-                                    defaultValue={user.target} /////POR QUÉ NO NECESITO ESPECIFICAR QUE ES UN ARRAY??
-                                    placeholder="Define tus objetivos 🎯"
-                                    name="target"
-                                    options={targetChoices}
-                                    validations={{
-                                      required: "Este campo es requerido",
-                                    }}
-                                  />
-                                </Box>
-                              )}
-                              {user.equipment !== undefined && (
-                                <Box>
-                                  <UISelect
-                                    label="Material"
-                                    defaultValue={user.equipment}
-                                    name="equipment"
-                                    placeholder="¿Tienes material para tus workouts?"
-                                    options={equipmentChoices}
-                                    radioColor="orange"
-                                    validations={{ required: "Este campo es requerido" }}
-                                  />
-                                </Box>
-                              )}
-                              <Stack spacing={1} pt={4}>
-                                <UiButton variant="primary" type="submit">
-                                  Editar
-                                </UiButton>
-                              </Stack>
-                            </Stack>
+          <Box>
+            <Flex align={"center"} justify={"center"}>
+              <FormProvider {...methods}>
+                <form onSubmit={methods.handleSubmit(onFormSubmit)}>
+                  <Box>
+                    <Stack w="500px" py={2} px={6}>
+                      <Box
+                        rounded={"lg"}
+                        bg={useColorModeValue("white", "gray.700")}
+                        boxShadow="#101010 4px 6px 0 0"
+                        p={8}
+                      >
+                        <Stack spacing={1}>
+                          <Box display="block" m="auto" textAlign="center" mb="30px">
+                            <Heading>Perfil</Heading>
+                            <Text mt={{ sm: 3, md: 3, lg: 5 }} color="primary">
+                              Aquí puedes consultar y editar tus datos
+                            </Text>
                           </Box>
+                          {user.nickname && (
+                            <Box>
+                              <UIFormInput
+                                label="Nickname"
+                                defaultValue={user.nickname}
+                                name="nickname"
+                                validations={{
+                                  required: "Este campo es requerido",
+                                  minLength: {
+                                    value: 2,
+                                    message: "Necesita un minimo de 2 caracteres",
+                                  },
+                                }}
+                              ></UIFormInput>
+                            </Box>
+                          )}
+                          {user.email && (
+                            <Box>
+                              <UIFormInput
+                                label="Email"
+                                defaultValue={user.email}
+                                name="email"
+                                validations={{
+                                  required: "Este campo es requerido",
+                                  minLength: {
+                                    value: 2,
+                                    message: "Necesita un minimo de 2 caracteres",
+                                  },
+                                  pattern: {
+                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: "Dirección de e-mail incorrecta",
+                                  },
+                                }}
+                              />
+                            </Box>
+                          )}
+                          <Box>
+                            {user.fullname && (
+                              <UIFormInput text={user.fullname} name="fullname" />
+                            )}
+                          </Box>
+                          <HStack>
+                            {user.age && (
+                              <Box>
+                                <UIFormInput
+                                  label="Edad"
+                                  defaultValue={user.age}
+                                  name="age"
+                                  validations={{
+                                    pattern: {
+                                      value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                                      message: "Introduce una edad válida",
+                                    },
+                                  }}
+                                ></UIFormInput>
+                              </Box>
+                            )}
+                            {user.height && (
+                              <Box w="70%">
+                                <UIInput
+                                  label="Altura"
+                                  defaultValue={user.height}
+                                  name="height"
+                                  validations={{
+                                    pattern: {
+                                      value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                                      message: "Introduce una altura válida",
+                                    },
+                                  }}
+                                ></UIInput>
+                              </Box>
+                            )}
+                            {user.weight && (
+                              <Box>
+                                <UIInput
+                                  label="Peso"
+                                  defaultValue={user.weight}
+                                  name="weight"
+                                  placeholder="Peso (kg)"
+                                  validations={{
+                                    pattern: {
+                                      value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                                      message: "Introduce un peso válido",
+                                    },
+                                  }}
+                                ></UIInput>
+                              </Box>
+                            )}
+                          </HStack>
+                          <HStack>
+                            {user.diet && (
+                              <Box w="50%">
+                                <UISelect
+                                  label="Dieta"
+                                  defaultValue={[user.diet]}
+                                  placeholder="Dieta 🥑"
+                                  name="diet"
+                                  options={foodChoices}
+                                  validations={{
+                                    required: "Este campo es requerido",
+                                  }}
+                                />
+                              </Box>
+                            )}
+                            {user.status && (
+                              <Box w="50%">
+                                <UISelect
+                                  label="Estado Físico"
+                                  defaultValue={[user.status]}
+                                  placeholder="Estado físico 💪"
+                                  name="status"
+                                  options={statusChoices}
+                                  validations={{
+                                    required: "Este campo es requerido",
+                                  }}
+                                />
+                              </Box>
+                            )}
+                          </HStack>
+                          {user.target && (
+                            <Box>
+                              <UISelect
+                                label="Objetivo"
+                                defaultValue={user.target} /////POR QUÉ NO NECESITO ESPECIFICAR QUE ES UN ARRAY??
+                                placeholder="Define tus objetivos 🎯"
+                                name="target"
+                                options={targetChoices}
+                                validations={{
+                                  required: "Este campo es requerido",
+                                }}
+                              />
+                            </Box>
+                          )}
+                          {user.equipment !== undefined && (
+                            <Box>
+                              <UISelect
+                                label="Material"
+                                defaultValue={user.equipment}
+                                name="equipment"
+                                placeholder="¿Tienes material para tus workouts?"
+                                options={equipmentChoices}
+                                radioColor="orange"
+                                validations={{ required: "Este campo es requerido" }}
+                              />
+                            </Box>
+                          )}
+                          <Stack spacing={1} pt={4}>
+                            <UiButton variant="primary" type="submit">
+                              Editar
+                            </UiButton>
+                          </Stack>
                         </Stack>
                       </Box>
-                    </form>
-                  </FormProvider>
-                </Flex>
-              </WrapItem>
-            </Wrap>
+                    </Stack>
+                  </Box>
+                </form>
+              </FormProvider>
+            </Flex>
           </Box>
         </Flex>
       </Container>
