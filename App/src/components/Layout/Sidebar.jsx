@@ -7,6 +7,7 @@ import {
   DrawerContent,
   DrawerOverlay,
   Flex,
+  Heading,
   IconButton,
   Image,
   Menu,
@@ -163,11 +164,12 @@ const SidebarContent = ({ ...props }) => {
               _hover={{ textDecoration: "none" }}
             >
               <Avatar
+                my="10px"
                 size="lg"
                 name="Ahmad"
                 src="https://avatars2.githubusercontent.com/u/37842853?v=4"
               />
-              <Text fontSize="md">{user?.nickname}</Text>
+              <Heading variant="H4">{user?.nickname}</Heading>
             </MenuButton>
             <MenuList fontSize={17} zIndex={5555} w="150px" mr="8px">
               <Button w="full" onClick={() => navigate("/perfil/misrecetas")}>
