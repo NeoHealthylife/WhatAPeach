@@ -8,16 +8,15 @@ import styled from "styled-components";
 
 const StyledCardListWrapper = styled.div`
   max-width: initial;
- 
+
   .slick-arrow {
     display: none;
-    
   }
   @media (min-width: 600px) {
     max-width: 90%;
     padding: 18px 0;
     margin: auto;
-    background: linear-gradient(95deg, #c03c0349 20%, #f68c134c 25%, #0ed28758 100%); 
+    background: linear-gradient(95deg, #c03c0349 20%, #f68c134c 25%, #0ed28758 100%);
     border-radius: 20px;
 
     .slick-arrow {
@@ -29,10 +28,8 @@ const StyledCardListWrapper = styled.div`
 
   & .card {
     margin: 10px;
-    
   }
 `;
-
 
 const StyledArrow = styled.div`
   ::before {
@@ -103,8 +100,7 @@ const CardList = (props) => {
 
   return (
     <StyledCardListWrapper>
-      <Slider {...settings}
-      >
+      <Slider {...settings}>
         {items &&
           items.map((item) => (
             <CardComp
@@ -123,4 +119,3 @@ const CardList = (props) => {
 };
 
 export default CardList;
-

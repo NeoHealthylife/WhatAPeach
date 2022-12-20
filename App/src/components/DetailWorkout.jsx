@@ -130,36 +130,39 @@ export const DetailWorkout = () => {
       {item !== null ? (
         <Center py={2}>
           <Box
-            h="100%"
             margin={{ base: 0, md: "1rem" }}
             bg="white"
             borderRadius="20px"
             p={{ base: "10px", md: "20px" }}
             bgGradient="linear(to-r, #c03c031e , #f68c1336, #0ed28734)"
           >
-            <NavLink to="/workouts">
-              <UiButton variant="back">
-                <ImArrowLeft2 />
-              </UiButton>
-            </NavLink>
-            <Box maxWidth={"100%"} maxHeight={"480px"} display="flex" justifyContent={"center"}  alignContent="center" >
+            <Box display="flex" justifyContent={"center"} alignContent="center">
               <Image
                 borderRadius="10px"
                 objectFit={"cover"}
                 h="full"
                 width={"60%"}
+                maxWidth={"600px"}
+                maxHeight={"600px"}
                 alt={item.title}
                 src={item.image}
               />
             </Box>
-            <Box  width={"80%"} display={"flex"} justifyContent="flex-end" mt="4rem" mr="22px">
+            <Box
+              width={"600px"}
+              display={"flex"}
+              justifyContent="flex-end"
+              m="auto"
+              mt="2rem"
+            >
+              {!completed && (
                 <Flex
-                   p={2}
-                   flexDirection={"row"}
-                   ml="50px"
-                   roundedBottom={"sm"}
-                   cursor={"pointer"}
-                   onClick={() => setToDo(!todo)}
+                  p={2}
+                  flexDirection={"row"}
+                  ml="50px"
+                  roundedBottom={"sm"}
+                  cursor={"pointer"}
+                  onClick={() => setToDo(!todo)}
                 >
                   {!todo && !completed && (
                     <Button variant="secondary" onClick={() => addToDo(item._id)}>
@@ -173,6 +176,9 @@ export const DetailWorkout = () => {
                     </Button>
                   )}
                 </Flex>
+              )}
+
+              {todo && (
                 <Flex
                   p={2}
                   alignItems="center"
@@ -191,6 +197,7 @@ export const DetailWorkout = () => {
                     </Button>
                   )}
                 </Flex>
+              )}
               <Flex
                 p={1}
                 alignItems="center"
@@ -242,7 +249,6 @@ export const DetailWorkout = () => {
               columnGap="150px"
               p="2"
               mt="2rem"
-           
               flexDirection={{ base: "column-reverse", md: "row" }}
             >
               <Box width="60%">
@@ -250,7 +256,13 @@ export const DetailWorkout = () => {
                 <OrderedList mt="1rem">
                   {item.workout.length &&
                     item.workout.map((num, index) => (
-                      <ListItem key={`paso_${index}`} mb="1rem" fontSize="md" gap="8">
+                      <ListItem
+                        key={`paso_${index}`}
+                        mb="1rem"
+                        fontSize="md"
+                        gap="8"
+                        textAlign="justify"
+                      >
                         {num}
                       </ListItem>
                     ))}

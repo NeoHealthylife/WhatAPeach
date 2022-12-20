@@ -7,6 +7,11 @@ const { generateNickName } = require('../../utils/string');
 
 const register = async (req, res, next) => {
   try {
+    if (!req.body.provider_id) {
+      const now = new Date();
+      req.body.providerid = `organic${now.getTime()}`;
+      req.body.provider = 'organic';
+    }
     const newUser = new User(req.body);
 
     const userDuplicate = await User.findOne({ nickname: newUser.nickname });
@@ -112,6 +117,18 @@ const deleteUser = async (req, res, next) => {
     const { id } = req.params;
     await User.findByIdAndDelete(id);
     return res.status(200).json('User deleted');
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const updatetUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = new User(req.body);
+    user._id = id;
+    const editUser = await User.findByIdAndUpdate(id);
+    return res.status(200).json(editUser);
   } catch (err) {
     return next(err);
   }

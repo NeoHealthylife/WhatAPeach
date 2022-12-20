@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import CardList from "../../components/CardList";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import { API } from "../../services/API";
-import { Heading } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import { TiInputChecked, TiInputCheckedOutline } from "react-icons/ti";
 import { GiChewedHeart } from "react-icons/gi";
 
@@ -29,7 +29,7 @@ export const MyWorkouts = () => {
       >
         <GiChewedHeart size="25px" /> Favoritas
       </Heading>
-      {profile.favWorkouts?.length && (
+      {profile.favWorkouts?.length !== 0 ? (
         <CardList
           section="favorite"
           width="250px"
@@ -38,6 +38,8 @@ export const MyWorkouts = () => {
           type="workout"
           setChangeValue={setChangeValue}
         />
+      ) : (
+        <Text>Añade tus workouts</Text>
       )}
       <Heading
         variant="H3"
@@ -50,7 +52,7 @@ export const MyWorkouts = () => {
       >
         <TiInputCheckedOutline size="40px" /> Pendientes
       </Heading>
-      {profile.toDoWorkouts?.length && (
+      {profile.toDoWorkouts?.length !== 0 ? (
         <CardList
           width="250px"
           heigth="360px"
@@ -58,6 +60,8 @@ export const MyWorkouts = () => {
           type="workout"
           section="pending"
         />
+      ) : (
+        <Text>Añade tus workouts</Text>
       )}
       <Heading
         variant="H3"
@@ -70,13 +74,15 @@ export const MyWorkouts = () => {
       >
         <TiInputChecked size="40px" /> Completadas
       </Heading>
-      {profile.completedWorkouts?.length && (
+      {profile.completedWorkouts?.length !== 0 ? (
         <CardList
           width="250px"
           heigth="360px"
           items={profile.completedWorkouts}
           type="workout"
         />
+      ) : (
+        <Text>Añade tus workouts</Text>
       )}
     </LayoutWrapper>
   );
