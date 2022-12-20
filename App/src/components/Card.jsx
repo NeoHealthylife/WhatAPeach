@@ -19,7 +19,7 @@ import { API } from "../services/API";
 
 const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
   const toast = useToast();
-  const { setItem, user, setUser } = useContext(GlobalContext);
+  const { setItem, user, setUser, showToast } = useContext(GlobalContext);
 
   const isFavourite = () => {
     if (type === "recipe") {
@@ -85,6 +85,15 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
 
     API.patch(config[type].url, config[type].data).then((response) => {
       const editedUser = response.data;
+
+      if (response.status === 201 || response.status === 200) {
+        showToast("success", "Eliminado de favoritos correctamente");
+      } else {
+        showToast(
+          "error",
+          "Ha habido un error inesperado. Intenta eliminar tu workout de tu lista de pendientes más tarde",
+        );
+      }
 
       setUser(editedUser);
       localStorage.setItem("user", JSON.stringify(editedUser));

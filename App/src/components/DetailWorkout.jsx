@@ -182,7 +182,7 @@ export const DetailWorkout = () => {
                 </Flex>
               )}
 
-              {todo && (
+              {(todo || completed) && (
                 <Flex alignItems="center" roundedBottom={"sm"} cursor={"pointer"}>
                   {todo && !completed && (
                     <>
@@ -276,7 +276,7 @@ export const DetailWorkout = () => {
                   <Text fontSize="md"> {item.time} min</Text>
                 </Box>
                 <Box>
-                  <Heading variant="H2">Material</Heading>
+                  <Heading variant="H2">Material:</Heading>
                   <UnorderedList mt="1rem">
                     {item.material.map((num) => (
                       <ListItem mb="1rem" fontSize="md" key={uuidv4()}>
