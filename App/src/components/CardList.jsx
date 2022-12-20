@@ -101,7 +101,7 @@ const CardList = (props) => {
   return (
     <StyledCardListWrapper>
       <Slider {...settings}>
-        {items.length > 0 &&
+        {items &&
           items.map((item) => (
             <CardComp
               section={section}

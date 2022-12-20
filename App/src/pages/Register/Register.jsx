@@ -39,8 +39,10 @@ const Register = () => {
 
   const onFormSubmit = (data) => {
     data.equipment = data.equipment === "true" ? true : false;
+
     API.post("/users/register", data)
       .then((res) => {
+        console.log(res);
         if (res.data.status === 201 || res.data.status === 200) {
           toast({
             position: "top",

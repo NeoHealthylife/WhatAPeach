@@ -22,11 +22,11 @@ export const HeadingStyles = {
     }),
     H3: (props) => ({
       color: "dark",
-      fontSize: "16px",
+      fontSize: "18px",
       fontFamily: "Poppins",
-      fontWeight: "500",
+      fontWeight: "800",
       letterSpacing: "1px",
       textDecoration: "",
-    }),
+  }),
   },
 };
