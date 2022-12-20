@@ -1,45 +1,62 @@
-import { Heading } from "@chakra-ui/react";
+import { Heading, Link, Text } from "@chakra-ui/react";
 import React from "react";
 import styled from "styled-components";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 
 const TextAbout = styled.div`
   padding: 70px;
+  text-align: justify;
 `;
 
 const About = () => {
   return (
     <div>
       <LayoutWrapper>
-        <Heading ml="100px" padding="30px" fontFamily="pacifico" color="#FE9066">
-          Como surgió What a Peach? 🍑
+        <Heading ml="100px" pb="30px" fontFamily="pacifico" color="#FE9066">
+          Como surge What a Peach? 🍑
         </Heading>
         <TextAbout>
-          <h2>
-            What a peach es una aplicación enfocada a toda persona que quiera cambiar su
-            estilo de vida pero le suponga un problema por falta de motivación o ideas.
-            <br></br>
-            Con esta aplicación podrás descubrir recetas sanas y rutinas de ejercicios
-            acordes a tu estado físico inicial y gestionarlas como desees para así
-            implementar tu nuevo estilo de vida progresivamente y de forma divertida
-            gracias a los retos semanales. <br></br>En el futuro los usuarios podrán
-            postear sus retos en la aplicación y votar entre ellos el reto más original,
-            más elaborado…etc.
-          </h2>
+          <Text variant="H3">
+            What a Peach! es una aplicación enfocada tanto para alguien que quiera cambiar
+            su estilo de vida para tener unos hábitos más saludables como para aquella
+            persona cuyo estilo de vida ya lo sea. Aquellos usuarios a los que le suponga
+            un problema por falta de motivación o ideas podrán acceder a un contenido
+            personalizado y actualizado, y aquellos usuarios experiemntados en el arte de
+            cocinar y más deportistas podrán igualmente retarse con nuevos desafíos, ya
+            sea en los fogones o en el gym.
+          </Text>
+          <Text variant="H3" mt="15px">
+            Gestiona tus desafíos, guárdalos y ponte a prueba a ti mismo con cada reto
+            semanal ¡Únete a nuestra comunidad de una vida más saludable, únete a What a
+            Peach!
+          </Text>
         </TextAbout>
         <Heading ml="100px" padding="30px" fontFamily="pacifico" color="#FE9066">
-          Nuestro equipo:
+          El Equipo:
         </Heading>
         <TextAbout>
-          Bienvenido Peacher! Nos presentamos: Somos un equipo de tres desarrolladores
-          junior los que hemos dado vida a esta aplicación tan divertida y fácil de usar.
-          <div>
-            <a href="https://github.com/mariasosaluna">María Sosa Luna //</a>
-            Junior Full-stack Developer. Amante del Crossfit y fan de la dieta
+          Bienvenido Peacher! Somos un equipo conformado por tres desarrolladores que
+          hemos dado vida a esta aplicación web.
+          <Text variant="H3" m="30px" display="flex">
+            <Link color="primary" href="https://github.com/mariasosaluna" mr="5px">
+              María Sosa Luna
+            </Link>
+            // Junior Full-stack Developer. Amante del Crossfit y fan de la dieta
             vegetariana.
-          </div>
-          <div>Gloria Junior // Full-stack Developer</div>
-          <div> Álvaro Junior // Full-stack Developer</div>
+          </Text>
+          <Text variant="H3" m="30px" display="flex">
+            <Link color="primary" href="https://github.com/gloria-eme" mr="5px">
+              Gloria Merín{" "}
+            </Link>
+            // Junior Full-stack Developer
+          </Text>
+          <Text variant="H3" m="30px" display="flex">
+            <Link color="primary" href="https://github.com/alvaroLZ96" mr="5px">
+              {" "}
+              Álvaro López Zarraute
+            </Link>
+            // Junior Full-stack Developer
+          </Text>
         </TextAbout>
       </LayoutWrapper>
     </div>

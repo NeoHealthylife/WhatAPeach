@@ -92,8 +92,15 @@ const Login = () => {
               >
                 <Stack align={"center"}>
                   <Image src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1670515077/HealthyLife/logo_1_kano6g.svg" />
-                  <Text fontSize={"lg"} color={"gray.600"}>
-                    si queremos poner una intro de nuestra web
+                  <Text
+                    fontSize={"15px"}
+                    color={"gray.600"}
+                    textAlign="justify"
+                    py="30px"
+                    lineHeight="1.7"
+                  >
+                    Gestiona tus desafíos y ponte a prueba a ti mismo con cada reto
+                    semanal ¡Únete a nuestra comunidad para una vida más saludable!
                   </Text>
                 </Stack>
 
@@ -160,13 +167,13 @@ const Login = () => {
                     <UiButton variant="primary" type="submit">
                       Entrar
                     </UiButton>
-                    <Flex justifyContent="center">
+                    {/* <Flex justifyContent="center">
                       <Text fontSize="md">o</Text>
                     </Flex>
                     <UiButton variant="secondary" onClick={(e) => handleGoogleClick(e)}>
                       <BsGoogle />
                       Accede con Google
-                    </UiButton>
+                    </UiButton> */}
                   </Stack>
                   <Stack pt={6}>
                     <Text fontSize="13px" align={"center"}>
