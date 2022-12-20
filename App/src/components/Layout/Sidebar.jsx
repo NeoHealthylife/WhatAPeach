@@ -59,7 +59,19 @@ export default function Sidebar() {
             onClick={onOpen}
             icon={<FiMenu />}
             size="md"
+            bg="transparent"
+            color="white"
+            fontSize="30px"
+            variant="secondary"
           />
+          <NavLink to="/">
+            <Image
+              mx="2"
+              boxSize="10"
+              src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1671495636/Group_oze64f.png"
+              alt="logo"
+            />
+          </NavLink>
         </Flex>
         <Box
           as="main"
@@ -117,7 +129,7 @@ const SidebarContent = ({ ...props }) => {
             fontSize="md"
             aria-label="Main Navigation"
           >
-            <Box m="1" borderRadius="5px" overflow="hidden">
+            <Box m="1" borderRadius="5px" overflow="hidden" color="red">
               <NavItemLink icon={FiHome} name="Home" href="/" />
             </Box>
             <Box m="1" borderRadius="5px" overflow="hidden">
@@ -139,7 +151,7 @@ const SidebarContent = ({ ...props }) => {
           />
         </Box>
 
-        <Flex px="4" py="5" mt={10} justify="center" alignItems="center">
+        <Flex px="25px" py="50px" mt={10} justify="center" alignItems="center">
           <Menu>
             <MenuButton
               as={Button}
@@ -150,18 +162,21 @@ const SidebarContent = ({ ...props }) => {
               _hover={{ textDecoration: "none" }}
             >
               <Avatar
-                size={"md"}
+                size="lg"
                 name="Ahmad"
                 src="https://avatars2.githubusercontent.com/u/37842853?v=4"
               />
               <Text fontSize="md">{user?.nickname}</Text>
             </MenuButton>
-            <MenuList fontSize={17} zIndex={5555} w="120px">
+            <MenuList fontSize={17} zIndex={5555} w="200px">
               <Button w="full" onClick={() => navigate("/perfil/misrecetas")}>
                 Mis Recetas
               </Button>
               <Button w="full" onClick={() => navigate("/perfil/miswokouts")}>
                 Mis workouts
+              </Button>
+              <Button w="full" onClick={() => navigate("/perfil/editar")}>
+                Editar Perfil
               </Button>
               <Button w="full" onClick={() => logout() & navigate("/login")}>
                 Cerrar sesión

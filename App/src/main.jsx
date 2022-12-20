@@ -13,7 +13,7 @@ import Favorites from "./pages/Favorites/Favorites";
 import Form from "./pages/Form/Form";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-import Profile from "./pages/Profile/Profile";
+import Profile from "./pages/Profile/EditProfile";
 import Recipes from "./pages/Recipes/Recipes";
 import Register from "./pages/Register/Register";
 import Workouts from "./pages/Workouts/Workouts";
@@ -24,6 +24,7 @@ import { MyRecipes } from "./pages/Profile/MyRecipes";
 import { DetailWorkout } from "./components/DetailWorkout";
 import WorkoutDetails from "./pages/WorkoutDetails/WorkoutDetails";
 import { MyWorkouts } from "./pages/Profile/MyWorkouts";
+import EditProfile from "./pages/Profile/EditProfile";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -90,11 +91,19 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 </RequiredAuth>
               }
             />
-             <Route
+            <Route
               path="/perfil/miswokouts"
               element={
                 <RequiredAuth>
-                  <MyWorkouts/>
+                  <MyWorkouts />
+                </RequiredAuth>
+              }
+            />
+            <Route
+              path="/perfil/editar"
+              element={
+                <RequiredAuth>
+                  <EditProfile />
                 </RequiredAuth>
               }
             />

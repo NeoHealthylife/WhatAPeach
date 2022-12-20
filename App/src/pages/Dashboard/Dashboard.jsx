@@ -27,14 +27,17 @@ const CardStyled = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fe9066;
+  color: #ffdfd2;
+  letter-spacing: 0.04cm;
+  text-shadow: 4px 6px 5px rgba(0, 0, 0, 0.8);
   font-size: xx-large;
   margin-top: 2rem;
   text-align: center;
 
   :hover {
-    box-shadow: 3px 6px 0 #fe9166;
+    box-shadow: 4px 10px 0 #fe9166;
     margin-top: 1.8rem;
+    transition: 0.4s ease-in-out;
   }
 
   @media (min-width: 600px) {
@@ -48,7 +51,7 @@ const CardStyled = styled.button`
   }
 
   &.recipes {
-    background-image: url("https://images-ext-1.discordapp.net/external/yzeFHDpSlbQaX83tmTvE8Jpm3RoUxE9JPkNHQ-QAC10/https/res.cloudinary.com/drh0lkvxh/image/upload/v1671474001/shutterstock_736615915_1_1_jnko6s.jpg?width=1005&height=670");
+    background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671493538/shutterstock_736615915_1_1_jnko6s.jpg");
   }
   &.workouts {
     background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671276169/HealthyLife/workout2_wgipac.webp");
@@ -72,10 +75,12 @@ const CardTextStyled = styled.div`
   color: #fe9066;
   font-size: xx-large;
   margin: 2rem 0 1rem;
+  padding-left: 75px;
+  padding-top: 30px;
 `;
 
 const challengeHasExpired = (item, savedDate) => {
-  const difference = new Date(savedDate) - new Date();
+  const difference = new Date(savedDate) - new Date(); //esto me da la fecha de ahora mismo
   const totalDays = Math.ceil(difference / (1000 * 3600 * 24));
   return totalDays > 7;
 };
@@ -149,7 +154,7 @@ const Dashboard = () => {
       </DashboardCards>
 
       <CardTextStyled>Últimas recetas</CardTextStyled>
-      <CardList width="250px" heigth="360px" items={recipes} type="recipe" />
+      <CardList width="250px" heigth="360px" items={recipes} type="recipe" pb="100px" />
       <CardTextStyled>Últimos workouts</CardTextStyled>
       <CardList width="250px" heigth="360px" items={workouts} type="workout" />
     </>

@@ -1,4 +1,4 @@
-.allMarked{
+/* .allMarked{
     padding: 6px 14px;
     font-size:12px;
       background-color: transparent;
@@ -6,7 +6,7 @@
       box-sizing: border-box;
       color: #00132C;
      border-radius: 25px;
-      /* padding: 16px 23px; */
+     
       position: relative;
       text-decoration: none;
       user-select: none;
@@ -33,7 +33,7 @@
       box-sizing: border-box;
       color: #00132C;
      border-radius: 25px;
-      /* padding: 16px 23px; */
+
       position: relative;
       text-decoration: none;
       user-select: none;
@@ -52,3 +52,4 @@
       z-index: -1;
     }
     
+ */

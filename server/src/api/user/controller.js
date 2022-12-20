@@ -127,8 +127,9 @@ const updatetUser = async (req, res, next) => {
     const { id } = req.params;
     const user = new User(req.body);
     user._id = id;
-    const editUser = await User.findByIdAndUpdate(id);
-    return res.status(200).json(editUser);
+    const editUser = await User.findByIdAndUpdate(id, user);
+    editUser.password = user.password;
+    return res.status(200).json(user);
   } catch (err) {
     return next(err);
   }
@@ -347,7 +348,7 @@ module.exports = {
   login,
   getUsers,
   getUser,
-  // updatetUser,
+  updatetUser,
   deletetodorecipe,
   deleteUser,
   addFavRecipe,

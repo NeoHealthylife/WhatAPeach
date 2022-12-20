@@ -4,13 +4,21 @@ import { IconButtonStyles as IconButton } from "./IconButtonStyles";
 import { HeadingStyles as Heading } from "./HeadingStyles";
 
 export const myTheme = extendTheme({
+  styles: {
+    global: {
+      "html, body": {
+        bg: "whitesmoke",
+      },
+    },
+  },
   colors: {
     primary: "#FF562d",
     "soft-primary": "#fe9166",
     secondary: "#024b42",
     "soft-secondary": "#12b396",
-    dark: "#4b1e19e1",
-    "sof-dark": "#4B1E19",
+    dark: "#100102",
+    "soft-dark": "#4B1E19",
+    label: "#ffa787",
   },
   fontSizes: {
     lg: "22px",

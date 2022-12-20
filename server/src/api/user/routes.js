@@ -16,7 +16,7 @@ const {
   getUsers,
   getUser,
   deleteUser,
-  // updatetUser,
+  updatetUser,
   addFavRecipe,
   addFavWorkout,
   loginFromSocialLogin,
@@ -89,14 +89,10 @@ UserRoutes.get('/logout', (req, res) => {
 });
 
 //WEB ROUTES
-UserRoutes.post('/register',  register);
+UserRoutes.post('/register', register);
 
 UserRoutes.post('/login', login);
 
-UserRoutes.get('/', getUsers);
-UserRoutes.delete('/:id', [isAdmin], deleteUser);
-UserRoutes.get('/:id', getUser);
-// UserRoutes.patch('/:id', updatetUser);
 UserRoutes.patch('/addfavrecipe', [isBasic], addFavRecipe);
 UserRoutes.patch('/addfavworkout', [isBasic], addFavWorkout);
 UserRoutes.patch('/deletefavrecipe', [isBasic], deleteFavRecipe);
@@ -109,5 +105,9 @@ UserRoutes.patch('/addcompleterecipe', [isBasic], addCompletedRecipe);
 UserRoutes.patch('/addcompleteworkout', [isBasic], addCompletedWorkout);
 UserRoutes.patch('/deletecompleterecipe', [isBasic], deleteCompletedRecipe);
 UserRoutes.patch('/deletecompleteworkout', [isBasic], deleteCompletedWorkout);
+UserRoutes.get('/', getUsers);
+UserRoutes.delete('/:id', [isAdmin], deleteUser);
+UserRoutes.get('/:id', getUser);
+UserRoutes.patch('/:id', updatetUser);
 
 module.exports = UserRoutes;
