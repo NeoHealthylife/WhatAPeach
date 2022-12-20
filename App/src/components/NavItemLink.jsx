@@ -4,7 +4,6 @@ import { Icon, useColorModeValue, Flex } from "@chakra-ui/react";
 import GlobalContext from "../context/GlobalContext";
 
 export const NavItemLink = ({ icon, name, href }) => {
-  const color = useColorModeValue("gray.600", "gray.300");
   const { activePage, setActivePage } = useContext(GlobalContext);
 
   const handleClick = (href) => {
@@ -38,7 +37,6 @@ export const NavItemLink = ({ icon, name, href }) => {
           <Icon
             mx="2"
             boxSize="4"
-            color="white"
             _groupHover={{
               color: "primary",
             }}

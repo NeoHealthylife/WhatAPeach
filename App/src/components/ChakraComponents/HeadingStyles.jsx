@@ -27,6 +27,14 @@ export const HeadingStyles = {
       fontWeight: "800",
       letterSpacing: "1px",
       textDecoration: "",
-  }),
+    }),
+    H4: (props) => ({
+      color: "white",
+      fontSize: "14px",
+      fontFamily: "Poppins",
+      fontWeight: "600",
+      letterSpacing: "2px",
+      textDecoration: "",
+    }),
   },
 };

@@ -20,7 +20,7 @@ const GridUI = (props) => {
         <GridItem key={item._id} justifyContent={"center"}>
           <CardComp
             width="250px"
-            heigth="360px"
+            heigth="350px"
             key={item._id}
             className="card"
             item={item}

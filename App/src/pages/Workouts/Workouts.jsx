@@ -87,7 +87,6 @@ const Workouts = () => {
 
   return (
     <LayoutWrapper>
-      <Heading variant="H1">Workouts</Heading>
       <Box alignItems="center" justifyContent="center" p={4}>
         <Stack>
           <UIInput
@@ -140,7 +139,7 @@ const Workouts = () => {
         </Stack>
       </Box>
       <Box>
-        <Button ml="20px" variant="secondary" onClick={() => setFilters([user.target])}>
+        <Button ml="35px" variant="secondary" onClick={() => setFilters([user.target])}>
           Show my target
         </Button>
         <Button ml="10px" variant="secondary" onClick={() => setFilters([])}>
@@ -150,7 +149,9 @@ const Workouts = () => {
       {showContent.length ? (
         <GridUI items={showContent} type="workout" section="favorite" />
       ) : (
-        <>Aun no tienes workouts sugeridas por el sistema. Prueba a buscar una!</>
+        <Box mt="50px" ml="20px">
+        <Heading variant="H3"> Aun no tienes workouts sugeridos por el sistema 😕. Prueba a buscar uno! </Heading>
+      </Box>
       )}
     </LayoutWrapper>
   );

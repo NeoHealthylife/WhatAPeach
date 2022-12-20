@@ -1,3 +1,4 @@
+
 import React, { useContext } from "react";
 import { useEffect, useState } from "react";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
@@ -14,12 +15,12 @@ import {
 import { API } from "../../services/API";
 import GridUI from "../../components/UIComponents/GridUI";
 import GlobalContext from "../../context/GlobalContext";
-import "./styles.css";
 import { FaCheckDouble } from "react-icons/fa";
 import UISpan from "../../components/UIComponents/UISpan";
 import UIInput from "../../components/UIComponents/UIInput";
 import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
 import { nutrientsToDisplay } from "../../utils/tagsFilters";
+import { HeadingStyled } from "../Dashboard/Dashboard";
 
 const tags = ["perder peso", "vegetariana", "vegana", "omnívora"];
 
@@ -80,7 +81,6 @@ const Recipes = () => {
 
   return (
     <LayoutWrapper>
-      <Heading variant="H1">Recetas</Heading>
       <Box alignItems="center" justifyContent="center" p={4}>
         <Stack>
           <UIInput
@@ -95,6 +95,7 @@ const Recipes = () => {
           justifyContent="center"
           alignItems="center"
           gap="6px"
+          width={"90%"}
         >
           <Heading variant="H2" mr="50px">
             Recetas con...
@@ -134,7 +135,7 @@ const Recipes = () => {
       </Box>
       <Box>
         <Button
-          ml="20px"
+          ml="35px"
           variant="secondary"
           onClick={() =>
             setFilters([user.diet, user.target]) &
@@ -151,7 +152,7 @@ const Recipes = () => {
           Show all
         </Button>
 
-        {tags.map((tag) => (
+        {/* {tags.map((tag) => (
           <UISpan
             key={tag}
             variant="tag"
@@ -159,12 +160,15 @@ const Recipes = () => {
           >
             {tag}
           </UISpan>
-        ))}
+        ))} */}
       </Box>
       {showContent.length ? (
         <GridUI items={showContent} type="recipe" section="favorite" />
       ) : (
-        <>Aun no tienes recetas sugeridas por el sistema. Prueba a buscar una!</>
+        <Box mt="50px" ml="20px">
+          <Heading variant="H3"> Aun no tienes recetas sugeridas por el sistema 😕. Prueba a buscar una! </Heading>
+        </Box>
+
       )}
     </LayoutWrapper>
   );

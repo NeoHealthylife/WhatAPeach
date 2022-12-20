@@ -57,7 +57,7 @@ const CardStyled = styled.button`
     background-image: url("https://res.cloudinary.com/drh0lkvxh/image/upload/v1671276169/HealthyLife/workout2_wgipac.webp");
   }
 `;
-const HeadingStyled = styled.div`
+export const HeadingStyled = styled.div`
   color: #384d62;
   font-size: 3rem;
   padding: 20px;
