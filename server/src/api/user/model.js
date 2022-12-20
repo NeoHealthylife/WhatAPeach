@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema(
 
     provider_id: { type: String },
     provider: { type: String },
-    // avatar: {type: String},
     password: { type: String, required: true },
     role: { type: String, enum: ['admin', 'basic'], default: 'basic' },
     fullname: { type: String },
