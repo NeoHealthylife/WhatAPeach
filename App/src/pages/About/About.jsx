@@ -4,15 +4,24 @@ import styled from "styled-components";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 
 const TextAbout = styled.div`
-  padding: 70px;
+  padding: 10px;
   text-align: justify;
+
+  @media (min-width: 600px) {
+    padding: 70px;
+  }
 `;
 
 const About = () => {
   return (
     <div>
       <LayoutWrapper>
-        <Heading ml="100px" pb="30px" fontFamily="pacifico" color="#FE9066">
+        <Heading
+          ml={{ base: "20px", md: "100px" }}
+          fontSize={{ base: "25px", md: "30px" }}
+          fontFamily="pacifico"
+          color="#FE9066"
+        >
           Como surge What a Peach? 🍑
         </Heading>
         <TextAbout>
@@ -31,7 +40,13 @@ const About = () => {
             Peach!
           </Text>
         </TextAbout>
-        <Heading ml="100px" padding="30px" fontFamily="pacifico" color="#FE9066">
+        <Heading
+          ml={{ base: "20px", md: "100px" }}
+          fontSize={{ base: "25px", md: "30px" }}
+          pt={{ base: "30px", md: "0px" }}
+          fontFamily="pacifico"
+          color="#FE9066"
+        >
           El Equipo:
         </Heading>
         <TextAbout>

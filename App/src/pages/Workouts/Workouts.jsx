@@ -184,7 +184,7 @@ const Workouts = () => {
         <Box mt="50px" ml="20px">
           <Heading variant="H3">
             {" "}
-            Aun no tienes workouts sugeridos por el sistema 😕. Prueba a buscar uno!{" "}
+            Aun no tienes workouts sugeridos por el sistema 😕. Prueba a buscar uno!
           </Heading>
         </Box>
       )}
