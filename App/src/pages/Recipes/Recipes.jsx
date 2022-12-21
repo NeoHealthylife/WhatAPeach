@@ -22,6 +22,16 @@ import { nutrientsToDisplay } from "../../utils/tagsFilters";
 
 const tags = ["perder peso", "vegetariana", "vegana", "omnívora"];
 
+const getExtendedDietFilter = (filters) => {
+  switch (filters[0]) {
+    case "vegana":
+      return [filters[0]];
+    case "vegetariana":
+      return ["vegana", "vegetariana"];
+  }
+  return ["vegana", "vegetariana", "omnívora"];
+};
+
 const Recipes = () => {
   const { user } = useContext(GlobalContext);
   const [recipes, setRecipes] = useState([]);
@@ -58,8 +68,12 @@ const Recipes = () => {
         return recipe.title.toLowerCase().includes(search.toLowerCase());
       });
 
+      const extendedDietFilter = getExtendedDietFilter(filters);
       const filteredByDiet = recipes.filter((recipe) => {
-        return recipe.tags.includes(filters[0]) || recipe.tags.includes(filters[1]);
+        return (
+          recipe.tags.some((r) => extendedDietFilter.indexOf(r) >= 0) &&
+          recipe.tags.includes(filters[1])
+        );
       });
 
       const filteredByNutrients = recipes.filter((recipe) => {

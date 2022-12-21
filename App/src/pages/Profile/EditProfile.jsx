@@ -49,6 +49,7 @@ const Edituser = () => {
       if (response.status === 201 || response.status === 200) {
         showToast("success", "Usuario actualizado");
         setUser(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
         navigate("/");
       } else {
         showToast(
