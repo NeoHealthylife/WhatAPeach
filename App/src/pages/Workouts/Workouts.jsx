@@ -179,7 +179,7 @@ const Workouts = () => {
         </Box>
       </Box>
       {showContent.length ? (
-        <GridUI items={showContent} type="workout" section="favorite" />
+        <GridUI items={showContent} type="workout" showFavorite />
       ) : (
         <Box mt="50px" ml="20px">
           <Heading variant="H3">

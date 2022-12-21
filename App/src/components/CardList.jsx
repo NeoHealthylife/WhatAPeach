@@ -57,7 +57,7 @@ function SamplePrevArrow(props) {
 }
 
 const CardList = (props) => {
-  const { items, width, heigth, type, setChangeValue, section } = props;
+  const { items, width, heigth, type, setChangeValue, showFavorite } = props;
 
   var settings = {
     className: "center",
@@ -104,7 +104,7 @@ const CardList = (props) => {
         {items &&
           items.map((item) => (
             <CardComp
-              section={section}
+              showFavorite={showFavorite}
               setChangeValue={setChangeValue}
               key={item._id}
               item={item}

@@ -31,7 +31,7 @@ export const MyWorkouts = () => {
       </Heading>
       {profile.favWorkouts?.length !== 0 ? (
         <CardList
-          section="favorite"
+          showFavorite
           width="250px"
           heigth="360px"
           items={profile.favWorkouts}
@@ -58,7 +58,6 @@ export const MyWorkouts = () => {
           heigth="360px"
           items={profile.toDoWorkouts}
           type="workout"
-          section="pending"
         />
       ) : (
         <Text>Añade tus workouts</Text>

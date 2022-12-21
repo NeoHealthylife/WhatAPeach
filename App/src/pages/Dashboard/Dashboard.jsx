@@ -154,9 +154,22 @@ const Dashboard = () => {
       </DashboardCards>
 
       <CardTextStyled>Últimas recetas</CardTextStyled>
-      <CardList width="250px" heigth="360px" items={recipes} type="recipe" pb="100px" />
+      <CardList
+        width="250px"
+        heigth="360px"
+        items={recipes}
+        type="recipe"
+        pb="100px"
+        showFavorite
+      />
       <CardTextStyled>Últimos workouts</CardTextStyled>
-      <CardList width="250px" heigth="360px" items={workouts} type="workout" />
+      <CardList
+        width="250px"
+        heigth="360px"
+        items={workouts}
+        type="workout"
+        showFavorite
+      />
     </>
   );
 };

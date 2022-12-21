@@ -3,7 +3,7 @@ import CardComp from "../Card";
 import { Grid, GridItem } from "@chakra-ui/react";
 
 const GridUI = (props) => {
-  const { items, type, section } = props;
+  const { items, type, showFavorite } = props;
   const [changeValue, setChangeValue] = useState("");
 
   return (
@@ -25,7 +25,7 @@ const GridUI = (props) => {
             className="card"
             item={item}
             type={type}
-            section={section}
+            showFavorite={showFavorite}
             setChangeValue={setChangeValue}
           />
         </GridItem>

@@ -187,7 +187,7 @@ const Recipes = () => {
       </Box>
 
       {showContent.length ? (
-        <GridUI items={showContent} type="recipe" section="favorite" />
+        <GridUI items={showContent} type="recipe" showFavorite />
       ) : (
         <Box mt="50px" ml="20px">
           <Heading variant="H3">

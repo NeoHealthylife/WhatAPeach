@@ -17,7 +17,7 @@ import { v4 as uuidv4 } from "uuid";
 import GlobalContext from "../context/GlobalContext";
 import { API } from "../services/API";
 
-const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
+const CardComp = ({ item, type, width, heigth, setChangeValue, showFavorite }) => {
   const toast = useToast();
   const { setItem, user, setUser, showToast } = useContext(GlobalContext);
 
@@ -154,9 +154,6 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
               {tag}
             </Box>
           ))}
-          {/* <Text color={"gray.500"} noOfLines={2}>
-            {bodyText}
-          </Text> */}
         </Box>
         <HStack borderTop={"1px"} color="black">
           <Flex
@@ -182,7 +179,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, section }) => {
               + Info
             </Button>
           </Flex>
-          {section === "favorite" ? (
+          {showFavorite ? ( // This boolean prop shows the favourite button when is loaded from the CardList or Grid parents
             <Flex
               p={1}
               alignItems="center"

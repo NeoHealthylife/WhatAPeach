@@ -31,7 +31,7 @@ export const MyRecipes = () => {
       </Heading>
       {profile.favRecipes?.length !== 0 ? (
         <CardList
-          section="favorite"
+          showFavorite
           width="250px"
           heigth="360px"
           items={profile.favRecipes}
@@ -58,7 +58,6 @@ export const MyRecipes = () => {
           heigth="360px"
           items={profile.toDoRecipes}
           type="recipe"
-          section="pending"
         />
       ) : (
         <Text>Añade tus recetas</Text>
