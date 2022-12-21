@@ -20,7 +20,14 @@ import UIInput from "../../components/UIComponents/UIInput";
 import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
 import { nutrientsToDisplay } from "../../utils/tagsFilters";
 
-const tags = ["perder peso", "vegetariana", "vegana", "omnívora"];
+const tags = [
+  "perder peso",
+  "vegetariana",
+  "vegana",
+  "omnívora",
+  "definición",
+  "musculación",
+];
 
 const getExtendedDietFilter = (filters) => {
   switch (filters[0]) {
@@ -192,7 +199,7 @@ const Recipes = () => {
         <Box mt="50px" ml="20px">
           <Heading variant="H3">
             {" "}
-            Aun no tienes recetas sugeridas por el sistema 😕. Prueba a buscar una!{" "}
+            Aún no tienes recetas sugeridas por el sistema 😕. Prueba a buscar una!{" "}
           </Heading>
         </Box>
       )}
