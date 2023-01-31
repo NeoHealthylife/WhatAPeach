@@ -12,11 +12,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { API } from "../../services/API";
-import GridUI from "../../components/UIComponents/GridUI";
+import GridUI from "../../components/Layout/GridUI";
 import GlobalContext from "../../context/GlobalContext";
 import { FaCheckDouble } from "react-icons/fa";
 import UISpan from "../../components/UIComponents/UISpan";
-import UIInput from "../../components/UIComponents/UIInput";
+import RegularInput from "../../components/ChakraComponents/Inputs/RegularInput";
 import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
 import { nutrientsToDisplay } from "../../utils/tagsFilters";
 
@@ -98,7 +98,7 @@ const Recipes = () => {
           Recetas
         </Heading>
         <Stack>
-          <UIInput
+          <RegularInput
             placeholder="Buscar recetas"
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -116,7 +116,7 @@ const Recipes = () => {
             Recetas con...
           </Heading>
           <Box textAlign="center">
-            {nutrientsToDisplay.map(({ img, name, isChecked }) => (
+            {nutrientsToDisplay.map(({ img, name }) => (
               <Checkbox
                 icon={<FaCheckDouble />}
                 sx={outlinedClasses}

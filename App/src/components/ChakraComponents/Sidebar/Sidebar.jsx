@@ -14,18 +14,16 @@ import {
   MenuButton,
   MenuList,
   Stack,
-  Text,
   useColorModeValue,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-// Here we have used react-icons package for the icons
 import { useContext } from "react";
 import { BiDumbbell } from "react-icons/bi";
 import { FiMenu, FiHome, FiInfo } from "react-icons/fi";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { NavLink, useNavigate } from "react-router-dom";
-import GlobalContext from "../../context/GlobalContext";
+import GlobalContext from "../../../context/GlobalContext";
 import { NavItemLink } from "../NavItemLink";
 
 export default function Sidebar() {
@@ -103,7 +101,6 @@ const SidebarContent = ({ ...props }) => {
       left="0"
       zIndex="sticky"
       h="full"
-      // pb="10"
       overflowX="hidden"
       overflowY="auto"
       bg={useColorModeValue("soft-primary", "gray.800")}

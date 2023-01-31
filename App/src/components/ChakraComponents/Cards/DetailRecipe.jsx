@@ -1,5 +1,3 @@
-import LayoutWrapper from "./Layout/LayoutWrapper";
-// import { recipes } from "../../services/recipe";
 import {
   Box,
   Center,
@@ -8,23 +6,19 @@ import {
   Image,
   Flex,
   IconButton,
-  HStack,
   Button,
   OrderedList,
   ListItem,
-  Divider,
   UnorderedList,
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 import { useContext, useState } from "react";
-import GlobalContext from "../context/GlobalContext";
+import GlobalContext from "../../../context/GlobalContext";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import { API } from "../services/API";
+import { Navigate } from "react-router-dom";
+import { API } from "../../../services/API";
 
-import { ImArrowLeft2 } from "react-icons/im";
-
-export const DescriptCard = () => {
+export const DetailRecipe = () => {
   const { item, user, setUser, showToast } = useContext(GlobalContext);
   const isFavourite = () => !!user.favRecipes.find((id) => id === item._id);
   const [liked, setLiked] = useState(isFavourite);

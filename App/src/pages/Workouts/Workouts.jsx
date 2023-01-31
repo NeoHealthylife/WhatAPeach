@@ -12,12 +12,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { API } from "../../services/API";
-import GridUI from "../../components/UIComponents/GridUI";
+import GridUI from "../../components/Layout/GridUI";
 import GlobalContext from "../../context/GlobalContext";
-import "./styles.css";
 import { FaCheckDouble } from "react-icons/fa";
 import UISpan from "../../components/UIComponents/UISpan";
-import UIInput from "../../components/UIComponents/UIInput";
+import RegularInput from "../../components/ChakraComponents/Inputs/RegularInput";
 import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
 import { bodyPartsToDisplay } from "../../utils/tagsFilters";
 
@@ -94,7 +93,7 @@ const Workouts = () => {
           Workouts
         </Heading>
         <Stack>
-          <UIInput
+          <RegularInput
             placeholder="Buscar workouts"
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -112,7 +111,7 @@ const Workouts = () => {
             Workouts para...
           </Heading>
           <Box textAlign="center">
-            {bodyPartsToDisplay.map(({ img, name, isChecked }) => (
+            {bodyPartsToDisplay.map(({ img, name }) => (
               <Checkbox
                 icon={<FaCheckDouble />}
                 sx={outlinedClasses}

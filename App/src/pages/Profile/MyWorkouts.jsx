@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import CardList from "../../components/CardList";
+import CardList from "../../components/ChakraComponents/Cards/CardList";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import { API } from "../../services/API";
 import { Heading, Text } from "@chakra-ui/react";

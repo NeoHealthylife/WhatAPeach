@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import CardList from "../../components/CardList";
+import CardList from "../../components/ChakraComponents/Cards/CardList";
 import GlobalContext from "../../context/GlobalContext";
 import { API } from "../../services/API";
 
@@ -80,7 +80,7 @@ const CardTextStyled = styled.div`
 `;
 
 const challengeHasExpired = (item, savedDate) => {
-  const difference = new Date(savedDate) - new Date(); //esto me da la fecha de ahora mismo
+  const difference = new Date(savedDate) - new Date();
   const totalDays = Math.ceil(difference / (1000 * 3600 * 24));
   return totalDays > 7;
 };

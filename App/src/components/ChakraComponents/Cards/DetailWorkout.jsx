@@ -6,21 +6,17 @@ import {
   Image,
   Flex,
   IconButton,
-  HStack,
   Button,
   OrderedList,
   ListItem,
-  Divider,
   UnorderedList,
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 import { useContext, useState } from "react";
-import GlobalContext from "../context/GlobalContext";
+import GlobalContext from "../../../context/GlobalContext";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
-import { Navigate, NavLink } from "react-router-dom";
-import { API } from "../services/API";
-import UiButton from "./UIComponents/UIButton";
-import { ImArrowLeft2 } from "react-icons/im";
+import { Navigate } from "react-router-dom";
+import { API } from "../../../services/API";
 
 export const DetailWorkout = () => {
   const { item, user, setUser, showToast } = useContext(GlobalContext);

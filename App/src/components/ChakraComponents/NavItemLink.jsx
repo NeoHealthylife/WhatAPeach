@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Icon, useColorModeValue, Flex } from "@chakra-ui/react";
-import GlobalContext from "../context/GlobalContext";
+import GlobalContext from "../../context/GlobalContext";
 
 export const NavItemLink = ({ icon, name, href }) => {
   const { activePage, setActivePage } = useContext(GlobalContext);

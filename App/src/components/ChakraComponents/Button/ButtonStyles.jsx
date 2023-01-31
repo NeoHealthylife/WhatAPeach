@@ -44,7 +44,7 @@ export const ButtonStyles = {
       },
     }),
   },
-  //default value de size y variant
+  //default value de siz
   defaultProps: {
     bg: "softprim",
     color: "dark",

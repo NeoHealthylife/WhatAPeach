@@ -1,5 +1,5 @@
 import React from "react";
-import LayoutWrapper from "../components/Layout/LayoutWrapper";
+import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import { Image, Box } from "@chakra-ui/react";
 
 const NotFound = () => {

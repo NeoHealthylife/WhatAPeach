@@ -18,10 +18,7 @@ import { API } from "../../services/API";
 import { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { useEffect } from "react";
-import {
-  default as UIFormInput,
-  default as UIInput,
-} from "../../components/UIComponents/UIFormInput";
+import FormInput from "../../components/ChakraComponents/Inputs/FormInput.jsx";
 import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
 import { myTheme } from "../../components/ChakraComponents/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
@@ -36,7 +33,7 @@ const Login = () => {
   const methods = useForm();
   const navigate = useNavigate();
 
-  const handleGoogleClick = (e) => {
+  /*const handleGoogleClick = (e) => {
     e.preventDefault();
     API.get("/users/auth/google", {
       credentials: "include",
@@ -53,7 +50,7 @@ const Login = () => {
           alert(data.message);
         }
       });
-  };
+  }; */
 
   const onFormSubmit = (data) => {
     API.post("/users/login", data)
@@ -106,7 +103,7 @@ const Login = () => {
 
                 <Stack spacing={2}>
                   <Box>
-                    <UIFormInput
+                    <FormInput
                       name="nickname"
                       placeholder="Nickname"
                       validations={{
@@ -116,10 +113,10 @@ const Login = () => {
                           message: "Necesita un minimo de 2 caracteres",
                         },
                       }}
-                    ></UIFormInput>
+                    ></FormInput>
                   </Box>
                   <InputGroup position="relative">
-                    <UIInput
+                    <FormInput
                       name="password"
                       type={show ? "text" : "password"}
                       placeholder="******"
@@ -144,7 +141,7 @@ const Login = () => {
                           },
                         },
                       }}
-                    ></UIInput>
+                    ></FormInput>
                     <InputRightElement
                       position="absolute"
                       top="8px"

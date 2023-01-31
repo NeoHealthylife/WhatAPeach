@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "./Footer";
-// import Header from "./Header";
-import Sidebar from "./Sidebar";
+import Footer from "../ChakraComponents/Footer";
+import Sidebar from "../ChakraComponents/Sidebar/Sidebar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ImArrowLeft2 } from "react-icons/im";
 import UiButton from "../UIComponents/UIButton";

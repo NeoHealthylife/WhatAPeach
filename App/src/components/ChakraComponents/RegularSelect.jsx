@@ -2,8 +2,15 @@ import { FormControl, FormLabel, Select } from "@chakra-ui/react";
 import React from "react";
 import { ErrorMessage } from "@hookform/error-message";
 import { useFormContext, useFormState } from "react-hook-form";
-import { ErrorStyled } from "./UIFormInput";
-const UISelect = ({ options, label, placeholder, name, validations, defaultValue }) => {
+import { ErrorStyled } from "./Inputs/FormInput";
+const RegularSelect = ({
+  options,
+  label,
+  placeholder,
+  name,
+  validations,
+  defaultValue,
+}) => {
   const { register } = useFormContext();
   const { errors } = useFormState();
 
@@ -34,4 +41,4 @@ const UISelect = ({ options, label, placeholder, name, validations, defaultValue
   );
 };
 
-export default UISelect;
+export default RegularSelect;

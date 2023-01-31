@@ -10,12 +10,12 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { RiHeart2Fill, RiHeart2Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import GlobalContext from "../context/GlobalContext";
-import { API } from "../services/API";
+import GlobalContext from "../../../context/GlobalContext";
+import { API } from "../../../services/API";
 
 const CardComp = ({ item, type, width, heigth, setChangeValue, showFavorite }) => {
   const toast = useToast();
@@ -179,7 +179,7 @@ const CardComp = ({ item, type, width, heigth, setChangeValue, showFavorite }) =
               + Info
             </Button>
           </Flex>
-          {showFavorite ? ( // This boolean prop shows the favourite button when is loaded from the CardList or Grid parents
+          {showFavorite ? (
             <Flex
               p={1}
               alignItems="center"

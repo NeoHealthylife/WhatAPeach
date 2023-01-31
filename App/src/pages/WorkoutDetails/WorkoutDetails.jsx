@@ -1,5 +1,5 @@
 import React from "react";
-import { DetailWorkout } from "../../components/DetailWorkout";
+import { DetailWorkout } from "../../components/ChakraComponents/Cards/DetailWorkout";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 
 const WorkoutDetails = () => {

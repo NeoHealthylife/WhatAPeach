@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { Component } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -38,7 +38,7 @@ const StyledArrow = styled.div`
 `;
 
 function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
+  const { className, onClick } = props;
 
   return (
     <StyledArrow className={className} onClick={onClick} style={{ width: "30px" }}>
@@ -48,7 +48,7 @@ function SampleNextArrow(props) {
 }
 
 function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
+  const { className, onClick } = props;
   return (
     <StyledArrow className={className} onClick={onClick} style={{ width: "30px" }}>
       <img src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1671413113/Group_2417_r4xkcz.png" />

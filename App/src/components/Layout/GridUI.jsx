@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CardComp from "../Card";
+import CardComp from "../ChakraComponents/Cards/Card";
 import { Grid, GridItem } from "@chakra-ui/react";
 
 const GridUI = (props) => {

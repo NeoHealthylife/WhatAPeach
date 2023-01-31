@@ -4,14 +4,14 @@ import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 
 import { useFormContext, useFormState } from "react-hook-form";
 import styled from "styled-components";
-import { myTheme } from "../ChakraComponents/Theme";
+import { myTheme } from "../Theme";
 const ErrorStyled = styled.div`
   color: #ff3300;
   font-size: ${myTheme.fontSizes.xsm};
   margin-top: 5px;
 `;
 
-const UIFormInput = ({
+const FormInput = ({
   name,
   label,
   placeholder,
@@ -43,4 +43,4 @@ const UIFormInput = ({
   );
 };
 export { ErrorStyled };
-export default UIFormInput;
+export default FormInput;

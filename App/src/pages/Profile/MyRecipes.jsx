@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import CardList from "../../components/CardList";
+import CardList from "../../components/ChakraComponents/Cards/CardList";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import { API } from "../../services/API";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import { TiInputChecked, TiInputCheckedOutline } from "react-icons/ti";
 import { GiChewedHeart } from "react-icons/gi";
 
