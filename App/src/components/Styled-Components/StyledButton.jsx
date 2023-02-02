@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const StyledButton = styled.button`
+const Button = styled.button`
   border-radius: 20px;
   padding: 10px;
 
@@ -67,11 +67,11 @@ const StyledButton = styled.button`
     `}
 `;
 
-const UiButton = (props) => {
+const StyledButton = (props) => {
   return (
-    <StyledButton {...props} boderRadius="md">
+    <Button {...props} boderRadius="md">
       {props.children}
-    </StyledButton>
+    </Button>
   );
 };
-export default UiButton;
+export default StyledButton;

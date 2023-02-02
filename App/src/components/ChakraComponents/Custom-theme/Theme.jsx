@@ -1,6 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
-import { ButtonStyles as Button } from "./Button/ButtonStyles";
-import { IconButtonStyles as IconButton } from "./Button/IconButtonStyles";
+import { ButtonStyles as Button } from "../Custom-theme/ButtonStyles";
+import { IconButtonStyles as IconButton } from "../Custom-theme/IconButtonStyles";
 import { HeadingStyles as Heading } from "./HeadingStyles";
 
 export const myTheme = extendTheme({

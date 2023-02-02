@@ -4,10 +4,9 @@ import GlobalContext from "../../context/GlobalContext";
 import { API } from "../../services/API";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UiButton from "../../components/UIComponents/UIButton";
+import UiButton from "../../components/Styled-Components/StyledButton";
 import RegularSelect from "../../components/ChakraComponents/RegularSelect";
 import FormInput from "../../components/ChakraComponents/Inputs/FormInput.jsx";
-import RegularInput from "../../components/ChakraComponents/Inputs/RegularInput.jsx";
 import { foodChoices } from "../../utils/FormChoices";
 import { statusChoices } from "../../utils/FormChoices";
 import { targetChoices } from "../../utils/FormChoices";
@@ -127,7 +126,7 @@ const Edituser = () => {
                             )}
                             {user.height && (
                               <Box w="70%">
-                                <RegularInput
+                                <FormInput
                                   label="Altura"
                                   defaultValue={user.height}
                                   name="height"
@@ -137,12 +136,12 @@ const Edituser = () => {
                                       message: "Introduce una altura válida",
                                     },
                                   }}
-                                ></RegularInput>
+                                ></FormInput>
                               </Box>
                             )}
                             {user.weight && (
                               <Box>
-                                <RegularInput
+                                <FormInput
                                   label="Peso"
                                   defaultValue={user.weight}
                                   name="weight"
@@ -153,7 +152,7 @@ const Edituser = () => {
                                       message: "Introduce un peso válido",
                                     },
                                   }}
-                                ></RegularInput>
+                                ></FormInput>
                               </Box>
                             )}
                           </HStack>

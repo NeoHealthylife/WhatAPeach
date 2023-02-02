@@ -44,7 +44,6 @@ export const ButtonStyles = {
       },
     }),
   },
-  //default value de siz
   defaultProps: {
     bg: "softprim",
     color: "dark",

@@ -7,7 +7,7 @@ const StyleLink = styled(NavLink)`
     ${(props) => (props["data-hover"] ? `color: ${props["data-hover"]}` : "")}
   }
 `;
-export const NavItemLinkNoHover = ({ icon, name, href, hoverColor, fontSize }) => {
+export const StyledLoginLink = ({ name, href, hoverColor }) => {
   return (
     <StyleLink to={href} data-hover={hoverColor}>
       {name}

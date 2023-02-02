@@ -1,6 +1,5 @@
 const RecipesRoutes = require('express').Router();
 const upload = require('../../middlewares/file');
-/* const upload = require('../../middlewares/file'); */
 const {
   getRecipes,
   getRecipe,

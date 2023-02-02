@@ -13,14 +13,13 @@ import {
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UiButton from "../../components/UIComponents/UIButton";
+import StyledButton from "../../components/Styled-Components/StyledButton";
 import { API } from "../../services/API";
 import { HiOutlineEyeSlash, HiOutlineEye } from "react-icons/hi2";
 import RegularSelect from "../../components/ChakraComponents/RegularSelect";
 import FormInput from "../../components/ChakraComponents/Inputs/FormInput.jsx";
-import RegularInput from "../../components/ChakraComponents/Inputs/RegularInput.jsx";
-import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
-import { myTheme } from "../../components/ChakraComponents/Theme";
+import { StyledLoginLink } from "../../components/Styled-Components/StyledLoginLink";
+import { myTheme } from "../../components/ChakraComponents/Custom-theme/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
 import { useToast } from "@chakra-ui/react";
 import { foodChoices } from "../../utils/FormChoices";
@@ -110,7 +109,7 @@ const Register = () => {
                           },
                           pattern: {
                             value: /^\S*$/,
-                            message: "El formato no es correcto", // JS only: <p>error message</p> TS only support string
+                            message: "El formato no es correcto",
                           },
                           validate: {
                             format: (password) => {
@@ -242,14 +241,14 @@ const Register = () => {
                       />
                     </Box>
                     <Stack spacing={1} pt={4}>
-                      <UiButton variant="primary" type="submit">
+                      <StyledButton variant="primary" type="submit">
                         Finalizar
-                      </UiButton>
+                      </StyledButton>
                     </Stack>
                     <Stack pt={4}>
                       <Text fontSize="13px" align={"center"}>
                         Si ya tienes cuenta puedes entrar{" "}
-                        <NavItemLinkNoHover
+                        <StyledLoginLink
                           name="aquí"
                           href="/login"
                           hoverColor={myTheme.colors.primary}

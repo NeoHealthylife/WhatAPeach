@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import App from "./App";
-import { myTheme } from "./components/ChakraComponents/Theme";
+import { myTheme } from "./components/ChakraComponents/Custom-theme/Theme";
 import { GlobalContextProvider } from "./context/GlobalContext";
 import NotFound from "./pages/NotFound/404";
 import Home from "./pages/Home/Home";

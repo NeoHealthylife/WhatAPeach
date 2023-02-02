@@ -4,7 +4,7 @@ import { Grid, GridItem } from "@chakra-ui/react";
 
 const GridUI = (props) => {
   const { items, type, showFavorite } = props;
-  const [changeValue, setChangeValue] = useState("");
+  const [setChangeValue] = useState("");
 
   return (
     <Grid

@@ -6,8 +6,6 @@ import Dashboard from "../Dashboard/Dashboard";
 const Home = () => {
   const { isLogged } = useContext(GlobalContext);
 
-  /* const filtrar = () => {};*/
-
   return (
     <LayoutWrapper>
       <div className="HomeDiv">{isLogged && <Dashboard />}</div>

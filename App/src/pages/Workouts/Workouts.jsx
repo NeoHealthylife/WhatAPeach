@@ -15,9 +15,9 @@ import { API } from "../../services/API";
 import GridUI from "../../components/Layout/GridUI";
 import GlobalContext from "../../context/GlobalContext";
 import { FaCheckDouble } from "react-icons/fa";
-import UISpan from "../../components/UIComponents/UISpan";
+import StyledSpan from "../../components/Styled-Components/StyledSpan";
 import RegularInput from "../../components/ChakraComponents/Inputs/RegularInput";
-import { outlinedClasses } from "../../components/UIComponents/CheckboxStyles";
+import { outlinedClasses } from "../../components/ChakraComponents/Custom-theme/CheckboxStyles";
 import { bodyPartsToDisplay } from "../../utils/tagsFilters";
 
 const tags = ["perder peso", "musculación", "definición"];
@@ -119,7 +119,7 @@ const Workouts = () => {
                 key={name}
                 onChange={handleCheckboxChange}
                 value={name}
-                maxWidth="200px" //quitarMaxW
+                maxWidth="200px"
                 borderRadius="24px"
                 border="1px"
                 borderColor="primary"
@@ -167,13 +167,13 @@ const Workouts = () => {
 
         <Box pt="10px">
           {tags.map((tag) => (
-            <UISpan
+            <StyledSpan
               key={tag}
               variant="tag"
               className={activatedTags.includes(tag) ? "allMarked" : ""}
             >
               {tag}
-            </UISpan>
+            </StyledSpan>
           ))}
         </Box>
       </Box>

@@ -1,6 +1,6 @@
 const WorkoutRoutes = require('express').Router();
 const upload = require('../../middlewares/file');
-/* const upload = require('../../middlewares/file'); */
+
 const {
   getWorkouts,
   postWorkout,

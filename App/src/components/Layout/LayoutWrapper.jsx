@@ -4,7 +4,7 @@ import Footer from "../ChakraComponents/Footer";
 import Sidebar from "../ChakraComponents/Sidebar/Sidebar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ImArrowLeft2 } from "react-icons/im";
-import UiButton from "../UIComponents/UIButton";
+import StyledButton from "../Styled-Components/StyledButton";
 
 const StyledMainWrapper = styled.div`
   max-width: 100vw;
@@ -41,9 +41,9 @@ const LayoutWrapper = (props) => {
       <RightContentWrapper>
         <StyledMainContent>
           {!backBtnExceptions.includes(location.pathname) && (
-            <UiButton variant="back" onClick={() => navigate(-1)}>
+            <StyledButton variant="back" onClick={() => navigate(-1)}>
               <ImArrowLeft2 />
-            </UiButton>
+            </StyledButton>
           )}
           {props.children}
         </StyledMainContent>

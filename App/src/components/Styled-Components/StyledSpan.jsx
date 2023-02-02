@@ -1,7 +1,7 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-const StyledSpan = styled.span`
+const Span = styled.span`
   margin: 0 10px;
   font-size: 12px;
   padding: 6px 10px 6px 0;
@@ -55,7 +55,7 @@ const StyledSpan = styled.span`
   }
 `;
 
-const UISpan = ({ className, children }) => {
-  return <StyledSpan className={className}>{children}</StyledSpan>;
+const StyledSpan = ({ className, children }) => {
+  return <Span className={className}>{children}</Span>;
 };
-export default UISpan;
+export default StyledSpan;

@@ -12,15 +12,15 @@ import {
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UiButton from "../../components/UIComponents/UIButton";
+import UiButton from "../../components/Styled-Components/StyledButton";
 import { BsGoogle } from "react-icons/bs";
 import { API } from "../../services/API";
 import { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { useEffect } from "react";
 import FormInput from "../../components/ChakraComponents/Inputs/FormInput.jsx";
-import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
-import { myTheme } from "../../components/ChakraComponents/Theme";
+import { StyledLoginLink } from "../../components/Styled-Components/StyledLoginLink";
+import { myTheme } from "../../components/ChakraComponents/Custom-theme/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
 import { useToast } from "@chakra-ui/react";
 import { HiOutlineEyeSlash, HiOutlineEye } from "react-icons/hi2";
@@ -175,7 +175,7 @@ const Login = () => {
                   <Stack pt={6}>
                     <Text fontSize="13px" align={"center"}>
                       Si no tienes cuenta puedes registrarte{" "}
-                      <NavItemLinkNoHover
+                      <StyledLoginLink
                         name="aquí"
                         href="/register"
                         hoverColor={myTheme.colors.primary}
