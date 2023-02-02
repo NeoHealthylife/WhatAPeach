@@ -150,7 +150,7 @@ const SidebarContent = ({ ...props }) => {
           </Box>
         </Box>
 
-        <Flex px="25px" py="50px" mt={10} justify="center" alignItems="center">
+        <Box px="25px" py="50px" mt={10} justify="center" alignItems="center">
           <Menu>
             <MenuButton
               as={Button}
@@ -159,11 +159,12 @@ const SidebarContent = ({ ...props }) => {
               variant={"link"}
               cursor={"pointer"}
               _hover={{ textDecoration: "none" }}
+              whiteSpace={"normal"}
             >
               <Avatar
                 my="10px"
                 size="lg"
-                name="Ahmad"
+                name="Avatar"
                 src="https://res.cloudinary.com/drh0lkvxh/image/upload/v1671560343/shutterstock_1822147493_Converted_-04_c4r5t2.png"
               />
               <Heading variant="H4">{user?.nickname}</Heading>
@@ -183,7 +184,7 @@ const SidebarContent = ({ ...props }) => {
               </Button>
             </MenuList>
           </Menu>
-        </Flex>
+        </Box>
       </VStack>
     </Box>
   );
