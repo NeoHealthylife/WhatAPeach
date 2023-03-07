@@ -2,7 +2,6 @@ const UserRoutes = require('express').Router();
 
 const { isAdmin } = require('../../middlewares/admin.middlewares');
 const { isBasic } = require('../../middlewares/basic.middlewares');
-// const upload = require ("../../middlewares/file")
 const passport = require('passport');
 require('./passportSetup');
 

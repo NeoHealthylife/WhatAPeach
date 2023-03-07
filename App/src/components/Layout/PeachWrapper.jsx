@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "./Footer";
+import Footer from "../ChakraComponents/Footer";
 
 const StyledContent = styled.div`
   background: linear-gradient(90.08deg, #f4967f 0.06%, #facbbf 99.91%);

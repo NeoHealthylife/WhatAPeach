@@ -12,18 +12,15 @@ import {
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UiButton from "../../components/UIComponents/UIButton";
+import UiButton from "../../components/Styled-Components/StyledButton";
 import { BsGoogle } from "react-icons/bs";
 import { API } from "../../services/API";
 import { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { useEffect } from "react";
-import {
-  default as UIFormInput,
-  default as UIInput,
-} from "../../components/UIComponents/UIFormInput";
-import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
-import { myTheme } from "../../components/ChakraComponents/Theme";
+import FormInput from "../../components/ChakraComponents/Inputs/FormInput.jsx";
+import { StyledLoginLink } from "../../components/Styled-Components/StyledLoginLink";
+import { myTheme } from "../../components/ChakraComponents/Custom-theme/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
 import { useToast } from "@chakra-ui/react";
 import { HiOutlineEyeSlash, HiOutlineEye } from "react-icons/hi2";
@@ -36,7 +33,7 @@ const Login = () => {
   const methods = useForm();
   const navigate = useNavigate();
 
-  const handleGoogleClick = (e) => {
+  /*const handleGoogleClick = (e) => {
     e.preventDefault();
     API.get("/users/auth/google", {
       credentials: "include",
@@ -53,7 +50,7 @@ const Login = () => {
           alert(data.message);
         }
       });
-  };
+  }; */
 
   const onFormSubmit = (data) => {
     API.post("/users/login", data)
@@ -106,7 +103,7 @@ const Login = () => {
 
                 <Stack spacing={2}>
                   <Box>
-                    <UIFormInput
+                    <FormInput
                       name="nickname"
                       placeholder="Nickname"
                       validations={{
@@ -116,10 +113,10 @@ const Login = () => {
                           message: "Necesita un minimo de 2 caracteres",
                         },
                       }}
-                    ></UIFormInput>
+                    ></FormInput>
                   </Box>
                   <InputGroup position="relative">
-                    <UIInput
+                    <FormInput
                       name="password"
                       type={show ? "text" : "password"}
                       placeholder="******"
@@ -131,7 +128,7 @@ const Login = () => {
                         },
                         pattern: {
                           value: /^\S*$/,
-                          message: "El formato no es correcto", // JS only: <p>error message</p> TS only support string
+                          message: "El formato no es correcto",
                         },
                         validate: {
                           format: (password) => {
@@ -144,7 +141,7 @@ const Login = () => {
                           },
                         },
                       }}
-                    ></UIInput>
+                    ></FormInput>
                     <InputRightElement
                       position="absolute"
                       top="8px"
@@ -178,7 +175,7 @@ const Login = () => {
                   <Stack pt={6}>
                     <Text fontSize="13px" align={"center"}>
                       Si no tienes cuenta puedes registrarte{" "}
-                      <NavItemLinkNoHover
+                      <StyledLoginLink
                         name="aquí"
                         href="/register"
                         hoverColor={myTheme.colors.primary}

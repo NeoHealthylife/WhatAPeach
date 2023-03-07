@@ -26,7 +26,7 @@ const GlobalContextProvider = ({ children }) => {
     const initialValue = JSON.parse(savedUser);
     return initialValue || null;
   });
-  //IsLogged no funcionaba y el dashboard no se pintaba en home porque el UseState estaba seteado en false
+
   const [isLogged, setIsLogged] = useState(() => {
     const savedUser = localStorage.getItem("user");
     const initialValue = JSON.parse(savedUser);

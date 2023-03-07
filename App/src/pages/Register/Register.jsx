@@ -13,16 +13,13 @@ import {
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UiButton from "../../components/UIComponents/UIButton";
+import StyledButton from "../../components/Styled-Components/StyledButton";
 import { API } from "../../services/API";
 import { HiOutlineEyeSlash, HiOutlineEye } from "react-icons/hi2";
-import UISelect from "../../components/UIComponents/UISelect";
-import {
-  default as UIFormInput,
-  default as UIInput,
-} from "../../components/UIComponents/UIFormInput";
-import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
-import { myTheme } from "../../components/ChakraComponents/Theme";
+import RegularSelect from "../../components/ChakraComponents/RegularSelect";
+import FormInput from "../../components/ChakraComponents/Inputs/FormInput.jsx";
+import { StyledLoginLink } from "../../components/Styled-Components/StyledLoginLink";
+import { myTheme } from "../../components/ChakraComponents/Custom-theme/Theme";
 import PeachWrapper from "../../components/Layout/PeachWrapper";
 import { useToast } from "@chakra-ui/react";
 import { foodChoices } from "../../utils/FormChoices";
@@ -87,7 +84,7 @@ const Register = () => {
                       />
                     </Flex>
                     <Box pt="40px">
-                      <UIFormInput
+                      <FormInput
                         name="nickname"
                         placeholder="Nickname"
                         validations={{
@@ -97,10 +94,10 @@ const Register = () => {
                             message: "Necesita un minimo de 2 caracteres",
                           },
                         }}
-                      ></UIFormInput>
+                      ></FormInput>
                     </Box>
                     <InputGroup position="relative">
-                      <UIInput
+                      <FormInput
                         name="password"
                         type={show ? "text" : "password"}
                         placeholder="******"
@@ -112,7 +109,7 @@ const Register = () => {
                           },
                           pattern: {
                             value: /^\S*$/,
-                            message: "El formato no es correcto", // JS only: <p>error message</p> TS only support string
+                            message: "El formato no es correcto",
                           },
                           validate: {
                             format: (password) => {
@@ -125,7 +122,7 @@ const Register = () => {
                             },
                           },
                         }}
-                      ></UIInput>
+                      ></FormInput>
                       <InputRightElement
                         position="absolute"
                         top="8px"
@@ -146,7 +143,7 @@ const Register = () => {
                     </InputGroup>
 
                     <Box>
-                      <UIFormInput
+                      <FormInput
                         name="email"
                         placeholder="E-mail"
                         validations={{
@@ -165,7 +162,7 @@ const Register = () => {
 
                     <HStack>
                       <Box>
-                        <UIFormInput
+                        <FormInput
                           name="age"
                           placeholder="Edad"
                           validations={{
@@ -174,10 +171,10 @@ const Register = () => {
                               message: "Introduce una edad válida",
                             },
                           }}
-                        ></UIFormInput>
+                        ></FormInput>
                       </Box>
                       <Box w="70%">
-                        <UIInput
+                        <FormInput
                           name="height"
                           placeholder="Altura (cm)"
                           validations={{
@@ -186,10 +183,10 @@ const Register = () => {
                               message: "Introduce una altura válida",
                             },
                           }}
-                        ></UIInput>
+                        ></FormInput>
                       </Box>
                       <Box>
-                        <UIInput
+                        <FormInput
                           name="weight"
                           placeholder="Peso (kg)"
                           validations={{
@@ -198,13 +195,13 @@ const Register = () => {
                               message: "Introduce un peso válido",
                             },
                           }}
-                        ></UIInput>
+                        ></FormInput>
                       </Box>
                     </HStack>
 
                     <HStack>
                       <Box w="50%">
-                        <UISelect
+                        <RegularSelect
                           placeholder="Dieta 🥑"
                           name="diet"
                           options={foodChoices}
@@ -214,7 +211,7 @@ const Register = () => {
                         />
                       </Box>
                       <Box w="50%">
-                        <UISelect
+                        <RegularSelect
                           placeholder="Estado físico 💪"
                           name="status"
                           options={statusChoices}
@@ -225,7 +222,7 @@ const Register = () => {
                       </Box>
                     </HStack>
                     <Box>
-                      <UISelect
+                      <RegularSelect
                         placeholder="Define tus objetivos 🎯"
                         name="target"
                         options={targetChoices}
@@ -235,7 +232,7 @@ const Register = () => {
                       />
                     </Box>
                     <Box>
-                      <UISelect
+                      <RegularSelect
                         name="equipment"
                         placeholder="¿Tienes material para tus workouts?"
                         options={equipmentChoices}
@@ -244,14 +241,14 @@ const Register = () => {
                       />
                     </Box>
                     <Stack spacing={1} pt={4}>
-                      <UiButton variant="primary" type="submit">
+                      <StyledButton variant="primary" type="submit">
                         Finalizar
-                      </UiButton>
+                      </StyledButton>
                     </Stack>
                     <Stack pt={4}>
                       <Text fontSize="13px" align={"center"}>
                         Si ya tienes cuenta puedes entrar{" "}
-                        <NavItemLinkNoHover
+                        <StyledLoginLink
                           name="aquí"
                           href="/login"
                           hoverColor={myTheme.colors.primary}

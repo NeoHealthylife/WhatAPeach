@@ -1,11 +1,11 @@
 import React from "react";
-import { DescriptCard } from "../../components/DescriptCard";
+import { DetailRecipe } from "../../components/ChakraComponents/Cards/DetailRecipe";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 
 const RecipeDetails = () => {
   return (
     <LayoutWrapper>
-      <DescriptCard />
+      <DetailRecipe />
     </LayoutWrapper>
   );
 };

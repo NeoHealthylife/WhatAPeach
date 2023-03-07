@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import CardList from "../../components/CardList";
+import CardList from "../../components/ChakraComponents/Cards/CardList";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import { API } from "../../services/API";
 import { Heading, Text } from "@chakra-ui/react";
@@ -31,7 +31,7 @@ export const MyWorkouts = () => {
       </Heading>
       {profile.favWorkouts?.length !== 0 ? (
         <CardList
-          section="favorite"
+          showFavorite
           width="250px"
           heigth="360px"
           items={profile.favWorkouts}
@@ -58,7 +58,6 @@ export const MyWorkouts = () => {
           heigth="360px"
           items={profile.toDoWorkouts}
           type="workout"
-          section="pending"
         />
       ) : (
         <Text>Añade tus workouts</Text>

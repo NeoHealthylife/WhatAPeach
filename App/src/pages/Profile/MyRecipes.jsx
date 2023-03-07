@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import CardList from "../../components/CardList";
+import CardList from "../../components/ChakraComponents/Cards/CardList";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import { API } from "../../services/API";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import { TiInputChecked, TiInputCheckedOutline } from "react-icons/ti";
 import { GiChewedHeart } from "react-icons/gi";
 
@@ -31,7 +31,7 @@ export const MyRecipes = () => {
       </Heading>
       {profile.favRecipes?.length !== 0 ? (
         <CardList
-          section="favorite"
+          showFavorite
           width="250px"
           heigth="360px"
           items={profile.favRecipes}
@@ -58,7 +58,6 @@ export const MyRecipes = () => {
           heigth="360px"
           items={profile.toDoRecipes}
           type="recipe"
-          section="pending"
         />
       ) : (
         <Text>Añade tus recetas</Text>

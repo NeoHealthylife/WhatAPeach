@@ -1,21 +1,12 @@
 import { useContext } from "react";
 import LayoutWrapper from "../../components/Layout/LayoutWrapper";
 import GlobalContext from "../../context/GlobalContext";
-import { useEffect, useState } from "react";
 import { API } from "../../services/API";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UiButton from "../../components/UIComponents/UIButton";
-import { HiOutlineEyeSlash, HiOutlineEye } from "react-icons/hi2";
-import UISelect from "../../components/UIComponents/UISelect";
-import {
-  default as UIFormInput,
-  default as UIInput,
-} from "../../components/UIComponents/UIFormInput";
-import { NavItemLinkNoHover } from "../../components/UIComponents/NavItemLink-NoHover";
-import { myTheme } from "../../components/ChakraComponents/Theme";
-import PeachWrapper from "../../components/Layout/PeachWrapper";
-import { useToast } from "@chakra-ui/react";
+import UiButton from "../../components/Styled-Components/StyledButton";
+import RegularSelect from "../../components/ChakraComponents/RegularSelect";
+import FormInput from "../../components/ChakraComponents/Inputs/FormInput.jsx";
 import { foodChoices } from "../../utils/FormChoices";
 import { statusChoices } from "../../utils/FormChoices";
 import { targetChoices } from "../../utils/FormChoices";
@@ -26,16 +17,9 @@ import {
   Box,
   Heading,
   Text,
-  IconButton,
-  VStack,
   HStack,
-  Wrap,
-  WrapItem,
-  InputGroup,
-  Image,
   Stack,
   useColorModeValue,
-  InputRightElement,
 } from "@chakra-ui/react";
 
 const Edituser = () => {
@@ -85,7 +69,7 @@ const Edituser = () => {
                           </Box>
                           {user.nickname && (
                             <Box>
-                              <UIFormInput
+                              <FormInput
                                 label="Nickname"
                                 defaultValue={user.nickname}
                                 name="nickname"
@@ -96,12 +80,12 @@ const Edituser = () => {
                                     message: "Necesita un minimo de 2 caracteres",
                                   },
                                 }}
-                              ></UIFormInput>
+                              ></FormInput>
                             </Box>
                           )}
                           {user.email && (
                             <Box>
-                              <UIFormInput
+                              <FormInput
                                 label="Email"
                                 defaultValue={user.email}
                                 name="email"
@@ -121,13 +105,13 @@ const Edituser = () => {
                           )}
                           <Box>
                             {user.fullname && (
-                              <UIFormInput text={user.fullname} name="fullname" />
+                              <FormInput text={user.fullname} name="fullname" />
                             )}
                           </Box>
                           <HStack>
                             {user.age && (
                               <Box>
-                                <UIFormInput
+                                <FormInput
                                   label="Edad"
                                   defaultValue={user.age}
                                   name="age"
@@ -137,12 +121,12 @@ const Edituser = () => {
                                       message: "Introduce una edad válida",
                                     },
                                   }}
-                                ></UIFormInput>
+                                ></FormInput>
                               </Box>
                             )}
                             {user.height && (
                               <Box w="70%">
-                                <UIInput
+                                <FormInput
                                   label="Altura"
                                   defaultValue={user.height}
                                   name="height"
@@ -152,12 +136,12 @@ const Edituser = () => {
                                       message: "Introduce una altura válida",
                                     },
                                   }}
-                                ></UIInput>
+                                ></FormInput>
                               </Box>
                             )}
                             {user.weight && (
                               <Box>
-                                <UIInput
+                                <FormInput
                                   label="Peso"
                                   defaultValue={user.weight}
                                   name="weight"
@@ -168,14 +152,14 @@ const Edituser = () => {
                                       message: "Introduce un peso válido",
                                     },
                                   }}
-                                ></UIInput>
+                                ></FormInput>
                               </Box>
                             )}
                           </HStack>
                           <HStack>
                             {user.diet && (
                               <Box w="50%">
-                                <UISelect
+                                <RegularSelect
                                   label="Dieta"
                                   defaultValue={[user.diet]}
                                   placeholder="Dieta 🥑"
@@ -189,7 +173,7 @@ const Edituser = () => {
                             )}
                             {user.status && (
                               <Box w="50%">
-                                <UISelect
+                                <RegularSelect
                                   label="Estado Físico"
                                   defaultValue={[user.status]}
                                   placeholder="Estado físico 💪"
@@ -204,9 +188,9 @@ const Edituser = () => {
                           </HStack>
                           {user.target && (
                             <Box>
-                              <UISelect
+                              <RegularSelect
                                 label="Objetivo"
-                                defaultValue={user.target} /////POR QUÉ NO NECESITO ESPECIFICAR QUE ES UN ARRAY??
+                                defaultValue={user.target}
                                 placeholder="Define tus objetivos 🎯"
                                 name="target"
                                 options={targetChoices}
@@ -218,7 +202,7 @@ const Edituser = () => {
                           )}
                           {user.equipment !== undefined && (
                             <Box>
-                              <UISelect
+                              <RegularSelect
                                 label="Material"
                                 defaultValue={user.equipment}
                                 name="equipment"
