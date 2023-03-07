@@ -128,7 +128,7 @@ const Login = () => {
                         },
                         pattern: {
                           value: /^\S*$/,
-                          message: "El formato no es correcto", // JS only: <p>error message</p> TS only support string
+                          message: "El formato no es correcto",
                         },
                         validate: {
                           format: (password) => {
